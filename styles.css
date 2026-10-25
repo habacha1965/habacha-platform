@@ -1,0 +1,683 @@
+/* HABACHA Design System v2.0 - Institutional Edition */
+:root {
+  --color-navy-main: #070D1A;
+  --color-navy-surface: #0E1726;
+  --color-navy-elevated: #1E293B;
+  --color-platinum: #C5C6C8;
+  --color-platinum-light: #E8E6E1;
+  --canvas-light: #F7F6F3;
+  --surface-white: #FFFFFF;
+  --border-subtle-dark: #1E293B;
+  --border-subtle-light: #E2E0D9;
+  --font-heading: 'Manrope', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --text-dark-primary: #F8FAFC;
+  --text-dark-secondary: #94A3B8;
+  --text-light-primary: #0F172A;
+  --text-light-secondary: #64748B;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--canvas-light);
+    color: var(--text-light-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: var(--surface-white);
+    border-bottom: 1px solid var(--border-subtle-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-navy-main);
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--color-platinum);
+}
+
+/* Mode Switcher */
+.mode-switcher {
+  background: var(--color-navy-surface);
+  border: 1px solid var(--border-subtle-dark);
+  border-radius: 4px;
+  padding: 3px;
+  display: inline-flex;
+}
+
+.mode-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dark-secondary);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+  background: var(--color-navy-elevated);
+  color: var(--color-platinum);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Fix voor de navigatie kleuren (Aviation bug) */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light-primary) !important; /* Forceer dezelfde donkere kleur */
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 1 !important;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--color-platinum) !important;
+}
+
+/* Primary Solid Dark Button */
+.btn-primary {
+    text-decoration: none;
+    background: var(--color-navy-main);
+    color: var(--surface-white);
+    border: 1px solid transparent;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover {
+    background: #132F4C;
+    border-color: var(--color-platinum);
+    color: var(--surface-white);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(7, 13, 26, 0.9), rgba(7, 13, 26, 0.9)), url('https://images.unsplash.com/photo-1542314831-c6a4d1065c6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+    padding: 120px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 54px;
+    color: var(--text-dark-primary);
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero-content p {
+    color: var(--text-dark-secondary);
+    font-size: 18px;
+    margin-bottom: 50px;
+    font-weight: 400;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Institutional Search Bar */
+.search-container {
+  background: var(--surface-white);
+  border: 1px solid var(--border-subtle-light);
+  border-radius: 6px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search-field {
+  flex: 1;
+  padding: 12px 20px;
+  border-right: 1px solid var(--border-subtle-light);
+  text-align: left;
+}
+
+.search-field:last-of-type {
+    border-right: none;
+}
+
+.search-field label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.search-field input, .search-field select {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light-primary);
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.search-field input::placeholder {
+    color: #A0AABF;
+}
+
+/* Search Button */
+.btn-search {
+  background: var(--color-navy-main);
+  color: var(--text-dark-primary);
+  border: 1px solid var(--color-platinum);
+  border-radius: 4px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-left: 15px;
+}
+
+.btn-search:hover {
+  background: #132F4C;
+  border-color: var(--color-platinum-light);
+  box-shadow: 0 4px 12px rgba(197, 198, 200, 0.15);
+}
+
+/* Institutional Trust Bar */
+.social-proof {
+    background-color: var(--surface-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px;
+    border-bottom: 1px solid var(--border-subtle-light);
+    gap: 40px;
+}
+
+.stat {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-light-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat strong {
+    font-size: 14px;
+    color: var(--color-navy-main);
+    font-weight: 700;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 16px;
+    background-color: var(--border-subtle-light);
+}
+
+/* Featured Listings */
+.featured {
+    padding: 100px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    color: var(--color-navy-main);
+}
+
+.view-all {
+    text-decoration: none;
+    color: var(--color-navy-main);
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 1px solid var(--color-platinum);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.view-all:hover {
+    color: var(--color-platinum);
+    border-color: var(--color-navy-main);
+}
+
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.inventory-card {
+  background: var(--surface-white);
+  border: 1px solid var(--border-subtle-light);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inventory-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-platinum);
+  box-shadow: 0 16px 32px -8px rgba(7, 13, 26, 0.08);
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fotografie Art Direction: Uniforme filter voor consistentie */
+.inventory-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    filter: grayscale(15%) contrast(105%) brightness(0.95); /* Maakt de set een familie */
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.inventory-card:hover img {
+    filter: grayscale(0%) contrast(100%) brightness(1); /* Wordt helder bij hover */
+    transform: scale(1.02);
+}
+
+/* Tag Badges */
+.badge-institutional {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(7, 13, 26, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--color-platinum);
+  border: 1px solid rgba(197, 198, 200, 0.3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.listing-info {
+    padding: 25px;
+}
+
+.listing-info h3 {
+    font-size: 20px;
+    color: var(--color-navy-main);
+    margin-bottom: 5px;
+}
+
+.listing-info p {
+    font-size: 12px;
+    color: var(--text-light-secondary);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+.listing-info .price {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-navy-main);
+    margin-bottom: 20px;
+}
+
+.listing-info .price span {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-light-secondary);
+}
+
+/* Specialist Link Contrast Fix */
+.specialist-link {
+    display: block;
+    text-decoration: none;
+    color: var(--text-light-secondary); /* Donkerder grijs in default state */
+    font-weight: 600;
+    font-size: 13px;
+    border-top: 1px solid var(--border-subtle-light);
+    padding-top: 15px;
+    transition: color 0.3s;
+}
+
+.specialist-link:hover {
+    color: var(--color-navy-main);
+}
+
+/* B2B CTA */
+.supplier-cta {
+    background-color: var(--color-navy-main);
+    padding: 100px 60px;
+    text-align: center;
+    border-top: 1px solid var(--border-subtle-dark);
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 38px;
+    color: var(--text-dark-primary);
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    color: var(--text-dark-secondary);
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+/* Secondary Ghost Button */
+.btn-ghost {
+    display: inline-block;
+    text-decoration: none;
+    background: transparent;
+    color: var(--text-dark-primary);
+    border: 1px solid var(--color-platinum);
+    padding: 16px 40px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: 20px;
+}
+
+.btn-ghost:hover {
+    background: rgba(197, 198, 200, 0.08);
+    border-color: var(--color-platinum-light);
+    color: var(--surface-white);
+}
+
+.btn-ghost:active {
+    background: rgba(197, 198, 200, 0.15);
+}
+
+.cta-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dark-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    background-color: #050A14;
+    color: var(--text-dark-primary);
+    padding: 80px 60px 30px 60px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 50px;
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-brand .logo {
+    color: var(--surface-white);
+    margin-bottom: 20px;
+}
+
+.footer-brand p {
+    color: var(--text-dark-secondary);
+    font-size: 13px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-links h4 {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--surface-white);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-dark-secondary);
+    font-size: 13px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--color-platinum);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-subtle-dark);
+    color: var(--text-dark-secondary);
+    font-size: 12px;
+    font-family: var(--font-mono);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .mode-switcher {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .listing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-field {
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle-light);
+        padding: 15px 20px;
+    }
+    .search-field:last-of-type {
+        border-bottom: none;
+    }
+    .btn-search {
+        margin-left: 0;
+        margin-top: 10px;
+        padding: 16px;
+    }
+    .social-proof {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .stat-divider {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .nav-links {
+        display: none;
+    }
+    .listing-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        flex-direction: column;
+    }
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* --- Nieuwe Sidebar Layout voor Inventory --- */
+.inventory-layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 60px;
+    gap: 40px;
+}
+
+.sidebar-filters {
+    width: 250px;
+    flex-shrink: 0;
+    background: var(--surface-white);
+    border: 1px solid var(--border-subtle-light);
+    border-radius: 6px;
+    padding: 25px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.filter-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: var(--color-navy-main);
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-subtle-light);
+}
+
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-group h4 {
+    font-family: var(--font-body);
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-light-secondary);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+}
+
+.filter-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-light-primary);
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.filter-group input[type="checkbox"] {
+    accent-color: var(--color-navy-main);
+    width: 16px;
+    height: 16px;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-subtle-light);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-light-primary);
+    background: var(--canvas-light);
+    outline: none;
+    cursor: pointer;
+}
+
+.inventory-main {
+    flex: 1;
+}
+
+@media (max-width: 1024px) {
+    .inventory-layout {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    .sidebar-filters {
+        width: 100%;
+        position: static;
+    }
+}

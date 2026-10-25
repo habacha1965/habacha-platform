@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Inventory | HABACHA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">HABACHA<span>.</span></a></div>
+        <div class="nav-actions">
+            <a href="#" class="btn-primary">Client Login</a>
+        </div>
+    </nav>
+
+    <!-- Compact Search Header -->
+    <div style="background-color: var(--color-navy-main); padding: 20px 60px;">
+        <div class="search-container" style="margin: 0; max-width: 100%; box-shadow: none; border: none;">
+            <div class="search-field">
+                <label>Location</label>
+                <input type="text" value="Global">
+            </div>
+            <div class="search-field">
+                <label>Asset Class</label>
+                <select>
+                    <option>All Categories</option>
+                    <option>Private Aviation</option>
+                    <option>Maritime</option>
+                </select>
+            </div>
+            <div class="search-field">
+                <label>Requirements</label>
+                <input type="text" placeholder="Pax, range, dates...">
+            </div>
+            <button class="btn-search">Update Search</button>
+        </div>
+    </div>
+
+    <!-- NIEUWE LAYOUT MET SIDEBAR FILTERS -->
+    <div class="inventory-layout">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar-filters">
+            <h3 class="filter-title">Filter Results</h3>
+            
+            <div class="filter-group">
+                <h4>Charter Type</h4>
+                <label><input type="checkbox"> Wet Lease (Crew included)</label>
+                <label><input type="checkbox"> Dry Lease (Asset only)</label>
+                <label><input type="checkbox"> Bareboat Charter</label>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Capacity / Range</h4>
+                <select class="filter-select">
+                    <option>Any Capacity</option>
+                    <option>1-12 Passengers (Pax)</option>
+                    <option>12+ Passengers (Pax)</option>
+                    <option>Heavy Cargo (DWT)</option>
+                </select>
+                <select class="filter-select" style="margin-top: 10px;">
+                    <option>Any Range</option>
+                    <option>Short Range (NM)</option>
+                    <option>Long Range (NM)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Price Range</h4>
+                <label><input type="checkbox"> Under $10k</label>
+                <label><input type="checkbox"> $10k - $50k</label>
+                <label><input type="checkbox"> $50k+</label>
+            </div>
+        </aside>
+
+        <!-- Main Results -->
+        <main class="inventory-main">
+            <div class="section-header">
+                <h2>Global Inventory (24 Assets)</h2>
+                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-light-secondary);">
+                    FILTERED BY: ALL CATEGORIES
+                </div>
+            </div>
+            
+            <div class="listing-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <!-- Example Asset 1 -->
+                <div class="inventory-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Private Jet">
+                        <div class="badge-institutional">Verified Operator</div>
+                    </div>
+                    <div class="listing-info">
+                        <h3>Bombardier Global 7500</h3>
+                        <p>Private Aviation • London, UK</p>
+                        <div class="price">From $10,500 <span>/ hour</span></div>
+                        <a href="#" class="specialist-link">View Asset Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Example Asset 2 -->
+                <div class="inventory-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yacht">
+                        <div class="badge-institutional">Institutional Escrow</div>
+                    </div>
+                    <div class="listing-info">
+                        <h3>Lürssen 110m Superyacht</h3>
+                        <p>Maritime • Mediterranean</p>
+                        <div class="price">From $85,000 <span>/ day</span></div>
+                        <a href="#" class="specialist-link">View Asset Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Example Asset 3 (B2B) -->
+                <div class="inventory-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cargo Ship">
+                        <div class="badge-institutional">Commercial Fleet</div>
+                    </div>
+                    <div class="listing-info">
+                        <h3>Panamax Container Vessel</h3>
+                        <p>Enterprise Logistics • Rotterdam</p>
+                        <div class="price">Request Quote <span>/ day</span></div>
+                        <a href="#" class="specialist-link">Contact Fleet Manager &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- Example Asset 4 -->
+                <div class="inventory-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Villa">
+                        <div class="badge-institutional">NDA Compliant</div>
+                    </div>
+                    <div class="listing-info">
+                        <h3>Palm Jumeirah Signature Villa</h3>
+                        <p>Private Real Estate • Dubai, UAE</p>
+                        <div class="price">From $2,500 <span>/ night</span></div>
+                        <a href="#" class="specialist-link">View Asset Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

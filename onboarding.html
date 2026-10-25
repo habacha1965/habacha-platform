@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Assets | HABACHA Institutional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">HABACHA<span>.</span></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Back to Home</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="#" class="btn-primary">Client Login</a>
+        </div>
+    </nav>
+
+    <header class="hero" style="padding: 80px 20px;">
+        <div class="hero-content">
+            <h1 style="font-size: 44px;">Institutional Asset Onboarding.</h1>
+            <p>Join the world's most exclusive exchange for high-value assets. Connect with vetted, high-intent clients globally.</p>
+        </div>
+    </header>
+
+    <section class="featured" style="padding-top: 60px;">
+        <div class="listing-grid" style="grid-template-columns: 1fr 1fr;">
+            <!-- Left Side: Value Proposition -->
+            <div>
+                <h2 style="margin-bottom: 20px;">Why Partner with HABACHA?</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 20px; border-left: 2px solid var(--color-platinum); padding-left: 15px;">
+                        <h3 style="font-size: 18px; margin-bottom: 5px;">Vetted Liquidity</h3>
+                        <p style="color: var(--text-light-secondary); font-size: 14px;">We don't accept just anyone. Our clients are vetted for financial capability, ensuring you only deal with serious counterparties.</p>
+                    </li>
+                    <li style="margin-bottom: 20px; border-left: 2px solid var(--color-platinum); padding-left: 15px;">
+                        <h3 style="font-size: 18px; margin-bottom: 5px;">Institutional Escrow</h3>
+                        <p style="color: var(--text-light-secondary); font-size: 14px;">All transactions are secured through our banking-grade escrow partners. Payment is guaranteed before asset release.</p>
+                    </li>
+                    <li style="margin-bottom: 20px; border-left: 2px solid var(--color-platinum); padding-left: 15px;">
+                        <h3 style="font-size: 18px; margin-bottom: 5px;">Full Discretion & NDA</h3>
+                        <p style="color: var(--text-light-secondary); font-size: 14px;">Your asset details, pricing, and client identity remain completely confidential under strict institutional NDAs.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Right Side: Application Form -->
+            <div class="inventory-card" style="padding: 40px;">
+                <h2 style="font-size: 24px; margin-bottom: 10px;">Request Access</h2>
+                <p style="font-size: 13px; color: var(--text-light-secondary); margin-bottom: 30px;">Our onboarding team reviews every application to maintain network quality.</p>
+                
+                <form action="#" method="POST">
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Company Name</label>
+                        <input type="text" placeholder="Legal Entity Name" required>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Asset Category</label>
+                        <select>
+                            <option>Private Aviation</option>
+                            <option>Maritime / Yachts</option>
+                            <option>Commercial Fleet / Logistics</option>
+                            <option>Luxury Real Estate</option>
+                        </select>
+                    </div>
+                    <!-- NIEUW VELD VOOR EXCLUSIVITEIT -->
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Estimated Portfolio Value</label>
+                        <select>
+                            <option>$5M - $25M</option>
+                            <option>$25M - $100M</option>
+                            <option>$100M+</option>
+                        </select>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 25px; padding: 10px;">
+                        <label>Corporate Email</label>
+                        <input type="email" placeholder="name@company.com" required>
+                    </div>
+                    
+                    <!-- AANGEPASTE KNOPTEKST -->
+                    <button type="submit" class="btn-search" style="width: 100%;">Request Institutional Onboarding</button>
+                    <p style="text-align: center; font-family: var(--font-mono); font-size: 10px; color: var(--text-light-secondary); margin-top: 15px;">ENCRYPTED SUBMISSION</p>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
