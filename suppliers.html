@@ -7,289 +7,124 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <header>
-    <div class="logo-container">
-      <a href="index.html" class="logo-text">HABACHA</a>
-    </div>
+    <div class="logo-container"><a href="index.html" class="logo-text">HABACHA</a></div>
     <nav>
       <a href="index.html">Home</a>
       <a href="inventory.html">Browse Assets</a>
       <a href="onboarding.html">Rent / Charter</a>
       <a href="suppliers.html" class="active">Suppliers (B2B)</a>
-      <a href="admin.html">Admin Console</a>
     </nav>
   </header>
 
   <div class="container" style="max-width: 900px; margin: 50px auto; padding: 0 20px;">
     <div style="text-align: center; margin-bottom: 40px;">
       <h1>Asset & Fleet Owner Onboarding</h1>
-      <p style="color: #94A3B8; font-size: 1.1rem; margin-top: 10px;">
-        Monetize your unutilized high-value assets across European, Middle Eastern, and global charter markets.
-      </p>
+      <p style="color: #94A3B8; font-size: 1.1rem; margin-top: 10px;">Monetize your unutilized high-value assets securely.</p>
     </div>
 
     <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px);">
       <form id="supplierForm">
-
-        <h3 style="color: #C5A880; border-bottom: 1px solid rgba(197,168,128,0.2); padding-bottom: 10px; margin-top: 0;">1. Company & Owner Identity</h3>
+        <h3 style="color: #C5A880; border-bottom: 1px solid rgba(197,168,128,0.2); padding-bottom: 10px; margin-top: 0;">1. Operator Identity</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-          <div>
-            <label style="display:block; margin-bottom: 8px; color: #fff; font-weight: 500;">Company / Fleet Operator Name *</label>
-            <input type="text" id="companyName" required placeholder="e.g. Apex Luxury Charters Ltd" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
-          </div>
-          <div>
-            <label style="display:block; margin-bottom: 8px; color: #fff; font-weight: 500;">Primary Contact Person *</label>
-            <input type="text" id="contactName" required placeholder="e.g. Marcus Vance" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
-          </div>
+          <div><label style="display:block; margin-bottom: 8px; color: #fff;">Company Name *</label><input type="text" id="companyName" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;"></div>
+          <div><label style="display:block; margin-bottom: 8px; color: #fff;">Contact Person *</label><input type="text" id="contactName" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div><label style="display:block; margin-bottom: 8px; color: #fff;">Corporate Email *</label><input type="email" id="email" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;"></div>
+          <div><label style="display:block; margin-bottom: 8px; color: #fff;">Phone / Direct *</label><input type="tel" id="phone" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;"></div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-          <div>
-            <label style="display:block; margin-bottom: 8px; color: #fff; font-weight: 500;">Corporate Email *</label>
-            <input type="email" id="email" required placeholder="partners@apexcharter.com" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
-          </div>
-          <div>
-            <label style="display:block; margin-bottom: 8px; color: #fff; font-weight: 500;">Direct Phone / WhatsApp *</label>
-            <input type="tel" id="phone" required placeholder="+44 20 7946 0912" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
-          </div>
-        </div>
-
-        <h3 style="color: #C5A880; border-bottom: 1px solid rgba(197,168,128,0.2); padding-bottom: 10px; margin-top: 30px;">2. Asset Type & Detailed Specifications</h3>
+        <h3 style="color: #C5A880; border-bottom: 1px solid rgba(197,168,128,0.2); padding-bottom: 10px; margin-top: 30px;">2. Asset Specifications</h3>
         <div style="margin-bottom: 20px;">
           <select id="supplierCategory" onchange="renderAssetSpecFields()" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid #C5A880; color: #fff; border-radius: 8px; font-size: 1rem;">
-            <option value="car_van_truck">Vehicles (Luxury Cars, Vans, Commercial Trucks)</option>
-            <option value="jet_aircraft">Aviation (Private Jets, Commercial Aircraft, Cargo Planes)</option>
-            <option value="yacht_ship">Maritime (Luxury Yachts, Cargo Vessels, Passenger Ships)</option>
-            <option value="real_estate">Real Estate (Luxury Villas, Corporate Estates, Commercial)</option>
+            <option value="car_van_truck">Vehicles (Luxury Cars, Vans, Trucks)</option>
+            <option value="jet_aircraft">Aviation (Private Jets, Cargo Planes)</option>
+            <option value="yacht_ship">Maritime (Luxury Yachts, Cargo Ships)</option>
           </select>
         </div>
+        <div id="dynamicAssetSpecsContainer"></div>
 
-        <div id="dynamicAssetSpecsContainer">
-          <!-- Dynamically Injected Spec Fields -->
-        </div>
-
-        <h3 style="color: #C5A880; border-bottom: 1px solid rgba(197,168,128,0.2); padding-bottom: 10px; margin-top: 30px;">3. Image Gallery & Ownership Verification Uploads</h3>
+        <h3 style="color: #C5A880; border-bottom: 1px solid rgba(197,168,128,0.2); padding-bottom: 10px; margin-top: 30px;">3. Image Gallery & Registration</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
           <div>
-            <label style="display:block; margin-bottom: 8px; color: #fff; font-weight: 500;">Asset Photos (Exterior & Interior) *</label>
+            <label style="display:block; margin-bottom: 8px; color: #fff;">Asset Photos *</label>
             <input type="file" id="assetPhotosFile" multiple accept="image/*" required style="width: 100%; padding: 10px; background: #0F172A; border: 1px dashed rgba(197,168,128,0.4); color: #fff; border-radius: 8px;">
           </div>
           <div>
-            <label style="display:block; margin-bottom: 8px; color: #fff; font-weight: 500;">Ownership / Registration Docs *</label>
+            <label style="display:block; margin-bottom: 8px; color: #fff;">Ownership / AOC Docs *</label>
             <input type="file" id="ownershipDocFile" accept="image/*,application/pdf" required style="width: 100%; padding: 10px; background: #0F172A; border: 1px dashed rgba(197,168,128,0.4); color: #fff; border-radius: 8px;">
           </div>
         </div>
 
-        <button type="submit" id="supplierSubmitBtn" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Submit Asset Listing Application</button>
-        
-        <div id="supplierFormResponse" style="margin-top: 20px; font-weight: 600; text-align: center; font-size: 1rem;"></div>
+        <button type="submit" id="supplierSubmitBtn" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem; font-weight: 600; text-transform: uppercase;">Submit Asset Listing</button>
+        <div id="supplierFormResponse" style="margin-top: 20px; font-weight: 600; text-align: center;"></div>
       </form>
     </div>
   </div>
-
-  <footer>
-    <p>&copy; 2026 HABACHA Platform. Universal Exchange for Asset Charters, Rentals & Leasing.</p>
-  </footer>
 
   <script src="js/supabase-client.js"></script>
   <script>
     function renderAssetSpecFields() {
       const cat = document.getElementById('supplierCategory').value;
       const container = document.getElementById('dynamicAssetSpecsContainer');
-
-      if (cat === 'car_van_truck') {
+      if (cat === 'jet_aircraft') {
         container.innerHTML = `
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Make / Brand *</label>
-              <input type="text" id="specMake" required placeholder="e.g. Rolls-Royce / Mercedes" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Model *</label>
-              <input type="text" id="specModel" required placeholder="e.g. Phantom VIII / Sprinter 319" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Year of Manufacture *</label>
-              <input type="number" id="specYear" required placeholder="2024" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Manufacturer *</label><input type="text" id="specMake" required placeholder="e.g. Gulfstream" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Model *</label><input type="text" id="specModel" required placeholder="e.g. G650ER" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Tail Number *</label><input type="text" id="specReg" required placeholder="e.g. N650GX" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">License Plate / Reg</label>
-              <input type="text" id="specReg" placeholder="e.g. 8-XYZ-99" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Daily Rate (€ / $)</label>
-              <input type="number" id="specRate" placeholder="2200" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Base Location *</label>
-              <input type="text" id="specLocation" required placeholder="e.g. Rotterdam / Dubai" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-          </div>
-        `;
-      } else if (cat === 'jet_aircraft') {
-        container.innerHTML = `
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Manufacturer *</label>
-              <input type="text" id="specMake" required placeholder="e.g. Gulfstream / Boeing" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Model *</label>
-              <input type="text" id="specModel" required placeholder="e.g. G650ER / B737-800F" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Tail Number (Registration) *</label>
-              <input type="text" id="specReg" required placeholder="e.g. N650GX / PH-ABC" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Max Range (Nautical Miles)</label>
-              <input type="text" id="specRange" placeholder="e.g. 7,500 NM" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Hourly Charter Rate (€ / $)</label>
-              <input type="number" id="specRate" placeholder="4800" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Home Airport (ICAO) *</label>
-              <input type="text" id="specLocation" required placeholder="e.g. EHAM / OMDB" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-          </div>
-        `;
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Year of Mfg / Refit</label><input type="number" id="specYear" placeholder="2022" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Hourly Rate (€/$)</label><input type="number" id="specRate" placeholder="4500" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Base Airport (ICAO) *</label><input type="text" id="specLocation" required placeholder="e.g. EHAM" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+          </div>`;
       } else if (cat === 'yacht_ship') {
         container.innerHTML = `
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Builder / Shipyard *</label>
-              <input type="text" id="specMake" required placeholder="e.g. Lürssen / Feadship" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Vessel Name / Model *</label>
-              <input type="text" id="specModel" required placeholder="e.g. 50m Custom Superyacht" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Length (Meters / Feet) *</label>
-              <input type="text" id="specRange" required placeholder="e.g. 50m (164 ft)" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Shipyard / Builder *</label><input type="text" id="specMake" required placeholder="e.g. Lürssen" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Vessel Name *</label><input type="text" id="specModel" required style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Length (LOA) *</label><input type="text" id="specRange" required placeholder="e.g. 50m / 164ft" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Flag State / IMO</label>
-              <input type="text" id="specReg" placeholder="e.g. Cayman Islands / IMO 98213" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Daily Charter Rate (€ / $)</label>
-              <input type="number" id="specRate" placeholder="18500" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Home Port / Marina *</label>
-              <input type="text" id="specLocation" required placeholder="e.g. Monaco / Dubai Marina" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-          </div>
-        `;
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Cabins</label><input type="number" id="specYear" placeholder="6" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Weekly Rate (€/$)</label><input type="number" id="specRate" placeholder="150000" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Base Port *</label><input type="text" id="specLocation" required placeholder="e.g. Monaco" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+          </div>`;
       } else {
         container.innerHTML = `
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Estate / Property Title *</label>
-              <input type="text" id="specModel" required placeholder="e.g. Executive Waterfront Villa" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Property Type *</label>
-              <input type="text" id="specMake" required placeholder="e.g. Coastal Estate / Penthouse" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Total Area (m² / Sqft)</label>
-              <input type="text" id="specRange" placeholder="e.g. 1,200 m²" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Brand *</label><input type="text" id="specMake" required placeholder="e.g. Mercedes" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Model *</label><input type="text" id="specModel" required placeholder="e.g. S-Class" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Year *</label><input type="number" id="specYear" required placeholder="2024" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Daily Lease Rate (€ / $)</label>
-              <input type="number" id="specRate" placeholder="12000" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display:block; margin-bottom: 6px; color: #94A3B8;">Full Location Address *</label>
-              <input type="text" id="specLocation" required placeholder="e.g. Palm Jumeirah, Dubai UAE" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;">
-            </div>
-          </div>
-        `;
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">License Plate</label><input type="text" id="specReg" placeholder="e.g. 8-XYZ-99" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Daily Rate (€/$)</label><input type="number" id="specRate" placeholder="1200" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+            <div><label style="display:block; margin-bottom: 6px; color: #94A3B8;">Base Location *</label><input type="text" id="specLocation" required placeholder="e.g. Amsterdam" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px;"></div>
+          </div>`;
       }
     }
-
     document.addEventListener('DOMContentLoaded', renderAssetSpecFields);
 
     document.getElementById('supplierForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-
-      const submitBtn = document.getElementById('supplierSubmitBtn');
-      const responseDiv = document.getElementById('supplierFormResponse');
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Uploading Photos & Verification Docs...';
-      responseDiv.style.color = '#C5A880';
-      responseDiv.textContent = 'Uploading asset photos to Supabase Storage...';
-
-      // 1. Upload Gallery Photos
-      const photosInput = document.getElementById('assetPhotosFile');
-      const galleryUrls = [];
-      for (let i = 0; i < photosInput.files.length; i++) {
-        const url = await window.habachaDB.uploadFile('habacha_assets', photosInput.files[i]);
-        if (url) galleryUrls.push(url);
-      }
-
-      // 2. Upload Ownership Doc
-      responseDiv.textContent = 'Uploading ownership verification document...';
-      const docInput = document.getElementById('ownershipDocFile');
-      let docUrl = null;
-      if (docInput.files.length > 0) {
-        docUrl = await window.habachaDB.uploadFile('habacha_docs', docInput.files[0]);
-      }
-
-      responseDiv.textContent = 'Registering supplier & asset details...';
-
-      const notesSpec = {
-        category_group: document.getElementById('supplierCategory').value,
-        make: document.getElementById('specMake') ? document.getElementById('specMake').value : '',
-        model: document.getElementById('specModel') ? document.getElementById('specModel').value : '',
-        registration: document.getElementById('specReg') ? document.getElementById('specReg').value : '',
-        rate: document.getElementById('specRate') ? document.getElementById('specRate').value : '',
-        location: document.getElementById('specLocation') ? document.getElementById('specLocation').value : '',
-        range_spec: document.getElementById('specRange') ? document.getElementById('specRange').value : '',
-        gallery_urls: galleryUrls
-      };
-
-      const payload = {
+      const btn = document.getElementById('supplierSubmitBtn');
+      btn.disabled = true; btn.textContent = 'Uploading secure data...';
+      
+      const res = await window.habachaDB.submitSupplier({
         company_name: document.getElementById('companyName').value,
         contact_name: document.getElementById('contactName').value,
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
         asset_categories: [document.getElementById('supplierCategory').value],
-        fleet_size: 1,
-        notes: JSON.stringify(notesSpec),
-        document_urls: docUrl ? [docUrl] : [],
         status: 'pending'
-      };
+      });
 
-      const res = await window.habachaDB.submitSupplier(payload);
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Asset Listing Application';
-
-      if (res.success) {
-        responseDiv.style.color = '#22C55E';
-        responseDiv.innerHTML = '✅ <strong>SUCCESS!</strong> Asset listing, photo gallery, and verification documents saved live in Supabase.';
-        document.getElementById('supplierForm').reset();
-        renderAssetSpecFields();
-      } else {
-        responseDiv.style.color = '#EF4444';
-        responseDiv.innerHTML = '❌ <strong>Submission Alert:</strong> ' + (res.message || 'Failed to submit application.');
-      }
+      if (res.success) window.location.href = 'success.html';
+      else { btn.disabled = false; btn.textContent = 'Submit Asset Listing'; alert('Error: ' + res.message); }
     });
   </script>
-
 </body>
 </html>
