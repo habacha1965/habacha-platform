@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /dashboard.html
+
+Sitemap: https://habacha-platform.vercel.app/sitemap.xml
