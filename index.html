@@ -3,66 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA | Rent, Lease & Charter Cars, Jets, Boats & Real Estate</title>
-  <meta name="description" content="The universal platform for individuals and businesses to rent, lease, and charter cars, vans, private jets, yachts, commercial fleets, and real estate.">
+  <title>HABACHA Platform | The Universal Asset Exchange</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+    .cat-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 16px; overflow: hidden; transition: 0.3s; text-decoration: none; display: block; }
+    .cat-card:hover { transform: translateY(-5px); border-color: #C5A880; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .cat-img { height: 200px; background-size: cover; background-position: center; border-bottom: 2px solid #C5A880; }
+    .cat-content { padding: 25px; text-align: center; }
+    .cat-title { color: #C5A880; font-size: 1.5rem; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .cat-desc { color: #94A3B8; font-size: 0.95rem; line-height: 1.5; }
+  </style>
 </head>
 <body>
-
   <header>
-    <a href="index.html" class="logo">HABA<span>CHA</span></a>
+    <div class="logo-container"><a href="index.html" class="logo-text">HABACHA</a></div>
     <nav>
       <a href="index.html" class="active">Home</a>
-      <a href="inventory.html">Browse Assets</a>
-      <a href="onboarding.html">List Your Asset</a>
-      <a href="login.html">Client Portal</a>
+      <a href="inventory.html">Marketplace</a>
+      <a href="suppliers.html">List Your Asset (B2B)</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-badge">For Individuals & Enterprise Clients</div>
-    <h1>Rent, Charter & Lease Any Asset Worldwide.</h1>
-    <p>From personal luxury cars, moving vans, and holiday yachts to private jets, commercial fleets, and real estate. Simple, transparent, and built for everyone.</p>
-
-    <div style="margin-top: 2rem;">
-      <a href="inventory.html" class="btn-primary">Browse Available Assets</a>
-      <a href="onboarding.html" class="btn-secondary">List an Asset / Inquire</a>
+  <section class="hero" style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
+    <div class="hero-text" style="max-width: 800px; text-align: center;">
+      <h1>The Universal Asset Exchange</h1>
+      <p>Select a category below to browse live availability and pricing from our global network of verified suppliers and fleet operators.</p>
     </div>
   </section>
 
-  <section class="section-grid">
-    <div class="card">
-      <div class="card-tag">Cars & Vans • Personal & B2B</div>
-      <h3>Auto's & Bestelwagens</h3>
-      <p>Rent cars for personal travel, moving vans for private use, or lease entire executive fleets for corporate operations.</p>
-      <a href="inventory.html" class="btn-secondary" style="display:inline-block; margin-left:0; margin-top:1rem;">View Cars & Vans</a>
+  <div class="container" style="margin-bottom: 80px;">
+    <div class="category-grid">
+      <a href="inventory.html?cat=car_van_truck" class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80');"></div>
+        <div class="cat-content">
+          <h2 class="cat-title">Road Transport</h2>
+          <p class="cat-desc">Luxury Chauffeur Sedans, Commercial Vans & Logistics Truck Fleets.</p>
+        </div>
+      </a>
+      <a href="inventory.html?cat=jet_aircraft" class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80');"></div>
+        <div class="cat-content">
+          <h2 class="cat-title">Aviation</h2>
+          <p class="cat-desc">Private Executive Jets, Helicopters & Commercial Cargo Aircraft.</p>
+        </div>
+      </a>
+      <a href="inventory.html?cat=yacht_ship" class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&q=80');"></div>
+        <div class="cat-content">
+          <h2 class="cat-title">Maritime</h2>
+          <p class="cat-desc">Luxury Superyachts, Passenger Ferries & Cargo Shipping Vessels.</p>
+        </div>
+      </a>
+      <a href="inventory.html?cat=real_estate" class="cat-card">
+        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80');"></div>
+        <div class="cat-content">
+          <h2 class="cat-title">Real Estate</h2>
+          <p class="cat-desc">Premium Coastal Estates, Corporate Villas & Commercial Venues.</p>
+        </div>
+      </a>
     </div>
-
-    <div class="card">
-      <div class="card-tag">Aviation • Private & Commercial</div>
-      <h3>Private Jets & Flight Charters</h3>
-      <p>Book private jet charters for leisure travel and family trips, or arrange commercial dry/wet aircraft leases.</p>
-      <a href="inventory.html" class="btn-secondary" style="display:inline-block; margin-left:0; margin-top:1rem;">Explore Aircraft</a>
-    </div>
-
-    <div class="card">
-      <div class="card-tag">Maritime • Day & Luxury Charters</div>
-      <h3>Yachts, Boats & Vessels</h3>
-      <p>Charter luxury yachts for private vacations, day boats for events, or commercial vessels for heavy cargo transportation.</p>
-      <a href="inventory.html" class="btn-secondary" style="display:inline-block; margin-left:0; margin-top:1rem;">View Boats & Yachts</a>
-    </div>
-
-    <div class="card">
-      <div class="card-tag">Real Estate • Short & Long Term</div>
-      <h3>Premium & Commercial Spaces</h3>
-      <p>Short-term luxury rentals, event venues, and long-term commercial logistics facilities for personal or corporate use.</p>
-      <a href="inventory.html" class="btn-secondary" style="display:inline-block; margin-left:0; margin-top:1rem;">Explore Properties</a>
-    </div>
-  </section>
+  </div>
 
   <footer>
-    <p>&copy; 2026 HABACHA Platform. The Universal Exchange for Asset Charters, Rentals & Leasing.</p>
+    <p>&copy; 2026 HABACHA Platform. All rights reserved.</p>
   </footer>
-
 </body>
 </html>
