@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal | HABACHA Platform</title>
+  <title>Admin Console | HABACHA Platform</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .admin-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
@@ -19,6 +19,7 @@
     th { background: rgba(0,0,0,0.2); color: #C5A880; font-weight: 600; }
     .btn-approve { background: #22C55E; color: #000; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; margin-right: 6px; }
     .btn-reject { background: #EF4444; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+    .doc-link { color: #38BDF8; text-decoration: underline; font-weight: 500; font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -29,69 +30,59 @@
     </div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="inventory.html">Fleet & Assets</a>
-      <a href="suppliers.html">Suppliers</a>
+      <a href="inventory.html">Browse Assets</a>
+      <a href="onboarding.html">Rent / Charter</a>
+      <a href="suppliers.html">Suppliers (B2B)</a>
       <a href="admin.html" class="active">Admin Console</a>
     </nav>
   </header>
 
   <div class="admin-container">
     <h1>Platform Administration Console</h1>
-    <p style="color: #94A3B8; margin-bottom: 25px;">Manage asset inquiries, approve supplier applications, and monitor catalog database operations.</p>
+    <p style="color: #94A3B8; margin-bottom: 25px;">Manage asset inquiries, verify uploaded ID documents, and approve supplier applications.</p>
 
-    <!-- API Key Configuration Box -->
-    <div class="key-box">
-      <h3 style="margin-top:0; color:#C5A880;">Supabase API Key Synchronization</h3>
-      <p style="font-size: 0.9rem; color: #94A3B8;">Paste your Supabase Publishable Key below to enable live REST API data synchronization across your browser session.</p>
-      <div style="display: flex; gap: 10px; margin-top: 15px;">
-        <input type="password" id="apiKeyInput" placeholder="Paste sb_publishable_... key here" style="flex:1; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: #0F172A; color: #fff;">
-        <button onclick="saveApiKey()" class="btn-primary" style="padding: 12px 24px;">Save & Sync</button>
-      </div>
-      <div id="keyStatus" style="margin-top: 10px; font-size: 0.85rem; color: #22C55E;"></div>
-    </div>
-
-    <!-- Live Suppliers Section -->
+    <!-- Live Inquiries Section -->
     <div class="data-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="margin:0;">Supplier Applications</h2>
+        <h2 style="margin:0;">Client Rental & Charter Inquiries</h2>
         <button onclick="loadDashboardData()" style="background:transparent; border:1px solid #C5A880; color:#C5A880; padding:6px 12px; border-radius:6px; cursor:pointer;">Refresh Data</button>
       </div>
       <div class="table-responsive">
         <table>
           <thead>
             <tr>
-              <th>Company</th>
-              <th>Contact Name</th>
-              <th>Email</th>
-              <th>Categories</th>
+              <th>Client Name</th>
+              <th>Contact / Phone</th>
+              <th>Logistics Details</th>
+              <th>Uploaded Docs</th>
+              <th>Date</th>
               <th>Status</th>
-              <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="suppliersTableBody">
-            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading supplier applications...</td></tr>
+          <tbody id="inquiriesTableBody">
+            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading inquiries...</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Live Inquiries Section -->
+    <!-- Live Suppliers Section -->
     <div class="data-card">
-      <h2>Client Rental & Charter Inquiries</h2>
+      <h2>Supplier Asset Applications</h2>
       <div class="table-responsive">
         <table>
           <thead>
             <tr>
-              <th>Client Name</th>
-              <th>Email</th>
-              <th>Type</th>
-              <th>Message / Requirements</th>
-              <th>Date Submitted</th>
+              <th>Company</th>
+              <th>Contact</th>
+              <th>Asset Specs</th>
+              <th>Uploaded Docs & Gallery</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="inquiriesTableBody">
-            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading client inquiries...</td></tr>
+          <tbody id="suppliersTableBody">
+            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading suppliers...</td></tr>
           </tbody>
         </table>
       </div>
@@ -101,68 +92,73 @@
 
   <script src="js/supabase-client.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const currentKey = localStorage.getItem('HABACHA_SUPABASE_KEY');
-      if (currentKey) {
-        document.getElementById('apiKeyInput').value = currentKey;
-        document.getElementById('keyStatus').textContent = '✓ Live Supabase Connection Active';
-      } else {
-        document.getElementById('keyStatus').textContent = '⚠️ Key required to fetch live database records.';
-        document.getElementById('keyStatus').style.color = '#EAB308';
-      }
-      loadDashboardData();
-    });
-
-    function saveApiKey() {
-      const key = document.getElementById('apiKeyInput').value;
-      if (window.habachaDB.setKey(key)) {
-        document.getElementById('keyStatus').textContent = '✓ Live Key Saved!';
-        document.getElementById('keyStatus').style.color = '#22C55E';
-        loadDashboardData();
-      }
-    }
+    document.addEventListener('DOMContentLoaded', loadDashboardData);
 
     async function loadDashboardData() {
       const suppliers = await window.habachaDB.fetchSuppliers();
       const inquiries = await window.habachaDB.fetchInquiries();
-
-      // Render Suppliers
-      const supBody = document.getElementById('suppliersTableBody');
-      if (suppliers.length === 0) {
-        supBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No supplier applications recorded yet.</td></tr>';
-      } else {
-        supBody.innerHTML = suppliers.map(s => `
-          <tr>
-            <td><strong>${escapeHtml(s.company_name)}</strong></td>
-            <td>${escapeHtml(s.contact_name)}</td>
-            <td>${escapeHtml(s.email)}</td>
-            <td>${(s.asset_categories || []).join(', ')}</td>
-            <td><span class="badge badge-${s.status}">${s.status}</span></td>
-            <td>
-              ${s.status === 'pending' ? `
-                <button class="btn-approve" onclick="updateSupplier('${s.id}', 'approved')">Approve</button>
-                <button class="btn-reject" onclick="updateSupplier('${s.id}', 'rejected')">Reject</button>
-              ` : '—'}
-            </td>
-          </tr>
-        `).join('');
-      }
 
       // Render Inquiries
       const inqBody = document.getElementById('inquiriesTableBody');
       if (inquiries.length === 0) {
         inqBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No inquiries recorded yet.</td></tr>';
       } else {
-        inqBody.innerHTML = inquiries.map(i => `
-          <tr>
-            <td><strong>${escapeHtml(i.client_name)}</strong></td>
-            <td>${escapeHtml(i.client_email)}</td>
-            <td><span style="text-transform:capitalize;">${escapeHtml(i.client_type || 'Individual')}</span></td>
-            <td>${escapeHtml(i.message || 'General Inquiry')}</td>
-            <td>${new Date(i.created_at).toLocaleDateString()}</td>
-            <td><span class="badge badge-${i.status === 'pending' ? 'pending' : 'approved'}">${i.status}</span></td>
-          </tr>
-        `).join('');
+        inqBody.innerHTML = inquiries.map(i => {
+          const log = i.logistics_data || {};
+          const docs = i.document_urls || [];
+          return `
+            <tr>
+              <td><strong>${escapeHtml(i.client_name)}</strong><br><small style="color:#94A3B8;">${escapeHtml(i.client_email)}</small></td>
+              <td>${escapeHtml(i.client_phone || 'N/A')}<br><small style="color:#C5A880;">${escapeHtml(i.company_name || 'Individual')}</small></td>
+              <td>
+                ${log.pickup_location ? `<strong>From:</strong> ${escapeHtml(log.pickup_location)}<br>` : ''}
+                ${log.dropoff_location ? `<strong>To:</strong> ${escapeHtml(log.dropoff_location)}<br>` : ''}
+                ${log.pickup_date ? `<small style="color:#94A3B8;">Date: ${escapeHtml(log.pickup_date)}</small>` : ''}
+              </td>
+              <td>
+                ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">View Doc #${idx+1}</a>`).join('<br>') : '<span style="color:#64748B;">No Document</span>'}
+              </td>
+              <td>${new Date(i.created_at).toLocaleDateString()}</td>
+              <td><span class="badge badge-${i.status === 'pending' ? 'pending' : 'approved'}">${i.status}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Render Suppliers
+      const supBody = document.getElementById('suppliersTableBody');
+      if (suppliers.length === 0) {
+        supBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No supplier applications recorded yet.</td></tr>';
+      } else {
+        supBody.innerHTML = suppliers.map(s => {
+          let specObj = {};
+          try { specObj = JSON.parse(s.notes || '{}'); } catch(e){}
+          const docs = s.document_urls || [];
+          const gallery = specObj.gallery_urls || [];
+
+          return `
+            <tr>
+              <td><strong>${escapeHtml(s.company_name)}</strong></td>
+              <td>${escapeHtml(s.contact_name)}<br><small style="color:#94A3B8;">${escapeHtml(s.email)}</small></td>
+              <td>
+                ${specObj.make ? `<strong>Make:</strong> ${escapeHtml(specObj.make)} ${escapeHtml(specObj.model || '')}<br>` : ''}
+                ${specObj.registration ? `<small style="color:#C5A880;">Reg/Plate: ${escapeHtml(specObj.registration)}</small><br>` : ''}
+                ${specObj.location ? `<small style="color:#94A3B8;">Base: ${escapeHtml(specObj.location)}</small>` : ''}
+              </td>
+              <td>
+                ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">Ownership ID #${idx+1}</a>`).join('<br>') : ''}
+                ${gallery.length > 0 ? `<br><small style="color:#22C55E;">${gallery.length} Photos Uploaded</small>` : ''}
+              </td>
+              <td><span class="badge badge-${s.status}">${s.status}</span></td>
+              <td>
+                ${s.status === 'pending' ? `
+                  <button class="btn-approve" onclick="updateSupplier('${s.id}', 'approved')">Approve</button>
+                  <button class="btn-reject" onclick="updateSupplier('${s.id}', 'rejected')">Reject</button>
+                ` : '—'}
+              </td>
+            </tr>
+          `;
+        }).join('');
       }
     }
 
