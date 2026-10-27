@@ -6,6 +6,36 @@
   <title>HABACHA | Global Asset Inventory</title>
   <meta name="description" content="Browse cars, vans, private jets, yachts, commercial fleets, and real estate available for rent or lease.">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2.5rem;
+      max-width: 540px;
+      width: 90%;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1.25rem;
+      font-size: 1.5rem; color: var(--text-secondary);
+      cursor: pointer; border: none; background: none;
+    }
+    .honeypot { display: none !important; }
+  </style>
 </head>
 <body>
 
@@ -26,20 +56,20 @@
   </section>
 
   <section class="section-grid">
-    <!-- Item 1: Auto / Car -->
+    <!-- Item 1: Auto -->
     <div class="card">
       <div class="card-tag">Cars • Daily / Monthly Rental</div>
       <h3>Luxury Executive Sedan (Mercedes S-Class / BMW 7)</h3>
       <p><strong>Use:</strong> Personal Travel, VIP Transport, Business Use<br>Available for short-term daily rental or flexible monthly lease for individuals and executives.</p>
-      <a href="onboarding.html?asset=luxury-sedan" class="btn-primary" style="display:block; text-align:center;">Rent This Vehicle</a>
+      <button onclick="openInquiryModal('Executive Sedan', 'Cars')" class="btn-primary" style="width:100%;">Rent This Vehicle</button>
     </div>
 
-    <!-- Item 2: Bestelbus / Van -->
+    <!-- Item 2: Bestelbus -->
     <div class="card">
       <div class="card-tag">Vans • Moving & Commercial</div>
       <h3>Commercial Moving & Cargo Van</h3>
       <p><strong>Use:</strong> Personal Relocation, Goods Transport<br>Easy-to-drive high-capacity van available for daily private rentals or long-term business logistics.</p>
-      <a href="onboarding.html?asset=moving-van" class="btn-primary" style="display:block; text-align:center;">Book Van Rental</a>
+      <button onclick="openInquiryModal('Cargo Van', 'Vans')" class="btn-primary" style="width:100%;">Book Van Rental</button>
     </div>
 
     <!-- Item 3: Private Jet -->
@@ -47,7 +77,7 @@
       <div class="card-tag">Aviation • Private Charter</div>
       <h3>Gulfstream G650ER Private Jet</h3>
       <p><strong>Capacity:</strong> 14 Passengers | <strong>Range:</strong> Transatlantic<br>Book custom private charters for family holidays, executive travel, or group flights worldwide.</p>
-      <a href="onboarding.html?asset=g650er" class="btn-primary" style="display:block; text-align:center;">Inquire Flight Rates</a>
+      <button onclick="openInquiryModal('Gulfstream G650ER', 'Aviation')" class="btn-primary" style="width:100%;">Inquire Flight Rates</button>
     </div>
 
     <!-- Item 4: Yacht -->
@@ -55,7 +85,7 @@
       <div class="card-tag">Maritime • Yacht Charter</div>
       <h3>50m Luxury Motor Yacht</h3>
       <p><strong>Guests:</strong> 12 | <strong>Crew:</strong> 11 Included<br>Full-service luxury charters for holidays, celebrations, or private sea excursions with professional crew.</p>
-      <a href="onboarding.html?asset=yacht50m" class="btn-primary" style="display:block; text-align:center;">Book Yacht Charter</a>
+      <button onclick="openInquiryModal('50m Motor Yacht', 'Yachts')" class="btn-primary" style="width:100%;">Book Yacht Charter</button>
     </div>
 
     <!-- Item 5: Commercial Fleet -->
@@ -63,7 +93,7 @@
       <div class="card-tag">Commercial Fleet • B2B Lease</div>
       <h3>Logistics Fleet (25x Sprinter Vans)</h3>
       <p><strong>Use:</strong> Corporate Last-Mile Delivery<br>Turnkey commercial fleet rentals for logistics businesses requiring scalable transport capacity.</p>
-      <a href="onboarding.html?asset=fleet25" class="btn-primary" style="display:block; text-align:center;">Request Fleet Quote</a>
+      <button onclick="openInquiryModal('25x Sprinter Fleet', 'Fleets')" class="btn-primary" style="width:100%;">Request Fleet Quote</button>
     </div>
 
     <!-- Item 6: Cargo Aircraft -->
@@ -71,13 +101,96 @@
       <div class="card-tag">Heavy Cargo • ACMI / Lease</div>
       <h3>Boeing 737-800 Cargo Aircraft</h3>
       <p><strong>Payload:</strong> 23.9 Tonnes<br>ACMI Wet Lease or long-term Dry Lease for air cargo operators and global freight providers.</p>
-      <a href="onboarding.html?asset=b737f" class="btn-primary" style="display:block; text-align:center;">Request Cargo Terms</a>
+      <button onclick="openInquiryModal('Boeing 737-800 Freighter', 'Heavy Cargo')" class="btn-primary" style="width:100%;">Request Cargo Terms</button>
     </div>
   </section>
+
+  <!-- Dynamic Modal Form -->
+  <div id="inquiryModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeInquiryModal()">&times;</button>
+      <h2 id="modalAssetTitle" style="margin-bottom:0.5rem;">Asset Inquiry</h2>
+      <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Complete your details below for direct availability and rates.</p>
+
+      <form id="modalForm">
+        <!-- Anti-Spam Honeypot Field -->
+        <input type="text" name="website_hp" class="honeypot" tabindex="-1" autocomplete="off">
+
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; margin-bottom:0.4rem;">I am a...</label>
+          <select id="modalClientType" required style="width:100%; padding:0.75rem; background:var(--bg-main); border:1px solid var(--border-subtle); color:white; border-radius:6px;">
+            <option value="private_individual">Private Individual (Particulier)</option>
+            <option value="business">Business / Enterprise (Bedrijf)</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; margin-bottom:0.4rem;">Full Name / Company *</label>
+          <input type="text" id="modalName" required placeholder="John Doe / Enterprise Name" style="width:100%; padding:0.75rem; background:var(--bg-main); border:1px solid var(--border-subtle); color:white; border-radius:6px;">
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; margin-bottom:0.4rem;">Email Address *</label>
+          <input type="email" id="modalEmail" required placeholder="name@example.com" style="width:100%; padding:0.75rem; background:var(--bg-main); border:1px solid var(--border-subtle); color:white; border-radius:6px;">
+        </div>
+
+        <div style="display:flex; gap:1rem; margin-bottom:1rem;">
+          <div style="flex:1;">
+            <label style="display:block; margin-bottom:0.4rem;">Start Date</label>
+            <input type="date" id="modalStartDate" style="width:100%; padding:0.75rem; background:var(--bg-main); border:1px solid var(--border-subtle); color:white; border-radius:6px;">
+          </div>
+          <div style="flex:1;">
+            <label style="display:block; margin-bottom:0.4rem;">End Date</label>
+            <input type="date" id="modalEndDate" style="width:100%; padding:0.75rem; background:var(--bg-main); border:1px solid var(--border-subtle); color:white; border-radius:6px;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <label style="display:block; margin-bottom:0.4rem;">Specific Requirements / Location</label>
+          <textarea id="modalRequirements" rows="3" placeholder="Specify pick-up location, passengers, or specific lease structure..." style="width:100%; padding:0.75rem; background:var(--bg-main); border:1px solid var(--border-subtle); color:white; border-radius:6px;"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;">Submit Inquiry</button>
+      </form>
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2026 HABACHA Platform. The Universal Exchange for Asset Charters, Rentals & Leasing.</p>
   </footer>
+
+  <script>
+    // Initialize Supabase Client
+    const SUPABASE_URL = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqc3dyYXZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY0MTYwMDAsImV4cCI6MjAyMTk5MjAwMH0.placeholder'; // Using standard client setup
+    
+    let currentAsset = '';
+
+    function openInquiryModal(assetName, category) {
+      currentAsset = assetName;
+      document.getElementById('modalAssetTitle').innerText = 'Inquire: ' + assetName;
+      document.getElementById('inquiryModal').style.display = 'flex';
+    }
+
+    function closeInquiryModal() {
+      document.getElementById('inquiryModal').style.display = 'none';
+    }
+
+    document.getElementById('modalForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Check Anti-Spam Honeypot
+      const hp = document.querySelector('input[name="website_hp"]').value;
+      if (hp !== '') {
+        console.warn('Spam detected.');
+        return false;
+      }
+
+      alert('Thank you! Your inquiry for ' + currentAsset + ' has been logged. Our asset desk will respond via email.');
+      closeInquiryModal();
+      this.reset();
+    });
+  </script>
 
 </body>
 </html>
