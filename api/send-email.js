@@ -1,14 +1,8 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
-
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
   try {
     const { apiKey, from, to, subject, html } = req.body;
-
-    if (!apiKey) {
-      return res.status(400).json({ error: 'Missing Resend API Key' });
-    }
+    if (!apiKey) return res.status(400).json({ error: 'Missing Resend API Key' });
 
     const resendResp = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -23,7 +17,6 @@ export default async function handler(req, res) {
         html: html
       })
     });
-
     const data = await resendResp.json();
     return res.status(resendResp.status).json(data);
   } catch (err) {

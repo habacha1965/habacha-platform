@@ -1,248 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asset Marketplace | HABACHA Platform</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
-    .card { background: #0F172A; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; }
-    .card-img { height: 220px; background-color: #1E293B; background-size: cover; background-position: center; }
-    .card-body { padding: 20px; }
-    .card-title { color: #C5A880; font-size: 1.25rem; margin-bottom: 10px; }
-    .card-price { color: #22C55E; font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; }
-    .card-spec { color: #94A3B8; font-size: 0.9rem; margin-bottom: 5px; }
-    
-    /* Checkout Modal Styles */
-    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2, 6, 23, 0.9); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-    .modal-content { background: #0F172A; border: 1px solid #C5A880; border-radius: 16px; width: 100%; max-width: 600px; padding: 30px; max-height: 90vh; overflow-y: auto; }
-    .close-btn { float: right; cursor: pointer; color: #94A3B8; font-size: 1.5rem; line-height: 1; }
-    .close-btn:hover { color: #EF4444; }
-    
-    .checkout-summary { background: #1E293B; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #C5A880; }
-    .total-price-display { font-size: 1.8rem; color: #22C55E; font-weight: bold; margin-top: 15px; text-align: center; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px; }
-    
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 6px; color: #94A3B8; font-size: 0.9rem; }
-    .form-group input { width: 100%; padding: 12px; background: #1E293B; border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 6px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Marketplace | HABACHA Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #0b132b; --bg-card: #1c2541; --gold: #c5a059; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .text-gold { color: var(--gold) !important; }
+        .bg-gold { background-color: var(--gold) !important; color: #000 !important; }
+        .nav-link { color: #fff; font-weight: 500; }
+        .nav-link:hover { color: var(--gold); }
+        .asset-card { background-color: var(--bg-card); border: 1px solid rgba(197, 160, 89, 0.2); border-radius: 12px; overflow: hidden; transition: transform 0.3s ease; }
+        .asset-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .asset-img { height: 220px; object-fit: cover; width: 100%; }
+        .filter-btn { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
+        .filter-btn.active, .filter-btn:hover { background-color: var(--gold); color: #000; }
+        .modal-content { background-color: var(--bg-card); border: 1px solid var(--gold); color: white; }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo-container"><a href="index.html" class="logo-text">HABACHA</a></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="inventory.html" class="active">Marketplace</a>
-      <a href="suppliers.html">List Your Asset</a>
-    </nav>
-  </header>
-
-  <div class="container" style="margin: 40px auto;">
-    <h1 style="text-align: center; color: #C5A880;">Live Asset Inventory</h1>
-    <div class="grid" id="inventoryGrid">
-      <!-- Injected via JS -->
-      <p style="text-align: center; width: 100%; color: #94A3B8;">Loading live marketplace data...</p>
-    </div>
-  </div>
-
-  <!-- Booking Checkout Modal -->
-  <div class="modal-overlay" id="checkoutModal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2 style="color: #C5A880; margin-top: 0;">Secure Booking Request</h2>
-      
-      <div class="checkout-summary">
-        <h3 id="modalAssetTitle" style="margin: 0 0 10px 0; color: #fff;">Asset Title</h3>
-        <p id="modalAssetRate" style="margin: 0; color: #94A3B8; font-size: 1rem;">Rate: €0 / day</p>
-      </div>
-
-      <form id="checkoutForm">
-        <input type="hidden" id="assetId">
-        <input type="hidden" id="assetRate">
-        <input type="hidden" id="assetRateType">
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-          <div class="form-group">
-            <label>Start Date & Time</label>
-            <input type="datetime-local" id="startDate" required onchange="calculateTotal()">
-          </div>
-          <div class="form-group">
-            <label>End Date & Time</label>
-            <input type="datetime-local" id="endDate" required onchange="calculateTotal()">
-          </div>
-        </div>
-
-        <div class="total-price-display" id="totalPriceDisplay">
-          Estimated Total: €0.00
-        </div>
-
-        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 25px 0;">
-        <h3 style="color: #C5A880; margin-bottom: 15px;">Client Details</h3>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-          <div class="form-group">
-            <label>Full Name *</label>
-            <input type="text" id="clientName" required>
-          </div>
-          <div class="form-group">
-            <label>Email Address *</label>
-            <input type="email" id="clientEmail" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Phone / WhatsApp *</label>
-          <input type="tel" id="clientPhone" required>
-        </div>
-        <div class="form-group">
-          <label>Specific Logistics / Routing Notes</label>
-          <input type="text" id="clientNotes" placeholder="e.g. Need pickup at Schiphol Airport">
-        </div>
-
-        <button type="submit" id="submitBookingBtn" class="btn-primary" style="width: 100%; padding: 15px; margin-top: 10px;">Confirm & Request Booking</button>
-        <div id="bookingResponse" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
-      </form>
-    </div>
-  </div>
-
-  <script src="js/supabase-client.js"></script>
-  <script>
-    let currentAssets = [];
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const categoryFilter = urlParams.get('cat');
-      
-      const grid = document.getElementById('inventoryGrid');
-      
-      // Fetch assets from Supabase DB
-      const res = await fetch(`${window.habachaDB.url}/rest/v1/assets?select=*&status=eq.available`, {
-        headers: { 'apikey': window.habachaDB.getKey(), 'Authorization': `Bearer ${window.habachaDB.getKey()}` }
-      });
-      
-      if (res.ok) {
-        currentAssets = await res.json();
-        let displayAssets = currentAssets;
-        
-        // Very basic mapping for demo (in production you map supplier categories to assets)
-        if (categoryFilter === 'jet_aircraft') {
-            displayAssets = currentAssets.filter(a => a.category === 'private_jet' || a.category === 'cargo_plane');
-        } else if (categoryFilter === 'car_van_truck') {
-            displayAssets = currentAssets.filter(a => a.category === 'car' || a.category === 'van' || a.category === 'truck');
-        } else if (categoryFilter === 'yacht_ship') {
-            displayAssets = currentAssets.filter(a => a.category === 'yacht');
-        } else if (categoryFilter === 'real_estate') {
-            displayAssets = currentAssets.filter(a => a.category === 'real_estate');
-        }
-
-        if (displayAssets.length === 0) {
-          grid.innerHTML = '<p style="text-align:center; width:100%; color:#C5A880;">No assets currently available in this category.</p>';
-          return;
-        }
-
-        grid.innerHTML = displayAssets.map(a => {
-          // Check if rate is per day or per hour based on category
-          const isHourly = (a.category === 'private_jet' || a.category === 'cargo_plane');
-          const rate = isHourly ? a.rate_per_hour : a.rate_per_day;
-          const rateLabel = isHourly ? '/ hour' : '/ day';
-          const rateFormatted = rate ? `€${parseFloat(rate).toLocaleString()}` : 'Price on Request';
-          const imgUrl = a.image_url || 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80';
-
-          return `
-            <div class="card">
-              <div class="card-img" style="background-image: url('${imgUrl}')"></div>
-              <div class="card-body">
-                <h3 class="card-title">${a.title}</h3>
-                <div class="card-price">${rateFormatted} <span style="font-size: 0.9rem; color: #94A3B8; font-weight: normal;">${rate ? rateLabel : ''}</span></div>
-                <p class="card-spec"><strong>Location:</strong> ${a.location || 'Global'}</p>
-                <p class="card-spec"><strong>Capacity:</strong> ${a.capacity || 'N/A'}</p>
-                <button class="btn-primary" style="width: 100%; margin-top: 15px; padding: 12px;" onclick="openModal('${a.id}', '${a.title.replace(/'/g, "\'")}', ${rate || 0}, '${isHourly ? 'hour' : 'day'}')">Select & Book</button>
-              </div>
+    <nav class="navbar navbar-expand-lg border-bottom border-secondary py-3">
+        <div class="container">
+            <a class="navbar-brand text-gold fw-bold fs-3" href="index.html">HABACHA</a>
+            <div class="navbar-nav ms-auto gap-3">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active text-gold" href="inventory.html">Marketplace</a>
+                <a class="nav-link" href="suppliers.html">List Your Asset</a>
+                <a class="nav-link" href="admin.html">Admin Console</a>
             </div>
-          `;
-        }).join('');
-      } else {
-        grid.innerHTML = '<p style="color:#EF4444; text-align:center;">Failed to load marketplace inventory. Verify Database API Key.</p>';
-      }
-    });
+        </div>
+    </nav>
 
-    function openModal(id, title, rate, type) {
-      document.getElementById('checkoutModal').style.display = 'flex';
-      document.getElementById('assetId').value = id;
-      document.getElementById('assetRate').value = rate;
-      document.getElementById('assetRateType').value = type;
-      
-      document.getElementById('modalAssetTitle').textContent = title;
-      document.getElementById('modalAssetRate').textContent = `Rate: €${parseFloat(rate).toLocaleString()} / ${type}`;
-      
-      // Reset form
-      document.getElementById('startDate').value = '';
-      document.getElementById('endDate').value = '';
-      document.getElementById('totalPriceDisplay').textContent = 'Estimated Total: €0.00';
-      document.getElementById('bookingResponse').textContent = '';
-    }
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-5 text-gold fw-bold mb-3">Executive Asset Exchange</h1>
+            <p class="text-secondary lead">Browse and charter verified private jets, luxury fleets, motor yachts, and real estate assets.</p>
+            <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap" id="category-filters">
+                <button class="btn filter-btn active" onclick="filterAssets('All')">All Assets</button>
+                <button class="btn filter-btn" onclick="filterAssets('Road Transport')">Road Transport</button>
+                <button class="btn filter-btn" onclick="filterAssets('Aviation')">Aviation</button>
+                <button class="btn filter-btn" onclick="filterAssets('Maritime')">Maritime</button>
+                <button class="btn filter-btn" onclick="filterAssets('Real Estate')">Real Estate</button>
+            </div>
+        </div>
 
-    function closeModal() {
-      document.getElementById('checkoutModal').style.display = 'none';
-    }
+        <div class="row g-4" id="inventory-grid">
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-gold" role="status"></div>
+                <p class="mt-3 text-secondary">Loading live fleet inventory...</p>
+            </div>
+        </div>
+    </div>
 
-    function calculateTotal() {
-      const start = new Date(document.getElementById('startDate').value);
-      const end = new Date(document.getElementById('endDate').value);
-      const rate = parseFloat(document.getElementById('assetRate').value);
-      const type = document.getElementById('assetRateType').value;
-      const display = document.getElementById('totalPriceDisplay');
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-gold" id="modalAssetTitle">Asset Booking Manifest</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+                        <input type="hidden" id="assetId">
+                        <input type="hidden" id="assetCategory">
+                        <input type="hidden" id="assetTitle">
+                        <input type="hidden" id="assetRate">
+                        <input type="hidden" id="assetRateType">
 
-      if (!start || !end || isNaN(start) || isNaN(end) || start >= end || rate === 0) {
-        display.textContent = 'Estimated Total: €0.00';
-        return;
-      }
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary">Full Name</label>
+                            <input type="text" id="clientName" class="form-control bg-dark text-white border-secondary" required placeholder="John Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary">Email Address</label>
+                            <input type="email" id="clientEmail" class="form-control bg-dark text-white border-secondary" required placeholder="name@company.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary">Phone / WhatsApp</label>
+                            <input type="tel" id="clientPhone" class="form-control bg-dark text-white border-secondary" required placeholder="+31 6 12345678">
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="form-label small text-secondary">Start Date / Departure</label>
+                                <input type="date" id="startDate" class="form-control bg-dark text-white border-secondary" required onchange="calcTotal()">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small text-secondary">Duration (Days / Hours)</label>
+                                <input type="number" id="durationUnits" class="form-control bg-dark text-white border-secondary" min="1" value="1" required onchange="calcTotal()">
+                            </div>
+                        </div>
+                        <div class="mb-3 p-3 bg-dark rounded border border-warning d-flex justify-content-between align-items-center">
+                            <span>Estimated Total:</span>
+                            <span class="fs-4 fw-bold text-gold" id="calculatedTotal">€0</span>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn bg-gold w-100 fw-bold py-2">Confirm Charter Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      const diffMs = end - start;
-      const diffHours = diffMs / (1000 * 60 * 60);
-      const diffDays = diffHours / 24;
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script>
+        let allAssets = [];
+        const fallbackImages = {
+            'Road Transport': 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80',
+            'Aviation': 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80',
+            'Maritime': 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80',
+            'Real Estate': 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'
+        };
 
-      let total = 0;
-      if (type === 'hour') {
-        total = diffHours * rate;
-      } else {
-        total = Math.ceil(diffDays) * rate; // round up to whole days
-      }
+        const defaultFleet = [
+            { id: 'jet-1', title: 'Gulfstream G650ER', category: 'Aviation', daily_rate: 14500, rate_type: 'hour', location: 'Amsterdam Schiphol (EHAM)', capacity: '16 Passengers', image_url: fallbackImages['Aviation'] },
+            { id: 'car-1', title: 'Rolls-Royce Cullinan Black Badge', category: 'Road Transport', daily_rate: 2200, rate_type: 'day', location: 'Monaco / Paris / Amsterdam', capacity: 'Chauffeur Driven', image_url: fallbackImages['Road Transport'] },
+            { id: 'yacht-1', title: 'Sunseeker 131 Yacht', category: 'Maritime', daily_rate: 18500, rate_type: 'day', location: 'Cannes / Mediterranean', capacity: '12 Guests / 5 Cabins', image_url: fallbackImages['Maritime'] },
+            { id: 're-1', title: 'Villa Superieure Côte d'Azur', category: 'Real Estate', daily_rate: 8500, rate_type: 'day', location: 'Saint-Tropez, France', capacity: '7 Bedrooms / Private Helipad', image_url: fallbackImages['Real Estate'] }
+        ];
 
-      display.textContent = `Estimated Total: €${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-    }
+        async function fetchAssets() {
+            try {
+                const resp = await fetch(`${SUPABASE_URL}/rest/v1/assets?select=*`, {
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+                });
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && data.length > 0) {
+                        allAssets = data.map(item => ({
+                            ...item,
+                            image_url: item.image_url || fallbackImages[item.category] || fallbackImages['Road Transport']
+                        }));
+                    } else {
+                        allAssets = defaultFleet;
+                    }
+                } else {
+                    allAssets = defaultFleet;
+                }
+            } catch (err) {
+                console.warn('Using default fleet fallback:', err);
+                allAssets = defaultFleet;
+            }
+            renderAssets(allAssets);
+        }
 
-    document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submitBookingBtn');
-      const resDiv = document.getElementById('bookingResponse');
-      
-      btn.disabled = true;
-      btn.textContent = 'Processing Booking...';
+        function renderAssets(assets) {
+            const grid = document.getElementById('inventory-grid');
+            if (!assets || assets.length === 0) {
+                grid.innerHTML = '<div class="col-12 text-center text-secondary py-5">No assets available in this category.</div>';
+                return;
+            }
+            grid.innerHTML = assets.map(a => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="asset-card h-100 d-flex flex-column">
+                        <img src="${a.image_url}" class="asset-img" alt="${a.title}" onerror="this.src='${fallbackImages[a.category] || fallbackImages['Road Transport']}'">
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <span class="badge bg-gold align-self-start mb-2">${a.category}</span>
+                            <h5 class="fw-bold mb-1">${a.title}</h5>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || 'Global Ops'}</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-secondary small">${a.capacity || ''}</span>
+                                    <span class="fs-5 fw-bold text-gold">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || 'day'}</small></span>
+                                </div>
+                                <button onclick="openBookingModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.rate_type || 'day'}')" class="btn bg-gold w-100 fw-bold">Book Asset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-      const payload = {
-        asset_id: document.getElementById('assetId').value || null,
-        client_name: document.getElementById('clientName').value,
-        client_email: document.getElementById('clientEmail').value,
-        client_phone: document.getElementById('clientPhone').value,
-        client_type: 'individual',
-        start_date: document.getElementById('startDate').value,
-        end_date: document.getElementById('endDate').value,
-        message: `Total Price Accepted: ${document.getElementById('totalPriceDisplay').textContent} | Notes: ${document.getElementById('clientNotes').value}`,
-        status: 'pending'
-      };
+        function filterAssets(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (cat === 'All') {
+                renderAssets(allAssets);
+            } else {
+                renderAssets(allAssets.filter(a => a.category === cat));
+            }
+        }
 
-      const res = await window.habachaDB.submitInquiry(payload);
-      
-      if (res.success) {
-        window.location.href = 'success.html';
-      } else {
-        btn.disabled = false;
-        btn.textContent = 'Confirm & Request Booking';
-        resDiv.style.color = '#EF4444';
-        resDiv.textContent = 'Error: ' + res.message;
-      }
-    });
-  </script>
+        function openBookingModal(id, title, category, rate, rateType) {
+            document.getElementById('assetId').value = id;
+            document.getElementById('assetTitle').value = title;
+            document.getElementById('assetCategory').value = category;
+            document.getElementById('assetRate').value = rate;
+            document.getElementById('assetRateType').value = rateType;
+            document.getElementById('modalAssetTitle').innerText = 'Charter ' + title;
+            calcTotal();
+            new bootstrap.Modal(document.getElementById('bookingModal')).show();
+        }
+
+        function calcTotal() {
+            const rate = parseFloat(document.getElementById('assetRate').value || 0);
+            const units = parseInt(document.getElementById('durationUnits').value || 1);
+            const total = rate * units;
+            document.getElementById('calculatedTotal').innerText = '€' + total.toLocaleString();
+        }
+
+        async function handleBookingSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+
+            const name = document.getElementById('clientName').value;
+            const email = document.getElementById('clientEmail').value;
+            const phone = document.getElementById('clientPhone').value;
+            const title = document.getElementById('assetTitle').value;
+            const category = document.getElementById('assetCategory').value;
+            const startDate = document.getElementById('startDate').value;
+            const units = document.getElementById('durationUnits').value;
+            const rateType = document.getElementById('assetRateType').value;
+            const total = document.getElementById('calculatedTotal').innerText;
+
+            const manifestDetails = `Asset: ${title}
+Start Date: ${startDate}
+Duration: ${units} ${rateType}(s)
+Total Estimated Rate: ${total}
+Client Contact: ${phone}`;
+
+            // Save inquiry to Supabase
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        full_name: name,
+                        email: email,
+                        phone: phone,
+                        asset_category: category,
+                        logistics_data: { asset: title, start_date: startDate, duration: units, total: total }
+                    })
+                });
+            } catch (err) {
+                console.warn('DB record creation notice:', err);
+            }
+
+            // Dispatch Resend Dual Emails via Serverless Endpoint
+            const clientHTML = getClientEmailHTML(name, category, manifestDetails);
+            const adminHTML = getAdminEmailHTML(name, email, category, manifestDetails, null);
+            const adminEmail = localStorage.getItem('admin_email_address') || email;
+
+            await Promise.all([
+                dispatchResendEmail(email, `Booking Confirmation: ${title}`, clientHTML),
+                dispatchResendEmail(adminEmail, `🚨 New Booking Inquiry: ${title}`, adminHTML)
+            ]);
+
+            window.location.href = 'success.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchAssets);
+    </script>
 </body>
 </html>
