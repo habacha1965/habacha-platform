@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Console | HABACHA Platform</title>
+  <title>Admin Portal | HABACHA Platform</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .admin-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .key-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 30px; }
+    .config-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
     .data-card { background: #1E293B; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
     .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; display: inline-block; }
     .badge-pending { background: rgba(234, 179, 8, 0.2); color: #EAB308; border: 1px solid #EAB308; }
@@ -17,29 +17,45 @@
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th, td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; }
     th { background: rgba(0,0,0,0.2); color: #C5A880; font-weight: 600; }
-    .btn-approve { background: #22C55E; color: #000; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; margin-right: 6px; }
-    .btn-reject { background: #EF4444; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+    .btn-approve { background: #22C55E; color: #000; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-right: 6px; }
+    .btn-reject { background: #EF4444; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
     .doc-link { color: #38BDF8; text-decoration: underline; font-weight: 500; font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo-container">
-      <a href="index.html" class="logo-text">HABACHA</a>
-    </div>
+    <div class="logo-container"><a href="index.html" class="logo-text">HABACHA</a></div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="inventory.html">Browse Assets</a>
-      <a href="onboarding.html">Rent / Charter</a>
-      <a href="suppliers.html">Suppliers (B2B)</a>
+      <a href="inventory.html">Marketplace</a>
+      <a href="suppliers.html">Suppliers</a>
       <a href="admin.html" class="active">Admin Console</a>
     </nav>
   </header>
 
   <div class="admin-container">
     <h1>Platform Administration Console</h1>
-    <p style="color: #94A3B8; margin-bottom: 25px;">Manage asset inquiries, verify uploaded ID documents, and approve supplier applications.</p>
+    <p style="color: #94A3B8; margin-bottom: 25px;">Manage platform settings, live email notifications, asset inquiries, and supplier approvals.</p>
+
+    <!-- Email & API Configuration Card -->
+    <div class="config-card">
+      <h3 style="margin-top: 0; color: #C5A880;">1. Live Email Dispatch Settings (Resend.com)</h3>
+      <p style="color: #94A3B8; font-size: 0.9rem;">Enter your Resend API Key (`re_...`) and the Admin Email address where you want to receive instant booking alerts.</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+        <div>
+          <label style="display:block; color:#fff; font-size:0.85rem; margin-bottom:5px;">Resend API Key (`re_...`)</label>
+          <input type="password" id="resendKeyInput" placeholder="Paste re_... here" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 6px;">
+        </div>
+        <div>
+          <label style="display:block; color:#fff; font-size:0.85rem; margin-bottom:5px;">Admin Receiver Email (Your Email)</label>
+          <input type="email" id="adminEmailInput" placeholder="e.g. your-email@gmail.com" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 6px;">
+        </div>
+      </div>
+      <button onclick="saveEmailConfig()" class="btn-primary" style="margin-top: 15px; padding: 10px 20px;">Save Email Dispatcher Settings</button>
+      <div id="emailConfigStatus" style="margin-top: 10px; font-size: 0.85rem; font-weight: bold;"></div>
+    </div>
 
     <!-- Live Inquiries Section -->
     <div class="data-card">
@@ -53,7 +69,7 @@
             <tr>
               <th>Client Name</th>
               <th>Contact / Phone</th>
-              <th>Logistics Details</th>
+              <th>Logistics & Price Details</th>
               <th>Uploaded Docs</th>
               <th>Date</th>
               <th>Status</th>
@@ -76,7 +92,7 @@
               <th>Company</th>
               <th>Contact</th>
               <th>Asset Specs</th>
-              <th>Uploaded Docs & Gallery</th>
+              <th>Uploaded Docs</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -92,7 +108,32 @@
 
   <script src="js/supabase-client.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', loadDashboardData);
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load saved email config
+      const resendKey = window.habachaDB.getResendKey();
+      const adminEmail = window.habachaDB.getAdminEmail();
+      if (resendKey) document.getElementById('resendKeyInput').value = resendKey;
+      if (adminEmail) document.getElementById('adminEmailInput').value = adminEmail;
+      
+      if (resendKey && adminEmail) {
+        document.getElementById('emailConfigStatus').style.color = '#22C55E';
+        document.getElementById('emailConfigStatus').textContent = '✓ Resend Live Email Dispatcher Active';
+      } else {
+        document.getElementById('emailConfigStatus').style.color = '#EAB308';
+        document.getElementById('emailConfigStatus').textContent = '⚠️ Resend Key and Admin Email required for live email delivery.';
+      }
+
+      loadDashboardData();
+    });
+
+    function saveEmailConfig() {
+      const key = document.getElementById('resendKeyInput').value;
+      const email = document.getElementById('adminEmailInput').value;
+      window.habachaDB.setResendKey(key);
+      window.habachaDB.setAdminEmail(email);
+      document.getElementById('emailConfigStatus').style.color = '#22C55E';
+      document.getElementById('emailConfigStatus').textContent = '✓ Email Dispatch Settings Saved!';
+    }
 
     async function loadDashboardData() {
       const suppliers = await window.habachaDB.fetchSuppliers();
@@ -104,17 +145,12 @@
         inqBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No inquiries recorded yet.</td></tr>';
       } else {
         inqBody.innerHTML = inquiries.map(i => {
-          const log = i.logistics_data || {};
           const docs = i.document_urls || [];
           return `
             <tr>
               <td><strong>${escapeHtml(i.client_name)}</strong><br><small style="color:#94A3B8;">${escapeHtml(i.client_email)}</small></td>
               <td>${escapeHtml(i.client_phone || 'N/A')}<br><small style="color:#C5A880;">${escapeHtml(i.company_name || 'Individual')}</small></td>
-              <td>
-                ${log.pickup_location ? `<strong>From:</strong> ${escapeHtml(log.pickup_location)}<br>` : ''}
-                ${log.dropoff_location ? `<strong>To:</strong> ${escapeHtml(log.dropoff_location)}<br>` : ''}
-                ${log.pickup_date ? `<small style="color:#94A3B8;">Date: ${escapeHtml(log.pickup_date)}</small>` : ''}
-              </td>
+              <td>${escapeHtml(i.message || 'N/A')}</td>
               <td>
                 ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">View Doc #${idx+1}</a>`).join('<br>') : '<span style="color:#64748B;">No Document</span>'}
               </td>
@@ -131,23 +167,14 @@
         supBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No supplier applications recorded yet.</td></tr>';
       } else {
         supBody.innerHTML = suppliers.map(s => {
-          let specObj = {};
-          try { specObj = JSON.parse(s.notes || '{}'); } catch(e){}
           const docs = s.document_urls || [];
-          const gallery = specObj.gallery_urls || [];
-
           return `
             <tr>
               <td><strong>${escapeHtml(s.company_name)}</strong></td>
               <td>${escapeHtml(s.contact_name)}<br><small style="color:#94A3B8;">${escapeHtml(s.email)}</small></td>
+              <td>${escapeHtml((s.asset_categories || []).join(', '))}</td>
               <td>
-                ${specObj.make ? `<strong>Make:</strong> ${escapeHtml(specObj.make)} ${escapeHtml(specObj.model || '')}<br>` : ''}
-                ${specObj.registration ? `<small style="color:#C5A880;">Reg/Plate: ${escapeHtml(specObj.registration)}</small><br>` : ''}
-                ${specObj.location ? `<small style="color:#94A3B8;">Base: ${escapeHtml(specObj.location)}</small>` : ''}
-              </td>
-              <td>
-                ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">Ownership ID #${idx+1}</a>`).join('<br>') : ''}
-                ${gallery.length > 0 ? `<br><small style="color:#22C55E;">${gallery.length} Photos Uploaded</small>` : ''}
+                ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">Doc #${idx+1}</a>`).join('<br>') : '<span style="color:#64748B;">No Document</span>'}
               </td>
               <td><span class="badge badge-${s.status}">${s.status}</span></td>
               <td>
