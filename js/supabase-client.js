@@ -1,4 +1,4 @@
-// HABACHA Platform - Supabase Live Sync Engine
+// HABACHA Platform - Supabase Live Engine & Diagnostics
 const SUPABASE_URL = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
 
 function getApiKey() {
@@ -10,7 +10,8 @@ window.habachaDB = {
   
   setApiKey(key) {
     if (key && key.trim()) {
-      localStorage.setItem('HABACHA_SUPABASE_KEY', key.trim());
+      const cleanKey = key.trim();
+      localStorage.setItem('HABACHA_SUPABASE_KEY', cleanKey);
       return true;
     }
     return false;
@@ -18,6 +19,9 @@ window.habachaDB = {
 
   async submitInquiry(payload) {
     const key = getApiKey();
+    if (!key) {
+      return { success: false, message: 'Geen API Key ingesteld. Vul de key in op /admin.html' };
+    }
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
         method: 'POST',
@@ -25,19 +29,30 @@ window.habachaDB = {
           'apikey': key,
           'Authorization': `Bearer ${key}`,
           'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
+          'Prefer': 'return=representation'
         },
         body: JSON.stringify(payload)
       });
-      return { success: res.ok, status: res.status };
+      
+      const responseData = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return { 
+          success: false, 
+          status: res.status, 
+          message: responseData.message || responseData.hint || responseData.details || res.statusText 
+        };
+      }
+      return { success: true, data: responseData };
     } catch (err) {
-      console.error('Inquiry submission error:', err);
-      return { success: false, error: err.message };
+      return { success: false, message: err.message };
     }
   },
 
   async submitSupplier(payload) {
     const key = getApiKey();
+    if (!key) {
+      return { success: false, message: 'Geen API Key ingesteld. Vul de key in op /admin.html' };
+    }
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/suppliers`, {
         method: 'POST',
@@ -45,14 +60,22 @@ window.habachaDB = {
           'apikey': key,
           'Authorization': `Bearer ${key}`,
           'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
+          'Prefer': 'return=representation'
         },
         body: JSON.stringify(payload)
       });
-      return { success: res.ok, status: res.status };
+      
+      const responseData = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return { 
+          success: false, 
+          status: res.status, 
+          message: responseData.message || responseData.hint || responseData.details || res.statusText 
+        };
+      }
+      return { success: true, data: responseData };
     } catch (err) {
-      console.error('Supplier submission error:', err);
-      return { success: false, error: err.message };
+      return { success: false, message: err.message };
     }
   },
 

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Client Onboarding & Intake | HABACHA Platform</title>
-  <meta name="description" content="Submit charter, rental, or fleet leasing requirements for luxury cars, jets, yachts, commercial cargo planes, and real estate globally.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +17,7 @@
       <a href="inventory.html">Browse Assets</a>
       <a href="onboarding.html" class="active">List / Inquire</a>
       <a href="suppliers.html">Suppliers (B2B)</a>
-      <a href="admin.html">Admin</a>
+      <a href="admin.html">Admin Console</a>
     </nav>
   </header>
 
@@ -32,7 +31,6 @@
 
     <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px);">
       <form id="onboardingForm">
-        <!-- Anti-spam Honeypot -->
         <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
 
         <div style="margin-bottom: 20px;">
@@ -84,7 +82,7 @@
           <textarea id="details" rows="4" placeholder="Specify your desired rental dates, location, fleet volume, or specific requirements..." style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px; resize: vertical;"></textarea>
         </div>
 
-        <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Submit Intake Request</button>
+        <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 600; text-transform: uppercase;">Submit Intake Request</button>
       </form>
     </div>
   </div>
@@ -119,10 +117,11 @@
       submitBtn.textContent = 'Submit Intake Request';
 
       if (res.success) {
-        alert('SUCCESS! Your request has been saved directly to the live Supabase database.');
+        alert('✅ SUCCESS! Request stored directly in Supabase table [inquiries].');
         document.getElementById('onboardingForm').reset();
       } else {
-        alert('NOTICE: Form submitted. Make sure to paste your Supabase Key in /admin.html to view live records.');
+        alert('❌ Supabase API Status: ' + (res.status || 'Error') + '
+Message: ' + res.message);
       }
     });
   </script>
