@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA | Asset Listing & Charter Intake</title>
-  <meta name="description" content="Submit enterprise assets for listing or request direct dry/wet lease, bareboat charter, and commercial fleet terms on HABACHA.">
+  <title>HABACHA | Rental Request & Asset Listing</title>
+  <meta name="description" content="Request a rental or lease for cars, jets, yachts, and real estate, or list your asset on HABACHA.">
   <link rel="stylesheet" href="styles.css">
   <style>
     .form-container {
@@ -16,9 +16,7 @@
       border-radius: 12px;
       padding: 2.5rem;
     }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
+    .form-group { margin-bottom: 1.5rem; }
     .form-group label {
       display: block;
       margin-bottom: 0.5rem;
@@ -35,7 +33,6 @@
       color: var(--text-primary);
       font-size: 1rem;
       font-family: var(--font-stack);
-      transition: border-color 0.2s ease;
     }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline: none;
@@ -53,80 +50,77 @@
     <a href="index.html" class="logo">HABA<span>CHA</span></a>
     <nav>
       <a href="index.html">Home</a>
-      <a href="inventory.html">Global Inventory</a>
-      <a href="onboarding.html" class="active">List an Asset</a>
+      <a href="inventory.html">Browse Assets</a>
+      <a href="onboarding.html" class="active">List / Inquire</a>
       <a href="login.html">Client Portal</a>
     </nav>
   </header>
 
   <section class="hero" style="padding: 4rem 2rem 1rem;">
-    <div class="hero-badge">Discreet B2B Intake</div>
-    <h1>Asset Listing & Charter Terms Request</h1>
-    <p>Submit your asset for global leasing monetization or request direct terms for private aviation, maritime fleets, commercial rentals, and real estate.</p>
+    <div class="hero-badge">Simple & Fast Request</div>
+    <h1>Rent an Asset or List Yours</h1>
+    <p>Whether you need a car, van, boat, private jet, or property — or want to rent out your own asset — submit your request below.</p>
   </section>
 
   <div class="form-container">
-    <form id="onboardingForm">
+    <form id="rentalForm">
       <div class="form-group">
-        <label for="fullName">Full Name or Enterprise Entity *</label>
-        <input type="text" id="fullName" name="fullName" required placeholder="e.g., Global Logistics Corp / Executive Principal">
+        <label for="clientType">I am a... *</label>
+        <select id="clientType" name="clientType" required>
+          <option value="">Select option...</option>
+          <option value="private_individual">Private Individual (Particulier)</option>
+          <option value="business">Business / Enterprise (Bedrijf)</option>
+        </select>
       </div>
 
       <div class="form-group">
-        <label for="email">Corporate or Principal Email *</label>
-        <input type="email" id="email" name="email" required placeholder="principal@enterprise.com">
+        <label for="fullName">Your Name / Company Name *</label>
+        <input type="text" id="fullName" name="fullName" required placeholder="John Doe / Enterprise Name">
       </div>
 
       <div class="form-group">
-        <label for="intakeType">Inquiry Type *</label>
-        <select id="intakeType" name="intakeType" required>
-          <option value="">Select your objective...</option>
-          <option value="charter_request">Request Asset Charter / Lease Terms</option>
-          <option value="asset_owner">List an Asset for Lease / Monetization</option>
-          <option value="fleet_operator">B2B Fleet Operator Partnership</option>
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required placeholder="name@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="objective">What would you like to do? *</label>
+        <select id="objective" name="objective" required>
+          <option value="">Select objective...</option>
+          <option value="rent">Rent / Lease an Asset (Car, Van, Jet, Boat, Property)</option>
+          <option value="list">List My Asset for Rent / Monetization</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="category">Asset Category *</label>
         <select id="category" name="category" required>
-          <option value="">Select category...</option>
-          <option value="aviation">Aviation (Private Jets / Cargo Aircraft)</option>
-          <option value="maritime">Maritime (Cargo Vessels / Superyachts)</option>
-          <option value="commercial_fleet">Commercial Fleet (Vans, Trucks, VIP Fleets)</option>
-          <option value="real_estate">Strategic Real Estate & Industrial Hubs</option>
+          <option value="">Select asset type...</option>
+          <option value="cars_vans">Cars & Bestelwagens (Vans)</option>
+          <option value="aviation">Private Jets & Aircraft</option>
+          <option value="maritime">Boats & Luxury Yachts</option>
+          <option value="fleets">Commercial Fleets & Trucks</option>
+          <option value="real_estate">Real Estate & Venues</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="structure">Preferred Agreement Structure</label>
-        <select id="structure" name="structure">
-          <option value="">Select agreement type...</option>
-          <option value="dry_lease">Dry Lease</option>
-          <option value="wet_lease">Wet Lease / ACMI</option>
-          <option value="bareboat">Bareboat Charter</option>
-          <option value="time_charter">Time Charter</option>
-          <option value="corporate_rental">Corporate Fleet Rental / Lease</option>
-        </select>
+        <label for="details">Additional Details / Rental Dates</label>
+        <textarea id="details" name="details" rows="4" placeholder="Tell us what dates you need, specific model preferences, or details about the asset you want to list..."></textarea>
       </div>
 
-      <div class="form-group">
-        <label for="details">Asset Specification / Operational Requirements</label>
-        <textarea id="details" name="details" rows="4" placeholder="Provide asset details, required operational duration, geographic region, or fleet specifications..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-primary" style="width: 100%;">Submit Discrete Intake</button>
+      <button type="submit" class="btn-primary" style="width: 100%;">Submit Request</button>
     </form>
   </div>
 
   <footer>
-    <p>&copy; 2026 HABACHA Platform. Global Exchange for High-Value Asset Charters & Commercial Leasing.</p>
+    <p>&copy; 2026 HABACHA Platform. The Universal Exchange for Asset Charters, Rentals & Leasing.</p>
   </footer>
 
   <script>
-    document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+    document.getElementById('rentalForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Thank you. Your discrete intake has been received. Our asset desk will contact you via email.');
+      alert('Thank you! Your request has been received. Our team will contact you shortly via email.');
       this.reset();
     });
   </script>
