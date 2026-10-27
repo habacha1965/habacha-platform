@@ -109,30 +109,30 @@
     <script>
         let allAssets = [];
         const fallbackImages = {
-            'Road Transport': 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80',
-            'Aviation': 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80',
-            'Maritime': 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80',
-            'Real Estate': 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'
+            "Road Transport": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+            "Aviation": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+            "Maritime": "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80",
+            "Real Estate": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
         };
 
         const defaultFleet = [
-            { id: 'jet-1', title: 'Gulfstream G650ER', category: 'Aviation', daily_rate: 14500, rate_type: 'hour', location: 'Amsterdam Schiphol (EHAM)', capacity: '16 Passengers', image_url: fallbackImages['Aviation'] },
-            { id: 'car-1', title: 'Rolls-Royce Cullinan Black Badge', category: 'Road Transport', daily_rate: 2200, rate_type: 'day', location: 'Monaco / Paris / Amsterdam', capacity: 'Chauffeur Driven', image_url: fallbackImages['Road Transport'] },
-            { id: 'yacht-1', title: 'Sunseeker 131 Yacht', category: 'Maritime', daily_rate: 18500, rate_type: 'day', location: 'Cannes / Mediterranean', capacity: '12 Guests / 5 Cabins', image_url: fallbackImages['Maritime'] },
-            { id: 're-1', title: 'Villa Superieure Côte d'Azur', category: 'Real Estate', daily_rate: 8500, rate_type: 'day', location: 'Saint-Tropez, France', capacity: '7 Bedrooms / Private Helipad', image_url: fallbackImages['Real Estate'] }
+            { id: "jet-1", title: "Gulfstream G650ER", category: "Aviation", daily_rate: 14500, rate_type: "hour", location: "Amsterdam Schiphol (EHAM)", capacity: "16 Passengers", image_url: fallbackImages["Aviation"] },
+            { id: "car-1", title: "Rolls-Royce Cullinan Black Badge", category: "Road Transport", daily_rate: 2200, rate_type: "day", location: "Monaco / Paris / Amsterdam", capacity: "Chauffeur Driven", image_url: fallbackImages["Road Transport"] },
+            { id: "yacht-1", title: "Sunseeker 131 Yacht", category: "Maritime", daily_rate: 18500, rate_type: "day", location: "Cannes / Mediterranean", capacity: "12 Guests / 5 Cabins", image_url: fallbackImages["Maritime"] },
+            { id: "re-1", title: "Villa Superieure Cote dAzur", category: "Real Estate", daily_rate: 8500, rate_type: "day", location: "Saint-Tropez, France", capacity: "7 Bedrooms / Private Helipad", image_url: fallbackImages["Real Estate"] }
         ];
 
         async function fetchAssets() {
             try {
-                const resp = await fetch(`${SUPABASE_URL}/rest/v1/assets?select=*`, {
-                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+                const resp = await fetch(SUPABASE_URL + "/rest/v1/assets?select=*", {
+                    headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY }
                 });
                 if (resp.ok) {
                     const data = await resp.json();
                     if (data && data.length > 0) {
                         allAssets = data.map(item => ({
                             ...item,
-                            image_url: item.image_url || fallbackImages[item.category] || fallbackImages['Road Transport']
+                            image_url: item.image_url || fallbackImages[item.category] || fallbackImages["Road Transport"]
                         }));
                     } else {
                         allAssets = defaultFleet;
@@ -141,14 +141,14 @@
                     allAssets = defaultFleet;
                 }
             } catch (err) {
-                console.warn('Using default fleet fallback:', err);
+                console.warn("Using default fleet fallback:", err);
                 allAssets = defaultFleet;
             }
             renderAssets(allAssets);
         }
 
         function renderAssets(assets) {
-            const grid = document.getElementById('inventory-grid');
+            const grid = document.getElementById("inventory-grid");
             if (!assets || assets.length === 0) {
                 grid.innerHTML = '<div class="col-12 text-center text-secondary py-5">No assets available in this category.</div>';
                 return;
@@ -156,28 +156,28 @@
             grid.innerHTML = assets.map(a => `
                 <div class="col-md-6 col-lg-3">
                     <div class="asset-card h-100 d-flex flex-column">
-                        <img src="${a.image_url}" class="asset-img" alt="${a.title}" onerror="this.src='${fallbackImages[a.category] || fallbackImages['Road Transport']}'">
+                        <img src="${a.image_url}" class="asset-img" alt="${a.title}" onerror="this.src='${fallbackImages[a.category] || fallbackImages["Road Transport"]}'">
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <span class="badge bg-gold align-self-start mb-2">${a.category}</span>
                             <h5 class="fw-bold mb-1">${a.title}</h5>
-                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || 'Global Ops'}</p>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || "Global Ops"}</p>
                             <div class="mt-auto">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-secondary small">${a.capacity || ''}</span>
-                                    <span class="fs-5 fw-bold text-gold">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || 'day'}</small></span>
+                                    <span class="text-secondary small">${a.capacity || ""}</span>
+                                    <span class="fs-5 fw-bold text-gold">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || "day"}</small></span>
                                 </div>
-                                <button onclick="openBookingModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.rate_type || 'day'}')" class="btn bg-gold w-100 fw-bold">Book Asset</button>
+                                <button onclick="openBookingModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.rate_type || "day"}')" class="btn bg-gold w-100 fw-bold">Book Asset</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `).join("");
         }
 
         function filterAssets(cat) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            if (cat === 'All') {
+            document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+            event.target.classList.add("active");
+            if (cat === "All") {
                 renderAssets(allAssets);
             } else {
                 renderAssets(allAssets.filter(a => a.category === cat));
@@ -185,38 +185,38 @@
         }
 
         function openBookingModal(id, title, category, rate, rateType) {
-            document.getElementById('assetId').value = id;
-            document.getElementById('assetTitle').value = title;
-            document.getElementById('assetCategory').value = category;
-            document.getElementById('assetRate').value = rate;
-            document.getElementById('assetRateType').value = rateType;
-            document.getElementById('modalAssetTitle').innerText = 'Charter ' + title;
+            document.getElementById("assetId").value = id;
+            document.getElementById("assetTitle").value = title;
+            document.getElementById("assetCategory").value = category;
+            document.getElementById("assetRate").value = rate;
+            document.getElementById("assetRateType").value = rateType;
+            document.getElementById("modalAssetTitle").innerText = "Charter " + title;
             calcTotal();
-            new bootstrap.Modal(document.getElementById('bookingModal')).show();
+            new bootstrap.Modal(document.getElementById("bookingModal")).show();
         }
 
         function calcTotal() {
-            const rate = parseFloat(document.getElementById('assetRate').value || 0);
-            const units = parseInt(document.getElementById('durationUnits').value || 1);
+            const rate = parseFloat(document.getElementById("assetRate").value || 0);
+            const units = parseInt(document.getElementById("durationUnits").value || 1);
             const total = rate * units;
-            document.getElementById('calculatedTotal').innerText = '€' + total.toLocaleString();
+            document.getElementById("calculatedTotal").innerText = "€" + total.toLocaleString();
         }
 
         async function handleBookingSubmit(e) {
             e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
+            const submitBtn = document.getElementById("submitBtn");
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
 
-            const name = document.getElementById('clientName').value;
-            const email = document.getElementById('clientEmail').value;
-            const phone = document.getElementById('clientPhone').value;
-            const title = document.getElementById('assetTitle').value;
-            const category = document.getElementById('assetCategory').value;
-            const startDate = document.getElementById('startDate').value;
-            const units = document.getElementById('durationUnits').value;
-            const rateType = document.getElementById('assetRateType').value;
-            const total = document.getElementById('calculatedTotal').innerText;
+            const name = document.getElementById("clientName").value;
+            const email = document.getElementById("clientEmail").value;
+            const phone = document.getElementById("clientPhone").value;
+            const title = document.getElementById("assetTitle").value;
+            const category = document.getElementById("assetCategory").value;
+            const startDate = document.getElementById("startDate").value;
+            const units = document.getElementById("durationUnits").value;
+            const rateType = document.getElementById("assetRateType").value;
+            const total = document.getElementById("calculatedTotal").innerText;
 
             const manifestDetails = `Asset: ${title}
 Start Date: ${startDate}
@@ -224,15 +224,14 @@ Duration: ${units} ${rateType}(s)
 Total Estimated Rate: ${total}
 Client Contact: ${phone}`;
 
-            // Save inquiry to Supabase
             try {
-                await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
-                    method: 'POST',
+                await fetch(SUPABASE_URL + "/rest/v1/inquiries", {
+                    method: "POST",
                     headers: {
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Content-Type': 'application/json',
-                        'Prefer': 'return=minimal'
+                        "apikey": SUPABASE_ANON_KEY,
+                        "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
                     },
                     body: JSON.stringify({
                         full_name: name,
@@ -243,23 +242,22 @@ Client Contact: ${phone}`;
                     })
                 });
             } catch (err) {
-                console.warn('DB record creation notice:', err);
+                console.warn("DB record creation notice:", err);
             }
 
-            // Dispatch Resend Dual Emails via Serverless Endpoint
             const clientHTML = getClientEmailHTML(name, category, manifestDetails);
             const adminHTML = getAdminEmailHTML(name, email, category, manifestDetails, null);
-            const adminEmail = localStorage.getItem('admin_email_address') || email;
+            const adminEmail = localStorage.getItem("admin_email_address") || email;
 
             await Promise.all([
-                dispatchResendEmail(email, `Booking Confirmation: ${title}`, clientHTML),
-                dispatchResendEmail(adminEmail, `🚨 New Booking Inquiry: ${title}`, adminHTML)
+                dispatchResendEmail(email, "Booking Confirmation: " + title, clientHTML),
+                dispatchResendEmail(adminEmail, "🚨 New Booking Inquiry: " + title, adminHTML)
             ]);
 
-            window.location.href = 'success.html';
+            window.location.href = "success.html";
         }
 
-        document.addEventListener('DOMContentLoaded', fetchAssets);
+        document.addEventListener("DOMContentLoaded", fetchAssets);
     </script>
 </body>
 </html>
