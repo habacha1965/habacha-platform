@@ -1,208 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal | HABACHA Platform</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .admin-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .config-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
-    .data-card { background: #1E293B; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-    .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; display: inline-block; }
-    .badge-pending { background: rgba(234, 179, 8, 0.2); color: #EAB308; border: 1px solid #EAB308; }
-    .badge-approved { background: rgba(34, 197, 94, 0.2); color: #22C55E; border: 1px solid #22C55E; }
-    .badge-rejected { background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid #EF4444; }
-    .table-responsive { overflow-x: auto; margin-top: 15px; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; }
-    th { background: rgba(0,0,0,0.2); color: #C5A880; font-weight: 600; }
-    .btn-approve { background: #22C55E; color: #000; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-right: 6px; }
-    .btn-reject { background: #EF4444; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
-    .doc-link { color: #38BDF8; text-decoration: underline; font-weight: 500; font-size: 0.85rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | HABACHA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #0b132b; --bg-card: #1c2541; --gold: #c5a059; }
+        body { background-color: var(--bg-dark); color: #fff; }
+        .text-gold { color: var(--gold) !important; }
+        .bg-gold { background-color: var(--gold) !important; color: #000 !important; }
+        .border-gold { border-color: var(--gold) !important; }
+    </style>
 </head>
-<body>
-
-  <header>
-    <div class="logo-container"><a href="index.html" class="logo-text">HABACHA</a></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="inventory.html">Marketplace</a>
-      <a href="suppliers.html">Suppliers</a>
-      <a href="admin.html" class="active">Admin Console</a>
-    </nav>
-  </header>
-
-  <div class="admin-container">
-    <h1>Platform Administration Console</h1>
-    <p style="color: #94A3B8; margin-bottom: 25px;">Manage platform settings, live email notifications, asset inquiries, and supplier approvals.</p>
-
-    <!-- Email & API Configuration Card -->
-    <div class="config-card">
-      <h3 style="margin-top: 0; color: #C5A880;">1. Live Email Dispatch Settings (Resend.com)</h3>
-      <p style="color: #94A3B8; font-size: 0.9rem;">Enter your Resend API Key (`re_...`) and the Admin Email address where you want to receive instant booking alerts.</p>
-      
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-        <div>
-          <label style="display:block; color:#fff; font-size:0.85rem; margin-bottom:5px;">Resend API Key (`re_...`)</label>
-          <input type="password" id="resendKeyInput" placeholder="Paste re_... here" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 6px;">
+<body class="py-5">
+    <div class="container">
+        <h1 class="text-gold mb-4 fw-bold"><i class="fas fa-shield-halved me-2"></i>Admin Console</h1>
+        
+        <section class="p-4 bg-dark rounded border border-gold mb-5">
+            <h2 class="h5 text-gold mb-3">1. Live Email Dispatch Settings (Resend.com)</h2>
+            <div class="row g-3">
+                <div class="col-md-7">
+                    <label class="small text-secondary">Resend API Key (`re_...`)</label>
+                    <input type="password" id="resend-api-key" class="form-control bg-black text-white border-secondary" placeholder="Paste your re_... key here">
+                </div>
+                <div class="col-md-5">
+                    <label class="small text-secondary">Admin Receiver Email</label>
+                    <input type="email" id="admin-email-address" class="form-control bg-black text-white border-secondary" placeholder="service4companys@gmail.com">
+                </div>
+                <div class="col-12">
+                    <button onclick="saveAdminSettings()" class="btn bg-gold fw-bold px-4">Save Email Dispatcher Settings</button>
+                    <span id="save-status" class="ms-3 small text-success d-none">✅ Settings Saved Locally!</span>
+                </div>
+            </div>
+        </section>
+        
+        <div class="text-center mt-5">
+            <a href="inventory.html" class="btn btn-outline-secondary">Back to Marketplace</a>
         </div>
-        <div>
-          <label style="display:block; color:#fff; font-size:0.85rem; margin-bottom:5px;">Admin Receiver Email (Your Email)</label>
-          <input type="email" id="adminEmailInput" placeholder="e.g. your-email@gmail.com" style="width: 100%; padding: 10px; background: #0F172A; border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 6px;">
-        </div>
-      </div>
-      <button onclick="saveEmailConfig()" class="btn-primary" style="margin-top: 15px; padding: 10px 20px;">Save Email Dispatcher Settings</button>
-      <div id="emailConfigStatus" style="margin-top: 10px; font-size: 0.85rem; font-weight: bold;"></div>
     </div>
 
-    <!-- Live Inquiries Section -->
-    <div class="data-card">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="margin:0;">Client Rental & Charter Inquiries</h2>
-        <button onclick="loadDashboardData()" style="background:transparent; border:1px solid #C5A880; color:#C5A880; padding:6px 12px; border-radius:6px; cursor:pointer;">Refresh Data</button>
-      </div>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Client Name</th>
-              <th>Contact / Phone</th>
-              <th>Logistics & Price Details</th>
-              <th>Uploaded Docs</th>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="inquiriesTableBody">
-            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading inquiries...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <script>
+        // Load existing settings on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('resend-api-key').value = localStorage.getItem('resend_api_key') || '';
+            document.getElementById('admin-email-address').value = localStorage.getItem('admin_email_address') || '';
+        });
 
-    <!-- Live Suppliers Section -->
-    <div class="data-card">
-      <h2>Supplier Asset Applications</h2>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Contact</th>
-              <th>Asset Specs</th>
-              <th>Uploaded Docs</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="suppliersTableBody">
-            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading suppliers...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        function saveAdminSettings() {
+            const key = document.getElementById('resend-api-key').value.trim();
+            const email = document.getElementById('admin-email-address').value.trim();
+            
+            if(!key || !email) {
+                alert('Please fill in both fields.');
+                return;
+            }
 
-  </div>
-
-  <script src="js/supabase-client.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Load saved email config
-      const resendKey = window.habachaDB.getResendKey();
-      const adminEmail = window.habachaDB.getAdminEmail();
-      if (resendKey) document.getElementById('resendKeyInput').value = resendKey;
-      if (adminEmail) document.getElementById('adminEmailInput').value = adminEmail;
-      
-      if (resendKey && adminEmail) {
-        document.getElementById('emailConfigStatus').style.color = '#22C55E';
-        document.getElementById('emailConfigStatus').textContent = '✓ Resend Live Email Dispatcher Active';
-      } else {
-        document.getElementById('emailConfigStatus').style.color = '#EAB308';
-        document.getElementById('emailConfigStatus').textContent = '⚠️ Resend Key and Admin Email required for live email delivery.';
-      }
-
-      loadDashboardData();
-    });
-
-    function saveEmailConfig() {
-      const key = document.getElementById('resendKeyInput').value;
-      const email = document.getElementById('adminEmailInput').value;
-      window.habachaDB.setResendKey(key);
-      window.habachaDB.setAdminEmail(email);
-      document.getElementById('emailConfigStatus').style.color = '#22C55E';
-      document.getElementById('emailConfigStatus').textContent = '✓ Email Dispatch Settings Saved!';
-    }
-
-    async function loadDashboardData() {
-      const suppliers = await window.habachaDB.fetchSuppliers();
-      const inquiries = await window.habachaDB.fetchInquiries();
-
-      // Render Inquiries
-      const inqBody = document.getElementById('inquiriesTableBody');
-      if (inquiries.length === 0) {
-        inqBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No inquiries recorded yet.</td></tr>';
-      } else {
-        inqBody.innerHTML = inquiries.map(i => {
-          const docs = i.document_urls || [];
-          return `
-            <tr>
-              <td><strong>${escapeHtml(i.client_name)}</strong><br><small style="color:#94A3B8;">${escapeHtml(i.client_email)}</small></td>
-              <td>${escapeHtml(i.client_phone || 'N/A')}<br><small style="color:#C5A880;">${escapeHtml(i.company_name || 'Individual')}</small></td>
-              <td>${escapeHtml(i.message || 'N/A')}</td>
-              <td>
-                ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">View Doc #${idx+1}</a>`).join('<br>') : '<span style="color:#64748B;">No Document</span>'}
-              </td>
-              <td>${new Date(i.created_at).toLocaleDateString()}</td>
-              <td><span class="badge badge-${i.status === 'pending' ? 'pending' : 'approved'}">${i.status}</span></td>
-            </tr>
-          `;
-        }).join('');
-      }
-
-      // Render Suppliers
-      const supBody = document.getElementById('suppliersTableBody');
-      if (suppliers.length === 0) {
-        supBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No supplier applications recorded yet.</td></tr>';
-      } else {
-        supBody.innerHTML = suppliers.map(s => {
-          const docs = s.document_urls || [];
-          return `
-            <tr>
-              <td><strong>${escapeHtml(s.company_name)}</strong></td>
-              <td>${escapeHtml(s.contact_name)}<br><small style="color:#94A3B8;">${escapeHtml(s.email)}</small></td>
-              <td>${escapeHtml((s.asset_categories || []).join(', '))}</td>
-              <td>
-                ${docs.length > 0 ? docs.map((d, idx) => `<a href="${d}" target="_blank" class="doc-link">Doc #${idx+1}</a>`).join('<br>') : '<span style="color:#64748B;">No Document</span>'}
-              </td>
-              <td><span class="badge badge-${s.status}">${s.status}</span></td>
-              <td>
-                ${s.status === 'pending' ? `
-                  <button class="btn-approve" onclick="updateSupplier('${s.id}', 'approved')">Approve</button>
-                  <button class="btn-reject" onclick="updateSupplier('${s.id}', 'rejected')">Reject</button>
-                ` : '—'}
-              </td>
-            </tr>
-          `;
-        }).join('');
-      }
-    }
-
-    async function updateSupplier(id, newStatus) {
-      const ok = await window.habachaDB.updateSupplierStatus(id, newStatus);
-      if (ok) {
-        loadDashboardData();
-      } else {
-        alert('Could not update status. Verify database permissions.');
-      }
-    }
-
-    function escapeHtml(str) {
-      if(!str) return '';
-      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-  </script>
-
+            localStorage.setItem('resend_api_key', key);
+            localStorage.setItem('admin_email_address', email);
+            
+            const status = document.getElementById('save-status');
+            status.classList.remove('d-none');
+            setTimeout(() => status.classList.add('d-none'), 3000);
+        }
+    </script>
 </body>
 </html>
