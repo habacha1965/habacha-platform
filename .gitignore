@@ -1,1 +1,6 @@
 .vercel
+
+node_modules/
+.DS_Store
+*.backup*
+backup-escrow/
