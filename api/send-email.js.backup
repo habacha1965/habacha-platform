@@ -1,0 +1,42 @@
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export default async function handler(req, res) {
+  // BEVEILIGING: Alleen aanvragen vanaf onze eigen website zijn toegestaan
+  const allowedOrigins = ['https://habacha-platform.vercel.app', 'https://habacha.com', 'http://localhost:3000'];
+  const origin = req.headers.origin;
+  if (!allowedOrigins.includes(origin)) {
+      return res.status(403).json({ error: 'Unauthorized origin' });
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { email, name, assetTitle } = req.body;
+
+  try {
+    const data = await resend.emails.send({
+      from: 'HABACHA Escrow Desk <onboarding@resend.dev>', // Tijdelijk, tot je habacha.com hebt geverifieerd
+      to: [email],
+      subject: 'Inquiry Registered - HABACHA Escrow Desk',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #0F172A;">
+            <h2 style="color: #070D1A;">HABACHA.</h2>
+            <hr style="border: 1px solid #C5C6C8; margin: 20px 0;">
+            <p>Dear ${name || 'Client'},</p>
+            <p>Your private dossier request for the <strong>${assetTitle}</strong> has been securely received by our Escrow Desk.</p>
+            <p>A dedicated Asset Specialist will review your requirements and contact your office <strong>within 4 hours</strong> with the full dossier.</p>
+            <br>
+            <p style="font-size: 12px; color: #64748B;">This is an automated message. Please do not reply directly to this email.</p>
+            <p style="font-size: 12px; color: #64748B;">&copy; 2026 HABACHA Global. All rights reserved.</p>
+        </div>
+      `,
+    });
+
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}

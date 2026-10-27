@@ -3,48 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HABACHA | Institutional Exchange for High-Value Assets</title>
-    <meta name="description" content="Empowering global enterprises and private clients with frictionless access to verified real estate, aviation, maritime, and commercial fleets.">
+    <title>HABACHA | Global Exchange for Asset Charters & Leasing</title>
+    <meta name="description" content=" Connecting global enterprises and private clients with verified private aviation, heavy maritime, commercial fleets, and premium real estate for short-term charter or long-term lease.">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <!-- SEO & Open Graph -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/lucide:shield-check.svg?color=%23C5C6C8">
+    <meta property="og:title" content="HABACHA | Global Exchange for Asset Charters & Leasing">
+    <meta property="og:description" content="The global exchange for chartering private aviation, luxury real estate, maritime vessels, and leasing commercial fleets. Vetted listings. Private dossiers on request.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://habacha.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HABACHA | Institutional Exchange">
+    <meta name="twitter:description" content="Institutional Asset Allocation for Private Aviation, Maritime, and Real Estate.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+
 </head>
 <body>
-
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">HABACHA<span>.</span></div>
         
-        <!-- Mode Switcher (Institutional) -->
+        <!-- DE LINKS ZIJN NU 100% CORRECT -->
         <div class="mode-switcher">
-            <div class="mode-btn active">Private Clients</div>
-            <div class="mode-btn">Enterprise & Logistics</div>
+            <a href="inventory.html?tier=private" class="mode-btn active" style="text-decoration: none;">Private Clients</a>
+            <a href="inventory.html?tier=enterprise" class="mode-btn" style="text-decoration: none;">Enterprise & Logistics</a>
         </div>
-
         <ul class="nav-links">
-            <li><a href="#accommodations">Accommodations</a></li>
-            <li><a href="#aviation">Aviation</a></li>
-            <li><a href="#maritime">Maritime</a></li>
-            <li><a href="#b2b">Commercial Fleets</a></li>
+            <li><a href="inventory.html?category=Real Estate">Accommodations</a></li>
+            <li><a href="inventory.html?category=Aviation">Aviation</a></li>
+            <li><a href="inventory.html?category=Maritime">Maritime</a></li>
+            <li><a href="inventory.html?category=Fleets">Commercial Fleets</a></li>
         </ul>
-        <div class="nav-actions">
-            <a href="#login" class="btn-primary">Client Login</a>
+        
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    <div class="nav-actions">
+            <a href="login.html" class="btn-primary">Client Login</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content">
-            <h1>The Institutional Exchange for High-Value Assets.</h1>
-            <p>Empowering global enterprises and private clients with frictionless access to verified real estate, aviation, maritime, and commercial fleets.</p>
+            <h1>The Global Exchange for Asset Charters & Commercial Leasing.</h1>
+            <p> Connecting global enterprises and private clients with verified private aviation, heavy maritime, commercial fleets, and premium real estate for short-term charter or long-term lease.</p>
             
-            <!-- Institutional Search Bar -->
             <div class="search-container">
                 <div class="search-field">
                     <label>Location / Port / Airport</label>
-                    <!-- Typfout gecorrigeerd naar veilige, institutionele voorbeelden -->
-                    <input type="text" placeholder="e.g., Dubai, Rotterdam, JFK">
+                    <input type="text" placeholder="e.g., Rotterdam, JFK, Monaco">
                 </div>
                 <div class="search-field">
                     <label>Asset Class</label>
@@ -57,30 +68,27 @@
                 </div>
                 <div class="search-field">
                     <label>Requirements</label>
-                    <input type="text" placeholder="Pax, range, dates...">
+                    <input type="text" placeholder="Pax, NM Range, Bareboat / Wet Lease...">
                 </div>
                 <button class="btn-search">Search Network</button>
             </div>
         </div>
     </header>
 
-    <!-- Institutional Trust Bar -->
     <div class="social-proof">
-        <div class="stat"><strong>$1.2B+</strong> Assets Under Network</div>
+        <div class="stat"><strong>Curated</strong> Manually Verified Listings</div>
         <div class="stat-divider"></div>
-        <div class="stat"><strong>140+</strong> Jurisdictions Covered</div>
+        <div class="stat"><strong>Private</strong> Dossier on Request</div>
         <div class="stat-divider"></div>
-        <div class="stat"><strong>Strict</strong> Escrow Protocol</div>
+        <div class="stat"><strong>Discreet</strong> NDA-Backed Process</div>
     </div>
 
-    <!-- Featured Listings -->
     <section class="featured">
         <div class="section-header">
             <h2>Curated Inventory</h2>
-            <a href="#" class="view-all">View Full Portfolio &rarr;</a>
+            <a href="inventory.html" class="view-all">View Full Portfolio &rarr;</a>
         </div>
         <div class="listing-grid">
-            <!-- Listing 1 -->
             <div class="inventory-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Luxury Villa">
@@ -88,12 +96,11 @@
                 </div>
                 <div class="listing-info">
                     <h3>Palm Jumeirah Signature Villa</h3>
-                    <p>Private Real Estate • Dubai, UAE</p>
+                    <p>Private Estate Lease • Dubai, UAE</p>
                     <div class="price">From $2,500 <span>/ night</span></div>
-                    <a href="#" class="specialist-link">Speak with Asset Specialist &rarr;</a>
+                    <a href="inventory.html" class="specialist-link">Speak with Asset Specialist &rarr;</a>
                 </div>
             </div>
-            <!-- Listing 2 -->
             <div class="inventory-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Private Jet">
@@ -103,66 +110,155 @@
                     <h3>Gulfstream G650</h3>
                     <p>Private Aviation • Global</p>
                     <div class="price">From $8,500 <span>/ hour</span></div>
-                    <a href="#" class="specialist-link">Speak with Asset Specialist &rarr;</a>
+                    <a href="inventory.html" class="specialist-link">Speak with Asset Specialist &rarr;</a>
                 </div>
             </div>
-            <!-- Listing 3 -->
             <div class="inventory-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Luxury Yacht">
-                    <div class="badge-institutional">Institutional Escrow</div>
+                    <div class="badge-institutional">Private Dossier</div>
                 </div>
                 <div class="listing-info">
                     <h3>Benetti 108 Superyacht</h3>
-                    <p>Maritime • Monaco</p>
+                    <p>Bareboat Charter • Monaco</p>
                     <div class="price">From $15,000 <span>/ day</span></div>
-                    <a href="#" class="specialist-link">Speak with Asset Specialist &rarr;</a>
+                    <a href="inventory.html" class="specialist-link">Speak with Asset Specialist &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- B2B Supplier CTA -->
     <section class="supplier-cta" id="b2b">
         <div class="cta-content">
-            <h2>Institutional Asset Onboarding</h2>
-            <p>Join HABACHA's global network of verified suppliers. We provide vetted liquidity, institutional escrow, and full discretion for high-value assets and commercial fleets.</p>
-            <a href="#" class="btn-ghost">Request Institutional Access</a>
-            <p class="cta-sub">Vetted Liquidity. Institutional Escrow. Full Discretion.</p>
+            <h2>Asset Monetization & Fleet Leasing</h2>
+            <p>Join HABACHA's global network of verified suppliers. We facilitate dry/wet leasing, bareboat charters, and commercial rentals with full discretion and performance-based settlement.</p>
+            <a href="onboarding.html" class="btn-ghost">Request Institutional Access</a>
+            <p class="cta-sub">Vetted Liquidity & Performance-Based Settlement.</p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="logo">HABACHA<span>.</span></div>
-                <p>The premier institutional exchange for high-value asset rentals. Serving global enterprises and private clients.</p>
+                <p>The premier institutional exchange for high-value asset rentals.</p>
             </div>
             <div class="footer-links">
-                <h4>Private Clients</h4>
-                <a href="#">Real Estate</a>
-                <a href="#">Aviation</a>
-                <a href="#">Maritime</a>
+                <h4>Platform</h4>
+                <a href="inventory.html?tier=private">Private Clients</a>
+                <a href="inventory.html?tier=enterprise">Enterprise</a>
+                <a href="inventory.html">Global Inventory</a>
             </div>
             <div class="footer-links">
-                <h4>Enterprise</h4>
-                <a href="#">Commercial Fleets</a>
-                <a href="#">Dry Lease / Wet Lease</a>
-                <a href="#">Logistics & Cargo</a>
-                <a href="#">API Integration</a>
+                <h4>Company</h4>
+                <a href="about.html">About Us</a>
+                <a href="onboarding.html">Supplier Access</a>
             </div>
             <div class="footer-links">
-                <h4>Institutional</h4>
-                <a href="#">Escrow Services</a>
-                <a href="#">Compliance & NDA</a>
-                <a href="#">Contact Specialists</a>
+                <h4>Legal</h4>
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 HABACHA Global. All rights reserved.</p>
         </div>
     </footer>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <div class="logo">HABACHA<span>.</span></div>
+                <button class="close-menu" id="closeMenuBtn">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="inventory.html?tier=private">Private Clients</a></li>
+                <li><a href="inventory.html?tier=enterprise">Enterprise & Logistics</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="inventory.html?category=Real Estate">Accommodations</a></li>
+                <li><a href="inventory.html?category=Aviation">Aviation</a></li>
+                <li><a href="inventory.html?category=Maritime">Maritime</a></li>
+                <li><a href="inventory.html?category=Fleets">Commercial Fleets</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="onboarding.html" style="color: var(--color-platinum);">List Your Asset</a></li>
+                <li><a href="login.html">Client Login</a></li>
+            </ul>
+        </div>
+        
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        if(hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+        }
+
+        if(closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        }
+    </script>
+
+    <!-- Cookie Banner (AVG-compliant) -->
+    <div id="cookieBanner" class="cookie-banner" style="display:none;">
+        <div class="cookie-content">
+            <div class="cookie-title">Institutional Privacy Notice</div>
+            <p>HABACHA uses cookies to ensure the security and functionality of this platform. You may choose which categories to accept. Your choice will be remembered. <a href="privacy.html">Privacy Policy</a>.</p>
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn-accept" onclick="cookieChoice('all')">Accept All</button>
+            <button class="cookie-btn-reject" onclick="cookieChoice('essential')">Reject Non-Essential</button>
+            <button class="cookie-btn-customize" onclick="toggleCookiePrefs()">Customize</button>
+        </div>
+        <div class="cookie-preferences" id="cookiePrefs">
+            <div class="cookie-pref-item">
+                <div class="cookie-pref-text"><h4>Strictly Necessary</h4><p>Required for login, security, and core platform functionality. Cannot be disabled.</p></div>
+                <label class="cookie-toggle"><input type="checkbox" checked disabled><span class="cookie-slider"></span></label>
+            </div>
+            <div class="cookie-pref-item">
+                <div class="cookie-pref-text"><h4>Analytics</h4><p>Helps us understand how the platform is used so we can improve it.</p></div>
+                <label class="cookie-toggle"><input type="checkbox" id="prefAnalytics"><span class="cookie-slider"></span></label>
+            </div>
+            <div class="cookie-pref-item">
+                <div class="cookie-pref-text"><h4>Marketing</h4><p>Used to measure the effectiveness of communications. Never shared with third parties.</p></div>
+                <label class="cookie-toggle"><input type="checkbox" id="prefMarketing"><span class="cookie-slider"></span></label>
+            </div>
+            <div class="cookie-buttons" style="margin-top:15px;">
+                <button class="cookie-btn-accept" onclick="saveCustomPreferences()">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            window.toggleCookiePrefs = function() {
+                var prefs = document.getElementById('cookiePrefs');
+                prefs.classList.toggle('open');
+            };
+            window.cookieChoice = function(level) {
+                var prefs = { essential: true, analytics: level === 'all', marketing: level === 'all', timestamp: Date.now() };
+                localStorage.setItem('habacha_cookie_prefs', JSON.stringify(prefs));
+                document.getElementById('cookieBanner').style.display = 'none';
+            };
+            window.saveCustomPreferences = function() {
+                var prefs = {
+                    essential: true,
+                    analytics: document.getElementById('prefAnalytics').checked,
+                    marketing: document.getElementById('prefMarketing').checked,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem('habacha_cookie_prefs', JSON.stringify(prefs));
+                document.getElementById('cookieBanner').style.display = 'none';
+            };
+            if (!localStorage.getItem('habacha_cookie_prefs')) {
+                var banner = document.getElementById('cookieBanner');
+                if (banner) setTimeout(function() { banner.style.display = 'block'; }, 500);
+            }
+        })();
+    </script>
 
 </body>
 </html>

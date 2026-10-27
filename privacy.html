@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | HABACHA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <!-- SEO & Open Graph -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/lucide:shield-check.svg?color=%23C5C6C8">
+    <meta property="og:title" content="HABACHA | Institutional Exchange for High-Value Assets">
+    <meta property="og:description" content="The premier global exchange for private aviation, superyachts, luxury real estate, and commercial fleets. Vetted listings. Private dossiers on request.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://habacha.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HABACHA | Institutional Exchange">
+    <meta name="twitter:description" content="Institutional Asset Allocation for Private Aviation, Maritime, and Real Estate.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">HABACHA<span>.</span></a></div>
+    </nav>
+    <section class="featured" style="max-width: 800px; padding-top: 100px;">
+        <h1 style="font-family: var(--font-heading); color: var(--color-navy-main); font-size: 36px; margin-bottom: 10px;">Privacy Policy</h1>
+        <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-light-secondary); margin-bottom: 40px;">LAST UPDATED: OCTOBER 2026</p>
+        
+        <h3 style="font-family: var(--font-heading); color: var(--color-navy-main); margin: 30px 0 10px 0;">1. Institutional Discretion</h3>
+        <p style="color: var(--text-light-secondary); line-height: 1.7; font-size: 15px;">At HABACHA, discretion is our paramount principle. We collect only the data strictly necessary to facilitate high-value asset transactions. Your identity, portfolio information, and inquiry details are protected under strict institutional NDAs and are never shared with third parties without explicit consent.</p>
+        
+        <h3 style="font-family: var(--font-heading); color: var(--color-navy-main); margin: 30px 0 10px 0;">2. Data Encryption</h3>
+        <p style="color: var(--text-light-secondary); line-height: 1.7; font-size: 15px;">All data transmitted through our platform is secured using 256-bit AES encryption. Database access is strictly governed by Row Level Security (RLS) protocols, ensuring that suppliers can only view data relevant to their own assets, and clients can only view their own inquiries.</p>
+        
+        <h3 style="font-family: var(--font-heading); color: var(--color-navy-main); margin: 30px 0 10px 0;">3. Sharing of Data</h3>
+        <p style="color: var(--text-light-secondary); line-height: 1.7; font-size: 15px;">We share inquiry details only with the supplier of the asset concerned, and only as far as necessary to handle your request. We do not sell personal data.</p>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand"><div class="logo">HABACHA<span>.</span></div><p>The premier institutional exchange for high-value asset rentals.</p></div>
+            <div class="footer-links"><h4>Platform</h4><a href="inventory.html?tier=private">Private Clients</a><a href="inventory.html?tier=enterprise">Enterprise</a></div>
+            <div class="footer-links"><h4>Company</h4><a href="about.html">About Us</a><a href="onboarding.html">Supplier Access</a></div>
+            <div class="footer-links"><h4>Legal</h4><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 HABACHA Global. All rights reserved.</p></div>
+    </footer>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <div class="logo">HABACHA<span>.</span></div>
+                <button class="close-menu" id="closeMenuBtn">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="inventory.html?tier=private">Private Clients</a></li>
+                <li><a href="inventory.html?tier=enterprise">Enterprise & Logistics</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="inventory.html?category=Real Estate">Accommodations</a></li>
+                <li><a href="inventory.html?category=Aviation">Aviation</a></li>
+                <li><a href="inventory.html?category=Maritime">Maritime</a></li>
+                <li><a href="inventory.html?category=Fleets">Commercial Fleets</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="onboarding.html" style="color: var(--color-platinum);">List Your Asset</a></li>
+                <li><a href="login.html">Client Login</a></li>
+            </ul>
+        </div>
+
+    <!-- Cookie Banner (AVG-compliant) -->
+    <div id="cookieBanner" class="cookie-banner" style="display:none;">
+        <div class="cookie-content">
+            <div class="cookie-title">Institutional Privacy Notice</div>
+            <p>HABACHA uses cookies to ensure the security and functionality of this platform. You may choose which categories to accept. Your choice will be remembered. <a href="privacy.html">Privacy Policy</a>.</p>
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn-accept" onclick="cookieChoice('all')">Accept All</button>
+            <button class="cookie-btn-reject" onclick="cookieChoice('essential')">Reject Non-Essential</button>
+            <button class="cookie-btn-customize" onclick="toggleCookiePrefs()">Customize</button>
+        </div>
+        <div class="cookie-preferences" id="cookiePrefs">
+            <div class="cookie-pref-item">
+                <div class="cookie-pref-text"><h4>Strictly Necessary</h4><p>Required for login, security, and core platform functionality. Cannot be disabled.</p></div>
+                <label class="cookie-toggle"><input type="checkbox" checked disabled><span class="cookie-slider"></span></label>
+            </div>
+            <div class="cookie-pref-item">
+                <div class="cookie-pref-text"><h4>Analytics</h4><p>Helps us understand how the platform is used so we can improve it.</p></div>
+                <label class="cookie-toggle"><input type="checkbox" id="prefAnalytics"><span class="cookie-slider"></span></label>
+            </div>
+            <div class="cookie-pref-item">
+                <div class="cookie-pref-text"><h4>Marketing</h4><p>Used to measure the effectiveness of communications. Never shared with third parties.</p></div>
+                <label class="cookie-toggle"><input type="checkbox" id="prefMarketing"><span class="cookie-slider"></span></label>
+            </div>
+            <div class="cookie-buttons" style="margin-top:15px;">
+                <button class="cookie-btn-accept" onclick="saveCustomPreferences()">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            window.toggleCookiePrefs = function() {
+                var prefs = document.getElementById('cookiePrefs');
+                prefs.classList.toggle('open');
+            };
+            window.cookieChoice = function(level) {
+                var prefs = { essential: true, analytics: level === 'all', marketing: level === 'all', timestamp: Date.now() };
+                localStorage.setItem('habacha_cookie_prefs', JSON.stringify(prefs));
+                document.getElementById('cookieBanner').style.display = 'none';
+            };
+            window.saveCustomPreferences = function() {
+                var prefs = {
+                    essential: true,
+                    analytics: document.getElementById('prefAnalytics').checked,
+                    marketing: document.getElementById('prefMarketing').checked,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem('habacha_cookie_prefs', JSON.stringify(prefs));
+                document.getElementById('cookieBanner').style.display = 'none';
+            };
+            if (!localStorage.getItem('habacha_cookie_prefs')) {
+                var banner = document.getElementById('cookieBanner');
+                if (banner) setTimeout(function() { banner.style.display = 'block'; }, 500);
+            }
+        })();
+    </script>
+
+</body>
+</html>

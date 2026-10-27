@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Asset | HABACHA Supplier</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        .form-container { max-width: 800px; margin: 60px auto; padding: 40px; background: var(--surface-white); border: 1px solid var(--border-subtle-light); border-radius: 8px; box-shadow: var(--shadow-institutional); }
+        .form-header { margin-bottom: 30px; border-bottom: 1px solid var(--border-subtle-light); padding-bottom: 20px; }
+        .form-header h1 { font-family: var(--font-heading); color: var(--color-navy-main); font-size: 28px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-light-secondary); margin-bottom: 8px; letter-spacing: 0.05em; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border-subtle-light); border-radius: 4px; font-family: var(--font-body); font-size: 14px; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--color-navy-main); }
+        .section-title { font-family: var(--font-heading); font-size: 18px; color: var(--color-navy-main); margin: 30px 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-subtle-light); }
+    </style>
+
+    <!-- SEO & Open Graph -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/lucide:shield-check.svg?color=%23C5C6C8">
+    <meta property="og:title" content="HABACHA | Institutional Exchange for High-Value Assets">
+    <meta property="og:description" content="The premier global exchange for private aviation, superyachts, luxury real estate, and commercial fleets. Vetted listings. Private dossiers on request.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://habacha.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HABACHA | Institutional Exchange">
+    <meta name="twitter:description" content="Institutional Asset Allocation for Private Aviation, Maritime, and Real Estate.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="dashboard.html" style="text-decoration:none; color:inherit;">HABACHA<span>.</span></a></div>
+        <ul class="nav-links"><li><a href="dashboard.html">Back to Dashboard</a></li></ul>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h1>List a New Asset</h1>
+            <p style="color: var(--text-light-secondary); margin-top: 10px; font-size: 14px;">Submit your high-value asset. Our Curation Team will verify the details before publishing.</p>
+        </div>
+
+        <form id="assetForm" onsubmit="return false;">
+            <div class="form-group">
+                <label>Asset Title</label>
+                <input type="text" id="title" placeholder="e.g., Gulfstream G650" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Asset Image (High Resolution)</label>
+                <input type="file" id="assetImage" accept="image/*" style="border: 1px dashed var(--color-platinum); padding: 30px; background: var(--canvas-light); cursor: pointer;">
+                <p style="font-size: 11px; color: var(--text-light-secondary); margin-top: 5px;">Only high-resolution images without watermarks are accepted by our curators.</p>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="category" required>
+                        <option value="Aviation">Private Aviation</option>
+                        <option value="Maritime">Maritime / Yachts</option>
+                        <option value="Fleets">Commercial Fleets</option>
+                        <option value="Real Estate">Luxury Real Estate</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lease Type</label>
+                    <select id="lease_type" required>
+                        <option value="Dry Lease">Dry Lease</option>
+                        <option value="Wet Lease">Wet Lease</option>
+                        <option value="Bareboat Charter">Bareboat Charter</option>
+                        <option value="Daily Rate">Daily Rate</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Price / Rate (USD)</label>
+                    <input type="number" id="price_rate" placeholder="e.g., 8500" required>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="e.g., Monaco, Dubai, London" required>
+                </div>
+            </div>
+
+            <!-- NIEUWE SECTIE: Dynamische Specs & Compliance -->
+            <!-- ===== AVIATION ===== -->
+            <div id="block-aviation" style="display:none;">
+                <h3 class="section-title">Aviation Pricing</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Hourly Rate (USD)</label><input type="number" id="av_price_hourly" placeholder="e.g., 8500"></div>
+                    <div class="form-group"><label>Daily Rate (USD)</label><input type="number" id="av_price_daily" placeholder="e.g., 45000"></div>
+                </div>
+                <h3 class="section-title">Aircraft Specs & Compliance</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Tail Number (Hidden)</label><input type="text" id="av_spec_tail" placeholder="e.g., N650HA"></div>
+                    <div class="form-group"><label>Year of Manufacture</label><input type="number" id="av_spec_year" placeholder="e.g., 2018"></div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Pax Capacity</label><input type="number" id="av_spec_pax" placeholder="e.g., 14"></div>
+                    <div class="form-group"><label>Range (NM)</label><input type="number" id="av_spec_range" placeholder="e.g., 7000"></div>
+                </div>
+            </div>
+
+            <!-- ===== MARITIME ===== -->
+            <div id="block-maritime" style="display:none;">
+                <h3 class="section-title">Maritime Pricing</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Daily Rate (USD)</label><input type="number" id="ma_price_daily" placeholder="e.g., 85000"></div>
+                    <div class="form-group"><label>Weekly Rate (USD)</label><input type="number" id="ma_price_weekly" placeholder="e.g., 500000"></div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Weekend Rate (USD)</label><input type="number" id="ma_price_weekend" placeholder="e.g., 180000"></div>
+                    <div class="form-group"><label>Monthly Rate (USD)</label><input type="number" id="ma_price_monthly" placeholder="e.g., 2000000"></div>
+                </div>
+                <h3 class="section-title">Vessel Specs & Compliance</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>IMO Number</label><input type="text" id="ma_spec_imo" placeholder="e.g., IMO 9876543"></div>
+                    <div class="form-group"><label>Length Overall (LOA m)</label><input type="number" id="ma_spec_loa" placeholder="e.g., 110"></div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Gross Tonnage</label><input type="number" id="ma_spec_tonnage" placeholder="e.g., 4500"></div>
+                    <div class="form-group"><label>Crew Size</label><input type="number" id="ma_spec_crew" placeholder="e.g., 22"></div>
+                </div>
+            </div>
+
+            <!-- ===== REAL ESTATE ===== -->
+            <div id="block-realestate" style="display:none;">
+                <h3 class="section-title">Real Estate Pricing</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Nightly Rate (USD)</label><input type="number" id="re_price_nightly" placeholder="e.g., 2500"></div>
+                    <div class="form-group"><label>Weekly Rate (USD)</label><input type="number" id="re_price_weekly" placeholder="e.g., 15000"></div>
+                </div>
+                <div class="form-group"><label>Monthly Rate (USD)</label><input type="number" id="re_price_monthly" placeholder="e.g., 50000"></div>
+                <h3 class="section-title">Property Specs & Compliance</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Square Meters</label><input type="number" id="re_spec_sqm" placeholder="e.g., 1200"></div>
+                    <div class="form-group"><label>Bedrooms</label><input type="number" id="re_spec_bedrooms" placeholder="e.g., 6"></div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group"><label>Security Protocol</label><input type="text" id="re_spec_security" placeholder="e.g., Gated, 24/7 Guards"></div>
+                    <div class="form-group"><label>Staff Included</label><input type="text" id="re_spec_staff" placeholder="e.g., Chef, Butler, Driver"></div>
+                </div>
+            </div>
+
+            <!-- ===== FLEETS ===== -->
+            <div id="block-fleets" style="display:none;">
+                <h3 class="section-title">Fleet Pricing</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Daily Rate (USD)</label><input type="number" id="fl_price_daily" placeholder="e.g., 5000"></div>
+                    <div class="form-group"><label>Weekly Rate (USD)</label><input type="number" id="fl_price_weekly" placeholder="e.g., 30000"></div>
+                </div>
+                <div class="form-group"><label>Monthly Rate (USD)</label><input type="number" id="fl_price_monthly" placeholder="e.g., 100000"></div>
+                <h3 class="section-title">Fleet Specs & Compliance</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label>Asset Type</label><input type="text" id="fl_spec_type" placeholder="e.g., Panamax Vessel, Crane"></div>
+                    <div class="form-group"><label>Payload / TEU Capacity</label><input type="text" id="fl_spec_payload" placeholder="e.g., 50,000 DWT"></div>
+                </div>
+                <div class="form-group"><label>Compliance Certificates</label><input type="text" id="fl_spec_cert" placeholder="e.g., Lloyd's Register, ISO 9001"></div>
+            </div>
+
+            <button type="submit" class="btn-search" id="submitBtn" style="width: 100%; margin-top: 20px;">Submit Asset for Review</button>
+            <p id="message" style="text-align: center; margin-top: 15px; font-family: var(--font-mono); font-size: 12px;"></p>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const categorySelect = document.getElementById('category');
+        const blocks = {
+            'Aviation': document.getElementById('block-aviation'),
+            'Maritime': document.getElementById('block-maritime'),
+            'Real Estate': document.getElementById('block-realestate'),
+            'Fleets': document.getElementById('block-fleets')
+        };
+
+        function updateSpecFields() {
+            const val = categorySelect.value;
+            Object.keys(blocks).forEach(key => {
+                if(blocks[key]) blocks[key].style.display = (key === val) ? 'block' : 'none';
+            });
+        }
+
+        categorySelect.addEventListener('change', updateSpecFields);
+        updateSpecFields(); // Trigger bij laden
+
+        document.getElementById('assetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('message');
+            
+            btn.innerText = 'Submitting...';
+            msg.innerText = '';
+            
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (!session) { 
+                    window.location.href = 'login.html'; 
+                    return; 
+                }
+
+                // 1. AFBEELDING UPLOADEN
+                const fileInput = document.getElementById('assetImage');
+                let imageUrl = null;
+
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    
+                    // Check bestandsgrootte (max 5MB om hangs te voorkomen)
+                    if (file.size > 5 * 1024 * 1024) {
+                        throw new Error("Image is too large. Maximum size is 5MB.");
+                    }
+
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Math.random()}.${fileExt}`;
+                    const filePath = `${session.user.id}/${fileName}`;
+
+                    const { error: uploadError } = await supabaseClient.storage.from('asset-images').upload(filePath, file);
+                    if (uploadError) throw new Error("Image upload failed: " + uploadError.message);
+
+                    const { data: { publicUrl } } = supabaseClient.storage.from('asset-images').getPublicUrl(filePath);
+                    imageUrl = publicUrl;
+                }
+
+                // 2. DATA VERZAMELEN
+                const val = (id) => {
+                    const el = document.getElementById(id);
+                    return el && el.value ? el.value : null;
+                };
+                const num = (id) => {
+                    const el = document.getElementById(id);
+                    if (!el || !el.value) return null;
+                    const parsed = parseFloat(el.value);
+                    return isNaN(parsed) ? null : parsed;
+                };
+
+                let specsData = {};
+                let pricingData = {};
+                const cat = categorySelect.value;
+
+                if (cat === 'Aviation') {
+                    specsData = { tail_number: val('av_spec_tail'), year: val('av_spec_year'), pax: val('av_spec_pax'), range: val('av_spec_range') };
+                    pricingData = { hourly: num('av_price_hourly'), daily: num('av_price_daily') };
+                } else if (cat === 'Maritime') {
+                    specsData = { imo: val('ma_spec_imo'), loa: val('ma_spec_loa'), tonnage: val('ma_spec_tonnage'), crew: val('ma_spec_crew') };
+                    pricingData = { daily: num('ma_price_daily'), weekend: num('ma_price_weekend'), weekly: num('ma_price_weekly'), monthly: num('ma_price_monthly') };
+                } else if (cat === 'Real Estate') {
+                    specsData = { sqm: val('re_spec_sqm'), bedrooms: val('re_spec_bedrooms'), security: val('re_spec_security'), staff: val('re_spec_staff') };
+                    pricingData = { nightly: num('re_price_nightly'), weekly: num('re_price_weekly'), monthly: num('re_price_monthly') };
+                } else if (cat === 'Fleets') {
+                    specsData = { type: val('fl_spec_type'), payload: val('fl_spec_payload'), cert: val('fl_spec_cert') };
+                    pricingData = { daily: num('fl_price_daily'), weekly: num('fl_price_weekly'), monthly: num('fl_price_monthly') };
+                }
+
+                const newAsset = {
+                    supplier_id: session.user.id,
+                    title: document.getElementById('title').value,
+                    category: cat,
+                    lease_type: document.getElementById('lease_type').value,
+                    price_rate: pricingData.daily || pricingData.hourly || pricingData.nightly || 0,
+                    pricing: pricingData,
+                    location: document.getElementById('location').value,
+                    status: 'pending_review', 
+                    image_url: imageUrl,
+                    specs: specsData
+                };
+
+                // 3. INSERT IN DATABASE
+                const { error } = await supabaseClient.from('assets').insert([newAsset]);
+                if (error) throw new Error("Database error: " + error.message);
+
+                // 4. SUCCES
+                msg.innerText = '✅ Asset submitted for review. Our Curation Team will verify it shortly.';
+                msg.style.color = 'green';
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+
+            } catch (error) {
+                // Vang ALLE fouten op en toon ze op het scherm
+                console.error(error);
+                msg.innerText = 'Error: ' + error.message;
+                msg.style.color = 'red';
+                btn.innerText = 'Submit Asset for Review';
+            }
+        });
+    </script>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <div class="logo">HABACHA<span>.</span></div>
+                <button class="close-menu" id="closeMenuBtn">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="inventory.html?tier=private">Private Clients</a></li>
+                <li><a href="inventory.html?tier=enterprise">Enterprise & Logistics</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="inventory.html?category=Real Estate">Accommodations</a></li>
+                <li><a href="inventory.html?category=Aviation">Aviation</a></li>
+                <li><a href="inventory.html?category=Maritime">Maritime</a></li>
+                <li><a href="inventory.html?category=Fleets">Commercial Fleets</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="onboarding.html" style="color: var(--color-platinum);">List Your Asset</a></li>
+                <li><a href="login.html">Client Login</a></li>
+            </ul>
+        </div>
+        </body>
+</html>

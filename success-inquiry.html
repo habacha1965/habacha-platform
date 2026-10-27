@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmission Secured | HABACHA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        .success-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background-color: var(--color-navy-main); text-align: center; padding: 40px 20px; }
+        .success-box { max-width: 650px; width: 100%; }
+        .success-box h1 { font-family: var(--font-heading); color: var(--surface-white); font-size: 42px; margin-bottom: 15px; line-height: 1.1; }
+        .success-box p { color: var(--text-dark-secondary); font-size: 16px; margin-bottom: 30px; font-weight: 300; }
+        .badge { display: inline-block; border: 1px solid var(--color-platinum); color: var(--color-platinum); font-family: var(--font-mono); padding: 8px 16px; border-radius: 2px; margin-bottom: 30px; letter-spacing: 0.1em; font-size: 12px; }
+        .reference-box { background: var(--color-navy-surface); border: 1px solid var(--border-subtle-dark); padding: 20px; border-radius: 4px; margin-bottom: 40px; text-align: left; }
+        .reference-box p { margin: 0; font-size: 11px; color: var(--text-dark-secondary); font-family: var(--font-mono); letter-spacing: 0.08em; }
+        .reference-box strong { font-family: var(--font-mono); color: var(--color-platinum); font-size: 20px; display: block; margin-top: 6px; }
+        .next-steps { display: flex; flex-direction: column; gap: 18px; margin-bottom: 40px; text-align: left; }
+        .next-steps h3 { font-family: var(--font-heading); color: white; font-size: 18px; margin-bottom: 5px; }
+        .step { display: flex; gap: 15px; align-items: flex-start; }
+        .step-num { font-family: var(--font-mono); color: var(--color-platinum); font-size: 13px; font-weight: 600; padding-top: 2px; }
+        .step-text h4 { color: white; font-size: 15px; margin: 0 0 3px 0; font-family: var(--font-heading); }
+        .step-text p { font-size: 13px; margin: 0; color: var(--text-dark-secondary); }
+        .contact-box { border-top: 1px solid var(--border-subtle-dark); padding-top: 30px; margin-top: 20px; }
+        .contact-box p { font-size: 13px; margin-bottom: 12px; color: var(--text-dark-secondary); }
+        .contact-box strong { color: white; }
+        .contact-box a { color: var(--color-platinum); text-decoration: none; border-bottom: 1px solid var(--color-platinum); padding-bottom: 2px; font-weight: 500; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+        .btn-outline { display: inline-block; text-decoration: none; background: transparent; color: var(--surface-white); border: 1px solid var(--color-platinum); padding: 14px 30px; border-radius: 4px; font-weight: 600; font-size: 14px; transition: all 0.3s; }
+        .btn-outline:hover { background: var(--color-navy-surface); }
+        .btn-solid { display: inline-block; text-decoration: none; background: var(--color-platinum); color: var(--color-navy-main); border: 1px solid var(--color-platinum); padding: 14px 30px; border-radius: 4px; font-weight: 600; font-size: 14px; transition: all 0.3s; }
+        .btn-solid:hover { background: var(--color-platinum-light); }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-box">
+            <div class="badge">ENCRYPTED TRANSMISSION RECEIVED</div>
+            <h1>Your dossier request has been securely transmitted.</h1>
+            <p>Our Private Desk has received your requirements and is now processing your inquiry.</p>
+
+            <div class="reference-box">
+                <p>YOUR PRIVATE REFERENCE</p>
+                <strong>#HB-<span id="refNumber">0000</span></strong>
+            </div>
+
+            <div class="next-steps">
+                <h3>What happens next?</h3>
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <div class="step-text">
+                        <h4>Institutional Review</h4>
+                        <p>An Asset Specialist reviews your requirements and verifies the asset's availability.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <div class="step-text">
+                        <h4>NDA & Documentation</h4>
+                        <p>You will receive the full pricing, APA terms, and NDA for digital signature.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <div class="step-text">
+                        <h4>Private Introduction</h4>
+                        <p>Once signed, we connect you directly with the asset provider for final scheduling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-box">
+                <p>Your dedicated specialist will contact your office <strong>within 1 business day</strong> with the full dossier.</p>
+                <p>For urgent matters, contact the Private Desk directly:<br>
+                <a href="mailto:concierge@habacha.com">concierge@habacha.com</a></p>
+            </div>
+
+            <div class="btn-group">
+                <a href="inventory.html" class="btn-outline">Return to Inventory</a>
+                <a href="dashboard.html" class="btn-solid">Go to My Dashboard</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('refNumber').innerText = Math.floor(1000 + Math.random() * 9000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Onboarding | HABACHA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <!-- SEO & Open Graph -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/lucide:shield-check.svg?color=%23C5C6C8">
+    <meta property="og:title" content="HABACHA | Institutional Exchange for High-Value Assets">
+    <meta property="og:description" content="The premier global exchange for private aviation, superyachts, luxury real estate, and commercial fleets. Vetted listings. Private dossiers on request.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://habacha.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HABACHA | Institutional Exchange">
+    <meta name="twitter:description" content="Institutional Asset Allocation for Private Aviation, Maritime, and Real Estate.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">HABACHA<span>.</span></a></div>
+        <ul class="nav-links"><li><a href="index.html">Back to Home</a></li></ul>
+        
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    <div class="nav-actions"><a href="login.html" class="btn-primary">Client Login</a></div>
+    </nav>
+
+    <header class="hero" style="padding: 80px 20px;">
+        <div class="hero-content">
+            <h1 style="font-size: 44px;">Institutional Asset Allocation.</h1>
+            <p>Join the world's most exclusive exchange for high-value assets. Connect with vetted, high-intent clients globally.</p>
+        </div>
+    </header>
+
+    <section class="featured" style="padding-top: 60px;">
+        <div class="listing-grid" style="grid-template-columns: 1fr 1fr;">
+            <div>
+                <h2 style="margin-bottom: 20px;">Why Partner with HABACHA?</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 20px; border-left: 2px solid var(--color-platinum); padding-left: 15px;">
+                        <h3 style="font-size: 18px; margin-bottom: 5px;">Vetted Liquidity</h3>
+                        <p style="color: var(--text-light-secondary); font-size: 14px;">We don't accept just anyone. Our clients are vetted for financial capability, ensuring you only deal with serious counterparties.</p>
+                    </li>
+                    <li style="margin-bottom: 20px; border-left: 2px solid var(--color-platinum); padding-left: 15px;">
+                        <h3 style="font-size: 18px; margin-bottom: 5px;">Discreet Handling</h3>
+                        <p style="color: var(--text-light-secondary); font-size: 14px;">Every inquiry is handled personally and confidentially by your dedicated Asset Specialist.</p>
+                    </li>
+                    <li style="margin-bottom: 20px; border-left: 2px solid var(--color-platinum); padding-left: 15px;">
+                        <h3 style="font-size: 18px; margin-bottom: 5px;">Full Discretion & NDA</h3>
+                        <p style="color: var(--text-light-secondary); font-size: 14px;">Your asset details, pricing, and client identity remain completely confidential under strict institutional NDAs.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="inventory-card" style="padding: 40px;">
+                <h2 style="font-size: 24px; margin-bottom: 10px;">Request Access</h2>
+                <p style="font-size: 13px; color: var(--text-light-secondary); margin-bottom: 30px;">Our onboarding team reviews every application to maintain network quality.</p>
+                
+                <form id="supplierForm" onsubmit="return false;">
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Company Name</label>
+                        <input type="text" name="company_name" placeholder="Legal Entity Name" required>
+                    </div>
+                    <div class="form-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; padding: 10px;">
+                            <label>Applicant Name</label>
+                            <input type="text" name="applicant_name" placeholder="John Doe" required>
+                        </div>
+                        <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; padding: 10px;">
+                            <label>Corporate Title</label>
+                            <input type="text" name="corporate_title" placeholder="e.g., Fleet Manager" required>
+                        </div>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Asset Category</label>
+                        <select name="category">
+                            <option>Private Aviation</option>
+                            <option>Maritime / Yachts</option>
+                            <option>Commercial Fleet / Logistics</option>
+                            <option>Luxury Real Estate</option>
+                        </select>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Estimated Portfolio Value</label>
+                        <select name="portfolio_value">
+                            <option>$5M - $25M</option>
+                            <option>$25M - $100M</option>
+                            <option>$100M+</option>
+                        </select>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Corporate Email</label>
+                        <input type="email" name="email" placeholder="name@company.com" required>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 15px; padding: 10px;">
+                        <label>Direct Contact Number</label>
+                        <input type="tel" name="phone" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                    <div class="search-field" style="border: 1px solid var(--border-subtle-light); border-radius: 4px; margin-bottom: 25px; padding: 10px;">
+                        <label>Create Password</label>
+                        <input type="password" id="onboarding_password" placeholder="••••••••" required minlength="6">
+                    </div>
+                    
+                    <button type="submit" class="btn-search" style="width: 100%;">Request Institutional Onboarding</button>
+                    <p style="text-align: center; font-family: var(--font-mono); font-size: 10px; color: var(--text-light-secondary); margin-top: 15px;">ENCRYPTED SUBMISSION</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        document.getElementById('supplierForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Submitting...';
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            const password = document.getElementById('onboarding_password').value;
+
+            // 1. Maak eerst een Auth account aan
+            const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+                email: data.email,
+                password: password,
+                options: { data: { full_name: data.company_name, role: 'supplier', phone: data.phone } }
+            });
+
+            if (authError) {
+                alert('Error creating account: ' + authError.message);
+                btn.innerText = originalText;
+                return;
+            }
+
+            // 2. Sla de supplier details op
+            const { error: dbError } = await supabaseClient.from('suppliers').insert([data]);
+            
+            if (dbError) {
+                alert('Account created, but error saving details: ' + dbError.message);
+                btn.innerText = originalText;
+            } else {
+                window.location.href = 'success-onboarding.html';
+            }
+        });
+    </script>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <div class="logo">HABACHA<span>.</span></div>
+                <button class="close-menu" id="closeMenuBtn">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="inventory.html?tier=private">Private Clients</a></li>
+                <li><a href="inventory.html?tier=enterprise">Enterprise & Logistics</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="inventory.html?category=Real Estate">Accommodations</a></li>
+                <li><a href="inventory.html?category=Aviation">Aviation</a></li>
+                <li><a href="inventory.html?category=Maritime">Maritime</a></li>
+                <li><a href="inventory.html?category=Fleets">Commercial Fleets</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="onboarding.html" style="color: var(--color-platinum);">List Your Asset</a></li>
+                <li><a href="login.html">Client Login</a></li>
+            </ul>
+        </div>
+        
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        if(hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+        }
+
+        if(closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        }
+    </script>
+    </body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Inventory | HABACHA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <!-- SEO & Open Graph -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/lucide:shield-check.svg?color=%23C5C6C8">
+    <meta property="og:title" content="HABACHA | Institutional Exchange for High-Value Assets">
+    <meta property="og:description" content="The premier global exchange for private aviation, superyachts, luxury real estate, and commercial fleets. Vetted liquidity. Institutional escrow.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://habacha.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HABACHA | Institutional Exchange">
+    <meta name="twitter:description" content="Institutional Asset Allocation for Private Aviation, Maritime, and Real Estate.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">HABACHA<span>.</span></a></div>
+        
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    <div class="nav-actions"><a href="dashboard.html" class="btn-primary">My Dashboard</a></div>
+    </nav>
+
+    <div style="background-color: var(--color-navy-main); padding: 20px 60px;">
+        <div class="search-container" style="margin: 0; max-width: 100%; box-shadow: none; border: none;">
+            <div class="search-field"><label>Location</label><input type="text" value="Global"></div>
+            <div class="search-field"><label>Asset Class</label><select><option>All Categories</option></select></div>
+            <div class="search-field"><label>Requirements</label><input type="text" placeholder="Pax, NM Range, Bareboat / Wet Lease..."></div>
+            <button class="btn-search">Update Search</button>
+        </div>
+    </div>
+
+    <div class="inventory-layout">
+        <aside class="sidebar-filters">
+            <h3 class="filter-title">Filter Results</h3>
+            <div class="filter-group">
+                <h4>Charter Type</h4>
+                <label><input type="checkbox"> Wet Lease (Crew included)</label>
+                <label><input type="checkbox"> Dry Lease (Asset only)</label>
+                <label><input type="checkbox"> Bareboat Charter</label>
+            </div>
+        </aside>
+
+        <main class="inventory-main">
+            <div class="section-header">
+                <h2>Global Inventory</h2>
+                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-light-secondary);" id="assetCount">LOADING ASSETS...</div>
+            </div>
+            <div class="listing-grid" id="dynamicInventory" style="grid-template-columns: repeat(2, 1fr);"></div>
+        </main>
+    </div>
+
+    <!-- Inquiry Modal -->
+    <div id="inquiryModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(7,13,26,0.8); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:var(--surface-white); padding:40px; border-radius:8px; width:100%; max-width:500px; box-shadow:var(--shadow-institutional);">
+            <div class="badge-institutional" style="position:static; display:inline-block; margin-bottom:15px;">NDA COMPLIANT</div>
+            <h2 style="font-family:var(--font-heading); color:var(--color-navy-main); margin-bottom:5px;">Request Private Dossier</h2>
+            <p id="modalAssetTitle" style="font-size:14px; font-weight:600; color:var(--color-platinum); margin-bottom:15px;">Loading asset...</p>
+            <p style="font-size:13px; color:var(--text-light-secondary); margin-bottom:20px;">Send an inquiry to the HABACHA Escrow Desk. An asset specialist will contact you.</p>
+            
+            <form id="inquiryForm" onsubmit="return false;">
+                <input type="hidden" id="inquiryAssetId">
+                <div style="display:flex; gap:15px; margin-bottom:15px;">
+                    <div class="search-field" style="flex:1; border:1px solid var(--border-subtle-light); border-radius:4px; padding:10px;">
+                        <label>Start Date</label>
+                        <input type="text" id="inquiryStartDate" placeholder="Select Date" required>
+                    </div>
+                    <div class="search-field" style="flex:1; border:1px solid var(--border-subtle-light); border-radius:4px; padding:10px;">
+                        <label>End Date</label>
+                        <input type="text" id="inquiryEndDate" placeholder="Select Date" required>
+                    </div>
+                </div>
+                <div class="search-field" style="border:1px solid var(--border-subtle-light); border-radius:4px; margin-bottom:15px; padding:10px;">
+                    <label>Message / Requirements</label>
+                    <textarea id="inquiryMessage" rows="3" placeholder="Any specific requirements..." style="width:100%; border:none; outline:none; font-family:var(--font-body); resize:vertical;"></textarea>
+                </div>
+                <div style="margin-bottom:20px; display:flex; gap:10px; align-items:flex-start;">
+                    <input type="checkbox" id="ndaCheck" required style="margin-top:3px;">
+                    <label for="ndaCheck" style="font-size:11px; color:var(--text-light-secondary); line-height:1.4;">I agree to the HABACHA Non-Disclosure Agreement regarding this off-market asset.</label>
+                </div>
+                
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <button type="submit" class="btn-search" style="width:100%;">Send Inquiry</button>
+                    <button type="button" onclick="alert('A HABACHA Concierge will call you shortly.')" class="btn-primary" style="background:transparent; color:var(--color-navy-main); border:1px solid var(--color-navy-main); width:100%;">Prefer direct contact? Request Concierge Callback</button>
+                    <button type="button" onclick="closeModal()" style="background:none; border:none; color:var(--text-light-secondary); font-size:12px; cursor:pointer; text-decoration:underline;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        const SUPABASE_URL = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Initialiseer de strakke date pickers
+        flatpickr("#inquiryStartDate", { dateFormat: "Y-m-d", minDate: "today" });
+        flatpickr("#inquiryEndDate", { dateFormat: "Y-m-d", minDate: "today" });
+
+        const defaultImages = {
+            'Aviation': 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'Maritime': 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'Fleets': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            'Real Estate': 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        };
+
+        async function loadInventory() {
+            const grid = document.getElementById('dynamicInventory');
+            const countText = document.getElementById('assetCount');
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryFilter = urlParams.get('category');
+            const tierFilter = urlParams.get('tier');
+
+            let query = supabaseClient.from('assets').select('*').eq('status', 'verified').order('created_at', { ascending: false });
+
+            if (categoryFilter) {
+                query = query.eq('category', categoryFilter);
+                countText.innerText = categoryFilter.toUpperCase() + ' ASSETS FOUND';
+            } else if (tierFilter === 'private') {
+                query = query.in('category', ['Aviation', 'Maritime', 'Real Estate']);
+                countText.innerText = 'PRIVATE CLIENT PORTFOLIO';
+            } else if (tierFilter === 'enterprise') {
+                query = query.eq('category', 'Fleets');
+                countText.innerText = 'ENTERPRISE & LOGISTICS';
+            } else {
+                countText.innerText = 'ALL ASSETS FOUND';
+            }
+
+            const { data: assets, error } = await query;
+
+            if (error) { grid.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`; return; }
+            if (assets.length === 0) { grid.innerHTML = '<p style="color: var(--text-light-secondary);">No assets currently listed in the network.</p>'; countText.innerText = '0 ASSETS FOUND'; return; }
+
+            countText.innerText = assets.length + ' ASSETS FOUND';
+            grid.innerHTML = '';
+
+            assets.forEach(asset => {
+                const imgUrl = asset.image_url ? asset.image_url : (defaultImages[asset.category] || defaultImages['Aviation']);
+                const priceFormat = asset.price_rate ? `$${asset.price_rate.toLocaleString()}` : 'Request Quote';
+                
+                const card = `
+                    <div class="inventory-card">
+                        <div class="image-container">
+                            <img src="${imgUrl}" alt="${asset.title}">
+                            <div class="badge-institutional">${asset.lease_type}</div>
+                        </div>
+                        <div class="listing-info">
+                            <h3>${asset.title}</h3>
+                            <p>${asset.category} • ${asset.location}</p>
+                            <div class="price">${priceFormat} <span>/ ${asset.lease_type.includes('Daily') ? 'night' : 'hour'}</span></div>
+                            <button onclick="window.openModal('${asset.id}', '${asset.title}')" class="specialist-link" style="background:none; border:none; padding:0; cursor:pointer; text-align:left; width:100%;">Request Private Dossier &rarr;</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        window.openModal = function(assetId, assetTitle) {
+            document.getElementById('inquiryAssetId').value = assetId;
+            document.getElementById('modalAssetTitle').innerText = assetTitle;
+            document.getElementById('inquiryModal').style.display = 'flex';
+        };
+        window.closeModal = function() {
+            document.getElementById('inquiryModal').style.display = 'none';
+        };
+
+        document.getElementById('inquiryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = 'Sending...';
+
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) { alert('Please sign in to request a dossier.'); window.location.href = 'login.html'; return; }
+
+            const startDate = document.getElementById('inquiryStartDate').value;
+            const endDate = document.getElementById('inquiryEndDate').value;
+            const dateString = startDate + ' to ' + endDate;
+
+            // VEILIGHEID: We sturen alleen de ID en het bericht. De database vult de naam/email in via auth.uid()
+            const inquiryData = {
+                asset_id: document.getElementById('inquiryAssetId').value,
+                client_id: session.user.id,
+                requested_dates: dateString,
+                message: document.getElementById('inquiryMessage').value
+            };
+
+            const { error } = await supabaseClient.from('inquiries').insert([inquiryData]);
+
+            if (error) {
+                alert('Error: ' + error.message);
+                btn.innerText = originalText;
+            } else {
+                window.location.href = 'success-inquiry.html';
+            }
+        });
+
+        loadInventory();
+    </script>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <div class="logo">HABACHA<span>.</span></div>
+                <button class="close-menu" id="closeMenuBtn">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="inventory.html?tier=private">Private Clients</a></li>
+                <li><a href="inventory.html?tier=enterprise">Enterprise & Logistics</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="inventory.html?category=Real Estate">Accommodations</a></li>
+                <li><a href="inventory.html?category=Aviation">Aviation</a></li>
+                <li><a href="inventory.html?category=Maritime">Maritime</a></li>
+                <li><a href="inventory.html?category=Fleets">Commercial Fleets</a></li>
+                <hr style="border: 1px solid var(--border-subtle-dark); margin: 20px 0;">
+                <li><a href="onboarding.html" style="color: var(--color-platinum);">List Your Asset</a></li>
+                <li><a href="login.html">Client Login</a></li>
+            </ul>
+        </div>
+        
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        if(hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+        }
+
+        if(closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        }
+    </script>
+    </body>
+</html>
