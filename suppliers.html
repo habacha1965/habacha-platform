@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B2B Suppliers & Asset Owners | HABACHA Platform</title>
-  <meta name="description" content="List your fleet of luxury cars, vans, trucks, private jets, cargo aircraft, yachts, cargo ships, or commercial real estate on the HABACHA exchange.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +17,7 @@
       <a href="inventory.html">Browse Assets</a>
       <a href="onboarding.html">List / Inquire</a>
       <a href="suppliers.html" class="active">Suppliers (B2B)</a>
-      <a href="admin.html">Admin</a>
+      <a href="admin.html">Admin Console</a>
     </nav>
   </header>
 
@@ -32,7 +31,6 @@
 
     <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px);">
       <form id="supplierForm">
-        <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
           <div>
@@ -67,6 +65,8 @@
         </div>
 
         <button type="submit" id="supplierSubmitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 600; text-transform: uppercase;">Submit Supplier Application</button>
+        
+        <div id="supplierFormResponse" style="margin-top: 15px; font-weight: 600; text-align: center; font-size: 0.95rem;"></div>
       </form>
     </div>
   </div>
@@ -80,11 +80,13 @@
     document.getElementById('supplierForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      if (document.getElementById('website_hp').value) return;
-
       const submitBtn = document.getElementById('supplierSubmitBtn');
+      const responseDiv = document.getElementById('supplierFormResponse');
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Registering Supplier in Supabase...';
+      responseDiv.style.color = '#C5A880';
+      responseDiv.textContent = 'Saving supplier record to Supabase...';
 
       const payload = {
         company_name: document.getElementById('companyName').value,
@@ -102,10 +104,12 @@
       submitBtn.textContent = 'Submit Supplier Application';
 
       if (res.success) {
-        alert('SUCCESS! Supplier application saved live to Supabase suppliers table.');
+        responseDiv.style.color = '#22C55E';
+        responseDiv.innerHTML = '✅ <strong>SUCCESS!</strong> Supplier record saved live to Supabase table [suppliers].';
         document.getElementById('supplierForm').reset();
       } else {
-        alert('Supplier application submitted. Sync key in /admin.html to manage.');
+        responseDiv.style.color = '#EF4444';
+        responseDiv.innerHTML = '❌ <strong>Submission Alert:</strong> ' + (res.message || 'Failed to submit application.');
       }
     });
   </script>

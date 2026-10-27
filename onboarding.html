@@ -31,7 +31,6 @@
 
     <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px);">
       <form id="onboardingForm">
-        <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
 
         <div style="margin-bottom: 20px;">
           <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Account / Client Type *</label>
@@ -83,6 +82,8 @@
         </div>
 
         <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 600; text-transform: uppercase;">Submit Intake Request</button>
+        
+        <div id="formResponse" style="margin-top: 15px; font-weight: 600; text-align: center; font-size: 0.95rem;"></div>
       </form>
     </div>
   </div>
@@ -96,11 +97,13 @@
     document.getElementById('onboardingForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      if (document.getElementById('website_hp').value) return;
-
       const submitBtn = document.getElementById('submitBtn');
+      const responseDiv = document.getElementById('formResponse');
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Transmitting to Supabase...';
+      responseDiv.style.color = '#C5A880';
+      responseDiv.textContent = 'Connecting to Supabase live database...';
 
       const payload = {
         client_name: document.getElementById('fullName').value,
@@ -117,11 +120,12 @@
       submitBtn.textContent = 'Submit Intake Request';
 
       if (res.success) {
-        alert('✅ SUCCESS! Request stored directly in Supabase table [inquiries].');
+        responseDiv.style.color = '#22C55E';
+        responseDiv.innerHTML = '✅ <strong>SUCCESS!</strong> Your request has been stored directly in the live Supabase table [inquiries].';
         document.getElementById('onboardingForm').reset();
       } else {
-        alert('❌ Supabase API Status: ' + (res.status || 'Error') + '
-Message: ' + res.message);
+        responseDiv.style.color = '#EF4444';
+        responseDiv.innerHTML = '❌ <strong>Submission Alert:</strong> ' + (res.message || 'Failed to submit. Please verify API Key.');
       }
     });
   </script>
