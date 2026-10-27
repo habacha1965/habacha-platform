@@ -3,122 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA | Admin Control & Supplier Approval</title>
-  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Portal | HABACHA Platform</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .admin-container { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
-    .status-pill { padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; }
-    .status-pending { background: rgba(197, 168, 128, 0.2); color: var(--accent-gold); }
-    .status-approved { background: rgba(56, 189, 248, 0.2); color: var(--accent-blue); }
-    .btn-approve { background: #22c55e; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight:600; }
-    .btn-reject { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight:600; margin-left: 0.5rem; }
+    .admin-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .key-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 30px; }
+    .data-card { background: #1E293B; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; display: inline-block; }
+    .badge-pending { background: rgba(234, 179, 8, 0.2); color: #EAB308; border: 1px solid #EAB308; }
+    .badge-approved { background: rgba(34, 197, 94, 0.2); color: #22C55E; border: 1px solid #22C55E; }
+    .badge-rejected { background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid #EF4444; }
+    .table-responsive { overflow-x: auto; margin-top: 15px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; }
+    th { background: rgba(0,0,0,0.2); color: #C5A880; font-weight: 600; }
+    .btn-approve { background: #22C55E; color: #000; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; margin-right: 6px; }
+    .btn-reject { background: #EF4444; color: #fff; padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html" class="logo">HABA<span>CHA</span></a>
+    <div class="logo-container">
+      <a href="index.html" class="logo-text">HABACHA</a>
+    </div>
     <nav>
-      <a href="dashboard.html">Dashboard</a>
+      <a href="index.html">Home</a>
+      <a href="inventory.html">Fleet & Assets</a>
+      <a href="suppliers.html">Suppliers</a>
       <a href="admin.html" class="active">Admin Console</a>
-      <a href="index.html">Logout</a>
     </nav>
   </header>
 
   <div class="admin-container">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-      <h1>Supplier & Asset Approval Panel</h1>
-      <div class="hero-badge">System Administrator</div>
+    <h1>Platform Administration Console</h1>
+    <p style="color: #94A3B8; margin-bottom: 25px;">Manage asset inquiries, approve supplier applications, and monitor catalog database operations.</p>
+
+    <!-- API Key Configuration Box -->
+    <div class="key-box">
+      <h3 style="margin-top:0; color:#C5A880;">Supabase API Key Synchronization</h3>
+      <p style="font-size: 0.9rem; color: #94A3B8;">Paste your Supabase Publishable Key below to enable live REST API data synchronization across your browser session.</p>
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <input type="password" id="apiKeyInput" placeholder="Paste sb_publishable_... key here" style="flex:1; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: #0F172A; color: #fff;">
+        <button onclick="saveApiKey()" class="btn-primary" style="padding: 12px 24px;">Save & Sync</button>
+      </div>
+      <div id="keyStatus" style="margin-top: 10px; font-size: 0.85rem; color: #22C55E;"></div>
     </div>
 
-    <!-- Section 1: Pending Suppliers -->
-    <div class="card" style="margin-bottom: 2rem;">
-      <h3>Pending Supplier Verification Applications</h3>
-      <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Review and approve asset owners and fleet operators joining the platform.</p>
-      
-      <table style="width:100%; border-collapse:collapse;">
-        <thead>
-          <tr style="border-bottom:1px solid var(--border-subtle); text-align:left;">
-            <th style="padding:0.75rem;">Company / Operator</th>
-            <th>Category</th>
-            <th>Contact Email</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="supplierTable">
-          <tr style="border-bottom:1px solid var(--border-subtle);">
-            <td style="padding:1rem;"><strong>Executive Fleet Charters Ltd</strong></td>
-            <td>Aviation & Jets</td>
-            <td>operations@execfleet.com</td>
-            <td><span class="status-pill status-pending">Pending Review</span></td>
-            <td>
-              <button class="btn-approve" onclick="approveSupplier(this)">Approve</button>
-              <button class="btn-reject" onclick="rejectSupplier(this)">Reject</button>
-            </td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border-subtle);">
-            <td style="padding:1rem;"><strong>Global Van Rentals B.V.</strong></td>
-            <td>Commercial Vans</td>
-            <td>fleet@globalvans.nl</td>
-            <td><span class="status-pill status-pending">Pending Review</span></td>
-            <td>
-              <button class="btn-approve" onclick="approveSupplier(this)">Approve</button>
-              <button class="btn-reject" onclick="rejectSupplier(this)">Reject</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Live Suppliers Section -->
+    <div class="data-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="margin:0;">Supplier Applications</h2>
+        <button onclick="loadDashboardData()" style="background:transparent; border:1px solid #C5A880; color:#C5A880; padding:6px 12px; border-radius:6px; cursor:pointer;">Refresh Data</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Contact Name</th>
+              <th>Email</th>
+              <th>Categories</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="suppliersTableBody">
+            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading supplier applications...</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Section 2: Recent Inquiries -->
-    <div class="card">
-      <h3>Recent Customer & B2B Inquiries</h3>
-      <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Incoming requests from individuals and enterprise clients.</p>
-
-      <table style="width:100%; border-collapse:collapse;">
-        <thead>
-          <tr style="border-bottom:1px solid var(--border-subtle); text-align:left;">
-            <th style="padding:0.75rem;">Client Name</th>
-            <th>Type</th>
-            <th>Requested Asset</th>
-            <th>Details / Dates</th>
-            <th>Anti-Spam</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border-subtle);">
-            <td style="padding:1rem;">Alexander Wright</td>
-            <td>Private Individual</td>
-            <td>Gulfstream G650ER Jet</td>
-            <td>Family Trip • July 12 - July 20</td>
-            <td><span style="color:#22c55e;">✓ Verified</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border-subtle);">
-            <td style="padding:1rem;">EuroTrans Logistics</td>
-            <td>Enterprise (B2B)</td>
-            <td>25x Sprinter Van Fleet</td>
-            <td>6-Month Commercial Lease</td>
-            <td><span style="color:#22c55e;">✓ Verified</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Live Inquiries Section -->
+    <div class="data-card">
+      <h2>Client Rental & Charter Inquiries</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Client Name</th>
+              <th>Email</th>
+              <th>Type</th>
+              <th>Message / Requirements</th>
+              <th>Date Submitted</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="inquiriesTableBody">
+            <tr><td colspan="6" style="text-align:center; color:#94A3B8;">Loading client inquiries...</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
   </div>
 
+  <script src="js/supabase-client.js"></script>
   <script>
-    function approveSupplier(btn) {
-      const row = btn.closest('tr');
-      row.querySelector('.status-pill').className = 'status-pill status-approved';
-      row.querySelector('.status-pill').innerText = 'Approved';
-      btn.parentElement.innerHTML = '<span style="color:#22c55e; font-weight:700;">✓ Active Supplier</span>';
-      alert('Supplier has been approved and notified via email.');
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentKey = localStorage.getItem('HABACHA_SUPABASE_KEY');
+      if (currentKey) {
+        document.getElementById('apiKeyInput').value = currentKey;
+        document.getElementById('keyStatus').textContent = '✓ Live Supabase Connection Active';
+      } else {
+        document.getElementById('keyStatus').textContent = '⚠️ Key required to fetch live database records.';
+        document.getElementById('keyStatus').style.color = '#EAB308';
+      }
+      loadDashboardData();
+    });
+
+    function saveApiKey() {
+      const key = document.getElementById('apiKeyInput').value;
+      if (window.habachaDB.setKey(key)) {
+        document.getElementById('keyStatus').textContent = '✓ Live Key Saved!';
+        document.getElementById('keyStatus').style.color = '#22C55E';
+        loadDashboardData();
+      }
     }
-    function rejectSupplier(btn) {
-      const row = btn.closest('tr');
-      row.remove();
-      alert('Application rejected.');
+
+    async function loadDashboardData() {
+      const suppliers = await window.habachaDB.fetchSuppliers();
+      const inquiries = await window.habachaDB.fetchInquiries();
+
+      // Render Suppliers
+      const supBody = document.getElementById('suppliersTableBody');
+      if (suppliers.length === 0) {
+        supBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No supplier applications recorded yet.</td></tr>';
+      } else {
+        supBody.innerHTML = suppliers.map(s => `
+          <tr>
+            <td><strong>${escapeHtml(s.company_name)}</strong></td>
+            <td>${escapeHtml(s.contact_name)}</td>
+            <td>${escapeHtml(s.email)}</td>
+            <td>${(s.asset_categories || []).join(', ')}</td>
+            <td><span class="badge badge-${s.status}">${s.status}</span></td>
+            <td>
+              ${s.status === 'pending' ? `
+                <button class="btn-approve" onclick="updateSupplier('${s.id}', 'approved')">Approve</button>
+                <button class="btn-reject" onclick="updateSupplier('${s.id}', 'rejected')">Reject</button>
+              ` : '—'}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Render Inquiries
+      const inqBody = document.getElementById('inquiriesTableBody');
+      if (inquiries.length === 0) {
+        inqBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94A3B8;">No inquiries recorded yet.</td></tr>';
+      } else {
+        inqBody.innerHTML = inquiries.map(i => `
+          <tr>
+            <td><strong>${escapeHtml(i.client_name)}</strong></td>
+            <td>${escapeHtml(i.client_email)}</td>
+            <td><span style="text-transform:capitalize;">${escapeHtml(i.client_type || 'Individual')}</span></td>
+            <td>${escapeHtml(i.message || 'General Inquiry')}</td>
+            <td>${new Date(i.created_at).toLocaleDateString()}</td>
+            <td><span class="badge badge-${i.status === 'pending' ? 'pending' : 'approved'}">${i.status}</span></td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    async function updateSupplier(id, newStatus) {
+      const ok = await window.habachaDB.updateSupplierStatus(id, newStatus);
+      if (ok) {
+        loadDashboardData();
+      } else {
+        alert('Could not update status. Verify database permissions.');
+      }
+    }
+
+    function escapeHtml(str) {
+      if(!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
   </script>
 
