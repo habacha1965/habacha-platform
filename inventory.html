@@ -176,7 +176,7 @@
 
         function filterAssets(cat) {
             document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
-            event.target.classList.add("active");
+            if (event && event.target) event.target.classList.add("active");
             if (cat === "All") {
                 renderAssets(allAssets);
             } else {
@@ -206,7 +206,7 @@
             e.preventDefault();
             const submitBtn = document.getElementById("submitBtn");
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Dispatching Requests...';
 
             const name = document.getElementById("clientName").value;
             const email = document.getElementById("clientEmail").value;
@@ -218,12 +218,9 @@
             const rateType = document.getElementById("assetRateType").value;
             const total = document.getElementById("calculatedTotal").innerText;
 
-            const manifestDetails = `Asset: ${title}
-Start Date: ${startDate}
-Duration: ${units} ${rateType}(s)
-Total Estimated Rate: ${total}
-Client Contact: ${phone}`;
+            const manifestDetails = `Asset: ${title}\nStart Date: ${startDate}\nDuration: ${units} ${rateType}(s)\nTotal Estimated Rate: ${total}\nClient Contact: ${phone}`;
 
+            // Save to DB
             try {
                 await fetch(SUPABASE_URL + "/rest/v1/inquiries", {
                     method: "POST",
@@ -242,17 +239,24 @@ Client Contact: ${phone}`;
                     })
                 });
             } catch (err) {
-                console.warn("DB record creation notice:", err);
+                console.warn("DB notice:", err);
             }
 
+            // Dispatch Emails via Resend Serverless Function
             const clientHTML = getClientEmailHTML(name, category, manifestDetails);
-            const adminHTML = getAdminEmailHTML(name, email, category, manifestDetails, null);
+            const adminHTML = getAdminEmailHTML(name, email, category, manifestDetails);
             const adminEmail = localStorage.getItem("admin_email_address") || email;
 
-            await Promise.all([
+            console.log("Sending email to client:", email);
+            console.log("Sending email to admin:", adminEmail);
+
+            const [clientRes, adminRes] = await Promise.all([
                 dispatchResendEmail(email, "Booking Confirmation: " + title, clientHTML),
                 dispatchResendEmail(adminEmail, "🚨 New Booking Inquiry: " + title, adminHTML)
             ]);
+
+            console.log("Client Dispatch Result:", clientRes);
+            console.log("Admin Dispatch Result:", adminRes);
 
             window.location.href = "success.html";
         }
