@@ -3,77 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA | Partner With Us - List Your Fleet & Assets</title>
-  <meta name="description" content="List your luxury cars, commercial fleets, private aircraft, yachts, and real estate on HABACHA. Monetize your assets with zero upfront fees.">
+  <title>B2B Suppliers & Asset Owners | HABACHA Platform</title>
+  <meta name="description" content="List your fleet of luxury cars, vans, trucks, private jets, cargo aircraft, yachts, cargo ships, or commercial real estate on the HABACHA exchange.">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .benefit-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: left;
-    }
-    .benefit-card h3 {
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-      font-size: 1.3rem;
-    }
-  </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html" class="logo">HABA<span>CHA</span></a>
+    <div class="logo-container">
+      <a href="index.html" class="logo-text">HABACHA</a>
+    </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="inventory.html">Browse Assets</a>
-      <a href="suppliers.html" class="active">For Suppliers</a>
-      <a href="onboarding.html">List Your Asset</a>
-      <a href="login.html">Client Portal</a>
+      <a href="onboarding.html">List / Inquire</a>
+      <a href="suppliers.html" class="active">Suppliers (B2B)</a>
+      <a href="admin.html">Admin</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-badge">For Fleet Owners & Asset Providers</div>
-    <h1>Monetize Your Assets Worldwide.</h1>
-    <p>Join the global exchange for asset charters, commercial leasing, and rentals. Connect directly with pre-screened private clients, enterprise logistics operators, and corporate charterers.</p>
-    <div style="margin-top: 2rem;">
-      <a href="onboarding.html?type=supplier" class="btn-primary">Apply as Verified Supplier</a>
-    </div>
-  </section>
-
-  <section class="section-grid">
-    <div class="benefit-card">
-      <h3>0% Upfront Listing Fees</h3>
-      <p>List your luxury vehicles, aircraft, boats, or commercial fleets with no initial fees. You only pay a performance-based success commission upon confirmed bookings.</p>
+  <div class="container" style="max-width: 850px; margin: 50px auto; padding: 0 20px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h1>Supply Partner Network</h1>
+      <p style="color: #94A3B8; font-size: 1.1rem; margin-top: 10px;">
+        Monetize your unutilized high-value assets across European, Middle Eastern, and global charter markets.
+      </p>
     </div>
 
-    <div class="benefit-card">
-      <h3>Verified High-Value Clients</h3>
-      <p>Gain direct exposure to accredited B2B enterprises, logistics directors, family offices, and verified high-net-worth private individuals worldwide.</p>
-    </div>
+    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px);">
+      <form id="supplierForm">
+        <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
 
-    <div class="benefit-card">
-      <h3>Flexible Operational Structures</h3>
-      <p>Maintain complete authority over your assets. Choose your preferred terms: Daily Rental, Dry Lease, Wet Lease (ACMI), Bareboat Charter, or Long-Term Fleet Lease.</p>
-    </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Company / Fleet Name *</label>
+            <input type="text" id="companyName" required placeholder="e.g. Apex Global Charter Ltd" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Contact Person *</label>
+            <input type="text" id="contactName" required placeholder="e.g. Marcus Vance" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+        </div>
 
-    <div class="benefit-card">
-      <h3>Discreet & Secure Settlement</h3>
-      <p>Benefit from performance-based settlement, verified identity authentication, and automated admin review to protect your high-value assets.</p>
-    </div>
-  </section>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Corporate Email *</label>
+            <input type="email" id="email" required placeholder="partners@apexcharter.com" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Phone / Direct Line</label>
+            <input type="tel" id="phone" placeholder="+44 20 7946 0912" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+        </div>
 
-  <section style="max-width:800px; margin:4rem auto; text-align:center; padding:0 2rem;">
-    <h2>Ready to Expand Your Asset Monetization?</h2>
-    <p style="color:var(--text-secondary); margin:1rem 0 2rem;">Submit your company profile and asset portfolio for expedited verification by our asset desk.</p>
-    <a href="onboarding.html?type=supplier" class="btn-primary">Start Supplier Onboarding</a>
-  </section>
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Total Estimated Fleet Size</label>
+          <input type="number" id="fleetSize" min="1" value="1" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+        </div>
+
+        <div style="margin-bottom: 25px;">
+          <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Fleet Overview & Specification</label>
+          <textarea id="notes" rows="4" placeholder="List asset makes, models, year of manufacture, and deployment locations..." style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px; resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" id="supplierSubmitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 600; text-transform: uppercase;">Submit Supplier Application</button>
+      </form>
+    </div>
+  </div>
 
   <footer>
-    <p>&copy; 2026 HABACHA Platform. The Universal Exchange for Asset Charters, Rentals & Leasing.</p>
+    <p>&copy; 2026 HABACHA Platform. Universal Exchange for Asset Charters, Rentals & Leasing.</p>
   </footer>
+
+  <script src="js/supabase-client.js"></script>
+  <script>
+    document.getElementById('supplierForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      if (document.getElementById('website_hp').value) return;
+
+      const submitBtn = document.getElementById('supplierSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Registering Supplier in Supabase...';
+
+      const payload = {
+        company_name: document.getElementById('companyName').value,
+        contact_name: document.getElementById('contactName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        asset_categories: ['fleet_operator'],
+        fleet_size: parseInt(document.getElementById('fleetSize').value) || 1,
+        notes: document.getElementById('notes').value,
+        status: 'pending'
+      };
+
+      const res = await window.habachaDB.submitSupplier(payload);
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Supplier Application';
+
+      if (res.success) {
+        alert('SUCCESS! Supplier application saved live to Supabase suppliers table.');
+        document.getElementById('supplierForm').reset();
+      } else {
+        alert('Supplier application submitted. Sync key in /admin.html to manage.');
+      }
+    });
+  </script>
 
 </body>
 </html>

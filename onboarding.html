@@ -3,125 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA | Rental Request & Asset Listing</title>
-  <meta name="description" content="Request a rental or lease for cars, jets, yachts, and real estate, or list your asset on HABACHA.">
+  <title>Client Onboarding & Intake | HABACHA Platform</title>
+  <meta name="description" content="Submit charter, rental, or fleet leasing requirements for luxury cars, jets, yachts, commercial cargo planes, and real estate globally.">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .form-container {
-      max-width: 680px;
-      margin: 3rem auto;
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 2.5rem;
-    }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: var(--font-stack);
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent-gold);
-    }
-    .form-group select option {
-      background: var(--bg-main);
-      color: var(--text-primary);
-    }
-  </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html" class="logo">HABA<span>CHA</span></a>
+    <div class="logo-container">
+      <a href="index.html" class="logo-text">HABACHA</a>
+    </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="inventory.html">Browse Assets</a>
       <a href="onboarding.html" class="active">List / Inquire</a>
-      <a href="login.html">Client Portal</a>
+      <a href="suppliers.html">Suppliers (B2B)</a>
+      <a href="admin.html">Admin</a>
     </nav>
   </header>
 
-  <section class="hero" style="padding: 4rem 2rem 1rem;">
-    <div class="hero-badge">Simple & Fast Request</div>
-    <h1>Rent an Asset or List Yours</h1>
-    <p>Whether you need a car, van, boat, private jet, or property — or want to rent out your own asset — submit your request below.</p>
-  </section>
+  <div class="container" style="max-width: 800px; margin: 50px auto; padding: 0 20px;">
+    <div class="hero-text" style="text-align: center; margin-bottom: 40px;">
+      <h1>Client Onboarding & Intake</h1>
+      <p style="color: #94A3B8; font-size: 1.1rem; margin-top: 10px;">
+        For private individuals, VIPs, corporate logistics partners, and asset owners worldwide.
+      </p>
+    </div>
 
-  <div class="form-container">
-    <form id="rentalForm">
-      <div class="form-group">
-        <label for="clientType">I am a... *</label>
-        <select id="clientType" name="clientType" required>
-          <option value="">Select option...</option>
-          <option value="private_individual">Private Individual (Particulier)</option>
-          <option value="business">Business / Enterprise (Bedrijf)</option>
-        </select>
-      </div>
+    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px);">
+      <form id="onboardingForm">
+        <!-- Anti-spam Honeypot -->
+        <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
 
-      <div class="form-group">
-        <label for="fullName">Your Name / Company Name *</label>
-        <input type="text" id="fullName" name="fullName" required placeholder="John Doe / Enterprise Name">
-      </div>
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Account / Client Type *</label>
+          <select id="clientType" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+            <option value="individual">Private Individual (Rent / Charter)</option>
+            <option value="b2b_client">B2B Enterprise / Corporate Client</option>
+            <option value="asset_owner">Asset Owner / Fleet Operator (List Asset)</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required placeholder="name@example.com">
-      </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Full Name *</label>
+            <input type="text" id="fullName" required placeholder="e.g. Alexander Wright" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Email Address *</label>
+            <input type="email" id="email" required placeholder="name@company.com" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label for="objective">What would you like to do? *</label>
-        <select id="objective" name="objective" required>
-          <option value="">Select objective...</option>
-          <option value="rent">Rent / Lease an Asset (Car, Van, Jet, Boat, Property)</option>
-          <option value="list">List My Asset for Rent / Monetization</option>
-        </select>
-      </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Phone / WhatsApp</label>
+            <input type="tel" id="phone" placeholder="+31 6 12345678" style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+          <div>
+            <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Company Name (Optional)</label>
+            <input type="text" id="companyName" placeholder="e.g. Global Logistics B.V." style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label for="category">Asset Category *</label>
-        <select id="category" name="category" required>
-          <option value="">Select asset type...</option>
-          <option value="cars_vans">Cars & Bestelwagens (Vans)</option>
-          <option value="aviation">Private Jets & Aircraft</option>
-          <option value="maritime">Boats & Luxury Yachts</option>
-          <option value="fleets">Commercial Fleets & Trucks</option>
-          <option value="real_estate">Real Estate & Venues</option>
-        </select>
-      </div>
+        <div style="margin-bottom: 20px;">
+          <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Asset Category *</label>
+          <select id="assetCategory" required style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;">
+            <option value="car">Luxury Cars & VIP Chauffeur</option>
+            <option value="van">Commercial Vans & Sprinter Fleets</option>
+            <option value="truck">Logistics Trucks & Commercial Vehicles</option>
+            <option value="private_jet">Private Executive Jets</option>
+            <option value="cargo_plane">Cargo Planes & Air Freight</option>
+            <option value="yacht">Luxury Motor Yachts</option>
+            <option value="real_estate">Prime Real Estate Estates</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="details">Additional Details / Rental Dates</label>
-        <textarea id="details" name="details" rows="4" placeholder="Tell us what dates you need, specific model preferences, or details about the asset you want to list..."></textarea>
-      </div>
+        <div style="margin-bottom: 25px;">
+          <label style="display:block; margin-bottom: 8px; color: #C5A880; font-weight: 500;">Rental / Lease Details & Dates</label>
+          <textarea id="details" rows="4" placeholder="Specify your desired rental dates, location, fleet volume, or specific requirements..." style="width: 100%; padding: 12px; background: #0F172A; border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px; resize: vertical;"></textarea>
+        </div>
 
-      <button type="submit" class="btn-primary" style="width: 100%;">Submit Request</button>
-    </form>
+        <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Submit Intake Request</button>
+      </form>
+    </div>
   </div>
 
   <footer>
-    <p>&copy; 2026 HABACHA Platform. The Universal Exchange for Asset Charters, Rentals & Leasing.</p>
+    <p>&copy; 2026 HABACHA Platform. Universal Exchange for Asset Charters, Rentals & Leasing.</p>
   </footer>
 
+  <script src="js/supabase-client.js"></script>
   <script>
-    document.getElementById('rentalForm').addEventListener('submit', function(e) {
+    document.getElementById('onboardingForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      alert('Thank you! Your request has been received. Our team will contact you shortly via email.');
-      this.reset();
+
+      if (document.getElementById('website_hp').value) return;
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Transmitting to Supabase...';
+
+      const payload = {
+        client_name: document.getElementById('fullName').value,
+        client_email: document.getElementById('email').value,
+        client_phone: document.getElementById('phone').value,
+        client_type: document.getElementById('clientType').value,
+        company_name: document.getElementById('companyName').value,
+        message: `[Category: ${document.getElementById('assetCategory').value}] ${document.getElementById('details').value}`,
+        status: 'pending'
+      };
+
+      const res = await window.habachaDB.submitInquiry(payload);
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Intake Request';
+
+      if (res.success) {
+        alert('SUCCESS! Your request has been saved directly to the live Supabase database.');
+        document.getElementById('onboardingForm').reset();
+      } else {
+        alert('NOTICE: Form submitted. Make sure to paste your Supabase Key in /admin.html to view live records.');
+      }
     });
   </script>
 
