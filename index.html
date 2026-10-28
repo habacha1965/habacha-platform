@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HABACHA | Enterprise Asset Exchange & Global Fleet Operations</title>
-    <!-- FontAwesome & Fonts -->
+    <title>HABACHA | Universal Rental & Lease Marketplace</title>
+    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
@@ -25,7 +25,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* Top Utility Bar */
+        /* Top Bar */
         .utility-bar {
             background: #060b18;
             border-bottom: 1px solid var(--border-color);
@@ -69,105 +69,83 @@
             padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: 700;
         }
 
-        nav { display: flex; align-items: center; gap: 25px; }
-        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        nav { display: flex; align-items: center; gap: 20px; }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover, nav a.active { color: #fff; }
-        .btn-nav-action { background: var(--primary); color: #fff !important; padding: 10px 20px; border-radius: 6px; font-weight: 600; transition: 0.3s; }
-        .btn-nav-action:hover { background: var(--primary-hover); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
+        .btn-nav-action { background: var(--primary); color: #fff !important; padding: 10px 18px; border-radius: 6px; font-weight: 600; transition: 0.3s; }
+        .btn-nav-action:hover { background: var(--primary-hover); }
 
         /* Hero Section */
-        .hero { padding: 80px 5% 60px; background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.12) 0%, rgba(11, 19, 41, 1) 70%); text-align: center; }
-        .hero-title { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; max-width: 900px; margin-left: auto; margin-right: auto; }
-        .hero-title span { background: linear-gradient(135deg, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; font-weight: 400; }
+        .hero { padding: 70px 5% 50px; background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.12) 0%, rgba(11, 19, 41, 1) 70%); text-align: center; }
+        .hero-title { font-size: 2.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .hero-title span { color: var(--accent-cyan); }
+        .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 35px; font-weight: 400; }
 
-        /* Search Hub Widget */
+        /* Search Engine Hub */
         .search-engine {
             background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 24px; max-width: 1100px; margin: 0 auto;
+            border-radius: 16px; padding: 24px; max-width: 1150px; margin: 0 auto;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
-        .search-tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 20px; overflow-x: auto; }
+        .search-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 20px; overflow-x: auto; }
         .search-tab {
             background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color);
-            color: var(--text-muted); padding: 10px 18px; border-radius: 8px; cursor: pointer;
-            font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; white-space: nowrap;
+            color: var(--text-muted); padding: 8px 14px; border-radius: 8px; cursor: pointer;
+            font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: 0.3s; white-space: nowrap;
         }
         .search-tab.active, .search-tab:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
 
         .search-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 160px; gap: 16px; align-items: end; }
         .field-group { text-align: left; }
-        .field-group label { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; }
+        .field-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
         .field-group input, .field-group select { width: 100%; background: rgba(11, 19, 41, 0.8); border: 1px solid var(--border-color); color: #fff; padding: 12px 14px; border-radius: 8px; font-size: 0.9rem; outline: none; }
         .field-group input:focus, .field-group select:focus { border-color: var(--accent-cyan); }
         .btn-search { background: var(--primary); color: #fff; border: none; padding: 14px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-search:hover { background: var(--primary-hover); }
 
-        /* Metrics Bar */
-        .metrics-bar { background: #080e1e; border-y: 1px solid var(--border-color); padding: 35px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center; margin-top: 60px; }
-        .metric-item .number { font-size: 2.2rem; font-weight: 800; color: #fff; font-family: 'Space Grotesk', sans-serif; }
-        .metric-item .label { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-
-        /* Divisions Grid */
-        .section-container { padding: 90px 5%; max-width: 1300px; margin: 0 auto; }
-        .section-header { margin-bottom: 50px; text-align: center; }
+        /* Category Grid */
+        .section-container { padding: 70px 5%; max-width: 1300px; margin: 0 auto; }
+        .section-header { margin-bottom: 40px; text-align: center; }
         .section-tag { color: var(--accent-cyan); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
-        .section-title { font-size: 2.2rem; font-weight: 800; color: #fff; }
+        .section-title { font-size: 2rem; font-weight: 800; color: #fff; }
 
-        .divisions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .division-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--card-radius); padding: 30px; transition: 0.3s; position: relative; }
-        .division-card:hover { transform: translateY(-5px); background: var(--bg-card-hover); border-color: rgba(37, 99, 235, 0.4); }
-        .division-icon { width: 55px; height: 55px; background: rgba(37, 99, 235, 0.15); color: var(--accent-cyan); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
-        .division-card h3 { font-size: 1.3rem; margin-bottom: 12px; color: #fff; }
-        .division-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
-        .division-link { color: var(--accent-cyan); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; }
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .category-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--card-radius); padding: 24px; transition: 0.3s; text-decoration: none; display: block; }
+        .category-card:hover { transform: translateY(-4px); background: var(--bg-card-hover); border-color: rgba(37, 99, 235, 0.4); }
+        .category-icon { width: 50px; height: 50px; background: rgba(37, 99, 235, 0.15); color: var(--accent-cyan); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 16px; }
+        .category-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: #fff; }
+        .category-card p { color: var(--text-muted); font-size: 0.85rem; }
 
-        /* Governance Section */
-        .governance-section { background: #080e1e; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 80px 5%; }
-        .governance-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .gov-box h4 { font-size: 1.1rem; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .gov-box h4 i { color: var(--accent-cyan); }
-        .gov-box p { color: var(--text-muted); font-size: 0.88rem; }
-
-        /* Featured Assets */
-        .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .asset-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--card-radius); overflow: hidden; transition: 0.3s; }
-        .asset-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .asset-img-wrap { height: 220px; position: relative; background: #090f20; }
-        .asset-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        .asset-badge { position: absolute; top: 15px; left: 15px; background: rgba(11, 19, 41, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--border-color); color: var(--accent-cyan); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-        .asset-body { padding: 24px; }
-        .asset-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .asset-specs { display: flex; gap: 15px; color: var(--text-muted); font-size: 0.82rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
-        .asset-footer { display: flex; justify-content: space-between; align-items: center; }
-        .asset-price { font-size: 1.2rem; font-weight: 800; color: #fff; }
-        .asset-price span { font-size: 0.78rem; color: var(--text-muted); font-weight: 400; }
-        .btn-book-card { background: var(--primary); color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
-        .btn-book-card:hover { background: var(--primary-hover); }
+        /* Trust & Security */
+        .trust-section { background: #080e1e; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 60px 5%; }
+        .trust-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .trust-box h4 { font-size: 1.05rem; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .trust-box h4 i { color: var(--accent-cyan); }
+        .trust-box p { color: var(--text-muted); font-size: 0.88rem; }
 
         /* Footer */
-        footer { background: #040813; border-top: 1px solid var(--border-color); padding: 60px 5% 30px; color: var(--text-muted); font-size: 0.88rem; }
-        .footer-grid { max-width: 1300px; margin: 0 auto 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-col h5 { color: #fff; font-size: 1rem; margin-bottom: 18px; font-weight: 700; }
+        footer { background: #040813; border-top: 1px solid var(--border-color); padding: 50px 5% 25px; color: var(--text-muted); font-size: 0.88rem; }
+        .footer-grid { max-width: 1300px; margin: 0 auto 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .footer-col h5 { color: #fff; font-size: 0.95rem; margin-bottom: 15px; font-weight: 700; }
         .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li { margin-bottom: 8px; }
         .footer-col ul li a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
         .footer-col ul li a:hover { color: #fff; }
-        .footer-bottom { max-width: 1300px; margin: 0 auto; border-top: 1px solid var(--border-color); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .footer-bottom { max-width: 1300px; margin: 0 auto; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <!-- Utility Contact Bar -->
+    <!-- Utility Bar -->
     <div class="utility-bar">
         <div class="utility-contacts">
             <span><i class="fa-solid fa-phone"></i> +31 (0) 20 123 4567</span>
-            <span><i class="fa-solid fa-envelope"></i> operations@habacha.com</span>
-            <span><i class="fa-solid fa-shield-halved"></i> Escrow Guarantee Clearance</span>
+            <span><i class="fa-solid fa-envelope"></i> info@habacha.com</span>
+            <span><i class="fa-solid fa-globe"></i> Global Rental & Lease Network</span>
         </div>
         <div class="utility-right">
-            <a href="admin.html"><i class="fa-solid fa-lock"></i> Corporate Admin Portal</a>
-            <a href="inventory.html"><i class="fa-solid fa-grid-2"></i> Live Marketplace</a>
+            <a href="login.html"><i class="fa-solid fa-user-lock"></i> Client / Supplier Login</a>
+            <a href="inventory.html"><i class="fa-solid fa-grid-2"></i> Browse Marketplace</a>
         </div>
     </div>
 
@@ -176,205 +154,144 @@
         <a href="index.html" class="brand-logo">
             <div class="logo-icon">H</div>
             <div><div class="logo-text">HABACHA</div></div>
-            <span class="logo-badge">Enterprise Exchange</span>
+            <span class="logo-badge">Global Exchange</span>
         </a>
         <nav>
             <a href="index.html" class="active">Home</a>
-            <a href="inventory.html">Fleet & Assets</a>
-            <a href="inventory.html?cat=aviation">Aviation</a>
-            <a href="inventory.html?cat=maritime">Maritime</a>
-            <a href="inventory.html?cat=logistics">Commercial Fleet</a>
-            <a href="inventory.html?cat=realestate">Real Estate</a>
-            <a href="inventory.html" class="btn-nav-action">Browse Marketplace</a>
+            <a href="inventory.html">All Categories</a>
+            <a href="inventory.html?cat=cars">Cars & Vans</a>
+            <a href="inventory.html?cat=stays">Stays & Property</a>
+            <a href="inventory.html?cat=machinery">Equipment</a>
+            <a href="inventory.html" class="btn-nav-action">Find Rental or Lease</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1 class="hero-title">Global Enterprise Asset Exchange & <span>Charter Fleet Portal</span></h1>
-        <p class="hero-subtitle">Institutional leasing, VIP executive charters, heavy cargo transport, and commercial real estate under one unified escrow protocol.</p>
+        <h1 class="hero-title">Rent or Lease Anything, Anywhere for <span>Private & Business Use</span></h1>
+        <p class="hero-subtitle">Connect directly with verified owners and suppliers worldwide for short-term rental or long-term lease.</p>
 
-        <!-- Executive Search Widget -->
+        <!-- Search Engine Widget -->
         <div class="search-engine">
             <div class="search-tabs">
-                <button class="search-tab active" onclick="switchSearchTab('all')"><i class="fa-solid fa-layer-group"></i> All Assets</button>
-                <button class="search-tab" onclick="switchSearchTab('aviation')"><i class="fa-solid fa-plane"></i> Jets & Air Cargo</button>
-                <button class="search-tab" onclick="switchSearchTab('maritime')"><i class="fa-solid fa-ship"></i> Cargo Ships & Yachts</button>
-                <button class="search-tab" onclick="switchSearchTab('logistics')"><i class="fa-solid fa-truck-ramps"></i> Heavy Freight & Vans</button>
-                <button class="search-tab" onclick="switchSearchTab('realestate')"><i class="fa-solid fa-city"></i> Real Estate</button>
+                <button class="search-tab active" onclick="switchSearchTab('all')"><i class="fa-solid fa-layer-group"></i> All Categories</button>
+                <button class="search-tab" onclick="switchSearchTab('cars')"><i class="fa-solid fa-car"></i> Cars & Vans</button>
+                <button class="search-tab" onclick="switchSearchTab('logistics')"><i class="fa-solid fa-truck"></i> Cargo & Freight</button>
+                <button class="search-tab" onclick="switchSearchTab('maritime')"><i class="fa-solid fa-ship"></i> Boats & Ships</button>
+                <button class="search-tab" onclick="switchSearchTab('aviation')"><i class="fa-solid fa-plane"></i> Aircraft</button>
+                <button class="search-tab" onclick="switchSearchTab('stays')"><i class="fa-solid fa-building"></i> Stays & Spaces</button>
+                <button class="search-tab" onclick="switchSearchTab('machinery')"><i class="fa-solid fa-screwdriver-wrench"></i> Equipment</button>
+                <button class="search-tab" onclick="switchSearchTab('campers')"><i class="fa-solid fa-caravan"></i> Campers</button>
+                <button class="search-tab" onclick="switchSearchTab('events')"><i class="fa-solid fa-champagne-glasses"></i> Events</button>
             </div>
 
             <div class="search-fields">
                 <div class="field-group">
-                    <label>Terminal / Port / City</label>
-                    <input type="text" id="search-location" placeholder="e.g. London Heathrow / Port of Rotterdam">
+                    <label>Location / City / Airport</label>
+                    <input type="text" id="search-location" placeholder="e.g. Amsterdam, London, Airport or Port">
                 </div>
                 <div class="field-group">
-                    <label>Asset Category</label>
+                    <label>Rental Category</label>
                     <select id="search-category">
-                        <option value="all">All Asset Classes</option>
-                        <option value="aviation">Private Jets & Commercial Cargo Planes</option>
-                        <option value="maritime">Cargo Ships & Mega Yachts</option>
-                        <option value="logistics">Cargo Trucks, Vans & Trailers</option>
-                        <option value="cars">Executive & Armored Vehicles</option>
-                        <option value="realestate">Commercial & Luxury Real Estate</option>
+                        <option value="all">All 8 Product Categories</option>
+                        <option value="cars">1. Cars & Passenger Vans</option>
+                        <option value="logistics">2. Commercial Vans & Freight Trucks</option>
+                        <option value="maritime">3. Boats, Yachts & Cargo Ships</option>
+                        <option value="aviation">4. Helicopters & Aircraft</option>
+                        <option value="stays">5. Stays, Apartments & Properties</option>
+                        <option value="machinery">6. Construction Machinery & Tools</option>
+                        <option value="campers">7. Campers, RVs & Leisure Bikes</option>
+                        <option value="events">8. Event Equipment, Sound & Lights</option>
                     </select>
                 </div>
                 <div class="field-group">
-                    <label>Lease / Fulfillment Mode</label>
+                    <label>Agreement Type</label>
                     <select id="search-mode">
-                        <option value="vip">Fully Managed / Crew Included</option>
-                        <option value="bare">Bare-Lease / GPS Mobile Unlock</option>
+                        <option value="rent">Daily / Weekly Short Rental</option>
+                        <option value="lease">Monthly / Yearly Long Lease</option>
                     </select>
                 </div>
                 <div>
-                    <button class="btn-search" onclick="executeExecutiveSearch()">
-                        <i class="fa-solid fa-magnifying-glass"></i> Search Assets
+                    <button class="btn-search" onclick="executeSearch()">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search Offers
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Institutional Live Metrics Bar -->
-    <div class="metrics-bar">
-        <div class="metric-item">
-            <div class="number">$2.8B+</div>
-            <div class="label">Total Capital Managed</div>
-        </div>
-        <div class="metric-item">
-            <div class="number">140+</div>
-            <div class="label">Global Ports & Hubs</div>
-        </div>
-        <div class="metric-item">
-            <div class="number">100%</div>
-            <div class="label">Escrow Protected</div>
-        </div>
-        <div class="metric-item">
-            <div class="number">24/7/365</div>
-            <div class="label">Enterprise SLA Desk</div>
-        </div>
-    </div>
-
-    <!-- Core Asset Divisions -->
+    <!-- 8 Categories Overview Grid -->
     <section class="section-container">
         <div class="section-header">
-            <span class="section-tag">Institutional Divisions</span>
-            <h2 class="section-title">Core Asset Categories</h2>
+            <span class="section-tag">Marketplace Divisions</span>
+            <h2 class="section-title">Explore All 8 Product Categories</h2>
         </div>
 
-        <div class="divisions-grid">
-            <div class="division-card">
-                <div class="division-icon"><i class="fa-solid fa-plane-departure"></i></div>
-                <h3>Executive & Commercial Aviation</h3>
-                <p>Private heavy jets, regional passenger aircraft, and intercontinental freight carriers available for charter or wet/dry lease.</p>
-                <a href="inventory.html?cat=aviation" class="division-link">Explore Aviation <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+        <div class="categories-grid">
+            <a href="inventory.html?cat=cars" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-car"></i></div>
+                <h3>1. Cars & Passenger Vans</h3>
+                <p>Compact cars, family SUVs, luxury sedans, and 7-9 passenger vans for daily rental or private lease.</p>
+            </a>
 
-            <div class="division-card">
-                <div class="division-icon"><i class="fa-solid fa-ship"></i></div>
-                <h3>Maritime & Ocean Fleet</h3>
-                <p>Bulk cargo carriers, container ships, ocean vessels, and mega-yachts with licensed maritime crew or bareboat options.</p>
-                <a href="inventory.html?cat=maritime" class="division-link">Explore Maritime <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+            <a href="inventory.html?cat=logistics" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                <h3>2. Commercial Vans & Freight</h3>
+                <p>Delivery vans, moving trucks with tail lifts, refrigerated transport, and heavy cargo trucks.</p>
+            </a>
 
-            <div class="division-card">
-                <div class="division-icon"><i class="fa-solid fa-truck-moving"></i></div>
-                <h3>Heavy Freight & Road Logistics</h3>
-                <p>Class-A heavy cargo trucks, refrigerated transport vans, and immediate keyless GPS app-unlocked commercial vehicles.</p>
-                <a href="inventory.html?cat=logistics" class="division-link">Explore Fleet <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+            <a href="inventory.html?cat=maritime" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-ship"></i></div>
+                <h3>3. Boats, Yachts & Ships</h3>
+                <p>Sloops, motorboats, luxury yachts, passenger cruise vessels, and commercial cargo ships.</p>
+            </a>
 
-            <div class="division-card">
-                <div class="division-icon"><i class="fa-solid fa-building-user"></i></div>
-                <h3>Prime Real Estate & Commercial Logistics</h3>
-                <p>Industrial logistics distribution hubs, corporate office towers, and luxury residential estates for corporate acquisition or lease.</p>
-                <a href="inventory.html?cat=realestate" class="division-link">Explore Real Estate <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+            <a href="inventory.html?cat=aviation" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-plane"></i></div>
+                <h3>4. Helicopters & Aircraft</h3>
+                <p>Helicopters, propeller planes, private charter jets, and air cargo planes with pilots.</p>
+            </a>
+
+            <a href="inventory.html?cat=stays" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-building-user"></i></div>
+                <h3>5. Stays & Real Estate</h3>
+                <p>Apartments, holiday villas, hotel rooms, corporate offices, and logistics warehouse hubs.</p>
+            </a>
+
+            <a href="inventory.html?cat=machinery" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <h3>6. Equipment & Machinery</h3>
+                <p>Power tools, scaffolding, mini excavators, boom lifts, forklifts, and power generators.</p>
+            </a>
+
+            <a href="inventory.html?cat=campers" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-caravan"></i></div>
+                <h3>7. Campers & Leisure</h3>
+                <p>Motorhomes, camper vans, electric bikes, delivery scooters, quads, and leisure mobility.</p>
+            </a>
+
+            <a href="inventory.html?cat=events" class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <h3>8. Event & Audio Equipment</h3>
+                <p>Sound systems, stage lighting, DJ gear, party tents, event furniture, and catering items.</p>
+            </a>
         </div>
     </section>
 
-    <!-- Enterprise Escrow & Security -->
-    <section class="governance-section">
-        <div class="governance-grid">
-            <div class="gov-box">
-                <h4><i class="fa-solid fa-shield-halved"></i> Institutional Escrow Guarantee</h4>
-                <p>All charter payments and security deposits are safely held in verified escrow until flight/port clearances and safety compliance are verified.</p>
+    <!-- Trust & Operational Governance -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-box">
+                <h4><i class="fa-solid fa-handshake"></i> Direct Supplier Network</h4>
+                <p>Connect directly with verified local and international rental companies, lease providers, and private owners.</p>
             </div>
-            <div class="gov-box">
-                <h4><i class="fa-solid fa-clock-rotate-left"></i> Immediate GPS Keyless Release</h4>
-                <p>For commercial vans and local road fleets, instant digital keyless unlocking provides 24/7 immediate operational mobility.</p>
+            <div class="trust-box">
+                <h4><i class="fa-solid fa-users"></i> For Individuals & Businesses</h4>
+                <p>Flexible options available whether you need a vehicle for 1 day or a corporate fleet lease for 12 months.</p>
             </div>
-            <div class="gov-box">
-                <h4><i class="fa-solid fa-user-gear"></i> Dedicated Flight & Maritime Desk</h4>
-                <p>Full operational desk support for slot coordination, ICAO flight clearance, maritime bunkering, and cargo manifest processing.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Asset Spotlight -->
-    <section class="section-container">
-        <div class="section-header">
-            <span class="section-tag">Spotlight</span>
-            <h2 class="section-title">Verified Enterprise Assets</h2>
-        </div>
-
-        <div class="featured-grid">
-            <!-- Asset 1 -->
-            <div class="asset-card">
-                <div class="asset-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Gulfstream Jet">
-                    <span class="asset-badge"><i class="fa-solid fa-plane"></i> VIP Aviation</span>
-                </div>
-                <div class="asset-body">
-                    <h3 class="asset-title">Gulfstream G650ER</h3>
-                    <div class="asset-specs">
-                        <span><i class="fa-solid fa-user-group"></i> 14 Passengers</span>
-                        <span><i class="fa-solid fa-gauge-high"></i> 7,500 NM Range</span>
-                    </div>
-                    <div class="asset-footer">
-                        <div class="asset-price">€9,500 <span>/ flight hour</span></div>
-                        <a href="inventory.html" class="btn-book-card">Configure Flight</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Asset 2 -->
-            <div class="asset-card">
-                <div class="asset-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80" alt="Cargo Carrier Ship">
-                    <span class="asset-badge"><i class="fa-solid fa-ship"></i> Commercial Maritime</span>
-                </div>
-                <div class="asset-body">
-                    <h3 class="asset-title">Panamax Class Cargo Carrier</h3>
-                    <div class="asset-specs">
-                        <span><i class="fa-solid fa-boxes-stacked"></i> 4,500 TEU</span>
-                        <span><i class="fa-solid fa-anchor"></i> Maritime Crew</span>
-                    </div>
-                    <div class="asset-footer">
-                        <div class="asset-price">€32,000 <span>/ charter day</span></div>
-                        <a href="inventory.html" class="btn-book-card">Charter Vessel</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Asset 3 -->
-            <div class="asset-card">
-                <div class="asset-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Volvo Heavy Cargo Truck">
-                    <span class="asset-badge"><i class="fa-solid fa-truck"></i> Heavy Logistics</span>
-                </div>
-                <div class="asset-body">
-                    <h3 class="asset-title">Volvo FH16 Heavy Freight Truck</h3>
-                    <div class="asset-specs">
-                        <span><i class="fa-solid fa-weight-hanging"></i> 44 Ton Payload</span>
-                        <span><i class="fa-solid fa-location-crosshairs"></i> GPS App Unlock</span>
-                    </div>
-                    <div class="asset-footer">
-                        <div class="asset-price">€450 <span>/ day</span></div>
-                        <a href="inventory.html" class="btn-book-card">Lease Truck</a>
-                    </div>
-                </div>
+            <div class="trust-box">
+                <h4><i class="fa-solid fa-shield-halved"></i> Clear Terms & Security</h4>
+                <p>Every supplier provides their own clear rental terms, deposit details, and pickup/delivery instructions.</p>
             </div>
         </div>
     </section>
@@ -383,40 +300,40 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="brand-logo" style="margin-bottom: 15px;">
+                <div class="brand-logo" style="margin-bottom: 12px;">
                     <div class="logo-icon">H</div>
                     <div class="logo-text">HABACHA</div>
                 </div>
-                <p style="font-size: 0.85rem; line-height: 1.6;">HABACHA Platform is an institutional global asset exchange operating executive aviation, maritime transport, commercial logistics, and corporate real estate.</p>
+                <p style="font-size: 0.85rem; line-height: 1.6;">HABACHA Platform connects private individuals and enterprise clients with verified rental and lease suppliers worldwide across 8 core product divisions.</p>
             </div>
             <div class="footer-col">
-                <h5>Divisions</h5>
+                <h5>Product Divisions</h5>
                 <ul>
-                    <li><a href="inventory.html?cat=aviation">Executive Jets & Cargo Planes</a></li>
-                    <li><a href="inventory.html?cat=maritime">Cargo Ships & Mega Yachts</a></li>
-                    <li><a href="inventory.html?cat=logistics">Commercial Fleet & Vans</a></li>
-                    <li><a href="inventory.html?cat=realestate">Prime Commercial Real Estate</a></li>
+                    <li><a href="inventory.html?cat=cars">Cars & Passenger Vans</a></li>
+                    <li><a href="inventory.html?cat=logistics">Commercial Freight & Vans</a></li>
+                    <li><a href="inventory.html?cat=maritime">Boats & Marine Ships</a></li>
+                    <li><a href="inventory.html?cat=aviation">Helicopters & Aircraft</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h5>Governance & Legal</h5>
+                <h5>Property & Equipment</h5>
                 <ul>
-                    <li><a href="#">Escrow Security Guarantee</a></li>
-                    <li><a href="#">ICAO & Maritime Compliance</a></li>
-                    <li><a href="#">Corporate SLA Standards</a></li>
-                    <li><a href="admin.html">Admin System Portal</a></li>
+                    <li><a href="inventory.html?cat=stays">Stays & Commercial Spaces</a></li>
+                    <li><a href="inventory.html?cat=machinery">Construction Machinery</a></li>
+                    <li><a href="inventory.html?cat=campers">Campers & Leisure Mobility</a></li>
+                    <li><a href="inventory.html?cat=events">Event & Sound Equipment</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h5>Global Operations Desk</h5>
-                <p style="font-size: 0.85rem; margin-bottom: 8px;"><i class="fa-solid fa-building"></i> World Trade Center, Amsterdam</p>
-                <p style="font-size: 0.85rem; margin-bottom: 8px;"><i class="fa-solid fa-phone"></i> +31 (0) 20 123 4567</p>
-                <p style="font-size: 0.85rem;"><i class="fa-solid fa-envelope"></i> operations@habacha.com</p>
+                <h5>Supplier & Support Desk</h5>
+                <p style="font-size: 0.85rem; margin-bottom: 6px;"><i class="fa-solid fa-phone"></i> +31 (0) 20 123 4567</p>
+                <p style="font-size: 0.85rem; margin-bottom: 12px;"><i class="fa-solid fa-envelope"></i> info@habacha.com</p>
+                <a href="login.html" style="color:var(--accent-cyan); text-decoration:none; font-weight:700;"><i class="fa-solid fa-user-plus"></i> Supplier Registration</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <div>&copy; 2025 HABACHA Platform B.V. All Corporate Rights Reserved.</div>
-            <div>Strictly Confidential & Enterprise Clearance</div>
+            <div>&copy; 2025 HABACHA Platform. All Rights Reserved.</div>
+            <div>Universal Rental & Lease Network</div>
         </div>
     </footer>
 
@@ -427,7 +344,7 @@
             document.getElementById('search-category').value = cat;
         }
 
-        function executeExecutiveSearch() {
+        function executeSearch() {
             const cat = document.getElementById('search-category').value;
             const loc = document.getElementById('search-location').value;
             window.location.href = `inventory.html?cat=${cat}&loc=${encodeURIComponent(loc)}`;

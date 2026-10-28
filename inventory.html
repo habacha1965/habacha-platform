@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Marketplace | HABACHA Platform</title>
+    <title>All Categories Marketplace | HABACHA Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -24,20 +24,20 @@
         
         .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; }
         
-        .filter-bar { display: flex; gap: 12px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; }
-        .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap; }
+        .filter-bar { display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; }
+        .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
         
-        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
         .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
         .card:hover { border-color: var(--primary); transform: translateY(-4px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card img { width: 100%; height: 190px; object-fit: cover; }
         .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
-        .card-specs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
-        .card-price { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+        .card-specs { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
+        .card-price { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
         
-        .btn-view-product { background: var(--primary); color: #fff; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: 700; text-align: center; display: block; transition: 0.3s; }
+        .btn-view-product { background: var(--primary); color: #fff; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: 700; text-align: center; display: block; transition: 0.3s; font-size: 0.9rem; }
         .btn-view-product:hover { background: #1d4ed8; }
     </style>
 </head>
@@ -52,29 +52,35 @@
     </header>
 
     <div class="container">
-        <h2 style="font-size: 2rem; margin-bottom: 20px;">Enterprise Asset Marketplace</h2>
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">Rental & Lease Marketplace</h2>
         
         <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterCategory('all')">All Assets</button>
-            <button class="filter-btn" onclick="filterCategory('aviation')"><i class="fa-solid fa-plane"></i> Private & Cargo Jets</button>
-            <button class="filter-btn" onclick="filterCategory('maritime')"><i class="fa-solid fa-ship"></i> Cargo Ships & Yachts</button>
-            <button class="filter-btn" onclick="filterCategory('logistics')"><i class="fa-solid fa-truck"></i> Heavy Cargo & Vans</button>
-            <button class="filter-btn" onclick="filterCategory('realestate')"><i class="fa-solid fa-building"></i> Commercial Real Estate</button>
+            <button class="filter-btn active" onclick="filterCategory('all')">All Products</button>
+            <button class="filter-btn" onclick="filterCategory('cars')"><i class="fa-solid fa-car"></i> Cars & Vans</button>
+            <button class="filter-btn" onclick="filterCategory('logistics')"><i class="fa-solid fa-truck"></i> Freight & Vans</button>
+            <button class="filter-btn" onclick="filterCategory('maritime')"><i class="fa-solid fa-ship"></i> Boats & Ships</button>
+            <button class="filter-btn" onclick="filterCategory('aviation')"><i class="fa-solid fa-plane"></i> Aircraft</button>
+            <button class="filter-btn" onclick="filterCategory('stays')"><i class="fa-solid fa-building"></i> Stays & Spaces</button>
+            <button class="filter-btn" onclick="filterCategory('machinery')"><i class="fa-solid fa-screwdriver-wrench"></i> Equipment</button>
+            <button class="filter-btn" onclick="filterCategory('campers')"><i class="fa-solid fa-caravan"></i> Campers</button>
+            <button class="filter-btn" onclick="filterCategory('events')"><i class="fa-solid fa-champagne-glasses"></i> Events</button>
         </div>
 
         <div class="assets-grid" id="asset-container">
-            <!-- Dynamic Assets Rendered Here -->
+            <!-- Dynamic Render -->
         </div>
     </div>
 
     <script>
         const inventoryData = [
-            { id: '1', title: 'Gulfstream G650ER Jet', category: 'aviation', price: 9500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600', specs: '14 Passengers | Range 7,500 NM | ARGUS Platinum' },
-            { id: '2', title: 'Boeing 737-800 Cargo Freighter', category: 'aviation', price: 18500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1519074069444-1ba4eff56022?w=600', specs: '23.9 Ton Payload | Main Deck Pallet Loading' },
-            { id: '3', title: 'Panamax Bulk Cargo Carrier Vessel', category: 'maritime', price: 32000, unit: 'per charter day', image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600', specs: '4,500 TEU | Gross Tonnage 54,000 GT' },
-            { id: '4', title: 'Sunseeker 131 Ocean Mega Yacht', category: 'maritime', price: 14000, unit: 'per day', image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600', specs: '12 Guests | 5 Cabins | Master Captain & Crew' },
-            { id: '5', title: 'Volvo FH16 750 Heavy Freight Truck', category: 'logistics', price: 450, unit: 'per day', image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600', specs: '44 Ton Payload | Keyless Mobile App Unlock' },
-            { id: '7', title: 'Rotterdam Logistics Distribution Hub', category: 'realestate', price: 45000, unit: 'per month lease', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600', specs: '18,000 m² | 24 Hydraulic Docks | Escrow Clear' }
+            { id: '1', title: 'Volkswagen Golf 8 (Rental or Lease)', category: 'cars', price: 65, unit: 'per day', image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600', specs: '5 Seats | Automatic | Branch or Airport Pickup' },
+            { id: '2', title: 'Mercedes-Benz Sprinter Cargo Van', category: 'logistics', price: 120, unit: 'per day', image: 'https://images.unsplash.com/photo-1559297434-fae8a1916a79?w=600', specs: '14 m³ Cargo Space | Moving & Delivery | Driver Option' },
+            { id: '3', title: 'Luxury Motor Yacht 45ft', category: 'maritime', price: 950, unit: 'per day', image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600', specs: '10 Guests | Marina Berth | With or Without Skipper' },
+            { id: '4', title: 'Airbus H125 Helicopter', category: 'aviation', price: 1450, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600', specs: '5 Passengers | Certified Pilot Included' },
+            { id: '5', title: 'Modern City Center Apartment', category: 'stays', price: 140, unit: 'per night', image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600', specs: '2 Bedrooms | Fully Furnished | Short or Long Stay' },
+            { id: '6', title: 'Caterpillar Mini Excavator (1.8 Ton)', category: 'machinery', price: 110, unit: 'per day', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=600', specs: 'Garden & Construction | Delivery to Site Available' },
+            { id: '7', title: 'Luxury 4-Berth Campervan (RV)', category: 'campers', price: 135, unit: 'per day', image: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=600', specs: '4 Beds | Kitchen & Bathroom | Unlimited Mileage' },
+            { id: '8', title: 'Professional Party Tent & Sound Set', category: 'events', price: 250, unit: 'per weekend', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600', specs: '6x12m Tent | 2000W Sound System | Weddings & Parties' }
         ];
 
         function renderInventory(data) {
@@ -89,7 +95,7 @@
                         </div>
                         <div>
                             <div class="card-price">€${asset.price.toLocaleString()} <span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">${asset.unit}</span></div>
-                            <a href="asset-detail.html?id=${asset.id}" class="btn-view-product">View Full Specs & Reserve</a>
+                            <a href="asset-detail.html?id=${asset.id}" class="btn-view-product">View Details & Reserve</a>
                         </div>
                     </div>
                 </div>
@@ -103,7 +109,11 @@
             else renderInventory(inventoryData.filter(a => a.category === cat));
         }
 
-        renderInventory(inventoryData);
+        // Check URL category filter
+        const params = new URLSearchParams(window.location.search);
+        const catParam = params.get('cat');
+        if (catParam) filterCategory(catParam);
+        else renderInventory(inventoryData);
     </script>
 </body>
 </html>
