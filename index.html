@@ -22,7 +22,6 @@
     <style>
         body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; width: 100%; text-align: left; }
         
-        /* STRICT DARK NAVY DROPDOWN FIX FOR ALL BROWSERS & OS */
         select {
             background-color: #0f172a !important;
             color: #ffffff !important;
@@ -73,7 +72,7 @@
                 </a>
 
                 <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="inventory.html" class="text-slate-300 hover:text-cyan text-sm font-semibold transition">All Categories</a>
+                    <a href="inventory.html" class="text-slate-300 hover:text-cyan text-sm font-semibold transition">Marketplace Directory</a>
                     <a href="inventory.html?category=cars" class="text-slate-300 hover:text-white text-sm font-medium transition">Cars & Vans</a>
                     <a href="inventory.html?category=freight" class="text-slate-300 hover:text-white text-sm font-medium transition">Freight & Trucks</a>
                     <a href="inventory.html?category=equipment" class="text-slate-300 hover:text-white text-sm font-medium transition">Equipment</a>
@@ -81,7 +80,7 @@
 
                 <div class="hidden lg:flex items-center space-x-4">
                     <a href="supplier-register.html" class="text-cyan hover:underline text-sm font-semibold transition">List Your Fleet</a>
-                    <a href="login.html" class="px-5 py-2.5 rounded-lg border border-slate-600 hover:bg-slate-800 text-white font-semibold text-sm transition">Portal Login</a>
+                    <a href="login.html" class="px-5 py-2.5 rounded-lg border border-slate-600 hover:bg-slate-800 text-white font-semibold text-sm transition">Portal Access</a>
                 </div>
 
                 <div class="flex lg:hidden">
@@ -94,11 +93,11 @@
         </div>
 
         <div id="mobileMenu" class="hidden lg:hidden bg-navy-800 border-b border-slate-700 px-4 pt-4 pb-6 space-y-3">
-            <a href="inventory.html" class="block px-3 py-2 rounded-md bg-navy-900 text-cyan font-semibold">All 8 Product Divisions</a>
-            <a href="inventory.html?category=cars" class="block px-3 py-2 rounded-md text-slate-200 hover:bg-navy-900">1. Cars & Vans</a>
+            <a href="inventory.html" class="block px-3 py-2 rounded-md bg-navy-900 text-cyan font-semibold">Browse All Categories</a>
+            <a href="inventory.html?category=cars" class="block px-3 py-2 rounded-md text-slate-200 hover:bg-navy-900">1. Cars & Passenger Vans</a>
             <a href="inventory.html?category=freight" class="block px-3 py-2 rounded-md text-slate-200 hover:bg-navy-900">2. Commercial Freight</a>
             <a href="supplier-register.html" class="block px-3 py-2 rounded-md border border-cyan text-cyan font-semibold text-center mt-4">List Your Asset Fleet</a>
-            <a href="login.html" class="block px-3 py-2 rounded-md border border-slate-600 text-slate-200 font-medium text-center">Portal Login</a>
+            <a href="login.html" class="block px-3 py-2 rounded-md border border-slate-600 text-slate-200 font-medium text-center">Portal Access</a>
         </div>
     </header>
 
@@ -119,7 +118,7 @@
                     Directly search, compare, and reserve verified vehicles, freight transport, maritime vessels, aircraft, real estate, and industrial equipment worldwide.
                 </p>
 
-                <!-- SEARCH BAR WITH WIDE AGREEMENT COLUMN -->
+                <!-- SEARCH BAR -->
                 <div class="max-w-5xl w-full bg-navy-800/90 p-6 rounded-2xl border border-slate-700/80 shadow-2xl backdrop-blur-md text-left">
                     <form action="inventory.html" method="GET" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
@@ -165,7 +164,7 @@
             </div>
         </section>
 
-        <!-- 8 PRODUCT DIVISIONS GRID (PERFECTLY ALIGNED CARDS) -->
+        <!-- 8 PRODUCT DIVISIONS GRID -->
         <section class="py-16 bg-navy-900 border-t border-slate-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
@@ -175,7 +174,6 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
                     
-                    <!-- 1. CARS & VANS -->
                     <a href="inventory.html?category=cars" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🚗</div>
@@ -192,7 +190,6 @@
                         </div>
                     </a>
 
-                    <!-- 2. COMMERCIAL FREIGHT -->
                     <a href="inventory.html?category=freight" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🚚</div>
@@ -209,7 +206,6 @@
                         </div>
                     </a>
 
-                    <!-- 3. BOATS & SHIPS -->
                     <a href="inventory.html?category=boats" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🛥️</div>
@@ -226,7 +222,6 @@
                         </div>
                     </a>
 
-                    <!-- 4. AIRCRAFT & HELICOPTERS -->
                     <a href="inventory.html?category=aircraft" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">✈️</div>
@@ -242,8 +237,7 @@
                             <span>&rarr;</span>
                         </div>
                     </a>
-                    
-                    <!-- 5. STAYS & REAL ESTATE -->
+
                     <a href="inventory.html?category=realestate" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🏢</div>
@@ -260,7 +254,6 @@
                         </div>
                     </a>
 
-                    <!-- 6. CONSTRUCTION MACHINERY -->
                     <a href="inventory.html?category=equipment" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🏗️</div>
@@ -277,7 +270,6 @@
                         </div>
                     </a>
 
-                    <!-- 7. CAMPERS & LEISURE -->
                     <a href="inventory.html?category=campers" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🚐</div>
@@ -294,7 +286,6 @@
                         </div>
                     </a>
 
-                    <!-- 8. EVENT EQUIPMENT -->
                     <a href="inventory.html?category=events" class="group bg-navy-800 border border-slate-700/80 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between h-full">
                         <div>
                             <div class="w-12 h-12 rounded-lg bg-steel/20 text-cyan flex items-center justify-center text-2xl font-bold mb-4">🎤</div>
@@ -316,7 +307,6 @@
         </section>
     </main>
 
-    <!-- CORPORATE FOOTER -->
     <footer class="bg-navy-950 border-t border-slate-800 text-slate-400 text-xs pt-12 pb-6 px-4">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left">
             <div class="flex flex-col items-start">
@@ -337,8 +327,8 @@
             <div class="flex flex-col items-start">
                 <h4 class="text-white font-bold mb-4 uppercase tracking-wider">Partner Solutions</h4>
                 <a href="supplier-register.html" class="hover:text-cyan mb-2 transition">Supplier Fleet Onboarding</a>
-                <a href="login.html" class="hover:text-cyan mb-2 transition">Partner Portal Login</a>
-                <a href="inventory.html" class="hover:text-cyan mb-2 transition">Browse Global Inventory</a>
+                <a href="login.html" class="hover:text-cyan mb-2 transition">Partner Portal Access</a>
+                <a href="inventory.html" class="hover:text-cyan mb-2 transition">Browse Marketplace Directory</a>
             </div>
         </div>
         <div class="max-w-7xl mx-auto border-t border-slate-800 pt-6 text-center text-slate-500">

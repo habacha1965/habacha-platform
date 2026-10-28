@@ -8,11 +8,12 @@
     <script>tailwind.config = { theme: { extend: { colors: { navy: { 900: '#0b1329', 800: '#0f172a', 700: '#1e293b' }, steel: '#2563eb', cyan: '#0ea5e9' } } } }</script>
     <style>
         body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, sans-serif; text-align: left; }
-        select { background-color: #0f172a !important; color: #ffffff !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 1rem center !important; background-size: 1.25rem !important; padding-right: 2.75rem !important; }
+        select { background-color: #0f172a !important; color: #ffffff !important; border: 1px solid #334155 !important; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 0.75rem center !important; background-size: 1rem !important; padding-right: 2.25rem !important; }
     </style>
 </head>
 <body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col items-start">
 
+    <!-- HEADER -->
     <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur border-b border-slate-800 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -20,7 +21,7 @@
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-steel to-cyan flex items-center justify-center font-black text-white text-xl">H</div>
                     <span class="text-2xl font-extrabold text-white">HABACHA</span>
                 </a>
-                <a href="inventory.html" class="text-sm font-semibold text-cyan hover:underline">&larr; Back</a>
+                <a href="index.html" class="text-sm font-semibold text-cyan hover:underline">&larr; Return to Global Exchange</a>
             </div>
         </div>
     </header>
@@ -29,10 +30,18 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <div class="lg:col-span-8 space-y-6 flex flex-col items-start">
+                
+                <!-- BREADCRUMB -->
+                <div class="text-xs text-slate-400">
+                    <a href="index.html" class="hover:text-cyan">Exchange Home</a> &rarr; 
+                    <a href="inventory.html" id="breadcrumbCategory" class="hover:text-cyan">Category Directory</a> &rarr; 
+                    <span id="breadcrumbTitle" class="text-white font-semibold">Asset Specification</span>
+                </div>
+
                 <div class="bg-navy-800 p-8 rounded-2xl border border-slate-700 w-full">
                     <div class="flex items-center justify-between mb-4 w-full">
                         <span id="assetCategoryBadge" class="px-3 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">1. Cars & Vans</span>
-                        <span class="text-xs text-emerald-400">✓ Verified Supplier</span>
+                        <span class="text-xs text-emerald-400 font-semibold">✓ Verified Supplier Partner</span>
                     </div>
 
                     <h1 class="text-3xl font-bold text-white mb-2" id="assetTitle">Mercedes-Benz V-Class</h1>
@@ -47,32 +56,32 @@
                 </div>
 
                 <div class="bg-navy-800 p-8 rounded-2xl border border-slate-700 w-full text-left">
-                    <h2 class="text-xl font-bold text-white mb-4">Intermediary Policy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4">Intermediary Operating Policy</h2>
                     <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> HABACHA only generates verified referrals. We do not store payment.</li>
-                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Final contract, deposit, and conditions are signed directly with the supplier.</li>
-                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Pickups are done at physical supplier hubs (no home delivery for vehicles).</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> HABACHA operates strictly as an intermediary referral exchange.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Rental terms, security deposits, and agreements are completed directly with the supplier.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Motor vehicles are strictly collected and returned at supplier branch offices or airport terminals.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="lg:col-span-4 w-full">
                 <div class="bg-navy-800 p-6 rounded-2xl border border-slate-700 shadow-xl sticky top-28 text-left">
-                    <h2 class="text-lg font-bold text-white mb-1">Generate Supplier Lead</h2>
-                    <p class="text-xs text-slate-400 mb-6">Enter your details to generate your official referral code (<code class="text-cyan">HB-xxxx</code>) and redirect to the supplier.</p>
+                    <h2 class="text-lg font-bold text-white mb-1">Generate Supplier Referral Code</h2>
+                    <p class="text-xs text-slate-400 mb-6">Enter your details to generate your tracking lead reference (<code class="text-cyan">HB-xxxx</code>) and proceed to the supplier page.</p>
 
                     <form id="referralForm" class="space-y-4">
                         <div class="flex flex-col items-start">
                             <label class="block text-xs font-bold text-slate-300 mb-1">Full Name *</label>
-                            <input type="text" required placeholder="Robert van der Meer" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <input type="text" required placeholder="Robert van der Meer" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                         <div class="flex flex-col items-start">
                             <label class="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
-                            <input type="email" required placeholder="robert@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <input type="email" required placeholder="robert@company.com" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                         <div class="flex flex-col items-start">
                             <label class="block text-xs font-bold text-slate-300 mb-1">Client Type</label>
-                            <select class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
+                            <select class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
                                 <option value="b2c">Private Renter (B2C)</option>
                                 <option value="b2b">Commercial Enterprise (B2B)</option>
                             </select>
@@ -81,11 +90,11 @@
                         <!-- DYNAMIC SPECIFIC PRODUCT FIELD -->
                         <div class="flex flex-col items-start pt-2 border-t border-slate-700" id="dynamicFieldContainer">
                             <label id="dynamicLabel" class="block text-xs font-bold text-cyan mb-1">Driver's License Type *</label>
-                            <input type="text" id="dynamicInput" required placeholder="e.g. Type B / C" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <input type="text" id="dynamicInput" required placeholder="e.g. Class B" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
 
-                        <button type="submit" class="w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition mt-4">
-                            Proceed to Supplier &rarr;
+                        <button type="submit" class="w-full h-12 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition mt-4">
+                            Proceed to Supplier Website &rarr;
                         </button>
                     </form>
                 </div>
@@ -96,9 +105,14 @@
 
     <script>
         const assetsData = {
-            'cars-1': { title: 'Mercedes-Benz V-Class', category: 'Cars & Vans', sub: 'Exec transport.', rate: '€145/day', fill: 'Branch Pickup', loc: 'Amsterdam', dynLabel: 'Driver License Type', dynPlace: 'e.g. Class B', url: 'https://example.com' },
-            'freight-1': { title: 'DAF XF 480', category: 'Freight', sub: 'Heavy transport.', rate: '€2,100/mo', fill: 'Hub Transfer', loc: 'Rotterdam', dynLabel: 'Expected Cargo Weight (Tons)', dynPlace: 'e.g. 20 Tons', url: 'https://example.com' },
-            'boats-1': { title: 'Sunseeker Yacht', category: 'Boats', sub: 'Charter Yacht.', rate: '€3,400/day', fill: 'Marina Berth', loc: 'Monaco', dynLabel: 'Skipper Required?', dynPlace: 'Yes / No', url: 'https://example.com' }
+            'cars-1': { title: 'Mercedes-Benz V-Class (9-Seater)', category: '1. Cars & Passenger Vans', sub: 'Executive passenger van for transfers.', rate: '€145 / day', fill: 'Branch / Airport Terminal', loc: 'Amsterdam Schiphol', dynLabel: "Driver's License Type", dynPlace: 'e.g. Class B', url: 'https://example.com/cars' },
+            'freight-1': { title: 'DAF XF 480 Super Space Cab', category: '2. Commercial Freight', sub: 'Heavy freight tractor with sleeper cab.', rate: '€2,100 / mo', fill: 'Logistics Hub Transfer', loc: 'Rotterdam Port', dynLabel: 'Expected Cargo Weight (Tons)', dynPlace: 'e.g. 20 Tons', url: 'https://example.com/freight' },
+            'boats-1': { title: 'Sunseeker Predator 74 Yacht', category: '3. Boats & Ships', sub: '74ft executive charter yacht.', rate: '€3,400 / day', fill: 'Marina Berth Handover', loc: 'Monaco Marina', dynLabel: 'Skipper Required?', dynPlace: 'Yes / No', url: 'https://example.com/yachts' },
+            'aircraft-1': { title: 'Airbus H145 Twin-Engine Helicopter', category: '4. Helicopters & Aircraft', sub: 'VIP 8-passenger corporate helicopter.', rate: '€2,850 / hr', fill: 'Heliport / Terminal Charter', loc: 'London Heliport', dynLabel: 'Passenger Count', dynPlace: 'e.g. 4 Passengers', url: 'https://example.com/aircraft' },
+            'realestate-1': { title: 'Prime Office Suite (Zuidas District)', category: '5. Stays & Real Estate', sub: '450 m² fully furnished office floor.', rate: '€8,500 / mo', fill: 'Corporate Lease Contract', loc: 'Amsterdam Zuidas', dynLabel: 'Lease Start Date', dynPlace: 'DD/MM/YYYY', url: 'https://example.com/realestate' },
+            'equipment-1': { title: 'Caterpillar 320 Hydraulic Excavator', category: '6. Construction Machinery', sub: '20-ton crawler excavator with 3D GPS.', rate: '€380 / day', fill: 'On-Site Delivery', loc: 'Utrecht Hub', dynLabel: 'Site Delivery Postcode', dynPlace: 'e.g. 3500 AA', url: 'https://example.com/equipment' },
+            'campers-1': { title: 'Hymer B-Class Supreme Motorhome', category: '7. Campers & Leisure', sub: '4-berth luxury integrated motorhome.', rate: '€160 / day', fill: 'Depot Handover', loc: 'Eindhoven Hub', dynLabel: 'Driver Age (Min 23)', dynPlace: 'e.g. 35', url: 'https://example.com/campers' },
+            'events-1': { title: 'L-Acoustics Concert Sound Rig', category: '8. Event Equipment', sub: '20,000W festival line array audio system.', rate: '€1,250 / day', fill: 'Stage Delivery & Setup', loc: 'Brussels Depot', dynLabel: 'Event Venue Name', dynPlace: 'e.g. Amsterdam Arena', url: 'https://example.com/events' }
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -106,13 +120,14 @@
         const item = assetsData[assetId] || assetsData['cars-1'];
 
         document.getElementById('assetTitle').textContent = item.title;
+        document.getElementById('breadcrumbTitle').textContent = item.title;
         document.getElementById('assetCategoryBadge').textContent = item.category;
+        document.getElementById('breadcrumbCategory').textContent = item.category;
         document.getElementById('assetSubtitle').textContent = item.sub;
         document.getElementById('assetRate').textContent = item.rate;
         document.getElementById('assetFulfillment').textContent = item.fill;
         document.getElementById('assetLocation').textContent = item.loc;
         
-        // Update dynamic form field
         document.getElementById('dynamicLabel').textContent = item.dynLabel;
         document.getElementById('dynamicInput').placeholder = item.dynPlace;
 
@@ -120,7 +135,7 @@
             e.preventDefault();
             const refCode = 'HB-' + Math.floor(1000 + Math.random() * 9000);
             const redirectUrl = `success.html?ref=${refCode}&supplierUrl=${encodeURIComponent(item.url)}`;
-            window.location.href = redirectUrl; // Redirect to dedicated Thank You page
+            window.location.href = redirectUrl;
         });
     </script>
 </body>

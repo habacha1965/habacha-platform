@@ -47,7 +47,6 @@
 
             <form id="registerForm" class="space-y-4 w-full">
                 
-                <!-- CLIENT TYPE SELECTOR -->
                 <div class="flex flex-col items-start w-full">
                     <label class="block text-xs font-bold text-slate-300 mb-2">Account Type *</label>
                     <div class="grid grid-cols-2 gap-3 w-full">
@@ -60,37 +59,31 @@
                     </div>
                 </div>
 
-                <!-- FULL NAME -->
                 <div class="flex flex-col items-start w-full">
                     <label class="block text-xs font-bold text-slate-300 mb-1">Full Name *</label>
-                    <input type="text" required placeholder="e.g. Jan de Vries" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                    <input type="text" required placeholder="e.g. Jan de Vries" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                 </div>
 
-                <!-- B2B CORPORATE COMPANY NAME (HIDDEN FOR B2C) -->
                 <div id="companyField" class="hidden flex-col items-start w-full transition-all">
                     <label class="block text-xs font-bold text-cyan mb-1">Registered Company Name *</label>
-                    <input type="text" id="companyInput" placeholder="e.g. Global Logistics B.V." class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                    <input type="text" id="companyInput" placeholder="e.g. Global Logistics B.V." class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                 </div>
 
-                <!-- EMAIL -->
                 <div class="flex flex-col items-start w-full">
                     <label class="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
-                    <input type="email" required placeholder="jan@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                    <input type="email" required placeholder="jan@company.com" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                 </div>
 
-                <!-- B2B BUSINESS PHONE (HIDDEN FOR B2C PRIVATE RENTERS) -->
                 <div id="phoneField" class="hidden flex-col items-start w-full transition-all">
                     <label class="block text-xs font-bold text-cyan mb-1">Business Telephone Number *</label>
-                    <input type="tel" id="phoneInput" placeholder="+31 20 123 4567" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                    <input type="tel" id="phoneInput" placeholder="+31 20 123 4567" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                 </div>
 
-                <!-- PASSWORD -->
                 <div class="flex flex-col items-start w-full">
                     <label class="block text-xs font-bold text-slate-300 mb-1">Create Password *</label>
-                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                    <input type="password" required placeholder="••••••••" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                 </div>
 
-                <!-- TERMS -->
                 <div class="flex flex-col items-start w-full pt-2">
                     <label class="flex items-start space-x-2 text-xs text-slate-400 cursor-pointer">
                         <input type="checkbox" required class="mt-0.5 rounded bg-navy-900 border-slate-700 text-steel">
@@ -98,7 +91,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition mt-2">
+                <button type="submit" class="w-full h-12 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition mt-2">
                     Complete Registration & Sign In
                 </button>
 
@@ -118,7 +111,7 @@
             <h3 class="text-xl font-bold text-white">Account Created</h3>
             <p class="text-xs text-slate-300">Your client profile has been registered successfully. You can now request referral leads and view active listings.</p>
             <div class="pt-2">
-                <a href="inventory.html" class="inline-block w-full py-3 px-4 rounded-lg bg-steel text-white font-bold text-sm">Browse Marketplace Listings</a>
+                <a href="inventory.html" class="inline-block w-full py-3 px-4 rounded-lg bg-steel text-white font-bold text-sm">Browse Marketplace Directory</a>
             </div>
         </div>
     </div>
@@ -135,7 +128,6 @@
         const phoneField = document.getElementById('phoneField');
         const phoneInput = document.getElementById('phoneInput');
 
-        // DEFAULT: B2C (PRIVATE RENTER) -> NO PHONE, NO COMPANY
         typeB2C.addEventListener('click', () => {
             typeB2C.className = "py-2.5 px-3 rounded-lg border border-steel bg-steel text-white text-xs font-bold transition text-center";
             typeB2B.className = "py-2.5 px-3 rounded-lg border border-slate-700 bg-navy-900 text-slate-400 text-xs font-bold transition text-center";
@@ -149,7 +141,6 @@
             phoneInput.removeAttribute('required');
         });
 
-        // B2B (CORPORATE ENTERPRISE) -> REQUIRES COMPANY & PHONE
         typeB2B.addEventListener('click', () => {
             typeB2B.className = "py-2.5 px-3 rounded-lg border border-steel bg-steel text-white text-xs font-bold transition text-center";
             typeB2C.className = "py-2.5 px-3 rounded-lg border border-slate-700 bg-navy-900 text-slate-400 text-xs font-bold transition text-center";
