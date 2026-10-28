@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Details & Supplier Referral | HABACHA Platform</title>
+    <title>Asset Details & Referral Lead Capture | HABACHA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -37,7 +37,7 @@
 </head>
 <body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col">
 
-    <!-- HEADER NAVIGATION -->
+    <!-- HEADER (Logo acts as Home) -->
     <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -50,75 +50,80 @@
         </div>
     </header>
 
-    <!-- CONTENT -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- LEFT DETAILS -->
+            <!-- LEFT SPECIFICATIONS PANEL -->
             <div class="lg:col-span-8 space-y-6">
                 <div class="bg-navy-800 p-8 rounded-2xl border border-slate-700">
-                    <div class="inline-block px-3 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold mb-3">Verified Supplier Listing</div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span id="assetCategoryBadge" class="px-3 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">1. Cars & Passenger Vans</span>
+                        <span class="text-xs text-emerald-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Verified Fleet Partner Listing</span>
+                    </div>
+
                     <h1 class="text-3xl font-bold text-white mb-2" id="assetTitle">Mercedes-Benz V-Class (9-Seater)</h1>
-                    <p class="text-slate-400 text-sm">Branch Pickup & Terminal Drop-off Only (Home delivery disabled for motor vehicles).</p>
-                    
-                    <div class="mt-6 pt-6 border-t border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                    <p class="text-slate-400 text-sm mb-6" id="assetSubtitle">Executive passenger transport for corporate transfers or family travel.</p>
+
+                    <!-- SPECIFICATIONS GRID -->
+                    <div class="pt-6 border-t border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
                         <div>
-                            <span class="text-slate-400 block">Category</span>
-                            <span class="font-bold text-white">Cars & Vans</span>
+                            <span class="text-slate-400 block">Rate Model</span>
+                            <span class="font-bold text-cyan text-base" id="assetRate">€145 / day</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block">Min. Term</span>
-                            <span class="font-bold text-white">1 Day Rental</span>
+                            <span class="text-slate-400 block">Fulfillment Rule</span>
+                            <span class="font-bold text-white" id="assetFulfillment">Branch / Terminal Pickup</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block">Deposit</span>
-                            <span class="font-bold text-white">Direct to Supplier</span>
+                            <span class="text-slate-400 block">Location Hub</span>
+                            <span class="font-bold text-white" id="assetLocation">Amsterdam Schiphol (AMS)</span>
                         </div>
                         <div>
-                            <span class="text-slate-400 block">Availability</span>
-                            <span class="font-bold text-cyan">Instant Referral</span>
+                            <span class="text-slate-400 block">Intermediary Code</span>
+                            <span class="font-bold text-cyan" id="assetRefTag">Generated on Submit</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-navy-800 p-8 rounded-2xl border border-slate-700">
-                    <h2 class="text-xl font-bold text-white mb-4">Rental & Leasing Policy Notice</h2>
+                    <h2 class="text-xl font-bold text-white mb-4">Marketplace Intermediary Operating Rules</h2>
                     <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> HABACHA operates strictly as an intermediary referral platform.</li>
-                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Rental terms, deposits, and payment collection are handled directly by the verified supplier.</li>
-                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Vehicle pick-up and return are performed at authorized branch locations or airport hubs.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> HABACHA operates as an independent intermediary lead referral exchange.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Rental terms, security deposits, and final payment processing are completed directly with the verified asset supplier.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> <strong>Vehicle Policy Notice:</strong> Passenger cars and commercial vans are strictly collected and returned at supplier branch offices or airport terminals. Home address delivery is disabled.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- RIGHT FORM LEAD CAPTURE -->
+            <!-- RIGHT REFERRAL LEAD CAPTURE FORM -->
             <div class="lg:col-span-4">
-                <div class="bg-navy-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
-                    <h2 class="text-lg font-bold text-white mb-2">Request Referral Code</h2>
-                    <p class="text-xs text-slate-400 mb-6">Enter your details to generate your unique HABACHA tracking code (<code class="text-cyan">HB-xxxx</code>) and redirect to the verified supplier page.</p>
+                <div class="bg-navy-800 p-6 rounded-2xl border border-slate-700 shadow-xl sticky top-28">
+                    <h2 class="text-lg font-bold text-white mb-1">Generate Supplier Referral Code</h2>
+                    <p class="text-xs text-slate-400 mb-6">Enter your contact details to generate your official referral code (<code class="text-cyan">HB-xxxx</code>) and redirect to the supplier's booking page.</p>
 
                     <form id="referralForm" class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-300 mb-1">Full Name *</label>
-                            <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <input type="text" required placeholder="e.g. Robert van der Meer" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">Corporate / Personal Email *</label>
-                            <input type="email" required placeholder="john@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
+                            <input type="email" required placeholder="robert@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">Phone Number *</label>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Phone / Mobile *</label>
                             <input type="tel" required placeholder="+31 6 12345678" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-300 mb-1">Client Type</label>
                             <select class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
-                                <option value="b2c">Private Individual (B2C)</option>
+                                <option value="b2c">Private Renter (B2C)</option>
                                 <option value="b2b">Commercial Enterprise (B2B)</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition">
-                            Proceed to Verified Supplier &rarr;
+                        <button type="submit" class="w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition flex items-center justify-center space-x-2">
+                            <span>Get Referral Code & Proceed</span>
+                            <span>&rarr;</span>
                         </button>
                     </form>
                 </div>
@@ -129,23 +134,110 @@
 
     <!-- SUCCESS POPUP MODAL -->
     <div id="referralModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center space-y-4">
-            <div class="w-16 h-16 rounded-full bg-cyan/20 text-cyan mx-auto flex items-center justify-center text-3xl">✓</div>
-            <h3 class="text-xl font-bold text-white">Referral Code Issued</h3>
-            <p class="text-xs text-slate-300">Your unique intermediary referral code is: <span id="refCodeDisplay" class="font-mono font-bold text-cyan text-base">HB-8921</span></p>
-            <p class="text-xs text-slate-400">You are being redirected to the supplier portal with applied HABACHA referral rates...</p>
+        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-cyan/20 text-cyan mx-auto flex items-center justify-center text-3xl font-bold">✓</div>
+            <h3 class="text-xl font-bold text-white">Referral Code Generated</h3>
+            <p class="text-xs text-slate-300">Your HABACHA tracking lead reference is: <br><span id="refCodeDisplay" class="font-mono font-bold text-cyan text-lg">HB-8921</span></p>
+            <p class="text-xs text-slate-400">You are now being redirected to the supplier's booking server with HABACHA pre-negotiated rates applied.</p>
             <div class="pt-2">
-                <a id="supplierRedirectBtn" href="#" class="inline-block w-full py-3 px-4 rounded-lg bg-steel text-white font-bold text-sm">Continue to Supplier Website Now</a>
+                <a id="supplierRedirectBtn" href="#" target="_blank" class="inline-block w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm transition">Continue to Supplier Website Now</a>
             </div>
         </div>
     </div>
 
     <script>
+        // DYNAMIC ASSET DATA DICTIONARY FOR ALL 8 DIVISIONS
+        const assetsData = {
+            'cars-1': {
+                title: 'Mercedes-Benz V-Class (9-Seater)',
+                category: '1. Cars & Passenger Vans',
+                subtitle: 'Executive 9-seat passenger van for corporate transfers or family road trips.',
+                rate: '€145 / day',
+                fulfillment: 'Branch / Terminal Pickup Only',
+                location: 'Amsterdam Schiphol Hub',
+                supplierUrl: 'https://example.com/partner-car-booking'
+            },
+            'freight-1': {
+                title: 'DAF XF 480 Super Space Cab Truck',
+                category: '2. Commercial Vans & Freight',
+                subtitle: 'Heavy freight tractor unit designed for long-distance international transport.',
+                rate: '€2,100 / month',
+                fulfillment: 'Logistics Hub Transfer',
+                location: 'Rotterdam Freight Terminal',
+                supplierUrl: 'https://example.com/partner-freight-booking'
+            },
+            'boats-1': {
+                title: 'Sunseeker Predator 74 Luxury Yacht',
+                category: '3. Boats, Yachts & Ships',
+                subtitle: '74ft high-performance luxury motor yacht available for private executive charter.',
+                rate: '€3,400 / day',
+                fulfillment: 'Marina Berth Handover',
+                location: 'Monaco / Rotterdam Port',
+                supplierUrl: 'https://example.com/partner-yacht-booking'
+            },
+            'aircraft-1': {
+                title: 'Airbus H145 Twin-Engine Helicopter',
+                category: '4. Helicopters & Aircraft',
+                subtitle: 'VIP 8-passenger corporate helicopter charter with certified flight crew.',
+                rate: '€2,850 / hour',
+                fulfillment: 'Heliport / Terminal Charter',
+                location: 'London / Amsterdam Helipad',
+                supplierUrl: 'https://example.com/partner-aircraft-booking'
+            },
+            'realestate-1': {
+                title: 'Prime Office Suite (Zuidas Financial District)',
+                category: '5. Stays, Apartments & Real Estate',
+                subtitle: '450 m² executive office floor with high-speed uplink and meeting rooms.',
+                rate: '€8,500 / month',
+                fulfillment: 'Corporate Lease Agreement',
+                location: 'Amsterdam Zuidas',
+                supplierUrl: 'https://example.com/partner-realestate-booking'
+            },
+            'equipment-1': {
+                title: 'Caterpillar 320 Hydraulic Excavator',
+                category: '6. Construction Machinery & Tools',
+                subtitle: '20-ton crawler excavator with 3D GPS grading tools for heavy site construction.',
+                rate: '€380 / day',
+                fulfillment: 'On-Site Equipment Delivery',
+                location: 'Utrecht Industrial Park',
+                supplierUrl: 'https://example.com/partner-equipment-booking'
+            },
+            'campers-1': {
+                title: 'Hymer B-Class Supreme Motorhome',
+                category: '7. Campers, RVs & Leisure Mobility',
+                subtitle: 'Integrated 4-berth luxury motorhome with solar power system and bike rack.',
+                rate: '€160 / day',
+                fulfillment: 'Depot Handover',
+                location: 'Eindhoven Camper Hub',
+                supplierUrl: 'https://example.com/partner-camper-booking'
+            },
+            'events-1': {
+                title: 'L-Acoustics K2 Line Array Concert Sound Rig',
+                category: '8. Event Equipment & Audio/Visual',
+                subtitle: 'Professional 20,000W concert sound reinforcement system with amplifiers.',
+                rate: '€1,250 / day',
+                fulfillment: 'Event Stage Delivery & Setup',
+                location: 'Brussels Event Depot',
+                supplierUrl: 'https://example.com/partner-events-booking'
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const assetId = urlParams.get('id') || 'cars-1';
+        const currentAsset = assetsData[assetId] || assetsData['cars-1'];
+
+        document.getElementById('assetTitle').textContent = currentAsset.title;
+        document.getElementById('assetCategoryBadge').textContent = currentAsset.category;
+        document.getElementById('assetSubtitle').textContent = currentAsset.subtitle;
+        document.getElementById('assetRate').textContent = currentAsset.rate;
+        document.getElementById('assetFulfillment').textContent = currentAsset.fulfillment;
+        document.getElementById('assetLocation').textContent = currentAsset.location;
+
         document.getElementById('referralForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const randomCode = 'HB-' + Math.floor(1000 + Math.random() * 9000);
             document.getElementById('refCodeDisplay').textContent = randomCode;
-            document.getElementById('supplierRedirectBtn').href = 'https://example.com/partner-booking?ref=' + randomCode;
+            document.getElementById('supplierRedirectBtn').href = currentAsset.supplierUrl + '?ref=' + randomCode;
             document.getElementById('referralModal').classList.remove('hidden');
             document.getElementById('referralModal').classList.add('flex');
         });
