@@ -1,104 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA | Enterprise Client Portal Login</title>
-  <meta name="description" content="Secure client and fleet operator portal login for HABACHA asset charters and commercial leases.">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .login-container {
-      max-width: 440px;
-      margin: 5rem auto;
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 2.5rem;
-      text-align: center;
-    }
-    .login-container h2 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-    .login-container p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-    .form-group {
-      margin-bottom: 1.25rem;
-      text-align: left;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: var(--font-stack);
-    }
-    .form-group input:focus {
-      outline: none;
-      border-color: var(--accent-gold);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Portal Authentication | HABACHA Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0b1329;
+            --bg-card: #152243;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent-cyan: #0ea5e9;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+
+        .auth-container { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 480px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .logo { text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 25px; color: #fff; }
+
+        .role-switch { display: flex; background: rgba(0,0,0,0.3); border-radius: 8px; padding: 4px; margin-bottom: 25px; border: 1px solid var(--border-color); }
+        .role-btn { flex: 1; background: none; border: none; color: var(--text-muted); padding: 10px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.3s; }
+        .role-btn.active { background: var(--primary); color: #fff; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+        .form-group input { width: 100%; background: #0f172a; border: 1px solid var(--border-color); color: #fff; padding: 12px; border-radius: 8px; font-size: 0.95rem; outline: none; }
+        .form-group input:focus { border-color: var(--accent-cyan); }
+
+        .btn-auth { background: var(--primary); color: #fff; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-auth:hover { background: var(--primary-hover); }
+
+        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted); }
+        .auth-footer a { color: var(--accent-cyan); text-decoration: none; }
+    </style>
 </head>
 <body>
 
-  <header>
-    <a href="index.html" class="logo">HABA<span>CHA</span></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="inventory.html">Global Inventory</a>
-      <a href="onboarding.html">List an Asset</a>
-      <a href="login.html" class="active">Client Portal</a>
-    </nav>
-  </header>
+    <div class="auth-container">
+        <div class="logo"><i class="fa-solid fa-cubes"></i> HABACHA PLATFORM</div>
 
-  <div class="login-container">
-    <h2>Client & Operator Portal</h2>
-    <p>Secure access for accredited asset owners, corporate charterers, and fleet operators.</p>
-    
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="email">Corporate Email</label>
-        <input type="email" id="email" required placeholder="name@enterprise.com">
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required placeholder="••••••••••••">
-      </div>
+        <div class="role-switch">
+            <button class="role-btn active" id="btn-client" onclick="selectRole('client')"><i class="fa-solid fa-user"></i> Client / Renter</button>
+            <button class="role-btn" id="btn-supplier" onclick="selectRole('supplier')"><i class="fa-solid fa-handshake"></i> Asset Supplier</button>
+        </div>
 
-      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Authenticate</button>
-    </form>
+        <h3 id="auth-title" style="font-size: 1.2rem; color: #fff; margin-bottom: 15px; text-align: center;">Executive Client Login</h3>
 
-    <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-secondary);">
-      Need access? <a href="onboarding.html" style="color: var(--accent-gold); text-decoration: none;">Submit onboarding request</a>
+        <form onsubmit="executeLogin(event)">
+            <div class="form-group">
+                <label>Corporate Email Address *</label>
+                <input type="email" id="email" required placeholder="executive@enterprise.com">
+            </div>
+            <div class="form-group">
+                <label>Account Password *</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="btn-auth"><i class="fa-solid fa-right-to-bracket"></i> Login to Portal</button>
+        </form>
+
+        <div class="auth-footer">
+            Need an Enterprise account? <a href="onboarding.html">Register Account</a><br>
+            <a href="index.html" style="margin-top: 10px; display: inline-block;"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2026 HABACHA Platform. Global Exchange for High-Value Asset Charters & Commercial Leasing.</p>
-  </footer>
+    <script>
+        let selectedRole = 'client';
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // Redirect to dashboard
-      window.location.href = 'dashboard.html';
-    });
-  </script>
+        function selectRole(role) {
+            selectedRole = role;
+            document.getElementById('btn-client').classList.toggle('active', role === 'client');
+            document.getElementById('btn-supplier').classList.toggle('active', role === 'supplier');
+            document.getElementById('auth-title').innerText = role === 'client' ? 'Executive Client Login' : 'Asset Supplier / Owner Portal Login';
+        }
 
+        function executeLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const name = email.split('@')[0];
+            
+            // Save active session in LocalStorage
+            const session = {
+                email: email,
+                name: name.charAt(0).toUpperCase() + name.slice(1),
+                role: selectedRole,
+                loggedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('habacha_user_session', JSON.stringify(session));
+            
+            // Redirect to marketplace
+            window.location.href = 'inventory.html';
+        }
+    </script>
 </body>
 </html>

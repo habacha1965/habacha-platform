@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Exchange & Configuration | HABACHA Platform</title>
+    <title>Asset Marketplace | HABACHA Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-client.js"></script>
     <style>
         :root {
             --bg-main: #0b1329;
@@ -26,53 +24,42 @@
         
         .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; }
         
-        /* Category Filters Bar */
         .filter-bar { display: flex; gap: 12px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; }
         .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
         
-        /* Asset Grid */
         .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-4px); }
         .card img { width: 100%; height: 200px; object-fit: cover; }
         .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
         .card-specs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
         .card-price { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-        .btn-action { background: var(--primary); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 700; cursor: pointer; text-align: center; transition: 0.3s; }
-        .btn-action:hover { background: #1d4ed8; }
-
-        /* Tailored Category Modal Form */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: #0f172a; border: 1px solid var(--border-color); border-radius: 16px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative; }
-        .close-modal { position: absolute; top: 20px; right: 20px; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
         
-        .form-section-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-cyan); margin: 24px 0 12px; font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .form-group { margin-bottom: 12px; }
-        .form-group.full { grid-column: span 2; }
-        .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; background: #1e293b; border: 1px solid var(--border-color); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; outline: none; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--accent-cyan); }
+        .btn-view-product { background: var(--primary); color: #fff; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: 700; text-align: center; display: block; transition: 0.3s; }
+        .btn-view-product:hover { background: #1d4ed8; }
     </style>
 </head>
 <body>
 
     <header>
         <a href="index.html" class="logo"><i class="fa-solid fa-cubes"></i> HABACHA Platform</a>
-        <a href="index.html" style="color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <div>
+            <a href="login.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600; margin-right: 20px;"><i class="fa-solid fa-user-lock"></i> Client / Supplier Login</a>
+            <a href="index.html" style="color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Home</a>
+        </div>
     </header>
 
     <div class="container">
-        <h2 style="font-size: 2rem; margin-bottom: 20px;">Enterprise Fleet & Asset Exchange</h2>
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">Enterprise Asset Marketplace</h2>
         
         <div class="filter-bar">
             <button class="filter-btn active" onclick="filterCategory('all')">All Assets</button>
-            <button class="filter-btn" onclick="filterCategory('aviation')"><i class="fa-solid fa-plane"></i> Jets & Cargo Planes</button>
+            <button class="filter-btn" onclick="filterCategory('aviation')"><i class="fa-solid fa-plane"></i> Private & Cargo Jets</button>
             <button class="filter-btn" onclick="filterCategory('maritime')"><i class="fa-solid fa-ship"></i> Cargo Ships & Yachts</button>
             <button class="filter-btn" onclick="filterCategory('logistics')"><i class="fa-solid fa-truck"></i> Heavy Cargo & Vans</button>
             <button class="filter-btn" onclick="filterCategory('realestate')"><i class="fa-solid fa-building"></i> Commercial Real Estate</button>
-            <button class="filter-btn" onclick="filterCategory('cars')"><i class="fa-solid fa-car"></i> Armored & Luxury Cars</button>
         </div>
 
         <div class="assets-grid" id="asset-container">
@@ -80,57 +67,15 @@
         </div>
     </div>
 
-    <!-- Product Specific Dynamic Modal Form -->
-    <div class="modal" id="booking-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 id="modal-asset-name" style="font-size: 1.5rem; color: #fff; margin-bottom: 4px;">Asset Configuration</h3>
-            <p id="modal-asset-category" style="color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700; margin-bottom: 20px;"></p>
-
-            <form id="bespoke-form" onsubmit="submitBooking(event)">
-                <!-- Dynamically Generated Product-Specific Fields -->
-                <div id="dynamic-fields"></div>
-
-                <div class="form-section-title">Client & Corporate Verification</div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Full Name / Authorized Contact *</label>
-                        <input type="text" id="client_name" required placeholder="e.g. Alexander Wright">
-                    </div>
-                    <div class="form-group">
-                        <label>Corporate Email Address *</label>
-                        <input type="email" id="client_email" required placeholder="a.wright@enterprise.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Organization / Company Name</label>
-                        <input type="text" id="client_company" placeholder="e.g. Wright Global Logistics">
-                    </div>
-                    <div class="form-group">
-                        <label>Direct Phone / WhatsApp *</label>
-                        <input type="tel" id="client_phone" required placeholder="+31 6 12345678">
-                    </div>
-                </div>
-
-                <div style="margin-top: 25px;">
-                    <button type="submit" class="btn-action" style="font-size: 1rem;">Confirm Operational Order & Issue Escrow Request</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
         const inventoryData = [
-            { id: '1', title: 'Gulfstream G650ER', category: 'aviation', price: 9500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600', specs: '14 Passengers | Range 7,500 NM | Full Flight Crew' },
-            { id: '2', title: 'Boeing 737-800 Cargo Freighter', category: 'aviation', price: 18500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1519074069444-1ba4eff56022?w=600', specs: '23.9 Ton Payload | Main Deck Cargo Loading' },
-            { id: '3', title: 'Panamax Bulk Cargo Carrier Ship', category: 'maritime', price: 32000, unit: 'per charter day', image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600', specs: '4,500 TEU | Gross Tonnage 54,000 GT | Licensed Crew' },
-            { id: '4', title: 'Sunseeker 131 Ocean Mega Yacht', category: 'maritime', price: 14000, unit: 'per day', image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600', specs: '12 Guests | 5 Cabins | Master Captain & Crew Included' },
-            { id: '5', title: 'Volvo FH16 750 Heavy Freight Truck', category: 'logistics', price: 450, unit: 'per day', image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600', specs: '44 Ton Payload | GPS Mobile App Unlock' },
-            { id: '6', title: 'Mercedes-Benz Sprinter Cargo Van', category: 'logistics', price: 130, unit: 'per day', image: 'https://images.unsplash.com/photo-1559297434-fae8a1916a79?w=600', specs: '14 m³ Cargo Volume | Instant Street Keyless Unlock' },
-            { id: '7', title: 'Rotterdam Logistics Distribution Hub', category: 'realestate', price: 45000, unit: 'per month lease', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600', specs: '18,000 m² | 24 Loading Docks | Escrow Guaranteed' },
-            { id: '8', title: 'Armored Mercedes-Maybach S680 (VR10)', category: 'cars', price: 1800, unit: 'per day', image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600', specs: 'VR10 Certified Security Armor | Executive Chauffeur' }
+            { id: '1', title: 'Gulfstream G650ER Jet', category: 'aviation', price: 9500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600', specs: '14 Passengers | Range 7,500 NM | ARGUS Platinum' },
+            { id: '2', title: 'Boeing 737-800 Cargo Freighter', category: 'aviation', price: 18500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1519074069444-1ba4eff56022?w=600', specs: '23.9 Ton Payload | Main Deck Pallet Loading' },
+            { id: '3', title: 'Panamax Bulk Cargo Carrier Vessel', category: 'maritime', price: 32000, unit: 'per charter day', image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600', specs: '4,500 TEU | Gross Tonnage 54,000 GT' },
+            { id: '4', title: 'Sunseeker 131 Ocean Mega Yacht', category: 'maritime', price: 14000, unit: 'per day', image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600', specs: '12 Guests | 5 Cabins | Master Captain & Crew' },
+            { id: '5', title: 'Volvo FH16 750 Heavy Freight Truck', category: 'logistics', price: 450, unit: 'per day', image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600', specs: '44 Ton Payload | Keyless Mobile App Unlock' },
+            { id: '7', title: 'Rotterdam Logistics Distribution Hub', category: 'realestate', price: 45000, unit: 'per month lease', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600', specs: '18,000 m² | 24 Hydraulic Docks | Escrow Clear' }
         ];
-
-        let selectedAsset = null;
 
         function renderInventory(data) {
             const container = document.getElementById('asset-container');
@@ -144,7 +89,7 @@
                         </div>
                         <div>
                             <div class="card-price">€${asset.price.toLocaleString()} <span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">${asset.unit}</span></div>
-                            <button class="btn-action" onclick="openBespokeModal('${asset.id}')">Configure & Book Asset</button>
+                            <a href="asset-detail.html?id=${asset.id}" class="btn-view-product">View Full Specs & Reserve</a>
                         </div>
                     </div>
                 </div>
@@ -158,183 +103,6 @@
             else renderInventory(inventoryData.filter(a => a.category === cat));
         }
 
-        function openBespokeModal(id) {
-            selectedAsset = inventoryData.find(a => a.id === id);
-            document.getElementById('modal-asset-name').innerText = selectedAsset.title;
-            document.getElementById('modal-asset-category').innerText = `CATEGORY: ${selectedAsset.category.toUpperCase()} | BASE RATE: €${selectedAsset.price.toLocaleString()} ${selectedAsset.unit}`;
-            
-            // Generate product-specific fields
-            document.getElementById('dynamic-fields').innerHTML = generateBespokeFormFields(selectedAsset.category);
-            document.getElementById('booking-modal').style.display = 'flex';
-        }
-
-        function generateBespokeFormFields(category) {
-            if (category === 'aviation') {
-                return `
-                    <div class="form-section-title">1. Flight & Aviation Parameters</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Departure Airport (ICAO / IATA Code) *</label>
-                            <input type="text" id="param_origin" required placeholder="e.g. EHAM / AMS (Amsterdam)">
-                        </div>
-                        <div class="form-group">
-                            <label>Destination Airport (ICAO / IATA Code) *</label>
-                            <input type="text" id="param_dest" required placeholder="e.g. EGLL / LHR (London)">
-                        </div>
-                        <div class="form-group">
-                            <label>Flight Date & Departure Time *</label>
-                            <input type="datetime-local" id="param_datetime" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Passengers / Cargo Payload Weight *</label>
-                            <input type="text" id="param_load" required placeholder="e.g. 8 Passengers or 12 Tons Cargo">
-                        </div>
-                        <div class="form-group full">
-                            <label>Flight Crew & Ramp Handling Setup</label>
-                            <select id="param_service">
-                                <option value="full_crew">Captain, First Officer & VIP Cabin Crew Included</option>
-                                <option value="bare_aircraft">Dry Lease (Client Provides Certified Flight Crew)</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
-            } else if (category === 'maritime') {
-                return `
-                    <div class="form-section-title">1. Maritime Port & Voyage Specifications</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Port of Departure *</label>
-                            <input type="text" id="param_origin" required placeholder="e.g. Port of Rotterdam">
-                        </div>
-                        <div class="form-group">
-                            <label>Port of Destination *</label>
-                            <input type="text" id="param_dest" required placeholder="e.g. Port of Singapore">
-                        </div>
-                        <div class="form-group">
-                            <label>Charter Duration (Days) *</label>
-                            <input type="number" id="param_duration" min="1" value="7" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Cargo Manifest / Vessel Usage *</label>
-                            <input type="text" id="param_cargo" required placeholder="e.g. Dry Bulk Containers or Private Yachting">
-                        </div>
-                        <div class="form-group full">
-                            <label>Marine Crew & Fuel Bunkering Setup</label>
-                            <select id="param_service">
-                                <option value="full_crew">Licensed Master Captain & Full Marine Crew Included</option>
-                                <option value="bareboat">Bareboat Charter (Client Provides Certified Crew)</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
-            } else if (category === 'logistics') {
-                return `
-                    <div class="form-section-title">1. Logistics & Heavy Freight Parameters</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Pickup Freight Terminal / Location *</label>
-                            <input type="text" id="param_origin" required placeholder="e.g. Schiphol Cargo City Hub 3">
-                        </div>
-                        <div class="form-group">
-                            <label>Drop-off Location *</label>
-                            <input type="text" id="param_dest" required placeholder="e.g. Frankfurt Freight Center">
-                        </div>
-                        <div class="form-group">
-                            <label>Lease Duration (Days) *</label>
-                            <input type="number" id="param_duration" min="1" value="3" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Hazardous Cargo (ADR Classification)</label>
-                            <select id="param_adr">
-                                <option value="none">Standard Non-Hazardous Cargo</option>
-                                <option value="adr_certified">ADR Certified Hazardous Transport</option>
-                            </select>
-                        </div>
-                        <div class="form-group full">
-                            <label>Fulfillment Option</label>
-                            <select id="param_dispatch">
-                                <option value="gps_app">Instant Keyless Mobile GPS Unlock (Self-Drive)</option>
-                                <option value="professional_driver">Professional Heavy Cargo Driver Included</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
-            } else if (category === 'realestate') {
-                return `
-                    <div class="form-section-title">1. Commercial Lease Terms</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Lease Commencement Date *</label>
-                            <input type="date" id="param_start" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Intended Lease Duration *</label>
-                            <select id="param_lease_term">
-                                <option value="6_months">6 Months Commercial Lease</option>
-                                <option value="12_months">12 Months Commercial Lease</option>
-                                <option value="long_term">Multi-Year Long Term Corporate Lease</option>
-                            </select>
-                        </div>
-                        <div class="form-group full">
-                            <label>Escrow Deposit & Bank Guarantee</label>
-                            <select id="param_escrow">
-                                <option value="standard_escrow">HABACHA Escrow Clearance Deposit</option>
-                                <option value="bank_guarantee">Direct Corporate Bank Guarantee</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
-            } else { // Luxury & Armored Cars
-                return `
-                    <div class="form-section-title">1. Vehicle Pickup & Chauffeur Options</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Pickup Location / VIP Terminal *</label>
-                            <input type="text" id="param_origin" required placeholder="e.g. Hotel Okura Amsterdam / AMS Terminal">
-                        </div>
-                        <div class="form-group">
-                            <label>Rental Duration (Days) *</label>
-                            <input type="number" id="param_duration" min="1" value="1" required>
-                        </div>
-                        <div class="form-group full">
-                            <label>Driver Setup</label>
-                            <select id="param_chauffeur">
-                                <option value="chauffeur">Executive VIP Armed/Unarmed Chauffeur Included</option>
-                                <option value="self_drive">Self-Drive Keyless Mobile Unlock</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('booking-modal').style.display = 'none';
-        }
-
-        async function submitBooking(e) {
-            e.preventDefault();
-            
-            const bookingDetails = {
-                asset_title: selectedAsset.title,
-                category: selectedAsset.category,
-                client_name: document.getElementById('client_name').value,
-                client_email: document.getElementById('client_email').value,
-                client_company: document.getElementById('client_company').value,
-                client_phone: document.getElementById('client_phone').value,
-                origin: document.getElementById('param_origin') ? document.getElementById('param_origin').value : 'N/A',
-                destination: document.getElementById('param_dest') ? document.getElementById('param_dest').value : 'N/A',
-                service_type: document.getElementById('param_service') ? document.getElementById('param_service').value : 'Standard Operational Setup'
-            };
-
-            if (typeof HABACHA_ENGINE !== 'undefined') {
-                await HABACHA_ENGINE.processBookingSubmission(bookingDetails);
-            }
-
-            window.location.href = 'success.html';
-        }
-
-        // Initialize Inventory
         renderInventory(inventoryData);
     </script>
 </body>
