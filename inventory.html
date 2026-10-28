@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executive Marketplace | HABACHA</title>
+    <title>Asset Exchange & Local Rentals | HABACHA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -18,9 +18,10 @@
         .asset-img { height: 220px; object-fit: cover; width: 100%; }
         .btn-filter { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
         .btn-filter.active, .btn-filter:hover { background: var(--gold); color: #000; }
+        .mode-btn { border: 2px solid var(--gold); font-weight: bold; padding: 10px 20px; }
+        .mode-btn.active { background-color: var(--gold); color: #000; }
         .form-control, .form-select { background-color: #0b132b !important; color: #fff !important; border-color: #3a4767 !important; }
         .form-control:focus, .form-select:focus { border-color: var(--gold) !important; box-shadow: none !important; }
-        .form-check-input:checked { background-color: var(--gold) !important; border-color: var(--gold) !important; }
     </style>
 </head>
 <body>
@@ -37,28 +38,49 @@
     </nav>
 
     <div class="container py-5">
-        <div class="text-center mb-5">
-            <h1 class="display-5 text-gold fw-bold">Executive Asset Exchange</h1>
-            <p class="text-secondary lead">Select an asset to configure bespoke logistics and charter parameters.</p>
-            <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap" id="filters">
-                <button class="btn btn-filter active" onclick="filterAssets('All')">All Assets</button>
-                <button class="btn btn-filter" onclick="filterAssets('Aviation')">Aviation</button>
-                <button class="btn btn-filter" onclick="filterAssets('Road Transport')">Road Transport</button>
-                <button class="btn filter-btn btn-filter" onclick="filterAssets('Maritime')">Maritime</button>
-                <button class="btn btn-filter" onclick="filterAssets('Real Estate')">Real Estate</button>
+        <!-- Service Mode Switcher -->
+        <div class="text-center mb-4">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-warning mode-btn active" id="btnModeLocal" onclick="switchRentalMode('local')">
+                    <i class="fas fa-location-crosshairs me-2"></i>Find Assets Near Me (GPS)
+                </button>
+                <button type="button" class="btn btn-outline-warning mode-btn" id="btnModeVIP" onclick="switchRentalMode('vip')">
+                    <i class="fas fa-crown me-2"></i>VIP Executive & Delivery
+                </button>
             </div>
         </div>
+
+        <div class="text-center mb-5">
+            <h1 class="display-5 text-gold fw-bold" id="pageTitle">Local Nearby Fleet & Asset Exchange</h1>
+            <p class="text-secondary lead" id="pageSubtitle">Locate verified providers near your current position for instant office pickup or street unlock.</p>
+            
+            <div class="d-flex justify-content-center align-items-center gap-2 mt-4 flex-wrap">
+                <button class="btn btn-warning btn-sm fw-bold px-3 py-2" onclick="requestGPSLocation()">
+                    <i class="fas fa-location-arrow me-1"></i> Enable GPS Location
+                </button>
+                <span class="text-secondary small ms-2" id="gpsStatus">Location: Global Default</span>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap" id="filters">
+                <button class="btn btn-filter active" onclick="filterCategory('All')">All Assets</button>
+                <button class="btn btn-filter" onclick="filterCategory('Road Transport')">Road Vehicles</button>
+                <button class="btn btn-filter" onclick="filterCategory('Maritime')">Boats & Vessels</button>
+                <button class="btn btn-filter" onclick="filterCategory('Aviation')">Aviation</button>
+                <button class="btn btn-filter" onclick="filterCategory('Real Estate')">Spaces & Properties</button>
+            </div>
+        </div>
+
         <div class="row g-4" id="grid"></div>
     </div>
 
-    <!-- Dynamic Category Booking Modal -->
+    <!-- Smart Rental Modal -->
     <div class="modal fade" id="bookModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content" style="background:var(--bg-card); border:1px solid var(--gold);">
                 <div class="modal-header border-secondary">
                     <div>
-                        <span class="badge bg-gold text-black mb-1" id="modalCategoryBadge">Category</span>
-                        <h5 class="modal-title text-white fw-bold" id="modalTitle">Configure Charter Request</h5>
+                        <span class="badge bg-gold text-black mb-1" id="mBadge">Pickup</span>
+                        <h5 class="modal-title text-white fw-bold" id="mTitle">Asset Rental Agreement</h5>
                     </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
@@ -68,16 +90,16 @@
                         <input type="hidden" id="aCat">
                         <input type="hidden" id="aRate">
 
-                        <!-- Step 1: Contact Details -->
-                        <h6 class="text-gold mb-3"><i class="fas fa-user-tie me-2"></i>1. Client Identification</h6>
+                        <!-- Client Info -->
+                        <h6 class="text-gold mb-3"><i class="fas fa-id-card me-2"></i>1. Client Identification</h6>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="small text-secondary">Full Name / Entity</label>
-                                <input type="text" id="cName" class="form-control" required placeholder="e.g. Alexander Wright">
+                                <label class="small text-secondary">Full Name</label>
+                                <input type="text" id="cName" class="form-control" required placeholder="John Doe">
                             </div>
                             <div class="col-md-4">
                                 <label class="small text-secondary">Email Address</label>
-                                <input type="email" id="cEmail" class="form-control" required placeholder="alexander@company.com">
+                                <input type="email" id="cEmail" class="form-control" required placeholder="john@example.com">
                             </div>
                             <div class="col-md-4">
                                 <label class="small text-secondary">Phone / WhatsApp</label>
@@ -85,25 +107,38 @@
                             </div>
                         </div>
 
-                        <!-- Step 2: Dynamic Category Specific Fields -->
-                        <h6 class="text-gold mb-3"><i class="fas fa-sliders me-2"></i>2. Specific Logistics & Route Manifest</h6>
-                        <div id="dynamicFieldsContainer" class="p-3 bg-dark rounded border border-secondary mb-4">
-                            <!-- Injected dynamically via JS -->
+                        <!-- Logistics / Pickup Option -->
+                        <h6 class="text-gold mb-3"><i class="fas fa-map-location-dot me-2"></i>2. Pickup & Logistics Option</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="small text-secondary">Fulfillment Type</label>
+                                <select id="fulfillmentType" class="form-select" onchange="toggleFulfillmentFields()">
+                                    <option value="Office Pickup">Local Provider Office Pickup (Nearest Branch)</option>
+                                    <option value="Street / App Unlock">On-Street Keyless / App Unlock</option>
+                                    <option value="VIP Delivery">Deliver to My Location (+ Fee)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small text-secondary">Pickup Location / Address</label>
+                                <input type="text" id="pickupLocation" class="form-control" required placeholder="Detected automatically or enter address">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small text-secondary">Start Date & Time</label>
+                                <input type="datetime-local" id="startDate" class="form-control" required onchange="calcTotal()">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small text-secondary">Rental Duration (Days / Hours)</label>
+                                <input type="number" id="duration" class="form-control" min="1" value="1" required oninput="calcTotal()">
+                            </div>
                         </div>
 
-                        <!-- Step 3: Add-on VIP Services -->
-                        <h6 class="text-gold mb-3"><i class="fas fa-concierge-bell me-2"></i>3. Bespoke Concierge & VIP Add-ons</h6>
-                        <div id="dynamicAddonsContainer" class="row g-2 mb-4">
-                            <!-- Injected dynamically via JS -->
-                        </div>
-
-                        <!-- Step 4: Cost Calculation & Submit -->
+                        <!-- Calculation & Confirmation -->
                         <div class="d-flex justify-content-between align-items-center p-3 bg-dark rounded border border-warning mb-3">
                             <div>
-                                <span class="text-secondary d-block small">Estimated Investment:</span>
+                                <span class="text-secondary d-block small">Estimated Rate:</span>
                                 <span class="fs-3 fw-bold text-gold" id="cTotal">€0</span>
                             </div>
-                            <button type="submit" id="btnSubmit" class="btn bg-gold px-4 fw-bold py-2">Confirm Manifest & Request Quote</button>
+                            <button type="submit" id="btnSubmit" class="btn bg-gold px-4 fw-bold py-2">Confirm & Reserve Asset</button>
                         </div>
                     </form>
                 </div>
@@ -114,14 +149,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/supabase-client.js"></script>
     <script>
-        const fallbackFleet = [
-            { id: "1", title: "Gulfstream G650ER", category: "Aviation", daily_rate: 14500, rate_type: "hour", location: "Amsterdam Schiphol (EHAM)", image_url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
-            { id: "2", title: "Rolls-Royce Cullinan Black Badge", category: "Road Transport", daily_rate: 2200, rate_type: "day", location: "Monaco / Paris / Amsterdam", image_url: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" },
-            { id: "3", title: "Sunseeker 131 Yacht", category: "Maritime", daily_rate: 18500, rate_type: "day", location: "Cannes / Mediterranean", image_url: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" },
-            { id: "4", title: "Villa Superieure Côte d'Azur", category: "Real Estate", daily_rate: 8500, rate_type: "day", location: "Saint-Tropez, France", image_url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" }
+        let currentMode = 'local';
+        let userCoords = null;
+
+        const defaultFleet = [
+            { id: "1", title: "Volkswagen Golf 8 (Local Fleet)", category: "Road Transport", daily_rate: 75, rate_type: "day", location: "Amsterdam Sloterdijk Office (0.8 km)", pickup_type: "Office Pickup / App", image_url: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80" },
+            { id: "2", title: "BMW 4 Series Convertible", category: "Road Transport", daily_rate: 180, rate_type: "day", location: "Amsterdam Schiphol Branch (3.2 km)", pickup_type: "Office Pickup", image_url: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" },
+            { id: "3", title: "Sloop / Electric Boat (12 Pax)", category: "Maritime", daily_rate: 250, rate_type: "day", location: "Amsterdam Canals Dock (1.1 km)", pickup_type: "Self Drive", image_url: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" },
+            { id: "4", title: "Gulfstream G650ER Jet", category: "Aviation", daily_rate: 14500, rate_type: "hour", location: "EHAM VIP Terminal", pickup_type: "VIP Charter", image_url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" }
         ];
 
-        let assets = fallbackFleet;
+        let assets = defaultFleet;
+
+        function switchRentalMode(mode) {
+            currentMode = mode;
+            document.getElementById('btnModeLocal').classList.toggle('active', mode === 'local');
+            document.getElementById('btnModeVIP').classList.toggle('active', mode === 'vip');
+
+            if(mode === 'local') {
+                document.getElementById('pageTitle').innerText = "Local Nearby Fleet & Asset Exchange";
+                document.getElementById('pageSubtitle').innerText = "Locate verified providers near your position for instant office pickup or street unlock.";
+            } else {
+                document.getElementById('pageTitle').innerText = "VIP Executive & Bespoke Charter Desk";
+                document.getElementById('pageSubtitle').innerText = "Bespoke chauffeured fleets, private jets, luxury yachts, and estates delivered directly to you.";
+            }
+        }
+
+        function requestGPSLocation() {
+            const gpsStatus = document.getElementById('gpsStatus');
+            if (navigator.geolocation) {
+                gpsStatus.innerText = "Locating nearby providers...";
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        userCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                        gpsStatus.innerHTML = `<span class="text-success"><i class="fas fa-check-circle me-1"></i>GPS Active (${userCoords.lat.toFixed(2)}, ${userCoords.lng.toFixed(2)})</span>`;
+                    },
+                    () => { gpsStatus.innerText = "Location permission denied. Showing default locations."; }
+                );
+            } else {
+                gpsStatus.innerText = "Geolocation not supported by browser.";
+            }
+        }
 
         async function init() {
             try {
@@ -132,7 +200,7 @@
                     const data = await res.json();
                     if(data && data.length > 0) assets = data;
                 }
-            } catch(e) { console.warn("DB offline, using failsafe assets."); }
+            } catch(e) { console.warn("Using default local fleet."); }
             renderAssets(assets);
         }
 
@@ -142,12 +210,15 @@
                     <div class="asset-card h-100 d-flex flex-column">
                         <img src="${a.image_url}" class="asset-img" alt="${a.title}">
                         <div class="p-3 d-flex flex-column flex-grow-1">
-                            <span class="badge bg-gold align-self-start mb-2">${a.category}</span>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-gold text-black">${a.category}</span>
+                                <span class="badge bg-dark border border-secondary text-secondary">${a.pickup_type || 'Office Pickup'}</span>
+                            </div>
                             <h5 class="fw-bold text-white mb-1">${a.title}</h5>
-                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || 'Global Ops'}</p>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || 'Local Branch'}</p>
                             <div class="mt-auto pt-2">
                                 <h4 class="text-gold mb-3">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || 'day'}</small></h4>
-                                <button onclick="openModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.rate_type || 'day'}')" class="btn bg-gold w-100 fw-bold">Configure Charter</button>
+                                <button onclick="openModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.location || 'Local Office'}')" class="btn bg-gold w-100 fw-bold">Book / Reserve</button>
                             </div>
                         </div>
                     </div>
@@ -155,234 +226,65 @@
             `).join('');
         }
 
-        function filterAssets(cat) {
+        function filterCategory(cat) {
             document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
             if(event && event.target) event.target.classList.add('active');
             renderAssets(cat === 'All' ? assets : assets.filter(a => a.category === cat));
         }
 
-        function openModal(id, title, cat, rate, rateType) {
+        function openModal(id, title, cat, rate, loc) {
             document.getElementById('aTitle').value = title;
             document.getElementById('aCat').value = cat;
             document.getElementById('aRate').value = rate;
-            document.getElementById('modalCategoryBadge').innerText = cat;
-            document.getElementById('modalTitle').innerText = title;
-
-            buildDynamicFields(cat, rateType);
-            buildDynamicAddons(cat);
+            document.getElementById('pickupLocation').value = loc;
+            document.getElementById('mBadge').innerText = cat;
+            document.getElementById('mTitle').innerText = title;
             calcTotal();
 
             new bootstrap.Modal(document.getElementById('bookModal')).show();
         }
 
-        function buildDynamicFields(cat, rateType) {
-            const container = document.getElementById('dynamicFieldsContainer');
-            let html = '';
-
-            if (cat === 'Aviation') {
-                html = `
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Departure Airport (ICAO / City)</label>
-                            <input type="text" id="dyn_dep" class="form-control" required placeholder="e.g. EHAM / Amsterdam">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Arrival Airport (ICAO / City)</label>
-                            <input type="text" id="dyn_arr" class="form-control" required placeholder="e.g. LFPB / Paris Le Bourget">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Flight Date</label>
-                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Flight Duration (Estimated Hours)</label>
-                            <input type="number" id="dyn_duration" class="form-control" min="1" value="2" required oninput="calcTotal()">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Passengers (Pax Count)</label>
-                            <input type="number" id="dyn_pax" class="form-control" min="1" value="4" required>
-                        </div>
-                    </div>`;
-            } else if (cat === 'Road Transport') {
-                html = `
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Pick-up Location & Address</label>
-                            <input type="text" id="dyn_pickup" class="form-control" required placeholder="e.g. Schiphol VIP Terminal / Hotel">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Drop-off Location</label>
-                            <input type="text" id="dyn_dropoff" class="form-control" required placeholder="e.g. Grand Hotel Krasnapolsky">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Start Date</label>
-                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Duration (Days)</label>
-                            <input type="number" id="dyn_duration" class="form-control" min="1" value="1" required oninput="calcTotal()">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Driving Option</label>
-                            <select id="dyn_drive_type" class="form-select">
-                                <option value="Chauffeur Driven">Executive Chauffeur Driven</option>
-                                <option value="Self Drive">Self Drive (ID & Deposit required)</option>
-                            </select>
-                        </div>
-                    </div>`;
-            } else if (cat === 'Maritime') {
-                html = `
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Embarkation Port / Marina</label>
-                            <input type="text" id="dyn_port" class="form-control" required placeholder="e.g. Port de Cannes / Monaco">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Cruising Destination / Itinerary</label>
-                            <input type="text" id="dyn_route" class="form-control" required placeholder="e.g. Saint-Tropez Day Charter">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Charter Date</label>
-                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Charter Duration (Days)</label>
-                            <input type="number" id="dyn_duration" class="form-control" min="1" value="1" required oninput="calcTotal()">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small text-secondary">Total Guests On Board</label>
-                            <input type="number" id="dyn_guests" class="form-control" min="1" value="8" required>
-                        </div>
-                    </div>`;
-            } else { // Real Estate
-                html = `
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Check-in Date</label>
-                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Stay Duration (Nights/Days)</label>
-                            <input type="number" id="dyn_duration" class="form-control" min="1" value="3" required oninput="calcTotal()">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Number of Guests</label>
-                            <input type="number" id="dyn_guests" class="form-control" min="1" value="4" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small text-secondary">Purpose of Stay</label>
-                            <select id="dyn_purpose" class="form-select">
-                                <option value="Private Vacation">Private Vacation / Family Stay</option>
-                                <option value="Corporate Retreat">Corporate Executive Retreat</option>
-                                <option value="Private Event">Private Event / Production</option>
-                            </select>
-                        </div>
-                    </div>`;
-            }
-            container.innerHTML = html;
-        }
-
-        function buildDynamicAddons(cat) {
-            const container = document.getElementById('dynamicAddonsContainer');
-            let addons = [];
-
-            if (cat === 'Aviation') {
-                addons = ['Custom In-Flight Catering', 'Helicopter Ground Transfer', 'Armed Bodyguard Escort', 'Pet On Board Clearance'];
-            } else if (cat === 'Road Transport') {
-                addons = ['VIP Airport Meet & Greet', 'Armed Security Escort', 'Child / Infant Luxury Seats', 'Luggage Support Van'];
-            } else if (cat === 'Maritime') {
-                addons = ['Seabob & Water Toys Package', 'Michelin Star Private Chef', 'DJ & Audio Sound System', 'Diving Instructor On Board'];
-            } else {
-                addons = ['Daily Butler & Maid Service', 'Private In-Villa Chef & Sommelier', 'Helipad Airport Shuttle', '24/7 Villa Security Guard'];
-            }
-
-            container.innerHTML = addons.map((addon, idx) => `
-                <div class="col-md-6">
-                    <div class="form-check bg-dark p-2 ps-4 rounded border border-secondary">
-                        <input class="form-check-input addon-checkbox" type="checkbox" value="${addon}" id="addon_${idx}">
-                        <label class="form-check-label small text-white" for="addon_${idx}">${addon}</label>
-                    </div>
-                </div>
-            `).join('');
-        }
-
         function calcTotal() {
             const rate = parseFloat(document.getElementById('aRate').value || 0);
-            const durationEl = document.getElementById('dyn_duration');
-            const duration = durationEl ? parseFloat(durationEl.value || 1) : 1;
-            const total = rate * duration;
-            document.getElementById('cTotal').innerText = '€' + total.toLocaleString();
+            const duration = parseFloat(document.getElementById('duration').value || 1);
+            document.getElementById('cTotal').innerText = '€' + (rate * duration).toLocaleString();
         }
 
         async function processBooking(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
-            btn.disabled = true; btn.innerText = "Transmitting Manifest...";
+            btn.disabled = true; btn.innerText = "Reserving Asset...";
 
             const name = document.getElementById('cName').value;
             const email = document.getElementById('cEmail').value;
             const phone = document.getElementById('cPhone').value;
             const title = document.getElementById('aTitle').value;
             const cat = document.getElementById('aCat').value;
+            const fulfillment = document.getElementById('fulfillmentType').value;
+            const location = document.getElementById('pickupLocation').value;
+            const startDate = document.getElementById('startDate').value;
+            const duration = document.getElementById('duration').value;
             const total = document.getElementById('cTotal').innerText;
 
-            // Collect Selected Addons
-            const selectedAddons = [];
-            document.querySelectorAll('.addon-checkbox:checked').forEach(cb => selectedAddons.push(cb.value));
+            const manifestHtml = `<p><strong>Asset:</strong> ${title} (${cat})</p>
+                <p><strong>Fulfillment Mode:</strong> ${fulfillment}</p>
+                <p><strong>Pickup / Delivery Location:</strong> ${location}</p>
+                <p><strong>Start Date & Time:</strong> ${startDate}</p>
+                <p><strong>Duration:</strong> ${duration} day(s)/hour(s)</p>
+                <p><strong>Total Estimate:</strong> ${total}</p>`;
 
-            // Build Rich HTML Manifest based on Category
-            let detailsHtml = `<p><strong>Asset:</strong> ${title}</p>`;
-            detailsHtml += `<p><strong>Estimated Investment:</strong> ${total}</p>`;
-
-            if (cat === 'Aviation') {
-                detailsHtml += `<p><strong>Route:</strong> ${document.getElementById('dyn_dep').value} ➔ ${document.getElementById('dyn_arr').value}</p>`;
-                detailsHtml += `<p><strong>Flight Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
-                detailsHtml += `<p><strong>Flight Duration:</strong> ${document.getElementById('dyn_duration').value} hour(s)</p>`;
-                detailsHtml += `<p><strong>Passengers (Pax):</strong> ${document.getElementById('dyn_pax').value}</p>`;
-            } else if (cat === 'Road Transport') {
-                detailsHtml += `<p><strong>Pick-up Location:</strong> ${document.getElementById('dyn_pickup').value}</p>`;
-                detailsHtml += `<p><strong>Drop-off Location:</strong> ${document.getElementById('dyn_dropoff').value}</p>`;
-                detailsHtml += `<p><strong>Start Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
-                detailsHtml += `<p><strong>Duration:</strong> ${document.getElementById('dyn_duration').value} day(s)</p>`;
-                detailsHtml += `<p><strong>Drive Type:</strong> ${document.getElementById('dyn_drive_type').value}</p>`;
-            } else if (cat === 'Maritime') {
-                detailsHtml += `<p><strong>Embarkation Port:</strong> ${document.getElementById('dyn_port').value}</p>`;
-                detailsHtml += `<p><strong>Route / Itinerary:</strong> ${document.getElementById('dyn_route').value}</p>`;
-                detailsHtml += `<p><strong>Charter Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
-                detailsHtml += `<p><strong>Duration:</strong> ${document.getElementById('dyn_duration').value} day(s)</p>`;
-                detailsHtml += `<p><strong>Total Guests:</strong> ${document.getElementById('dyn_guests').value}</p>`;
-            } else {
-                detailsHtml += `<p><strong>Check-in Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
-                detailsHtml += `<p><strong>Duration:</strong> ${document.getElementById('dyn_duration').value} night(s)</p>`;
-                detailsHtml += `<p><strong>Guests:</strong> ${document.getElementById('dyn_guests').value}</p>`;
-                detailsHtml += `<p><strong>Purpose of Stay:</strong> ${document.getElementById('dyn_purpose').value}</p>`;
-            }
-
-            if (selectedAddons.length > 0) {
-                detailsHtml += `<p><strong>VIP Add-on Services:</strong> ${selectedAddons.join(', ')}</p>`;
-            }
-
-            // Save structured data to Supabase
             try {
                 await fetch(SUPABASE_URL + '/rest/v1/inquiries', {
                     method: 'POST',
                     headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        full_name: name,
-                        email: email,
-                        phone: phone,
-                        asset_category: cat,
-                        logistics_data: detailsHtml
-                    })
+                    body: JSON.stringify({ full_name: name, email: email, phone: phone, asset_category: cat, logistics_data: manifestHtml })
                 });
-            } catch(e) { console.log('DB log saved locally.'); }
+            } catch(e) { console.log('Local log'); }
 
-            // Send Dual Emails via Resend Proxy
             const adminEmail = localStorage.getItem('admin_email_address') || email;
-            
             await Promise.all([
-                dispatchResendEmail(email, "Booking Confirmation: " + title, generateClientEmail(name, cat, detailsHtml)),
-                dispatchResendEmail(adminEmail, "🚨 New Inquiry: " + title + " (" + name + ")", generateAdminEmail(name, email, phone, cat, title, detailsHtml))
+                dispatchResendEmail(email, "Reservation Confirmation: " + title, generateClientEmail(name, cat, manifestHtml)),
+                dispatchResendEmail(adminEmail, "🚨 New Local Reservation: " + title + " (" + name + ")", generateAdminEmail(name, email, phone, cat, title, manifestHtml))
             ]);
 
             window.location.href = "success.html";
