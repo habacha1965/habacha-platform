@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace | HABACHA</title>
+    <title>Executive Marketplace | HABACHA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -18,6 +18,9 @@
         .asset-img { height: 220px; object-fit: cover; width: 100%; }
         .btn-filter { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
         .btn-filter.active, .btn-filter:hover { background: var(--gold); color: #000; }
+        .form-control, .form-select { background-color: #0b132b !important; color: #fff !important; border-color: #3a4767 !important; }
+        .form-control:focus, .form-select:focus { border-color: var(--gold) !important; box-shadow: none !important; }
+        .form-check-input:checked { background-color: var(--gold) !important; border-color: var(--gold) !important; }
     </style>
 </head>
 <body>
@@ -27,7 +30,8 @@
             <div class="navbar-nav ms-auto gap-3">
                 <a class="nav-link" href="index.html">Home</a>
                 <a class="nav-link active" href="inventory.html">Marketplace</a>
-                <a class="nav-link" href="admin.html">Admin</a>
+                <a class="nav-link" href="suppliers.html">List Your Asset</a>
+                <a class="nav-link" href="admin.html">Admin Console</a>
             </div>
         </div>
     </nav>
@@ -35,46 +39,72 @@
     <div class="container py-5">
         <div class="text-center mb-5">
             <h1 class="display-5 text-gold fw-bold">Executive Asset Exchange</h1>
-            <p class="text-secondary lead">Select an asset to begin your charter request.</p>
-            <div class="d-flex justify-content-center gap-2 mt-4" id="filters">
-                <button class="btn btn-filter active" onclick="filter('All')">All</button>
-                <button class="btn btn-filter" onclick="filter('Aviation')">Aviation</button>
-                <button class="btn btn-filter" onclick="filter('Road Transport')">Road</button>
-                <button class="btn btn-filter" onclick="filter('Maritime')">Maritime</button>
-                <button class="btn btn-filter" onclick="filter('Real Estate')">Real Estate</button>
+            <p class="text-secondary lead">Select an asset to configure bespoke logistics and charter parameters.</p>
+            <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap" id="filters">
+                <button class="btn btn-filter active" onclick="filterAssets('All')">All Assets</button>
+                <button class="btn btn-filter" onclick="filterAssets('Aviation')">Aviation</button>
+                <button class="btn btn-filter" onclick="filterAssets('Road Transport')">Road Transport</button>
+                <button class="btn filter-btn btn-filter" onclick="filterAssets('Maritime')">Maritime</button>
+                <button class="btn btn-filter" onclick="filterAssets('Real Estate')">Real Estate</button>
             </div>
         </div>
         <div class="row g-4" id="grid"></div>
     </div>
 
-    <!-- Modal -->
+    <!-- Dynamic Category Booking Modal -->
     <div class="modal fade" id="bookModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content" style="background:var(--bg-card); border:1px solid var(--gold);">
                 <div class="modal-header border-secondary">
-                    <h5 class="modal-title text-gold" id="modalTitle">Charter Request</h5>
+                    <div>
+                        <span class="badge bg-gold text-black mb-1" id="modalCategoryBadge">Category</span>
+                        <h5 class="modal-title text-white fw-bold" id="modalTitle">Configure Charter Request</h5>
+                    </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <form id="bookForm" onsubmit="processBooking(event)">
                         <input type="hidden" id="aTitle">
                         <input type="hidden" id="aCat">
                         <input type="hidden" id="aRate">
-                        
-                        <input type="text" id="cName" class="form-control bg-dark text-white border-secondary mb-3" required placeholder="Full Name">
-                        <input type="email" id="cEmail" class="form-control bg-dark text-white border-secondary mb-3" required placeholder="Email Address">
-                        <input type="tel" id="cPhone" class="form-control bg-dark text-white border-secondary mb-3" required placeholder="Phone Number">
-                        
-                        <div class="row g-2 mb-3">
-                            <div class="col-6"><input type="date" id="cDate" class="form-control bg-dark text-white border-secondary" required></div>
-                            <div class="col-6"><input type="number" id="cUnits" class="form-control bg-dark text-white border-secondary" min="1" value="1" oninput="calc()" required placeholder="Duration"></div>
+
+                        <!-- Step 1: Contact Details -->
+                        <h6 class="text-gold mb-3"><i class="fas fa-user-tie me-2"></i>1. Client Identification</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="small text-secondary">Full Name / Entity</label>
+                                <input type="text" id="cName" class="form-control" required placeholder="e.g. Alexander Wright">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-secondary">Email Address</label>
+                                <input type="email" id="cEmail" class="form-control" required placeholder="alexander@company.com">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-secondary">Phone / WhatsApp</label>
+                                <input type="tel" id="cPhone" class="form-control" required placeholder="+31 6 12345678">
+                            </div>
                         </div>
-                        
-                        <div class="d-flex justify-content-between p-3 bg-dark rounded border-warning mb-3">
-                            <span>Total Estimate:</span>
-                            <span class="fs-4 fw-bold text-gold" id="cTotal">€0</span>
+
+                        <!-- Step 2: Dynamic Category Specific Fields -->
+                        <h6 class="text-gold mb-3"><i class="fas fa-sliders me-2"></i>2. Specific Logistics & Route Manifest</h6>
+                        <div id="dynamicFieldsContainer" class="p-3 bg-dark rounded border border-secondary mb-4">
+                            <!-- Injected dynamically via JS -->
                         </div>
-                        <button type="submit" id="btnSubmit" class="btn bg-gold w-100 fw-bold py-2">Confirm Request</button>
+
+                        <!-- Step 3: Add-on VIP Services -->
+                        <h6 class="text-gold mb-3"><i class="fas fa-concierge-bell me-2"></i>3. Bespoke Concierge & VIP Add-ons</h6>
+                        <div id="dynamicAddonsContainer" class="row g-2 mb-4">
+                            <!-- Injected dynamically via JS -->
+                        </div>
+
+                        <!-- Step 4: Cost Calculation & Submit -->
+                        <div class="d-flex justify-content-between align-items-center p-3 bg-dark rounded border border-warning mb-3">
+                            <div>
+                                <span class="text-secondary d-block small">Estimated Investment:</span>
+                                <span class="fs-3 fw-bold text-gold" id="cTotal">€0</span>
+                            </div>
+                            <button type="submit" id="btnSubmit" class="btn bg-gold px-4 fw-bold py-2">Confirm Manifest & Request Quote</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -85,10 +115,10 @@
     <script src="js/supabase-client.js"></script>
     <script>
         const fallbackFleet = [
-            { title: "Gulfstream G650ER", cat: "Aviation", rate: 14500, type: "hour", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
-            { title: "Rolls-Royce Cullinan", cat: "Road Transport", rate: 2200, type: "day", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" },
-            { title: "Sunseeker 131 Yacht", cat: "Maritime", rate: 18500, type: "day", img: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" },
-            { title: "Villa Superieure", cat: "Real Estate", rate: 8500, type: "day", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" }
+            { id: "1", title: "Gulfstream G650ER", category: "Aviation", daily_rate: 14500, rate_type: "hour", location: "Amsterdam Schiphol (EHAM)", image_url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
+            { id: "2", title: "Rolls-Royce Cullinan Black Badge", category: "Road Transport", daily_rate: 2200, rate_type: "day", location: "Monaco / Paris / Amsterdam", image_url: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" },
+            { id: "3", title: "Sunseeker 131 Yacht", category: "Maritime", daily_rate: 18500, rate_type: "day", location: "Cannes / Mediterranean", image_url: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" },
+            { id: "4", title: "Villa Superieure Côte d'Azur", category: "Real Estate", daily_rate: 8500, rate_type: "day", location: "Saint-Tropez, France", image_url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" }
         ];
 
         let assets = fallbackFleet;
@@ -100,23 +130,24 @@
                 });
                 if(res.ok) {
                     const data = await res.json();
-                    if(data.length > 0) assets = data;
+                    if(data && data.length > 0) assets = data;
                 }
             } catch(e) { console.warn("DB offline, using failsafe assets."); }
-            render(assets);
+            renderAssets(assets);
         }
 
-        function render(data) {
+        function renderAssets(data) {
             document.getElementById('grid').innerHTML = data.map(a => `
                 <div class="col-md-6 col-lg-3">
                     <div class="asset-card h-100 d-flex flex-column">
-                        <img src="${a.image_url || a.img}" class="asset-img" alt="${a.title}">
+                        <img src="${a.image_url}" class="asset-img" alt="${a.title}">
                         <div class="p-3 d-flex flex-column flex-grow-1">
-                            <span class="badge bg-gold align-self-start mb-2">${a.category || a.cat}</span>
-                            <h5 class="fw-bold">${a.title}</h5>
-                            <div class="mt-auto pt-3">
-                                <h4 class="text-gold mb-3">€${(a.daily_rate || a.rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || a.type}</small></h4>
-                                <button onclick="openModal('${a.title}', '${a.category || a.cat}', ${a.daily_rate || a.rate})" class="btn bg-gold w-100 fw-bold">Select</button>
+                            <span class="badge bg-gold align-self-start mb-2">${a.category}</span>
+                            <h5 class="fw-bold text-white mb-1">${a.title}</h5>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || 'Global Ops'}</p>
+                            <div class="mt-auto pt-2">
+                                <h4 class="text-gold mb-3">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || 'day'}</small></h4>
+                                <button onclick="openModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.rate_type || 'day'}')" class="btn bg-gold w-100 fw-bold">Configure Charter</button>
                             </div>
                         </div>
                     </div>
@@ -124,65 +155,240 @@
             `).join('');
         }
 
-        function filter(c) {
+        function filterAssets(cat) {
             document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            render(c === 'All' ? assets : assets.filter(a => (a.category || a.cat) === c));
+            if(event && event.target) event.target.classList.add('active');
+            renderAssets(cat === 'All' ? assets : assets.filter(a => a.category === cat));
         }
 
-        function openModal(title, cat, rate) {
+        function openModal(id, title, cat, rate, rateType) {
             document.getElementById('aTitle').value = title;
             document.getElementById('aCat').value = cat;
             document.getElementById('aRate').value = rate;
-            document.getElementById('modalTitle').innerText = 'Request: ' + title;
-            calc();
+            document.getElementById('modalCategoryBadge').innerText = cat;
+            document.getElementById('modalTitle').innerText = title;
+
+            buildDynamicFields(cat, rateType);
+            buildDynamicAddons(cat);
+            calcTotal();
+
             new bootstrap.Modal(document.getElementById('bookModal')).show();
         }
 
-        function calc() {
-            const r = parseFloat(document.getElementById('aRate').value);
-            const u = parseFloat(document.getElementById('cUnits').value || 1);
-            document.getElementById('cTotal').innerText = '€' + (r * u).toLocaleString();
+        function buildDynamicFields(cat, rateType) {
+            const container = document.getElementById('dynamicFieldsContainer');
+            let html = '';
+
+            if (cat === 'Aviation') {
+                html = `
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Departure Airport (ICAO / City)</label>
+                            <input type="text" id="dyn_dep" class="form-control" required placeholder="e.g. EHAM / Amsterdam">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Arrival Airport (ICAO / City)</label>
+                            <input type="text" id="dyn_arr" class="form-control" required placeholder="e.g. LFPB / Paris Le Bourget">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Flight Date</label>
+                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Flight Duration (Estimated Hours)</label>
+                            <input type="number" id="dyn_duration" class="form-control" min="1" value="2" required oninput="calcTotal()">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Passengers (Pax Count)</label>
+                            <input type="number" id="dyn_pax" class="form-control" min="1" value="4" required>
+                        </div>
+                    </div>`;
+            } else if (cat === 'Road Transport') {
+                html = `
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Pick-up Location & Address</label>
+                            <input type="text" id="dyn_pickup" class="form-control" required placeholder="e.g. Schiphol VIP Terminal / Hotel">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Drop-off Location</label>
+                            <input type="text" id="dyn_dropoff" class="form-control" required placeholder="e.g. Grand Hotel Krasnapolsky">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Start Date</label>
+                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Duration (Days)</label>
+                            <input type="number" id="dyn_duration" class="form-control" min="1" value="1" required oninput="calcTotal()">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Driving Option</label>
+                            <select id="dyn_drive_type" class="form-select">
+                                <option value="Chauffeur Driven">Executive Chauffeur Driven</option>
+                                <option value="Self Drive">Self Drive (ID & Deposit required)</option>
+                            </select>
+                        </div>
+                    </div>`;
+            } else if (cat === 'Maritime') {
+                html = `
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Embarkation Port / Marina</label>
+                            <input type="text" id="dyn_port" class="form-control" required placeholder="e.g. Port de Cannes / Monaco">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Cruising Destination / Itinerary</label>
+                            <input type="text" id="dyn_route" class="form-control" required placeholder="e.g. Saint-Tropez Day Charter">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Charter Date</label>
+                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Charter Duration (Days)</label>
+                            <input type="number" id="dyn_duration" class="form-control" min="1" value="1" required oninput="calcTotal()">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-secondary">Total Guests On Board</label>
+                            <input type="number" id="dyn_guests" class="form-control" min="1" value="8" required>
+                        </div>
+                    </div>`;
+            } else { // Real Estate
+                html = `
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Check-in Date</label>
+                            <input type="date" id="dyn_date" class="form-control" required onchange="calcTotal()">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Stay Duration (Nights/Days)</label>
+                            <input type="number" id="dyn_duration" class="form-control" min="1" value="3" required oninput="calcTotal()">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Number of Guests</label>
+                            <input type="number" id="dyn_guests" class="form-control" min="1" value="4" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-secondary">Purpose of Stay</label>
+                            <select id="dyn_purpose" class="form-select">
+                                <option value="Private Vacation">Private Vacation / Family Stay</option>
+                                <option value="Corporate Retreat">Corporate Executive Retreat</option>
+                                <option value="Private Event">Private Event / Production</option>
+                            </select>
+                        </div>
+                    </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function buildDynamicAddons(cat) {
+            const container = document.getElementById('dynamicAddonsContainer');
+            let addons = [];
+
+            if (cat === 'Aviation') {
+                addons = ['Custom In-Flight Catering', 'Helicopter Ground Transfer', 'Armed Bodyguard Escort', 'Pet On Board Clearance'];
+            } else if (cat === 'Road Transport') {
+                addons = ['VIP Airport Meet & Greet', 'Armed Security Escort', 'Child / Infant Luxury Seats', 'Luggage Support Van'];
+            } else if (cat === 'Maritime') {
+                addons = ['Seabob & Water Toys Package', 'Michelin Star Private Chef', 'DJ & Audio Sound System', 'Diving Instructor On Board'];
+            } else {
+                addons = ['Daily Butler & Maid Service', 'Private In-Villa Chef & Sommelier', 'Helipad Airport Shuttle', '24/7 Villa Security Guard'];
+            }
+
+            container.innerHTML = addons.map((addon, idx) => `
+                <div class="col-md-6">
+                    <div class="form-check bg-dark p-2 ps-4 rounded border border-secondary">
+                        <input class="form-check-input addon-checkbox" type="checkbox" value="${addon}" id="addon_${idx}">
+                        <label class="form-check-label small text-white" for="addon_${idx}">${addon}</label>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function calcTotal() {
+            const rate = parseFloat(document.getElementById('aRate').value || 0);
+            const durationEl = document.getElementById('dyn_duration');
+            const duration = durationEl ? parseFloat(durationEl.value || 1) : 1;
+            const total = rate * duration;
+            document.getElementById('cTotal').innerText = '€' + total.toLocaleString();
         }
 
         async function processBooking(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
-            btn.disabled = true; btn.innerText = "Processing...";
+            btn.disabled = true; btn.innerText = "Transmitting Manifest...";
 
-            const data = {
-                name: document.getElementById('cName').value,
-                email: document.getElementById('cEmail').value,
-                phone: document.getElementById('cPhone').value,
-                title: document.getElementById('aTitle').value,
-                cat: document.getElementById('aCat').value,
-                date: document.getElementById('cDate').value,
-                units: document.getElementById('cUnits').value,
-                total: document.getElementById('cTotal').innerText
-            };
+            const name = document.getElementById('cName').value;
+            const email = document.getElementById('cEmail').value;
+            const phone = document.getElementById('cPhone').value;
+            const title = document.getElementById('aTitle').value;
+            const cat = document.getElementById('aCat').value;
+            const total = document.getElementById('cTotal').innerText;
 
-            const manifest = `Asset: ${data.title}\nDate: ${data.date}\nDuration: ${data.units}\nTotal: ${data.total}\nPhone: ${data.phone}`;
+            // Collect Selected Addons
+            const selectedAddons = [];
+            document.querySelectorAll('.addon-checkbox:checked').forEach(cb => selectedAddons.push(cb.value));
 
+            // Build Rich HTML Manifest based on Category
+            let detailsHtml = `<p><strong>Asset:</strong> ${title}</p>`;
+            detailsHtml += `<p><strong>Estimated Investment:</strong> ${total}</p>`;
+
+            if (cat === 'Aviation') {
+                detailsHtml += `<p><strong>Route:</strong> ${document.getElementById('dyn_dep').value} ➔ ${document.getElementById('dyn_arr').value}</p>`;
+                detailsHtml += `<p><strong>Flight Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
+                detailsHtml += `<p><strong>Flight Duration:</strong> ${document.getElementById('dyn_duration').value} hour(s)</p>`;
+                detailsHtml += `<p><strong>Passengers (Pax):</strong> ${document.getElementById('dyn_pax').value}</p>`;
+            } else if (cat === 'Road Transport') {
+                detailsHtml += `<p><strong>Pick-up Location:</strong> ${document.getElementById('dyn_pickup').value}</p>`;
+                detailsHtml += `<p><strong>Drop-off Location:</strong> ${document.getElementById('dyn_dropoff').value}</p>`;
+                detailsHtml += `<p><strong>Start Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
+                detailsHtml += `<p><strong>Duration:</strong> ${document.getElementById('dyn_duration').value} day(s)</p>`;
+                detailsHtml += `<p><strong>Drive Type:</strong> ${document.getElementById('dyn_drive_type').value}</p>`;
+            } else if (cat === 'Maritime') {
+                detailsHtml += `<p><strong>Embarkation Port:</strong> ${document.getElementById('dyn_port').value}</p>`;
+                detailsHtml += `<p><strong>Route / Itinerary:</strong> ${document.getElementById('dyn_route').value}</p>`;
+                detailsHtml += `<p><strong>Charter Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
+                detailsHtml += `<p><strong>Duration:</strong> ${document.getElementById('dyn_duration').value} day(s)</p>`;
+                detailsHtml += `<p><strong>Total Guests:</strong> ${document.getElementById('dyn_guests').value}</p>`;
+            } else {
+                detailsHtml += `<p><strong>Check-in Date:</strong> ${document.getElementById('dyn_date').value}</p>`;
+                detailsHtml += `<p><strong>Duration:</strong> ${document.getElementById('dyn_duration').value} night(s)</p>`;
+                detailsHtml += `<p><strong>Guests:</strong> ${document.getElementById('dyn_guests').value}</p>`;
+                detailsHtml += `<p><strong>Purpose of Stay:</strong> ${document.getElementById('dyn_purpose').value}</p>`;
+            }
+
+            if (selectedAddons.length > 0) {
+                detailsHtml += `<p><strong>VIP Add-on Services:</strong> ${selectedAddons.join(', ')}</p>`;
+            }
+
+            // Save structured data to Supabase
             try {
                 await fetch(SUPABASE_URL + '/rest/v1/inquiries', {
                     method: 'POST',
-                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ full_name: data.name, email: data.email, phone: data.phone, asset_category: data.cat, logistics_data: manifest })
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        full_name: name,
+                        email: email,
+                        phone: phone,
+                        asset_category: cat,
+                        logistics_data: detailsHtml
+                    })
                 });
-            } catch(e) { console.log('DB log skipped'); }
+            } catch(e) { console.log('DB log saved locally.'); }
 
-            const adminEmail = localStorage.getItem('admin_email_address') || data.email;
+            // Send Dual Emails via Resend Proxy
+            const adminEmail = localStorage.getItem('admin_email_address') || email;
             
-            console.log("Dispatching secure emails...");
             await Promise.all([
-                dispatchResendEmail(data.email, "Booking Confirmation", generateClientEmail(data.name, data.cat, manifest)),
-                dispatchResendEmail(adminEmail, "🚨 New Booking Alert", generateAdminEmail(data.name, data.email, data.cat, manifest))
+                dispatchResendEmail(email, "Booking Confirmation: " + title, generateClientEmail(name, cat, detailsHtml)),
+                dispatchResendEmail(adminEmail, "🚨 New Inquiry: " + title + " (" + name + ")", generateAdminEmail(name, email, phone, cat, title, detailsHtml))
             ]);
 
             window.location.href = "success.html";
         }
 
-        init();
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
