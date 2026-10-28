@@ -22,28 +22,52 @@
             --card-radius: 12px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
 
-        /* Top Bar */
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-main); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+            display: block;
+        }
+
+        /* Top Utility Bar */
         .utility-bar {
             background: #060b18;
             border-bottom: 1px solid var(--border-color);
-            padding: 8px 5%;
+            padding: 10px 5%;
             font-size: 0.82rem;
             color: var(--text-muted);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .utility-contacts span { margin-right: 20px; }
-        .utility-contacts i { color: var(--accent-cyan); margin-right: 6px; }
-        .utility-right a { color: var(--text-muted); text-decoration: none; margin-left: 15px; transition: 0.3s; }
+        .utility-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .utility-contacts i { color: var(--accent-cyan); margin-right: 5px; }
+        .utility-right {
+            display: flex;
+            gap: 15px;
+        }
+        .utility-right a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
         .utility-right a:hover { color: #fff; }
 
-        /* Header Navigation */
+        /* Navigation Header */
         header {
-            background: rgba(11, 19, 41, 0.95);
+            background: rgba(11, 19, 41, 0.98);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -53,6 +77,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
         }
 
         .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -69,61 +96,179 @@
             padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: 700;
         }
 
-        nav { display: flex; align-items: center; gap: 20px; }
-        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 18px; 
+            flex-wrap: wrap; 
+        }
+        nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: 0.3s; white-space: nowrap; }
         nav a:hover, nav a.active { color: #fff; }
-        .btn-nav-action { background: var(--primary); color: #fff !important; padding: 10px 18px; border-radius: 6px; font-weight: 600; transition: 0.3s; }
+        .btn-nav-action { background: var(--primary); color: #fff !important; padding: 8px 16px; border-radius: 6px; font-weight: 600; transition: 0.3s; }
         .btn-nav-action:hover { background: var(--primary-hover); }
 
-        /* High-Converting SEO Hero Section */
-        .hero { padding: 80px 5% 60px; background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15) 0%, rgba(11, 19, 41, 1) 75%); text-align: center; }
-        .hero-tagline { display: inline-flex; align-items: center; gap: 8px; background: rgba(14, 165, 233, 0.12); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
-        .hero-title { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; max-width: 950px; margin-left: auto; margin-right: auto; }
-        .hero-title span { color: var(--accent-cyan); }
-        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 40px; font-weight: 400; line-height: 1.7; }
-
-        /* Search Engine Hub */
-        .search-engine {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 26px; max-width: 1150px; margin: 0 auto;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        /* SEO Hero Section */
+        .hero { 
+            width: 100%;
+            padding: 70px 5% 50px; 
+            background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15) 0%, rgba(11, 19, 41, 1) 80%); 
+            text-align: center; 
         }
-        .search-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 20px; overflow-x: auto; }
+        .hero-tagline { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: rgba(14, 165, 233, 0.12); 
+            color: var(--accent-cyan); 
+            border: 1px solid rgba(14, 165, 233, 0.3); 
+            padding: 6px 16px; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 20px; 
+        }
+        .hero-title { 
+            font-size: clamp(1.8rem, 4vw, 3rem); 
+            font-weight: 800; 
+            line-height: 1.25; 
+            margin-bottom: 20px; 
+            max-width: 950px; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .hero-title span { color: var(--accent-cyan); }
+        .hero-subtitle { 
+            font-size: clamp(0.95rem, 2vw, 1.15rem); 
+            color: var(--text-muted); 
+            max-width: 800px; 
+            margin: 0 auto 35px; 
+            font-weight: 400; 
+            line-height: 1.7; 
+        }
+
+        /* Search Engine Hub Widget */
+        .search-engine {
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color);
+            border-radius: 16px; 
+            padding: 24px; 
+            max-width: 1150px; 
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            text-align: left;
+        }
+        .search-tabs { 
+            display: flex; 
+            gap: 8px; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 14px; 
+            margin-bottom: 20px; 
+            overflow-x: auto; 
+            scrollbar-width: thin;
+        }
         .search-tab {
-            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color);
-            color: var(--text-muted); padding: 9px 16px; border-radius: 8px; cursor: pointer;
-            font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: 0.3s; white-space: nowrap;
+            background: rgba(255, 255, 255, 0.04); 
+            border: 1px solid var(--border-color);
+            color: var(--text-muted); 
+            padding: 8px 14px; 
+            border-radius: 8px; 
+            cursor: pointer;
+            font-size: 0.82rem; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            transition: 0.3s; 
+            white-space: nowrap;
         }
         .search-tab.active, .search-tab:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
 
-        .search-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 170px; gap: 16px; align-items: end; }
-        .field-group { text-align: left; }
-        .field-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
-        .field-group input, .field-group select { width: 100%; background: rgba(11, 19, 41, 0.8); border: 1px solid var(--border-color); color: #fff; padding: 12px 14px; border-radius: 8px; font-size: 0.9rem; outline: none; }
+        .search-fields { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 16px; 
+            align-items: end; 
+        }
+        .field-group label { 
+            display: block; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            color: var(--text-muted); 
+            margin-bottom: 6px; 
+            font-weight: 700; 
+        }
+        .field-group input, .field-group select { 
+            width: 100%; 
+            background: rgba(11, 19, 41, 0.8); 
+            border: 1px solid var(--border-color); 
+            color: #fff; 
+            padding: 12px 14px; 
+            border-radius: 8px; 
+            font-size: 0.88rem; 
+            outline: none; 
+            text-overflow: ellipsis;
+        }
         .field-group input:focus, .field-group select:focus { border-color: var(--accent-cyan); }
-        .btn-search { background: var(--primary); color: #fff; border: none; padding: 14px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-search { 
+            background: var(--primary); 
+            color: #fff; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            width: 100%; 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            height: 45px;
+        }
         .btn-search:hover { background: var(--primary-hover); }
 
         /* Trust Badges Bar */
-        .hero-trust-bar { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted); }
-        .hero-trust-bar span { display: flex; align-items: center; gap: 8px; }
+        .hero-trust-bar { 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            margin-top: 25px; 
+            flex-wrap: wrap; 
+            font-size: 0.82rem; 
+            color: var(--text-muted); 
+        }
+        .hero-trust-bar span { display: flex; align-items: center; gap: 6px; }
         .hero-trust-bar i { color: var(--accent-cyan); }
 
-        /* Category Grid */
-        .section-container { padding: 80px 5%; max-width: 1300px; margin: 0 auto; }
-        .section-header { margin-bottom: 45px; text-align: center; }
+        /* Category Grid Section */
+        .section-container { 
+            width: 100%;
+            padding: 70px 5%; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+        }
+        .section-header { margin-bottom: 40px; text-align: center; }
         .section-tag { color: var(--accent-cyan); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
-        .section-title { font-size: 2.2rem; font-weight: 800; color: #fff; }
+        .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: #fff; }
 
         .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .category-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--card-radius); padding: 26px; transition: 0.3s; text-decoration: none; display: block; }
+        .category-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--card-radius); padding: 24px; transition: 0.3s; text-decoration: none; display: block; }
         .category-card:hover { transform: translateY(-4px); background: var(--bg-card-hover); border-color: rgba(37, 99, 235, 0.4); }
-        .category-icon { width: 50px; height: 50px; background: rgba(37, 99, 235, 0.15); color: var(--accent-cyan); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 18px; }
-        .category-card h3 { font-size: 1.2rem; margin-bottom: 8px; color: #fff; }
-        .category-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
+        .category-icon { width: 48px; height: 48px; background: rgba(37, 99, 235, 0.15); color: var(--accent-cyan); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
+        .category-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: #fff; }
+        .category-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
+
+        /* Trust Section */
+        .trust-section { background: #080e1e; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 60px 5%; width: 100%; }
+        .trust-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .trust-box h4 { font-size: 1.05rem; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .trust-box h4 i { color: var(--accent-cyan); }
+        .trust-box p { color: var(--text-muted); font-size: 0.85rem; }
 
         /* Footer */
-        footer { background: #040813; border-top: 1px solid var(--border-color); padding: 50px 5% 25px; color: var(--text-muted); font-size: 0.88rem; }
+        footer { background: #040813; border-top: 1px solid var(--border-color); padding: 50px 5% 25px; color: var(--text-muted); font-size: 0.88rem; width: 100%; }
         .footer-grid { max-width: 1300px; margin: 0 auto 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
         .footer-col h5 { color: #fff; font-size: 0.95rem; margin-bottom: 15px; font-weight: 700; }
         .footer-col ul { list-style: none; }
@@ -140,7 +285,7 @@
         <div class="utility-contacts">
             <span><i class="fa-solid fa-phone"></i> +31 (0) 20 123 4567</span>
             <span><i class="fa-solid fa-envelope"></i> info@habacha.com</span>
-            <span><i class="fa-solid fa-globe"></i> Global Asset Exchange Network</span>
+            <span><i class="fa-solid fa-globe"></i> Global Rental & Lease Network</span>
         </div>
         <div class="utility-right">
             <a href="login.html"><i class="fa-solid fa-user-lock"></i> Client / Supplier Login</a>
@@ -157,10 +302,10 @@
         </a>
         <nav>
             <a href="index.html" class="active">Home</a>
-            <a href="inventory.html">All Divisions</a>
+            <a href="inventory.html">All Categories</a>
             <a href="inventory.html?cat=cars">Cars & Vans</a>
             <a href="inventory.html?cat=stays">Stays & Spaces</a>
-            <a href="inventory.html?cat=machinery">Machinery</a>
+            <a href="inventory.html?cat=machinery">Equipment</a>
             <a href="inventory.html" class="btn-nav-action">Find Rental or Lease</a>
         </nav>
     </header>
@@ -215,7 +360,7 @@
                 </div>
                 <div>
                     <button class="btn-search" onclick="executeSearch()">
-                        <i class="fa-solid fa-magnifying-glass"></i> Search Assets
+                        <i class="fa-solid fa-magnifying-glass"></i> Search Offers
                     </button>
                 </div>
             </div>
@@ -283,6 +428,24 @@
                 <h3>8. Event & Audio Equipment</h3>
                 <p>Pro sound systems, stage lighting, DJ gear, party tents, event furniture, and catering equipment.</p>
             </a>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-box">
+                <h4><i class="fa-solid fa-handshake"></i> Direct Supplier Network</h4>
+                <p>Connect directly with verified local and international rental companies, lease providers, and private owners.</p>
+            </div>
+            <div class="trust-box">
+                <h4><i class="fa-solid fa-users"></i> For Individuals & Businesses</h4>
+                <p>Flexible options available whether you need a vehicle for 1 day or a corporate fleet lease for 12 months.</p>
+            </div>
+            <div class="trust-box">
+                <h4><i class="fa-solid fa-shield-halved"></i> Clear Terms & Security</h4>
+                <p>Every supplier provides their own clear rental terms, deposit details, and pickup/delivery instructions.</p>
+            </div>
         </div>
     </section>
 
