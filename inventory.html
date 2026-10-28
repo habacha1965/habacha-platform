@@ -3,117 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Categories Marketplace | HABACHA Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-main: #0b1329;
-            --bg-card: #152243;
-            --primary: #2563eb;
-            --accent-cyan: #0ea5e9;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+    <title>Global Marketplace Inventory | HABACHA Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0b1329',
+                            800: '#0f172a',
+                            700: '#1e293b',
+                            600: '#334155'
+                        },
+                        steel: '#2563eb',
+                        cyan: '#0ea5e9'
+                    }
+                }
+            }
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-main); }
-        
-        header { background: #060b18; border-bottom: 1px solid var(--border-color); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        
-        .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; }
-        
-        .filter-bar { display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; }
-        .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-        
-        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); transform: translateY(-4px); }
-        .card img { width: 100%; height: 190px; object-fit: cover; }
-        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
-        .card-specs { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
-        .card-price { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-        
-        .btn-view-product { background: var(--primary); color: #fff; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: 700; text-align: center; display: block; transition: 0.3s; font-size: 0.9rem; }
-        .btn-view-product:hover { background: #1d4ed8; }
+    </script>
+    <style>
+        body {
+            background-color: #0b1329;
+            color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Select Field & Dropdown Dark Navy Fix */
+        select {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 1rem center !important;
+            background-size: 1.25rem !important;
+            padding-right: 2.75rem !important;
+        }
+
+        select option {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+
+        select option:hover,
+        select option:focus,
+        select option:checked {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
     </style>
 </head>
-<body>
+<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col">
 
-    <header>
-        <a href="index.html" class="logo"><i class="fa-solid fa-cubes"></i> HABACHA Platform</a>
-        <div>
-            <a href="login.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600; margin-right: 20px;"><i class="fa-solid fa-user-lock"></i> Client / Supplier Login</a>
-            <a href="index.html" style="color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Home</a>
+    <!-- HEADER NAVIGATION WITH HAMBURGER -->
+    <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-steel to-cyan flex items-center justify-center font-black text-white text-xl shadow-lg">H</div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-extrabold text-white">HABACHA</span>
+                        <span class="text-[10px] tracking-widest text-slate-400 uppercase font-semibold">Global Exchange</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="text-slate-300 hover:text-white text-sm font-medium">Home</a>
+                    <a href="inventory.html" class="text-cyan font-semibold text-sm">All Categories</a>
+                    <a href="inventory.html?category=cars" class="text-slate-300 hover:text-white text-sm font-medium">Cars & Vans</a>
+                    <a href="inventory.html?category=freight" class="text-slate-300 hover:text-white text-sm font-medium">Freight & Trucks</a>
+                </nav>
+
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white text-sm font-medium">Partner Portal</a>
+                </div>
+
+                <!-- HAMBURGER BUTTON -->
+                <div class="flex lg:hidden">
+                    <button id="mobileMenuBtn" class="p-2 rounded-lg bg-navy-800 text-slate-300 hover:text-white border border-slate-700">
+                        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden lg:hidden bg-navy-800 border-b border-slate-700 px-4 pt-4 pb-6 space-y-3">
+            <a href="index.html" class="block px-3 py-2 rounded-md text-slate-200">Home</a>
+            <a href="inventory.html" class="block px-3 py-2 rounded-md bg-navy-900 text-cyan font-semibold">All Categories</a>
+            <a href="login.html" class="block px-3 py-2 rounded-md text-slate-200">Partner Login</a>
         </div>
     </header>
 
-    <div class="container">
-        <h2 style="font-size: 2rem; margin-bottom: 20px;">Rental & Lease Marketplace</h2>
-        
-        <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterCategory('all')">All Products</button>
-            <button class="filter-btn" onclick="filterCategory('cars')"><i class="fa-solid fa-car"></i> Cars & Vans</button>
-            <button class="filter-btn" onclick="filterCategory('logistics')"><i class="fa-solid fa-truck"></i> Freight & Vans</button>
-            <button class="filter-btn" onclick="filterCategory('maritime')"><i class="fa-solid fa-ship"></i> Boats & Ships</button>
-            <button class="filter-btn" onclick="filterCategory('aviation')"><i class="fa-solid fa-plane"></i> Aircraft</button>
-            <button class="filter-btn" onclick="filterCategory('stays')"><i class="fa-solid fa-building"></i> Stays & Spaces</button>
-            <button class="filter-btn" onclick="filterCategory('machinery')"><i class="fa-solid fa-screwdriver-wrench"></i> Equipment</button>
-            <button class="filter-btn" onclick="filterCategory('campers')"><i class="fa-solid fa-caravan"></i> Campers</button>
-            <button class="filter-btn" onclick="filterCategory('events')"><i class="fa-solid fa-champagne-glasses"></i> Events</button>
+    <!-- CONTENT -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-white">Global Asset Marketplace Inventory</h1>
+            <p class="text-slate-400 text-sm mt-1">Explore verified short-term rentals and long-term lease offers across all 8 divisions.</p>
         </div>
 
-        <div class="assets-grid" id="asset-container">
-            <!-- Dynamic Render -->
+        <!-- FILTER BAR -->
+        <div class="bg-navy-800 p-6 rounded-xl border border-slate-700 mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Category Filter</label>
+                <select id="categoryFilter" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
+                    <option value="all">All Product Divisions</option>
+                    <option value="cars">1. Cars & Passenger Vans</option>
+                    <option value="freight">2. Commercial Vans & Freight</option>
+                    <option value="boats">3. Boats & Ships</option>
+                    <option value="aircraft">4. Helicopters & Aircraft</option>
+                    <option value="realestate">5. Stays & Real Estate</option>
+                    <option value="equipment">6. Construction Machinery</option>
+                    <option value="campers">7. Campers & Leisure Bikes</option>
+                    <option value="events">8. Event Equipment & Audio</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Agreement Model</label>
+                <select id="typeFilter" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
+                    <option value="all">All Agreements (Rental & Lease)</option>
+                    <option value="rental">Short-Term Rental</option>
+                    <option value="lease">Long-Term Enterprise Lease</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Location Search</label>
+                <input type="text" id="locationInput" placeholder="Enter city or airport code..." class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+            </div>
         </div>
-    </div>
 
-    <script>
-        const inventoryData = [
-            { id: '1', title: 'Volkswagen Golf 8 (Rental or Lease)', category: 'cars', price: 65, unit: 'per day', image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600', specs: '5 Seats | Automatic | Branch or Airport Pickup' },
-            { id: '2', title: 'Mercedes-Benz Sprinter Cargo Van', category: 'logistics', price: 120, unit: 'per day', image: 'https://images.unsplash.com/photo-1559297434-fae8a1916a79?w=600', specs: '14 m³ Cargo Space | Moving & Delivery | Driver Option' },
-            { id: '3', title: 'Luxury Motor Yacht 45ft', category: 'maritime', price: 950, unit: 'per day', image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600', specs: '10 Guests | Marina Berth | With or Without Skipper' },
-            { id: '4', title: 'Airbus H125 Helicopter', category: 'aviation', price: 1450, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600', specs: '5 Passengers | Certified Pilot Included' },
-            { id: '5', title: 'Modern City Center Apartment', category: 'stays', price: 140, unit: 'per night', image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600', specs: '2 Bedrooms | Fully Furnished | Short or Long Stay' },
-            { id: '6', title: 'Caterpillar Mini Excavator (1.8 Ton)', category: 'machinery', price: 110, unit: 'per day', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=600', specs: 'Garden & Construction | Delivery to Site Available' },
-            { id: '7', title: 'Luxury 4-Berth Campervan (RV)', category: 'campers', price: 135, unit: 'per day', image: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=600', specs: '4 Beds | Kitchen & Bathroom | Unlimited Mileage' },
-            { id: '8', title: 'Professional Party Tent & Sound Set', category: 'events', price: 250, unit: 'per weekend', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600', specs: '6x12m Tent | 2000W Sound System | Weddings & Parties' }
-        ];
-
-        function renderInventory(data) {
-            const container = document.getElementById('asset-container');
-            container.innerHTML = data.map(asset => `
-                <div class="card">
-                    <img src="${asset.image}" alt="${asset.title}">
-                    <div class="card-content">
+        <!-- ASSETS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="inventoryGrid">
+            
+            <!-- SAMPLE ITEM 1 -->
+            <div class="bg-navy-800 border border-slate-700 rounded-xl overflow-hidden hover:border-cyan transition flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">Cars & Vans</span>
+                        <span class="text-xs text-slate-400">Branch Pickup Only</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Mercedes-Benz V-Class (9-Seater)</h3>
+                    <p class="text-xs text-slate-400 mt-2">Executive passenger van for corporate transfer or family trips. Available at main airport hubs.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700/60 flex items-center justify-between">
                         <div>
-                            <div class="card-title">${asset.title}</div>
-                            <div class="card-specs">${asset.specs}</div>
+                            <span class="text-xs text-slate-400">Rates from</span>
+                            <div class="text-lg font-bold text-cyan">€145 <span class="text-xs font-normal text-slate-400">/ day</span></div>
                         </div>
-                        <div>
-                            <div class="card-price">€${asset.price.toLocaleString()} <span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">${asset.unit}</span></div>
-                            <a href="asset-detail.html?id=${asset.id}" class="btn-view-product">View Details & Reserve</a>
-                        </div>
+                        <a href="asset-detail.html?id=cars-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details</a>
                     </div>
                 </div>
-            `).join('');
-        }
+            </div>
 
-        function filterCategory(cat) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            if (cat === 'all') renderInventory(inventoryData);
-            else renderInventory(inventoryData.filter(a => a.category === cat));
-        }
+            <!-- SAMPLE ITEM 2 -->
+            <div class="bg-navy-800 border border-slate-700 rounded-xl overflow-hidden hover:border-cyan transition flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">Commercial Freight</span>
+                        <span class="text-xs text-slate-400">Long-Term Lease</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">DAF XF 480 Super Space Cab Truck</h3>
+                    <p class="text-xs text-slate-400 mt-2">Heavy freight cargo tractor with sleeper cab for international logistics fleets.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700/60 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400">Enterprise Lease</span>
+                            <div class="text-lg font-bold text-cyan">€2,100 <span class="text-xs font-normal text-slate-400">/ month</span></div>
+                        </div>
+                        <a href="asset-detail.html?id=freight-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details</a>
+                    </div>
+                </div>
+            </div>
 
-        // Check URL category filter
-        const params = new URLSearchParams(window.location.search);
-        const catParam = params.get('cat');
-        if (catParam) filterCategory(catParam);
-        else renderInventory(inventoryData);
+            <!-- SAMPLE ITEM 3 -->
+            <div class="bg-navy-800 border border-slate-700 rounded-xl overflow-hidden hover:border-cyan transition flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">Construction</span>
+                        <span class="text-xs text-slate-400">Short & Long Lease</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Caterpillar 320 Hydraulic Excavator</h3>
+                    <p class="text-xs text-slate-400 mt-2">20-ton crawler excavator equipped with GPS 3D site grading system for heavy earthworks.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700/60 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400">Rates from</span>
+                            <div class="text-lg font-bold text-cyan">€380 <span class="text-xs font-normal text-slate-400">/ day</span></div>
+                        </div>
+                        <a href="asset-detail.html?id=equipment-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-950 border-t border-slate-800 text-slate-400 text-xs py-8 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span class="text-white font-bold text-sm">HABACHA Intermediary Exchange</span>
+            <span>&copy; HABACHA Platform. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html>

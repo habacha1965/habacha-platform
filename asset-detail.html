@@ -3,189 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details & Request | HABACHA Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-client.js"></script>
-    <style>
-        :root {
-            --bg-main: #0b1329;
-            --bg-card: #152243;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --accent-cyan: #0ea5e9;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+    <title>Asset Details & Supplier Referral | HABACHA Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0b1329', 800: '#0f172a', 700: '#1e293b' },
+                        steel: '#2563eb',
+                        cyan: '#0ea5e9'
+                    }
+                }
+            }
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
-
-        header { background: #060b18; border-bottom: 1px solid var(--border-color); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; }
-
-        .container { max-width: 1250px; margin: 40px auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
-        
-        .asset-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
-        .asset-title { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
-        .asset-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; display: flex; gap: 20px; }
-
-        .gallery { width: 100%; height: 400px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 30px; position: relative; }
-        .gallery img { width: 100%; height: 100%; object-fit: cover; }
-        .supplier-badge { position: absolute; bottom: 20px; left: 20px; background: rgba(11, 19, 41, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: #fff; }
-
-        .box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-        .box h4 { font-size: 1.05rem; color: #fff; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
-        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-        .spec-item label { display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-        .spec-item span { font-size: 0.95rem; color: #fff; font-weight: 600; }
-
-        .sidebar { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; position: sticky; top: 30px; }
-        .price { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-        .price span { font-size: 0.85rem; font-weight: 400; color: var(--text-muted); }
-
-        .form-head { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-cyan); font-weight: 700; margin: 18px 0 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; }
-        .form-group input, .form-group select { width: 100%; background: #0f172a; border: 1px solid var(--border-color); color: #fff; padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; outline: none; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--accent-cyan); }
-
-        .btn-submit { background: var(--primary); color: #fff; border: none; padding: 14px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; width: 100%; cursor: pointer; transition: 0.3s; margin-top: 15px; }
-        .btn-submit:hover { background: var(--primary-hover); }
-
-        /* Redirect Pop-up */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-card { background: #0f172a; border: 1px solid var(--border-color); border-radius: 16px; padding: 35px; max-width: 500px; width: 100%; text-align: center; }
-        .btn-redirect { background: #16a34a; color: #fff; text-decoration: none; padding: 14px 20px; border-radius: 8px; font-weight: 700; display: block; margin-top: 20px; }
+    </script>
+    <style>
+        body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        select {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 1rem center !important;
+            background-size: 1.25rem !important;
+            padding-right: 2.75rem !important;
+        }
+        select option { background-color: #0f172a !important; color: #ffffff !important; padding: 12px; }
     </style>
 </head>
-<body>
+<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col">
 
-    <header>
-        <a href="index.html" class="logo"><i class="fa-solid fa-cubes"></i> HABACHA Platform</a>
-        <a href="inventory.html" style="color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Back to Marketplace</a>
+    <!-- HEADER NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-steel to-cyan flex items-center justify-center font-black text-white text-xl">H</div>
+                    <span class="text-2xl font-extrabold text-white">HABACHA</span>
+                </a>
+                <a href="inventory.html" class="text-sm font-semibold text-cyan hover:underline">&larr; Back to Inventory</a>
+            </div>
+        </div>
     </header>
 
-    <div class="container" id="detail-container">
-        <!-- Injected via JS -->
-    </div>
+    <!-- CONTENT -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- LEFT DETAILS -->
+            <div class="lg:col-span-8 space-y-6">
+                <div class="bg-navy-800 p-8 rounded-2xl border border-slate-700">
+                    <div class="inline-block px-3 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold mb-3">Verified Supplier Listing</div>
+                    <h1 class="text-3xl font-bold text-white mb-2" id="assetTitle">Mercedes-Benz V-Class (9-Seater)</h1>
+                    <p class="text-slate-400 text-sm">Branch Pickup & Terminal Drop-off Only (Home delivery disabled for motor vehicles).</p>
+                    
+                    <div class="mt-6 pt-6 border-t border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                        <div>
+                            <span class="text-slate-400 block">Category</span>
+                            <span class="font-bold text-white">Cars & Vans</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">Min. Term</span>
+                            <span class="font-bold text-white">1 Day Rental</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">Deposit</span>
+                            <span class="font-bold text-white">Direct to Supplier</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">Availability</span>
+                            <span class="font-bold text-cyan">Instant Referral</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Redirect Modal -->
-    <div class="modal" id="redirect-modal">
-        <div class="modal-card">
-            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #16a34a; margin-bottom: 15px;"></i>
-            <h3>Request Recorded Successfully!</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Your details have been saved under HABACHA Referral Code: <strong id="ref-code" style="color:var(--accent-cyan);">HB-8921</strong>.</p>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">Click below to complete your booking directly on the supplier's website.</p>
-            <a href="#" id="supplier-link" target="_blank" class="btn-redirect"><i class="fa-solid fa-arrow-up-right-from-square"></i> Continue to Supplier Web Booking</a>
+                <div class="bg-navy-800 p-8 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-4">Rental & Leasing Policy Notice</h2>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> HABACHA operates strictly as an intermediary referral platform.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Rental terms, deposits, and payment collection are handled directly by the verified supplier.</li>
+                        <li class="flex items-start"><span class="text-cyan mr-2">✓</span> Vehicle pick-up and return are performed at authorized branch locations or airport hubs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RIGHT FORM LEAD CAPTURE -->
+            <div class="lg:col-span-4">
+                <div class="bg-navy-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                    <h2 class="text-lg font-bold text-white mb-2">Request Referral Code</h2>
+                    <p class="text-xs text-slate-400 mb-6">Enter your details to generate your unique HABACHA tracking code (<code class="text-cyan">HB-xxxx</code>) and redirect to the verified supplier page.</p>
+
+                    <form id="referralForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Full Name *</label>
+                            <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Corporate / Personal Email *</label>
+                            <input type="email" required placeholder="john@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Phone Number *</label>
+                            <input type="tel" required placeholder="+31 6 12345678" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Client Type</label>
+                            <select class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
+                                <option value="b2c">Private Individual (B2C)</option>
+                                <option value="b2b">Commercial Enterprise (B2B)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition">
+                            Proceed to Verified Supplier &rarr;
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SUCCESS POPUP MODAL -->
+    <div id="referralModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center space-y-4">
+            <div class="w-16 h-16 rounded-full bg-cyan/20 text-cyan mx-auto flex items-center justify-center text-3xl">✓</div>
+            <h3 class="text-xl font-bold text-white">Referral Code Issued</h3>
+            <p class="text-xs text-slate-300">Your unique intermediary referral code is: <span id="refCodeDisplay" class="font-mono font-bold text-cyan text-base">HB-8921</span></p>
+            <p class="text-xs text-slate-400">You are being redirected to the supplier portal with applied HABACHA referral rates...</p>
+            <div class="pt-2">
+                <a id="supplierRedirectBtn" href="#" class="inline-block w-full py-3 px-4 rounded-lg bg-steel text-white font-bold text-sm">Continue to Supplier Website Now</a>
+            </div>
         </div>
     </div>
 
     <script>
-        const database = [
-            {
-                id: '1', title: 'Volkswagen Golf 8', category: 'cars', price: 65, unit: 'per day',
-                image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=1200',
-                location: 'Amsterdam Branch / Schiphol Airport', provider: 'CityDrive Car Rental B.V.',
-                website: 'https://example.com/citydrive-booking',
-                specs: { 'Transmission': 'Automatic', 'Engine': '1.5 TSI Petrol', 'Seats': '5 Persons', 'Fuel Standard': 'Full to Full' },
-                description: 'Ideal car for daily driving, city trips, or business meetings. Flexible short rental or long-term private lease available.'
-            },
-            {
-                id: '2', title: 'Mercedes-Benz Sprinter Cargo Van', category: 'logistics', price: 120, unit: 'per day',
-                image: 'https://images.unsplash.com/photo-1559297434-fae8a1916a79?w=1200',
-                location: 'Rotterdam Terminal / Delivery Address', provider: 'EuroExpress Fleet Services',
-                website: 'https://example.com/sprinter-van',
-                specs: { 'Cargo Volume': '14 m³ Volume', 'Payload Capacity': '1,200 kg', 'Driver License': 'Standard Category B', 'Features': 'Rear Camera & GPS' },
-                description: 'Spacious delivery van equipped for moving house, transport of goods, or company parcel delivery.'
-            }
-        ];
-
-        function renderDetails() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id') || '1';
-            const item = database.find(i => i.id === id) || database[0];
-
-            const specsHtml = Object.entries(item.specs).map(([k, v]) => `
-                <div class="spec-item"><label>${k}</label><span>${v}</span></div>
-            `).join('');
-
-            document.getElementById('detail-container').innerHTML = `
-                <div>
-                    <span class="asset-tag"><i class="fa-solid fa-tag"></i> ${item.category.toUpperCase()} DIVISION</span>
-                    <h1 class="asset-title">${item.title}</h1>
-                    <div class="asset-meta">
-                        <span><i class="fa-solid fa-location-dot" style="color:var(--accent-cyan)"></i> ${item.location}</span>
-                    </div>
-
-                    <div class="gallery">
-                        <img src="${item.image}" alt="${item.title}">
-                        <div class="supplier-badge"><i class="fa-solid fa-shield-halved" style="color:var(--accent-cyan)"></i> Supplier: ${item.provider}</div>
-                    </div>
-
-                    <div class="box">
-                        <h4>Specifications & Features</h4>
-                        <div class="spec-grid">${specsHtml}</div>
-                    </div>
-
-                    <div class="box">
-                        <h4>Description</h4>
-                        <p style="color:var(--text-muted);">${item.description}</p>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="sidebar">
-                        <div class="price">€${item.price} <span>/ ${item.unit}</span></div>
-
-                        <form onsubmit="submitLead(event, '${item.website}')">
-                            <div class="form-head">1. Customer Type & Service</div>
-                            <div class="form-group">
-                                <label>Customer Type *</label>
-                                <select id="client_type">
-                                    <option value="private">Private Individual</option>
-                                    <option value="business">Business / Company</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Agreement *</label>
-                                <select id="service_type">
-                                    <option value="rental">Short Rental (Days / Weeks)</option>
-                                    <option value="lease">Long Lease (Months / Years)</option>
-                                </select>
-                            </div>
-
-                            <div class="form-head">2. Your Contact Details</div>
-                            <div class="form-group">
-                                <label>Full Name *</label>
-                                <input type="text" id="client_name" required placeholder="John Doe">
-                            </div>
-                            <div class="form-group">
-                                <label>Email Address *</label>
-                                <input type="email" id="client_email" required placeholder="john@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label>Phone / WhatsApp *</label>
-                                <input type="tel" id="client_phone" required placeholder="+31 6 12345678">
-                            </div>
-
-                            <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Proceed to Supplier Website</button>
-                        </form>
-                    </div>
-                </div>
-            `;
-        }
-
-        function submitLead(e, supplierUrl) {
+        document.getElementById('referralForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const refCode = 'HB-' + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('ref-code').innerText = refCode;
-            document.getElementById('supplier-link').href = `${supplierUrl}?ref=${refCode}`;
-            document.getElementById('redirect-modal').style.display = 'flex';
-        }
-
-        renderDetails();
+            const randomCode = 'HB-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('refCodeDisplay').textContent = randomCode;
+            document.getElementById('supplierRedirectBtn').href = 'https://example.com/partner-booking?ref=' + randomCode;
+            document.getElementById('referralModal').classList.remove('hidden');
+            document.getElementById('referralModal').classList.add('flex');
+        });
     </script>
 </body>
 </html>
