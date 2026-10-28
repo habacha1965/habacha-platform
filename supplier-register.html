@@ -23,14 +23,14 @@
         select {
             background-color: #0f172a !important;
             color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid #334155 !important;
             appearance: none;
             -webkit-appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
             background-repeat: no-repeat !important;
-            background-position: right 1rem center !important;
-            background-size: 1.25rem !important;
-            padding-right: 2.75rem !important;
+            background-position: right 0.75rem center !important;
+            background-size: 1rem !important;
+            padding-right: 2.25rem !important;
         }
         select option { background-color: #0f172a !important; color: #ffffff !important; padding: 12px; }
     </style>
@@ -66,32 +66,37 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                         <div class="flex flex-col items-start">
                             <label class="block text-xs font-bold text-slate-300 mb-1">Company Legal Name *</label>
-                            <input type="text" required placeholder="e.g. European Logistics & Mobility Group" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <input type="text" required placeholder="e.g. European Logistics & Mobility Group" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                         <div class="flex flex-col items-start">
                             <label class="block text-xs font-bold text-slate-300 mb-1">Corporate / Operations Email *</label>
-                            <input type="email" required placeholder="partners@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                            <input type="email" required placeholder="partners@company.com" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
                         </div>
                     </div>
                 </div>
 
-                <!-- SECTION 2: CLEAR ENTERPRISE HEADQUARTERS & BOOKING URL -->
+                <!-- SECTION 2: FIXED EQUAL-HEIGHT LABEL CONTAINERS FOR PERFECT ROW ALIGNMENT -->
                 <div class="flex flex-col items-start w-full bg-navy-900/60 p-6 rounded-xl border border-slate-700">
                     <h2 class="text-base font-bold text-cyan mb-4 flex items-center"><span class="w-6 h-6 rounded-full bg-steel text-white text-xs flex items-center justify-center mr-2">2</span> Enterprise Headquarters & Direct Booking URL</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full items-start">
                         
-                        <!-- CLEAR HEADQUARTERS FIELD -->
-                        <div class="flex flex-col items-start">
-                            <label class="block text-xs font-bold text-white mb-1">Company Headquarters / Primary Operating Region *</label>
-                            <p class="text-[11px] text-slate-400 mb-2">Specify your main headquarters or primary region (e.g., Global / Europe / London HQ). Individual branch locations are managed inside your partner portal.</p>
-                            <input type="text" required placeholder="e.g. Global Fleet / Headquarters Amsterdam" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-600 text-sm focus:outline-none focus:border-cyan">
+                        <!-- LEFT FIELD CONTAINER -->
+                        <div class="flex flex-col items-start w-full">
+                            <div class="min-h-[50px] flex flex-col justify-start w-full">
+                                <label class="block text-xs font-bold text-white mb-1">Company Headquarters / Primary Region *</label>
+                                <p class="text-[11px] text-slate-400">Main HQ location (e.g., Global / Europe / London HQ).</p>
+                            </div>
+                            <input type="text" required placeholder="e.g. Global Fleet / Headquarters Amsterdam" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-600 text-sm focus:outline-none focus:border-cyan">
                         </div>
 
-                        <!-- BOOKING LINK -->
-                        <div class="flex flex-col items-start">
-                            <label class="block text-xs font-bold text-white mb-1">Supplier Direct Booking Website (URL) *</label>
-                            <p class="text-[11px] text-slate-400 mb-2">The official URL where HABACHA will redirect verified clients with their tracking lead code (<code class="text-cyan">?ref=HB-xxxx</code>).</p>
-                            <input type="url" required placeholder="https://yourcompany.com/booking-engine" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-600 text-sm focus:outline-none focus:border-cyan">
+                        <!-- RIGHT FIELD CONTAINER (EXACT SAME VERTICAL INPUT LINE) -->
+                        <div class="flex flex-col items-start w-full">
+                            <div class="min-h-[50px] flex flex-col justify-start w-full">
+                                <label class="block text-xs font-bold text-white mb-1">Supplier Direct Booking Website (URL) *</label>
+                                <p class="text-[11px] text-slate-400">URL to redirect clients with lead code (<code class="text-cyan">?ref=HB-xxxx</code>).</p>
+                            </div>
+                            <input type="url" required placeholder="https://yourcompany.com/booking-engine" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-600 text-sm focus:outline-none focus:border-cyan">
                         </div>
 
                     </div>
@@ -102,7 +107,7 @@
                     <h2 class="text-base font-bold text-cyan mb-4 flex items-center"><span class="w-6 h-6 rounded-full bg-steel text-white text-xs flex items-center justify-center mr-2">3</span> Primary Asset Division</h2>
                     <div class="w-full">
                         <label class="block text-xs font-bold text-slate-300 mb-1">Primary Product Category Offered *</label>
-                        <select required class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
+                        <select required class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
                             <option value="cars">1. Cars & Passenger Vans (Branch & Airport Terminal Pickup)</option>
                             <option value="freight">2. Commercial Vans & Heavy Freight Trucks</option>
                             <option value="boats">3. Boats, Yachts & Commercial Cargo Ships</option>
