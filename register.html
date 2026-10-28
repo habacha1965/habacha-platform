@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Renter Account | HABACHA Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0b1329', 800: '#0f172a', 700: '#1e293b' },
+                        steel: '#2563eb',
+                        cyan: '#0ea5e9'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-align: left; }
+        select {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 1rem center !important;
+            background-size: 1.25rem !important;
+            padding-right: 2.75rem !important;
+        }
+    </style>
+</head>
+<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col justify-between items-start">
+
+    <!-- HEADER -->
+    <header class="bg-navy-900 border-b border-slate-800 py-4 px-6 w-full">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-steel to-cyan flex items-center justify-center font-black text-white text-lg">H</div>
+                <span class="text-xl font-bold text-white">HABACHA</span>
+            </a>
+            <a href="login.html" class="text-xs text-slate-400 hover:text-white">Already have an account? Sign In &rarr;</a>
+        </div>
+    </header>
+
+    <!-- FORM CARD -->
+    <main class="flex-grow max-w-xl mx-auto px-4 py-12 w-full text-left flex items-center justify-center">
+        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 shadow-2xl flex flex-col items-start w-full">
+            
+            <div class="mb-6 w-full flex flex-col items-start border-b border-slate-700 pb-4">
+                <span class="px-3 py-1 rounded-full bg-steel/20 text-cyan text-xs font-semibold">Client Registration</span>
+                <h1 class="text-2xl font-bold text-white mt-2">Create Free Renter Account</h1>
+                <p class="text-slate-400 text-xs mt-1">Access global short-term rentals and long-term enterprise leasing.</p>
+            </div>
+
+            <form id="registerForm" class="space-y-4 w-full">
+                
+                <!-- CLIENT TYPE SELECTOR -->
+                <div class="flex flex-col items-start w-full">
+                    <label class="block text-xs font-bold text-slate-300 mb-2">Account Type *</label>
+                    <div class="grid grid-cols-2 gap-3 w-full">
+                        <button type="button" id="typeB2C" class="py-2.5 px-3 rounded-lg border border-steel bg-steel text-white text-xs font-bold transition text-center">
+                            Private Individual (B2C)
+                        </button>
+                        <button type="button" id="typeB2B" class="py-2.5 px-3 rounded-lg border border-slate-700 bg-navy-900 text-slate-400 text-xs font-bold transition text-center">
+                            Corporate Enterprise (B2B)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FULL NAME -->
+                <div class="flex flex-col items-start w-full">
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Full Name *</label>
+                    <input type="text" required placeholder="e.g. Jan de Vries" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                </div>
+
+                <!-- COMPANY NAME (HIDDEN BY DEFAULT, SHOWN FOR B2B) -->
+                <div id="companyField" class="hidden flex-col items-start w-full transition-all">
+                    <label class="block text-xs font-bold text-cyan mb-1">Registered Company Name *</label>
+                    <input type="text" placeholder="e.g. Global Logistics B.V." class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                </div>
+
+                <!-- EMAIL -->
+                <div class="flex flex-col items-start w-full">
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
+                    <input type="email" required placeholder="jan@company.com" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                </div>
+
+                <!-- PHONE -->
+                <div class="flex flex-col items-start w-full">
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Telephone Number *</label>
+                    <input type="tel" required placeholder="+31 6 12345678" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="flex flex-col items-start w-full">
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Create Password *</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+                </div>
+
+                <!-- TERMS -->
+                <div class="flex flex-col items-start w-full pt-2">
+                    <label class="flex items-start space-x-2 text-xs text-slate-400 cursor-pointer">
+                        <input type="checkbox" required class="mt-0.5 rounded bg-navy-900 border-slate-700 text-steel">
+                        <span>I accept HABACHA Platform terms and intermediary privacy guidelines.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full py-3 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition mt-2">
+                    Complete Registration & Sign In
+                </button>
+
+            </form>
+
+            <div class="mt-6 w-full text-center text-xs text-slate-400 border-t border-slate-700/60 pt-4">
+                Are you an asset owner or fleet manager? <a href="supplier-register.html" class="text-cyan font-bold hover:underline">Register your Business Fleet</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-cyan/20 text-cyan mx-auto flex items-center justify-center text-3xl font-bold">✓</div>
+            <h3 class="text-xl font-bold text-white">Account Created</h3>
+            <p class="text-xs text-slate-300">Your client profile has been registered successfully. You can now request referral leads and view active listings.</p>
+            <div class="pt-2">
+                <a href="inventory.html" class="inline-block w-full py-3 px-4 rounded-lg bg-steel text-white font-bold text-sm">Browse Marketplace Listings</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-navy-950 border-t border-slate-800 text-slate-500 text-xs py-4 text-center w-full">
+        &copy; HABACHA Platform. All rights reserved.
+    </footer>
+
+    <script>
+        const typeB2C = document.getElementById('typeB2C');
+        const typeB2B = document.getElementById('typeB2B');
+        const companyField = document.getElementById('companyField');
+
+        typeB2C.addEventListener('click', () => {
+            typeB2C.className = "py-2.5 px-3 rounded-lg border border-steel bg-steel text-white text-xs font-bold transition text-center";
+            typeB2B.className = "py-2.5 px-3 rounded-lg border border-slate-700 bg-navy-900 text-slate-400 text-xs font-bold transition text-center";
+            companyField.classList.add('hidden');
+            companyField.classList.remove('flex');
+        });
+
+        typeB2B.addEventListener('click', () => {
+            typeB2B.className = "py-2.5 px-3 rounded-lg border border-steel bg-steel text-white text-xs font-bold transition text-center";
+            typeB2C.className = "py-2.5 px-3 rounded-lg border border-slate-700 bg-navy-900 text-slate-400 text-xs font-bold transition text-center";
+            companyField.classList.remove('hidden');
+            companyField.classList.add('flex');
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successModal').classList.remove('hidden');
+            document.getElementById('successModal').classList.add('flex');
+        });
+    </script>
+</body>
+</html>
