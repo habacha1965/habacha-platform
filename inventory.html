@@ -6,44 +6,23 @@
     <title>Global Asset Marketplace | HABACHA Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: { 900: '#0b1329', 800: '#0f172a', 700: '#1e293b' },
-                        steel: '#2563eb',
-                        cyan: '#0ea5e9'
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { navy: { 900: '#0b1329', 800: '#0f172a', 700: '#1e293b' }, steel: '#2563eb', cyan: '#0ea5e9' } } } }
     </script>
     <style>
-        body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        select {
-            background-color: #0f172a !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 1rem center !important;
-            background-size: 1.25rem !important;
-            padding-right: 2.75rem !important;
-        }
+        body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-align: left; }
+        select { background-color: #0f172a !important; color: #ffffff !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 1rem center !important; background-size: 1.25rem !important; padding-right: 2.75rem !important; }
         select option { background-color: #0f172a !important; color: #ffffff !important; padding: 12px; }
     </style>
 </head>
-<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col">
+<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col items-start">
 
-    <!-- HEADER NAVIGATION (Logo acts as Home) -->
-    <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur border-b border-slate-800">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur border-b border-slate-800 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <a href="index.html" class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-steel to-cyan flex items-center justify-center font-black text-white text-xl">H</div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col items-start">
                         <span class="text-2xl font-extrabold text-white">HABACHA</span>
                         <span class="text-[10px] tracking-widest text-slate-400 uppercase font-semibold">Global Exchange</span>
                     </div>
@@ -55,209 +34,114 @@
                 </nav>
 
                 <div class="hidden lg:flex items-center space-x-4">
-                    <a href="login.html" class="px-4 py-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white text-sm font-medium">Partner Portal</a>
-                </div>
-
-                <div class="flex lg:hidden">
-                    <button id="mobileMenuBtn" class="p-2 rounded-lg bg-navy-800 text-slate-300 hover:text-white border border-slate-700">
-                        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
+                    <a href="login.html" class="px-4 py-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white text-sm font-medium">Portal Login</a>
                 </div>
             </div>
         </div>
-
-        <div id="mobileMenu" class="hidden lg:hidden bg-navy-800 border-b border-slate-700 px-4 pt-4 pb-6 space-y-3">
-            <a href="inventory.html" class="block px-3 py-2 rounded-md bg-navy-900 text-cyan font-semibold">All Categories</a>
-            <a href="supplier-register.html" class="block px-3 py-2 rounded-md text-slate-200">List Your Fleet</a>
-            <a href="login.html" class="block px-3 py-2 rounded-md text-slate-200">Partner Login</a>
-        </div>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-        <div class="mb-8">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full text-left">
+        <div class="mb-8 flex flex-col items-start">
             <h1 class="text-3xl font-bold text-white">Global Asset Marketplace Inventory</h1>
             <p class="text-slate-400 text-sm mt-1">Explore verified short-term rentals and long-term lease offers across all 8 divisions.</p>
         </div>
 
         <!-- FILTER BAR -->
         <div class="bg-navy-800 p-6 rounded-xl border border-slate-700 mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
+            <div class="flex flex-col items-start">
                 <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Category Filter</label>
                 <select id="categoryFilter" onchange="filterAssets()" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
                     <option value="all">All 8 Product Divisions</option>
-                    <option value="cars">1. Cars & Passenger Vans</option>
-                    <option value="freight">2. Commercial Vans & Freight</option>
-                    <option value="boats">3. Boats, Yachts & Cargo Ships</option>
+                    <option value="cars">1. Cars & Vans</option>
+                    <option value="freight">2. Freight & Trucks</option>
+                    <option value="boats">3. Boats & Ships</option>
                     <option value="aircraft">4. Helicopters & Aircraft</option>
                     <option value="realestate">5. Stays & Real Estate</option>
                     <option value="equipment">6. Construction Machinery</option>
-                    <option value="campers">7. Campers & Leisure Mobility</option>
-                    <option value="events">8. Event Equipment & Audio/Visual</option>
+                    <option value="campers">7. Campers & RVs</option>
+                    <option value="events">8. Event Equipment</option>
                 </select>
             </div>
-            <div>
+            <div class="flex flex-col items-start">
                 <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Agreement Type</label>
                 <select id="typeFilter" onchange="filterAssets()" class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
-                    <option value="all">All Agreements (Rental & Lease)</option>
-                    <option value="short">Short-Term Rental (Daily / Weekly)</option>
-                    <option value="lease">Long-Term Lease (Monthly / Yearly)</option>
+                    <option value="all">All Agreements</option>
+                    <option value="short">Short-Term Rental</option>
+                    <option value="lease">Long-Term Lease</option>
                 </select>
             </div>
-            <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Search Asset or Location</label>
-                <input type="text" id="searchInput" onkeyup="filterAssets()" placeholder="Search model, city, airport..." class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
+            <div class="flex flex-col items-start">
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Search Location</label>
+                <input type="text" id="searchInput" onkeyup="filterAssets()" placeholder="Search city or airport..." class="w-full px-4 py-2.5 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
             </div>
         </div>
 
-        <!-- ASSETS GRID COVERING ALL 8 DIVISIONS -->
+        <!-- ASSETS GRID -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="inventoryGrid">
             
-            <!-- 1. CARS & VANS -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="cars" data-type="short" data-text="mercedes v-class passenger van amsterdam airport">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">1. Cars & Passenger Vans</span>
-                        <span class="text-xs text-slate-400">Branch Pickup Only</span>
+            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 flex flex-col justify-between" data-cat="cars" data-type="short" data-text="mercedes amsterdam">
+                <div class="flex flex-col items-start">
+                    <div class="flex items-center justify-between w-full mb-3">
+                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">1. Cars & Vans</span>
+                        <span class="text-xs text-slate-400">Branch Pickup</span>
                     </div>
                     <h3 class="text-lg font-bold text-white">Mercedes-Benz V-Class (9-Seater)</h3>
-                    <p class="text-xs text-slate-400 mt-2">Executive passenger transport for corporate transfers. Branch and airport terminal pickup strictly enforced.</p>
+                    <p class="text-xs text-slate-400 mt-2">Executive passenger transport. Amsterdam Hub.</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">From</span><div class="text-lg font-bold text-cyan">€145 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
-                    <a href="asset-detail.html?id=cars-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
+                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between w-full">
+                    <div class="flex flex-col items-start"><span class="text-xs text-slate-400">From</span><div class="text-lg font-bold text-cyan">€145 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
+                    <a href="asset-detail.html?id=cars-1" class="px-4 py-2 rounded-lg bg-steel text-white font-semibold text-xs">View Details &rarr;</a>
                 </div>
             </div>
 
-            <!-- 2. FREIGHT & TRUCKS -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="freight" data-type="lease" data-text="daf xf tractor freight truck rotterdam port">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">2. Commercial Freight</span>
+            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 flex flex-col justify-between" data-cat="freight" data-type="lease" data-text="daf xf rotterdam">
+                <div class="flex flex-col items-start">
+                    <div class="flex items-center justify-between w-full mb-3">
+                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">2. Freight & Trucks</span>
                         <span class="text-xs text-slate-400">Enterprise Lease</span>
                     </div>
                     <h3 class="text-lg font-bold text-white">DAF XF 480 Super Space Cab</h3>
-                    <p class="text-xs text-slate-400 mt-2">Heavy freight cargo tractor with sleeper cab for long-haul international logistics.</p>
+                    <p class="text-xs text-slate-400 mt-2">Heavy freight tractor. Rotterdam Terminal.</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Enterprise Lease</span><div class="text-lg font-bold text-cyan">€2,100 <span class="text-xs font-normal text-slate-400">/ mo</span></div></div>
-                    <a href="asset-detail.html?id=freight-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
+                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between w-full">
+                    <div class="flex flex-col items-start"><span class="text-xs text-slate-400">From</span><div class="text-lg font-bold text-cyan">€2,100 <span class="text-xs font-normal text-slate-400">/ mo</span></div></div>
+                    <a href="asset-detail.html?id=freight-1" class="px-4 py-2 rounded-lg bg-steel text-white font-semibold text-xs">View Details &rarr;</a>
                 </div>
             </div>
 
-            <!-- 3. BOATS & SHIPS -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="boats" data-type="short" data-text="sunseeker luxury yacht monaco charter">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
+            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 flex flex-col justify-between" data-cat="boats" data-type="short" data-text="sunseeker monaco yacht">
+                <div class="flex flex-col items-start">
+                    <div class="flex items-center justify-between w-full mb-3">
                         <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">3. Boats & Ships</span>
-                        <span class="text-xs text-slate-400">Charter Rental</span>
+                        <span class="text-xs text-slate-400">Charter</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white">Sunseeker Predator 74 Luxury Yacht</h3>
-                    <p class="text-xs text-slate-400 mt-2">74ft executive charter yacht with skipper, luxury cabins, and high-speed twin diesel propulsion.</p>
+                    <h3 class="text-lg font-bold text-white">Sunseeker 74 Luxury Yacht</h3>
+                    <p class="text-xs text-slate-400 mt-2">Executive charter yacht. Monaco Marina.</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Charter Rate</span><div class="text-lg font-bold text-cyan">€3,400 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
-                    <a href="asset-detail.html?id=boats-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
-                </div>
-            </div>
-
-            <!-- 4. AIRCRAFT & HELICOPTERS -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="aircraft" data-type="short" data-text="airbus h145 helicopter charter london">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">4. Helicopters & Aircraft</span>
-                        <span class="text-xs text-slate-400">Private Flight Charter</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">Airbus H145 Twin-Engine Helicopter</h3>
-                    <p class="text-xs text-slate-400 mt-2">VIP 8-passenger corporate transfer helicopter with certified flight crew.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Hourly Rate</span><div class="text-lg font-bold text-cyan">€2,850 <span class="text-xs font-normal text-slate-400">/ hour</span></div></div>
-                    <a href="asset-detail.html?id=aircraft-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
-                </div>
-            </div>
-
-            <!-- 5. STAYS & REAL ESTATE -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="realestate" data-type="lease" data-text="corporate office space amsterdam zuidas real estate">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">5. Stays & Real Estate</span>
-                        <span class="text-xs text-slate-400">Corporate Lease</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">Prime Office Suite (Zuidas Financial District)</h3>
-                    <p class="text-xs text-slate-400 mt-2">450 m² fully furnished modern office floor with boardroom and high-speed glass fiber uplink.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Commercial Lease</span><div class="text-lg font-bold text-cyan">€8,500 <span class="text-xs font-normal text-slate-400">/ mo</span></div></div>
-                    <a href="asset-detail.html?id=realestate-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
-                </div>
-            </div>
-
-            <!-- 6. CONSTRUCTION MACHINERY -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="equipment" data-type="short" data-text="caterpillar excavator 320 heavy equipment site">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">6. Construction Equipment</span>
-                        <span class="text-xs text-slate-400">Site Direct Delivery</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">Caterpillar 320 Hydraulic Excavator</h3>
-                    <p class="text-xs text-slate-400 mt-2">20-ton heavy crawler excavator equipped with GPS 3D grading tools for industrial site works.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Daily Rate</span><div class="text-lg font-bold text-cyan">€380 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
-                    <a href="asset-detail.html?id=equipment-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
-                </div>
-            </div>
-
-            <!-- 7. CAMPERS & LEISURE -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="campers" data-type="short" data-text="hymer campervan rv motorhome leisure travel">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">7. Campers & Leisure</span>
-                        <span class="text-xs text-slate-400">Holiday Rental</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">Hymer B-Class Supreme Motorhome</h3>
-                    <p class="text-xs text-slate-400 mt-2">4-berth luxury integrated motorhome with solar power, kitchen, and bike rack for European road trips.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Rental Rate</span><div class="text-lg font-bold text-cyan">€160 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
-                    <a href="asset-detail.html?id=campers-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
-                </div>
-            </div>
-
-            <!-- 8. EVENT AUDIO & LIGHTS -->
-            <div class="asset-card bg-navy-800 border border-slate-700 rounded-xl p-6 hover:border-cyan transition flex flex-col justify-between" data-cat="events" data-type="short" data-text="l-acoustics concert sound system stage event gear">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 rounded bg-steel/20 text-cyan text-xs font-semibold">8. Event & Audio/Visual</span>
-                        <span class="text-xs text-slate-400">Pro Event Rig</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">L-Acoustics K2 Line Array Concert Sound Rig</h3>
-                    <p class="text-xs text-slate-400 mt-2">Professional 20,000W festival audio system with amplified controllers and digital mixing console.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-                    <div><span class="text-xs text-slate-400">Event Rate</span><div class="text-lg font-bold text-cyan">€1,250 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
-                    <a href="asset-detail.html?id=events-1" class="px-4 py-2 rounded-lg bg-steel hover:bg-blue-600 text-white font-semibold text-xs">View Details &rarr;</a>
+                <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between w-full">
+                    <div class="flex flex-col items-start"><span class="text-xs text-slate-400">From</span><div class="text-lg font-bold text-cyan">€3,400 <span class="text-xs font-normal text-slate-400">/ day</span></div></div>
+                    <a href="asset-detail.html?id=boats-1" class="px-4 py-2 rounded-lg bg-steel text-white font-semibold text-xs">View Details &rarr;</a>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <footer class="bg-navy-950 border-t border-slate-800 text-slate-400 text-xs py-8 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <span class="text-white font-bold text-sm">HABACHA Intermediary Exchange</span>
-            <span>&copy; HABACHA Platform. All rights reserved.</span>
+    <!-- CORPORATE FOOTER -->
+    <footer class="bg-navy-950 border-t border-slate-800 w-full pt-8 pb-6 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400">
+            <span class="font-bold text-white">HABACHA Intermediary Exchange</span>
+            <div class="space-x-4 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-cyan">Terms</a>
+                <a href="#" class="hover:text-cyan">Privacy</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Read URL params if coming from homepage category click
         const urlParams = new URLSearchParams(window.location.search);
         const urlCategory = urlParams.get('category');
-        if (urlCategory) {
-            document.getElementById('categoryFilter').value = urlCategory;
-        }
+        if (urlCategory) document.getElementById('categoryFilter').value = urlCategory;
 
         function filterAssets() {
             const cat = document.getElementById('categoryFilter').value;
@@ -266,42 +150,15 @@
             const cards = document.querySelectorAll('.asset-card');
 
             cards.forEach(card => {
-                const cardCat = card.getAttribute('data-cat');
-                const cardType = card.getAttribute('data-type');
-                const cardText = card.getAttribute('data-text');
-
-                const matchCat = (cat === 'all' || cardCat === cat);
-                const matchType = (type === 'all' || cardType === type);
-                const matchSearch = (search === '' || cardText.includes(search));
-
-                if (matchCat && matchType && matchSearch) {
+                const c = card.getAttribute('data-cat'), t = card.getAttribute('data-type'), txt = card.getAttribute('data-text');
+                if ((cat === 'all' || c === cat) && (type === 'all' || t === type) && (search === '' || txt.includes(search))) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
             });
         }
-
-        // Run filter on page load
         filterAssets();
-
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const hamburgerIcon = document.getElementById('hamburgerIcon');
-        const closeIcon = document.getElementById('closeIcon');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isOpen = !mobileMenu.classList.contains('hidden');
-            if (isOpen) {
-                mobileMenu.classList.add('hidden');
-                hamburgerIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            } else {
-                mobileMenu.classList.remove('hidden');
-                hamburgerIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
-            }
-        });
     </script>
 </body>
 </html>
