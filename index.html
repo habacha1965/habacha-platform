@@ -1,72 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HABACHA Platform | The Universal Asset Exchange</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
-    .cat-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(197, 168, 128, 0.3); border-radius: 16px; overflow: hidden; transition: 0.3s; text-decoration: none; display: block; }
-    .cat-card:hover { transform: translateY(-5px); border-color: #C5A880; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .cat-img { height: 200px; background-size: cover; background-position: center; border-bottom: 2px solid #C5A880; }
-    .cat-content { padding: 25px; text-align: center; }
-    .cat-title { color: #C5A880; font-size: 1.5rem; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-    .cat-desc { color: #94A3B8; font-size: 0.95rem; line-height: 1.5; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HABACHA | Global Asset Exchange & Mobility Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #0b132b; --bg-card: #1c2541; --gold: #c5a059; --gold-hover: #e0b875; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; overflow-x: hidden; }
+        .text-gold { color: var(--gold) !important; }
+        .bg-gold { background-color: var(--gold) !important; color: #000 !important; }
+        
+        /* Top Executive Utility Bar */
+        .top-bar { background-color: #050a18; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
+        
+        /* Navigation */
+        .navbar { background-color: rgba(11, 19, 43, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
+        .nav-link { color: #d1d5db; font-weight: 500; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.8px; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        
+        /* Hero & Search Engine Widget (Booking.com style) */
+        .hero-section {
+            background: linear-gradient(180deg, rgba(11,19,43,0.5) 0%, rgba(11,19,43,1) 100%), 
+                        url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            padding: 80px 0 100px 0;
+            position: relative;
+        }
+        
+        .search-engine-box {
+            background: rgba(28, 37, 65, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
+        }
+        
+        .search-tab-btn {
+            background: transparent;
+            border: none;
+            color: #a0aec0;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .search-tab-btn.active, .search-tab-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Asset Cards (Airbnb style) */
+        .asset-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(197,160,89,0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .asset-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 30px rgba(197,160,89,0.15);
+        }
+        .asset-img-wrap { position: relative; height: 230px; overflow: hidden; }
+        .asset-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .asset-card:hover .asset-img { transform: scale(1.06); }
+        .badge-rating { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 0.78rem; }
+        .badge-verified { background: var(--gold); color: #000; font-weight: 700; border-radius: 6px; padding: 3px 8px; font-size: 0.7rem; text-transform: uppercase; }
+        .heart-btn { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.5); color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: 0.3s; }
+        .heart-btn:hover { background: #e63946; color: #fff; }
+
+        /* Destination Hub Pill (Trivago style) */
+        .city-hub-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+            text-decoration: none;
+            color: #fff;
+        }
+        .city-hub-card:hover {
+            border-color: var(--gold);
+            background: #253254;
+            color: var(--gold);
+        }
+        .city-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo-container"><a href="index.html" class="logo-text">HABACHA</a></div>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="inventory.html">Marketplace</a>
-      <a href="suppliers.html">List Your Asset (B2B)</a>
+
+    <!-- Top Utility Contact Bar (First Class Aviation Style) -->
+    <div class="top-bar py-2 text-secondary">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div class="d-flex gap-4">
+                <span><i class="fas fa-phone text-gold me-2"></i>+31 (0) 20 123 4567</span>
+                <span><i class="fas fa-envelope text-gold me-2"></i>operations@habacha.com</span>
+                <span class="d-none d-md-inline"><i class="fas fa-shield-halved text-gold me-2"></i>Verified Executive Exchange</span>
+            </div>
+            <div class="d-flex gap-3 align-items-center">
+                <span class="badge bg-gold text-black">24/7 Operations Desk</span>
+                <a href="suppliers.html" class="text-gold text-decoration-none fw-bold"><i class="fas fa-plus-circle me-1"></i>List Your Asset (B2B)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="navbar navbar-expand-lg sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand text-gold fw-bold fs-3 tracking-wide" href="index.html">
+                <i class="fas fa-compass me-2"></i>HABACHA
+            </a>
+            <button class="navbar-toggler text-white border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link active text-gold" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="inventory.html">Marketplace</a></li>
+                    <li class="nav-item"><a class="nav-link" href="suppliers.html">B2B Partners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin Console</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a href="inventory.html" class="btn bg-gold fw-bold btn-sm px-3 py-2"><i class="fas fa-search me-1"></i>Search Fleet</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <section class="hero" style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
-    <div class="hero-text" style="max-width: 800px; text-align: center;">
-      <h1>The Universal Asset Exchange</h1>
-      <p>Select a category below to browse live availability and pricing from our global network of verified suppliers and fleet operators.</p>
-    </div>
-  </section>
+    <!-- Hero Section with Booking.com Multi-Vertical Search Widget -->
+    <section class="hero-section">
+        <div class="container text-center text-lg-start">
+            <div class="row align-items-center">
+                <div class="col-lg-12 text-center mb-4">
+                    <span class="badge bg-outline-gold border border-gold text-gold px-3 py-2 rounded-pill text-uppercase tracking-wider small mb-3">Global Asset & Mobility Exchange</span>
+                    <h1 class="display-4 fw-bold text-white mb-2">Find Your Next <span class="text-gold">Charter, Fleet or Estate</span></h1>
+                    <p class="text-secondary lead max-w-2xl mx-auto fs-5">Search verified private jets, luxury cars, motor yachts, and properties worldwide.</p>
+                </div>
 
-  <div class="container" style="margin-bottom: 80px;">
-    <div class="category-grid">
-      <a href="inventory.html?cat=car_van_truck" class="cat-card">
-        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80');"></div>
-        <div class="cat-content">
-          <h2 class="cat-title">Road Transport</h2>
-          <p class="cat-desc">Luxury Chauffeur Sedans, Commercial Vans & Logistics Truck Fleets.</p>
-        </div>
-      </a>
-      <a href="inventory.html?cat=jet_aircraft" class="cat-card">
-        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80');"></div>
-        <div class="cat-content">
-          <h2 class="cat-title">Aviation</h2>
-          <p class="cat-desc">Private Executive Jets, Helicopters & Commercial Cargo Aircraft.</p>
-        </div>
-      </a>
-      <a href="inventory.html?cat=yacht_ship" class="cat-card">
-        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&q=80');"></div>
-        <div class="cat-content">
-          <h2 class="cat-title">Maritime</h2>
-          <p class="cat-desc">Luxury Superyachts, Passenger Ferries & Cargo Shipping Vessels.</p>
-        </div>
-      </a>
-      <a href="inventory.html?cat=real_estate" class="cat-card">
-        <div class="cat-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80');"></div>
-        <div class="cat-content">
-          <h2 class="cat-title">Real Estate</h2>
-          <p class="cat-desc">Premium Coastal Estates, Corporate Villas & Commercial Venues.</p>
-        </div>
-      </a>
-    </div>
-  </div>
+                <!-- Unified Search Engine Widget -->
+                <div class="col-lg-10 mx-auto">
+                    <div class="search-engine-box">
+                        <!-- Category Search Tabs -->
+                        <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap" id="searchTabs">
+                            <button class="search-tab-btn active" onclick="setSearchCategory('All')"><i class="fas fa-globe me-2"></i>All Assets</button>
+                            <button class="search-tab-btn" onclick="setSearchCategory('Road Vehicles')"><i class="fas fa-car me-2"></i>Road Vehicles</button>
+                            <button class="search-tab-btn" onclick="setSearchCategory('Aviation')"><i class="fas fa-plane me-2"></i>Aviation Desk</button>
+                            <button class="search-tab-btn" onclick="setSearchCategory('Boats & Vessels')"><i class="fas fa-ship me-2"></i>Maritime</button>
+                            <button class="search-tab-btn" onclick="setSearchCategory('Spaces & Properties')"><i class="fas fa-building me-2"></i>Real Estate</button>
+                        </div>
 
-  <footer>
-    <p>&copy; 2026 HABACHA Platform. All rights reserved.</p>
-  </footer>
+                        <!-- Input Controls Form -->
+                        <form action="inventory.html" method="GET" class="row g-3 align-items-center text-start">
+                            <input type="hidden" name="cat" id="searchCatInput" value="All">
+                            <div class="col-md-4">
+                                <label class="small text-secondary fw-semibold mb-1"><i class="fas fa-location-dot text-gold me-1"></i>Destination / Hub</label>
+                                <input type="text" name="location" class="form-control bg-dark text-white border-secondary py-2" placeholder="e.g. Amsterdam, Monaco, Cannes, Dubai">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small text-secondary fw-semibold mb-1"><i class="fas fa-calendar text-gold me-1"></i>Departure Date</label>
+                                <input type="date" name="date" class="form-control bg-dark text-white border-secondary py-2">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="small text-secondary fw-semibold mb-1"><i class="fas fa-clock text-gold me-1"></i>Duration</label>
+                                <select name="duration" class="form-select bg-dark text-white border-secondary py-2">
+                                    <option value="1">1 Day / Flight Hour</option>
+                                    <option value="3">3 Days</option>
+                                    <option value="7">1 Week</option>
+                                    <option value="30">1 Month Custom</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-grid">
+                                <label class="small text-transparent mb-1">Search</label>
+                                <button type="submit" class="btn bg-gold fw-bold py-2"><i class="fas fa-search me-1"></i>Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Hub Destinations (Trivago Style) -->
+    <section class="py-5 bg-black border-top border-secondary">
+        <div class="container py-2">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+                <div>
+                    <span class="text-gold text-uppercase fw-bold small">Global Operations Hubs</span>
+                    <h3 class="fw-bold text-white mb-0">Popular Charter Locations</h3>
+                </div>
+                <a href="inventory.html" class="text-gold text-decoration-none fw-bold small">Explore All Locations <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6 col-md-4 col-lg-2.4">
+                    <a href="inventory.html?location=Amsterdam" class="city-hub-card">
+                        <img src="https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=200&q=80" class="city-img" alt="Amsterdam">
+                        <div>
+                            <h6 class="fw-bold mb-0">Amsterdam</h6>
+                            <span class="text-secondary small">38 Assets</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2.4">
+                    <a href="inventory.html?location=Monaco" class="city-hub-card">
+                        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=200&q=80" class="city-img" alt="Monaco">
+                        <div>
+                            <h6 class="fw-bold mb-0">Monaco</h6>
+                            <span class="text-secondary small">24 Assets</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2.4">
+                    <a href="inventory.html?location=Cannes" class="city-hub-card">
+                        <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=200&q=80" class="city-img" alt="Cannes">
+                        <div>
+                            <h6 class="fw-bold mb-0">Cannes</h6>
+                            <span class="text-secondary small">19 Assets</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2.4">
+                    <a href="inventory.html?location=Dubai" class="city-hub-card">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=200&q=80" class="city-img" alt="Dubai">
+                        <div>
+                            <h6 class="fw-bold mb-0">Dubai</h6>
+                            <span class="text-secondary small">42 Assets</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2.4">
+                    <a href="inventory.html?location=London" class="city-hub-card">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=200&q=80" class="city-img" alt="London">
+                        <div>
+                            <h6 class="fw-bold mb-0">London</h6>
+                            <span class="text-secondary small">31 Assets</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Verified Assets (Airbnb Card Grid Style) -->
+    <section class="py-5">
+        <div class="container py-3">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <span class="text-gold text-uppercase fw-bold small">Handpicked & Verified Fleet</span>
+                    <h3 class="fw-bold text-white mb-0">Featured Executive Assets</h3>
+                </div>
+                <a href="inventory.html" class="btn btn-outline-warning btn-sm fw-bold">View Entire Fleet</a>
+            </div>
+
+            <div class="row g-4">
+                <!-- Asset 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="asset-card h-100 d-flex flex-column">
+                        <div class="asset-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" class="asset-img" alt="Gulfstream G650ER">
+                            <button class="heart-btn"><i class="far fa-heart"></i></button>
+                            <span class="position-absolute bottom-0 start-0 m-3 badge-rating"><i class="fas fa-star text-gold me-1"></i>4.98 (42)</span>
+                        </div>
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-gold text-black">Aviation</span>
+                                <span class="badge-verified">Verified Partner</span>
+                            </div>
+                            <h5 class="fw-bold text-white mb-1">Gulfstream G650ER</h5>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>Amsterdam Schiphol (EHAM)</p>
+                            <div class="mt-auto pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-secondary small d-block">Hourly Rate</span>
+                                    <span class="fs-5 fw-bold text-gold">€14.500</span>
+                                </div>
+                                <a href="inventory.html" class="btn bg-gold btn-sm fw-bold px-3">Reserve</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asset 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="asset-card h-100 d-flex flex-column">
+                        <div class="asset-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" class="asset-img" alt="Rolls-Royce Cullinan">
+                            <button class="heart-btn"><i class="far fa-heart"></i></button>
+                            <span class="position-absolute bottom-0 start-0 m-3 badge-rating"><i class="fas fa-star text-gold me-1"></i>4.95 (58)</span>
+                        </div>
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-gold text-black">Road Transport</span>
+                                <span class="badge-verified">Chauffeur / Self</span>
+                            </div>
+                            <h5 class="fw-bold text-white mb-1">Rolls-Royce Cullinan</h5>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>Monaco / Paris / Amsterdam</p>
+                            <div class="mt-auto pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-secondary small d-block">Daily Rate</span>
+                                    <span class="fs-5 fw-bold text-gold">€2.200</span>
+                                </div>
+                                <a href="inventory.html" class="btn bg-gold btn-sm fw-bold px-3">Reserve</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asset 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="asset-card h-100 d-flex flex-column">
+                        <div class="asset-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" class="asset-img" alt="Sunseeker 131 Yacht">
+                            <button class="heart-btn"><i class="far fa-heart"></i></button>
+                            <span class="position-absolute bottom-0 start-0 m-3 badge-rating"><i class="fas fa-star text-gold me-1"></i>5.0 (19)</span>
+                        </div>
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-gold text-black">Maritime</span>
+                                <span class="badge-verified">Superyacht</span>
+                            </div>
+                            <h5 class="fw-bold text-white mb-1">Sunseeker 131 Yacht</h5>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>Cannes / Mediterranean</p>
+                            <div class="mt-auto pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-secondary small d-block">Daily Charter</span>
+                                    <span class="fs-5 fw-bold text-gold">€18.500</span>
+                                </div>
+                                <a href="inventory.html" class="btn bg-gold btn-sm fw-bold px-3">Reserve</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asset 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="asset-card h-100 d-flex flex-column">
+                        <div class="asset-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" class="asset-img" alt="Villa Superieure">
+                            <button class="heart-btn"><i class="far fa-heart"></i></button>
+                            <span class="position-absolute bottom-0 start-0 m-3 badge-rating"><i class="fas fa-star text-gold me-1"></i>4.97 (31)</span>
+                        </div>
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-gold text-black">Real Estate</span>
+                                <span class="badge-verified">Private Estate</span>
+                            </div>
+                            <h5 class="fw-bold text-white mb-1">Villa Superieure</h5>
+                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>Saint-Tropez, France</p>
+                            <div class="mt-auto pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-secondary small d-block">Nightly Stay</span>
+                                    <span class="fs-5 fw-bold text-gold">€8.500</span>
+                                </div>
+                                <a href="inventory.html" class="btn bg-gold btn-sm fw-bold px-3">Reserve</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-black border-top border-secondary">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4">
+                    <a class="navbar-brand text-gold fw-bold fs-3 tracking-wide d-block mb-3" href="index.html">
+                        <i class="fas fa-compass me-2"></i>HABACHA
+                    </a>
+                    <p class="text-secondary small pe-lg-4">
+                        HABACHA is the premier executive asset exchange platform connecting clients to verified private jets, luxury car fleets, superyachts, and premier real estate.
+                    </p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="text-gold text-uppercase fw-bold mb-3 small">Exchange</h6>
+                    <ul class="list-unstyled text-secondary small gap-2 d-flex flex-column mb-0">
+                        <li><a href="inventory.html" class="text-secondary text-decoration-none">Aviation Desk</a></li>
+                        <li><a href="inventory.html" class="text-secondary text-decoration-none">Road Fleets</a></li>
+                        <li><a href="inventory.html" class="text-secondary text-decoration-none">Maritime Vessels</a></li>
+                        <li><a href="inventory.html" class="text-secondary text-decoration-none">Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="text-gold text-uppercase fw-bold mb-3 small">B2B Partners</h6>
+                    <ul class="list-unstyled text-secondary small gap-2 d-flex flex-column mb-0">
+                        <li><a href="suppliers.html" class="text-secondary text-decoration-none">List Your Asset</a></li>
+                        <li><a href="suppliers.html" class="text-secondary text-decoration-none">Fleet Owner Portal</a></li>
+                        <li><a href="admin.html" class="text-secondary text-decoration-none">Admin Console</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="text-gold text-uppercase fw-bold mb-3 small">Operations Desks</h6>
+                    <p class="text-secondary small mb-1"><i class="fas fa-location-dot me-2 text-gold"></i>Amsterdam • Monaco • Dubai • London • Cannes</p>
+                    <p class="text-secondary small mb-0"><i class="fas fa-envelope me-2 text-gold"></i>operations@habacha.com</p>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary small">
+                <p class="mb-0">&copy; 2026 HABACHA Platform. All rights reserved.</p>
+                <p class="mb-0 mt-2 mt-md-0">Terms of Service • Privacy Policy • Compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setSearchCategory(cat) {
+            document.getElementById('searchCatInput').value = cat;
+            document.querySelectorAll('.search-tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
