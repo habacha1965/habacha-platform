@@ -3,223 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Exchange & Local Rentals | HABACHA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Asset Exchange & Configuration | HABACHA Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
     <style>
-        :root { --bg-dark: #0b132b; --bg-card: #1c2541; --gold: #c5a059; }
-        body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', sans-serif; }
-        .text-gold { color: var(--gold) !important; }
-        .bg-gold { background-color: var(--gold) !important; color: #000 !important; }
-        .nav-link { color: #fff; font-weight: 500; }
-        .nav-link:hover, .nav-link.active { color: var(--gold); }
-        .asset-card { background: var(--bg-card); border: 1px solid rgba(197,160,89,0.2); border-radius: 12px; overflow: hidden; transition: 0.3s; }
-        .asset-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-        .asset-img { height: 220px; object-fit: cover; width: 100%; }
-        .btn-filter { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
-        .btn-filter.active, .btn-filter:hover { background: var(--gold); color: #000; }
-        .mode-btn { border: 2px solid var(--gold); font-weight: bold; padding: 10px 20px; }
-        .mode-btn.active { background-color: var(--gold); color: #000; }
-        .form-control, .form-select { background-color: #0b132b !important; color: #fff !important; border-color: #3a4767 !important; }
-        .form-control:focus, .form-select:focus { border-color: var(--gold) !important; box-shadow: none !important; }
+        :root {
+            --bg-main: #0b1329;
+            --bg-card: #152243;
+            --primary: #2563eb;
+            --accent-cyan: #0ea5e9;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); }
+        
+        header { background: #060b18; border-bottom: 1px solid var(--border-color); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        
+        .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; }
+        
+        /* Category Filters Bar */
+        .filter-bar { display: flex; gap: 12px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; }
+        .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+        
+        /* Asset Grid */
+        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+        .card-specs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
+        .card-price { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .btn-action { background: var(--primary); color: #fff; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 700; cursor: pointer; text-align: center; transition: 0.3s; }
+        .btn-action:hover { background: #1d4ed8; }
+
+        /* Tailored Category Modal Form */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: #0f172a; border: 1px solid var(--border-color); border-radius: 16px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative; }
+        .close-modal { position: absolute; top: 20px; right: 20px; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+        
+        .form-section-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-cyan); margin: 24px 0 12px; font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group.full { grid-column: span 2; }
+        .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; background: #1e293b; border: 1px solid var(--border-color); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent-cyan); }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg border-bottom border-secondary py-3">
-        <div class="container">
-            <a class="navbar-brand text-gold fw-bold fs-3" href="index.html">HABACHA</a>
-            <div class="navbar-nav ms-auto gap-3">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link active" href="inventory.html">Marketplace</a>
-                <a class="nav-link" href="suppliers.html">List Your Asset</a>
-                <a class="nav-link" href="admin.html">Admin Console</a>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container py-5">
-        <!-- Service Mode Switcher -->
-        <div class="text-center mb-4">
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-outline-warning mode-btn active" id="btnModeLocal" onclick="switchRentalMode('local')">
-                    <i class="fas fa-location-crosshairs me-2"></i>Find Assets Near Me (GPS)
-                </button>
-                <button type="button" class="btn btn-outline-warning mode-btn" id="btnModeVIP" onclick="switchRentalMode('vip')">
-                    <i class="fas fa-crown me-2"></i>VIP Executive & Delivery
-                </button>
-            </div>
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-cubes"></i> HABACHA Platform</a>
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+    </header>
+
+    <div class="container">
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">Enterprise Fleet & Asset Exchange</h2>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterCategory('all')">All Assets</button>
+            <button class="filter-btn" onclick="filterCategory('aviation')"><i class="fa-solid fa-plane"></i> Jets & Cargo Planes</button>
+            <button class="filter-btn" onclick="filterCategory('maritime')"><i class="fa-solid fa-ship"></i> Cargo Ships & Yachts</button>
+            <button class="filter-btn" onclick="filterCategory('logistics')"><i class="fa-solid fa-truck"></i> Heavy Cargo & Vans</button>
+            <button class="filter-btn" onclick="filterCategory('realestate')"><i class="fa-solid fa-building"></i> Commercial Real Estate</button>
+            <button class="filter-btn" onclick="filterCategory('cars')"><i class="fa-solid fa-car"></i> Armored & Luxury Cars</button>
         </div>
 
-        <div class="text-center mb-5">
-            <h1 class="display-5 text-gold fw-bold" id="pageTitle">Local Nearby Fleet & Asset Exchange</h1>
-            <p class="text-secondary lead" id="pageSubtitle">Locate verified providers near your current position for instant office pickup or street unlock.</p>
-            
-            <div class="d-flex justify-content-center align-items-center gap-2 mt-4 flex-wrap">
-                <button class="btn btn-warning btn-sm fw-bold px-3 py-2" onclick="requestGPSLocation()">
-                    <i class="fas fa-location-arrow me-1"></i> Enable GPS Location
-                </button>
-                <span class="text-secondary small ms-2" id="gpsStatus">Location: Global Default</span>
-            </div>
-
-            <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap" id="filters">
-                <button class="btn btn-filter active" onclick="filterCategory('All')">All Assets</button>
-                <button class="btn btn-filter" onclick="filterCategory('Road Transport')">Road Vehicles</button>
-                <button class="btn btn-filter" onclick="filterCategory('Maritime')">Boats & Vessels</button>
-                <button class="btn btn-filter" onclick="filterCategory('Aviation')">Aviation</button>
-                <button class="btn btn-filter" onclick="filterCategory('Real Estate')">Spaces & Properties</button>
-            </div>
+        <div class="assets-grid" id="asset-container">
+            <!-- Dynamic Assets Rendered Here -->
         </div>
-
-        <div class="row g-4" id="grid"></div>
     </div>
 
-    <!-- Smart Rental Modal -->
-    <div class="modal fade" id="bookModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content" style="background:var(--bg-card); border:1px solid var(--gold);">
-                <div class="modal-header border-secondary">
-                    <div>
-                        <span class="badge bg-gold text-black mb-1" id="mBadge">Pickup</span>
-                        <h5 class="modal-title text-white fw-bold" id="mTitle">Asset Rental Agreement</h5>
+    <!-- Product Specific Dynamic Modal Form -->
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 id="modal-asset-name" style="font-size: 1.5rem; color: #fff; margin-bottom: 4px;">Asset Configuration</h3>
+            <p id="modal-asset-category" style="color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700; margin-bottom: 20px;"></p>
+
+            <form id="bespoke-form" onsubmit="submitBooking(event)">
+                <!-- Dynamically Generated Product-Specific Fields -->
+                <div id="dynamic-fields"></div>
+
+                <div class="form-section-title">Client & Corporate Verification</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name / Authorized Contact *</label>
+                        <input type="text" id="client_name" required placeholder="e.g. Alexander Wright">
                     </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <div class="form-group">
+                        <label>Corporate Email Address *</label>
+                        <input type="email" id="client_email" required placeholder="a.wright@enterprise.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Organization / Company Name</label>
+                        <input type="text" id="client_company" placeholder="e.g. Wright Global Logistics">
+                    </div>
+                    <div class="form-group">
+                        <label>Direct Phone / WhatsApp *</label>
+                        <input type="tel" id="client_phone" required placeholder="+31 6 12345678">
+                    </div>
                 </div>
-                <div class="modal-body p-4">
-                    <form id="bookForm" onsubmit="processBooking(event)">
-                        <input type="hidden" id="aTitle">
-                        <input type="hidden" id="aCat">
-                        <input type="hidden" id="aRate">
 
-                        <!-- Client Info -->
-                        <h6 class="text-gold mb-3"><i class="fas fa-id-card me-2"></i>1. Client Identification</h6>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <label class="small text-secondary">Full Name</label>
-                                <input type="text" id="cName" class="form-control" required placeholder="John Doe">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="small text-secondary">Email Address</label>
-                                <input type="email" id="cEmail" class="form-control" required placeholder="john@example.com">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="small text-secondary">Phone / WhatsApp</label>
-                                <input type="tel" id="cPhone" class="form-control" required placeholder="+31 6 12345678">
-                            </div>
-                        </div>
-
-                        <!-- Logistics / Pickup Option -->
-                        <h6 class="text-gold mb-3"><i class="fas fa-map-location-dot me-2"></i>2. Pickup & Logistics Option</h6>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <label class="small text-secondary">Fulfillment Type</label>
-                                <select id="fulfillmentType" class="form-select" onchange="toggleFulfillmentFields()">
-                                    <option value="Office Pickup">Local Provider Office Pickup (Nearest Branch)</option>
-                                    <option value="Street / App Unlock">On-Street Keyless / App Unlock</option>
-                                    <option value="VIP Delivery">Deliver to My Location (+ Fee)</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small text-secondary">Pickup Location / Address</label>
-                                <input type="text" id="pickupLocation" class="form-control" required placeholder="Detected automatically or enter address">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small text-secondary">Start Date & Time</label>
-                                <input type="datetime-local" id="startDate" class="form-control" required onchange="calcTotal()">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small text-secondary">Rental Duration (Days / Hours)</label>
-                                <input type="number" id="duration" class="form-control" min="1" value="1" required oninput="calcTotal()">
-                            </div>
-                        </div>
-
-                        <!-- Calculation & Confirmation -->
-                        <div class="d-flex justify-content-between align-items-center p-3 bg-dark rounded border border-warning mb-3">
-                            <div>
-                                <span class="text-secondary d-block small">Estimated Rate:</span>
-                                <span class="fs-3 fw-bold text-gold" id="cTotal">€0</span>
-                            </div>
-                            <button type="submit" id="btnSubmit" class="btn bg-gold px-4 fw-bold py-2">Confirm & Reserve Asset</button>
-                        </div>
-                    </form>
+                <div style="margin-top: 25px;">
+                    <button type="submit" class="btn-action" style="font-size: 1rem;">Confirm Operational Order & Issue Escrow Request</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/supabase-client.js"></script>
     <script>
-        let currentMode = 'local';
-        let userCoords = null;
-
-        const defaultFleet = [
-            { id: "1", title: "Volkswagen Golf 8 (Local Fleet)", category: "Road Transport", daily_rate: 75, rate_type: "day", location: "Amsterdam Sloterdijk Office (0.8 km)", pickup_type: "Office Pickup / App", image_url: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80" },
-            { id: "2", title: "BMW 4 Series Convertible", category: "Road Transport", daily_rate: 180, rate_type: "day", location: "Amsterdam Schiphol Branch (3.2 km)", pickup_type: "Office Pickup", image_url: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" },
-            { id: "3", title: "Sloop / Electric Boat (12 Pax)", category: "Maritime", daily_rate: 250, rate_type: "day", location: "Amsterdam Canals Dock (1.1 km)", pickup_type: "Self Drive", image_url: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" },
-            { id: "4", title: "Gulfstream G650ER Jet", category: "Aviation", daily_rate: 14500, rate_type: "hour", location: "EHAM VIP Terminal", pickup_type: "VIP Charter", image_url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" }
+        const inventoryData = [
+            { id: '1', title: 'Gulfstream G650ER', category: 'aviation', price: 9500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600', specs: '14 Passengers | Range 7,500 NM | Full Flight Crew' },
+            { id: '2', title: 'Boeing 737-800 Cargo Freighter', category: 'aviation', price: 18500, unit: 'per flight hour', image: 'https://images.unsplash.com/photo-1519074069444-1ba4eff56022?w=600', specs: '23.9 Ton Payload | Main Deck Cargo Loading' },
+            { id: '3', title: 'Panamax Bulk Cargo Carrier Ship', category: 'maritime', price: 32000, unit: 'per charter day', image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600', specs: '4,500 TEU | Gross Tonnage 54,000 GT | Licensed Crew' },
+            { id: '4', title: 'Sunseeker 131 Ocean Mega Yacht', category: 'maritime', price: 14000, unit: 'per day', image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600', specs: '12 Guests | 5 Cabins | Master Captain & Crew Included' },
+            { id: '5', title: 'Volvo FH16 750 Heavy Freight Truck', category: 'logistics', price: 450, unit: 'per day', image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600', specs: '44 Ton Payload | GPS Mobile App Unlock' },
+            { id: '6', title: 'Mercedes-Benz Sprinter Cargo Van', category: 'logistics', price: 130, unit: 'per day', image: 'https://images.unsplash.com/photo-1559297434-fae8a1916a79?w=600', specs: '14 m³ Cargo Volume | Instant Street Keyless Unlock' },
+            { id: '7', title: 'Rotterdam Logistics Distribution Hub', category: 'realestate', price: 45000, unit: 'per month lease', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600', specs: '18,000 m² | 24 Loading Docks | Escrow Guaranteed' },
+            { id: '8', title: 'Armored Mercedes-Maybach S680 (VR10)', category: 'cars', price: 1800, unit: 'per day', image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600', specs: 'VR10 Certified Security Armor | Executive Chauffeur' }
         ];
 
-        let assets = defaultFleet;
+        let selectedAsset = null;
 
-        function switchRentalMode(mode) {
-            currentMode = mode;
-            document.getElementById('btnModeLocal').classList.toggle('active', mode === 'local');
-            document.getElementById('btnModeVIP').classList.toggle('active', mode === 'vip');
-
-            if(mode === 'local') {
-                document.getElementById('pageTitle').innerText = "Local Nearby Fleet & Asset Exchange";
-                document.getElementById('pageSubtitle').innerText = "Locate verified providers near your position for instant office pickup or street unlock.";
-            } else {
-                document.getElementById('pageTitle').innerText = "VIP Executive & Bespoke Charter Desk";
-                document.getElementById('pageSubtitle').innerText = "Bespoke chauffeured fleets, private jets, luxury yachts, and estates delivered directly to you.";
-            }
-        }
-
-        function requestGPSLocation() {
-            const gpsStatus = document.getElementById('gpsStatus');
-            if (navigator.geolocation) {
-                gpsStatus.innerText = "Locating nearby providers...";
-                navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        userCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-                        gpsStatus.innerHTML = `<span class="text-success"><i class="fas fa-check-circle me-1"></i>GPS Active (${userCoords.lat.toFixed(2)}, ${userCoords.lng.toFixed(2)})</span>`;
-                    },
-                    () => { gpsStatus.innerText = "Location permission denied. Showing default locations."; }
-                );
-            } else {
-                gpsStatus.innerText = "Geolocation not supported by browser.";
-            }
-        }
-
-        async function init() {
-            try {
-                const res = await fetch(SUPABASE_URL + '/rest/v1/assets?select=*', {
-                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
-                });
-                if(res.ok) {
-                    const data = await res.json();
-                    if(data && data.length > 0) assets = data;
-                }
-            } catch(e) { console.warn("Using default local fleet."); }
-            renderAssets(assets);
-        }
-
-        function renderAssets(data) {
-            document.getElementById('grid').innerHTML = data.map(a => `
-                <div class="col-md-6 col-lg-3">
-                    <div class="asset-card h-100 d-flex flex-column">
-                        <img src="${a.image_url}" class="asset-img" alt="${a.title}">
-                        <div class="p-3 d-flex flex-column flex-grow-1">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-gold text-black">${a.category}</span>
-                                <span class="badge bg-dark border border-secondary text-secondary">${a.pickup_type || 'Office Pickup'}</span>
-                            </div>
-                            <h5 class="fw-bold text-white mb-1">${a.title}</h5>
-                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || 'Local Branch'}</p>
-                            <div class="mt-auto pt-2">
-                                <h4 class="text-gold mb-3">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || 'day'}</small></h4>
-                                <button onclick="openModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.location || 'Local Office'}')" class="btn bg-gold w-100 fw-bold">Book / Reserve</button>
-                            </div>
+        function renderInventory(data) {
+            const container = document.getElementById('asset-container');
+            container.innerHTML = data.map(asset => `
+                <div class="card">
+                    <img src="${asset.image}" alt="${asset.title}">
+                    <div class="card-content">
+                        <div>
+                            <div class="card-title">${asset.title}</div>
+                            <div class="card-specs">${asset.specs}</div>
+                        </div>
+                        <div>
+                            <div class="card-price">€${asset.price.toLocaleString()} <span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">${asset.unit}</span></div>
+                            <button class="btn-action" onclick="openBespokeModal('${asset.id}')">Configure & Book Asset</button>
                         </div>
                     </div>
                 </div>
@@ -227,70 +152,190 @@
         }
 
         function filterCategory(cat) {
-            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
-            if(event && event.target) event.target.classList.add('active');
-            renderAssets(cat === 'All' ? assets : assets.filter(a => a.category === cat));
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            if (cat === 'all') renderInventory(inventoryData);
+            else renderInventory(inventoryData.filter(a => a.category === cat));
         }
 
-        function openModal(id, title, cat, rate, loc) {
-            document.getElementById('aTitle').value = title;
-            document.getElementById('aCat').value = cat;
-            document.getElementById('aRate').value = rate;
-            document.getElementById('pickupLocation').value = loc;
-            document.getElementById('mBadge').innerText = cat;
-            document.getElementById('mTitle').innerText = title;
-            calcTotal();
-
-            new bootstrap.Modal(document.getElementById('bookModal')).show();
+        function openBespokeModal(id) {
+            selectedAsset = inventoryData.find(a => a.id === id);
+            document.getElementById('modal-asset-name').innerText = selectedAsset.title;
+            document.getElementById('modal-asset-category').innerText = `CATEGORY: ${selectedAsset.category.toUpperCase()} | BASE RATE: €${selectedAsset.price.toLocaleString()} ${selectedAsset.unit}`;
+            
+            // Generate product-specific fields
+            document.getElementById('dynamic-fields').innerHTML = generateBespokeFormFields(selectedAsset.category);
+            document.getElementById('booking-modal').style.display = 'flex';
         }
 
-        function calcTotal() {
-            const rate = parseFloat(document.getElementById('aRate').value || 0);
-            const duration = parseFloat(document.getElementById('duration').value || 1);
-            document.getElementById('cTotal').innerText = '€' + (rate * duration).toLocaleString();
+        function generateBespokeFormFields(category) {
+            if (category === 'aviation') {
+                return `
+                    <div class="form-section-title">1. Flight & Aviation Parameters</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Departure Airport (ICAO / IATA Code) *</label>
+                            <input type="text" id="param_origin" required placeholder="e.g. EHAM / AMS (Amsterdam)">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination Airport (ICAO / IATA Code) *</label>
+                            <input type="text" id="param_dest" required placeholder="e.g. EGLL / LHR (London)">
+                        </div>
+                        <div class="form-group">
+                            <label>Flight Date & Departure Time *</label>
+                            <input type="datetime-local" id="param_datetime" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Passengers / Cargo Payload Weight *</label>
+                            <input type="text" id="param_load" required placeholder="e.g. 8 Passengers or 12 Tons Cargo">
+                        </div>
+                        <div class="form-group full">
+                            <label>Flight Crew & Ramp Handling Setup</label>
+                            <select id="param_service">
+                                <option value="full_crew">Captain, First Officer & VIP Cabin Crew Included</option>
+                                <option value="bare_aircraft">Dry Lease (Client Provides Certified Flight Crew)</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            } else if (category === 'maritime') {
+                return `
+                    <div class="form-section-title">1. Maritime Port & Voyage Specifications</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Port of Departure *</label>
+                            <input type="text" id="param_origin" required placeholder="e.g. Port of Rotterdam">
+                        </div>
+                        <div class="form-group">
+                            <label>Port of Destination *</label>
+                            <input type="text" id="param_dest" required placeholder="e.g. Port of Singapore">
+                        </div>
+                        <div class="form-group">
+                            <label>Charter Duration (Days) *</label>
+                            <input type="number" id="param_duration" min="1" value="7" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Cargo Manifest / Vessel Usage *</label>
+                            <input type="text" id="param_cargo" required placeholder="e.g. Dry Bulk Containers or Private Yachting">
+                        </div>
+                        <div class="form-group full">
+                            <label>Marine Crew & Fuel Bunkering Setup</label>
+                            <select id="param_service">
+                                <option value="full_crew">Licensed Master Captain & Full Marine Crew Included</option>
+                                <option value="bareboat">Bareboat Charter (Client Provides Certified Crew)</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            } else if (category === 'logistics') {
+                return `
+                    <div class="form-section-title">1. Logistics & Heavy Freight Parameters</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Pickup Freight Terminal / Location *</label>
+                            <input type="text" id="param_origin" required placeholder="e.g. Schiphol Cargo City Hub 3">
+                        </div>
+                        <div class="form-group">
+                            <label>Drop-off Location *</label>
+                            <input type="text" id="param_dest" required placeholder="e.g. Frankfurt Freight Center">
+                        </div>
+                        <div class="form-group">
+                            <label>Lease Duration (Days) *</label>
+                            <input type="number" id="param_duration" min="1" value="3" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hazardous Cargo (ADR Classification)</label>
+                            <select id="param_adr">
+                                <option value="none">Standard Non-Hazardous Cargo</option>
+                                <option value="adr_certified">ADR Certified Hazardous Transport</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Fulfillment Option</label>
+                            <select id="param_dispatch">
+                                <option value="gps_app">Instant Keyless Mobile GPS Unlock (Self-Drive)</option>
+                                <option value="professional_driver">Professional Heavy Cargo Driver Included</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            } else if (category === 'realestate') {
+                return `
+                    <div class="form-section-title">1. Commercial Lease Terms</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Lease Commencement Date *</label>
+                            <input type="date" id="param_start" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Intended Lease Duration *</label>
+                            <select id="param_lease_term">
+                                <option value="6_months">6 Months Commercial Lease</option>
+                                <option value="12_months">12 Months Commercial Lease</option>
+                                <option value="long_term">Multi-Year Long Term Corporate Lease</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Escrow Deposit & Bank Guarantee</label>
+                            <select id="param_escrow">
+                                <option value="standard_escrow">HABACHA Escrow Clearance Deposit</option>
+                                <option value="bank_guarantee">Direct Corporate Bank Guarantee</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            } else { // Luxury & Armored Cars
+                return `
+                    <div class="form-section-title">1. Vehicle Pickup & Chauffeur Options</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Pickup Location / VIP Terminal *</label>
+                            <input type="text" id="param_origin" required placeholder="e.g. Hotel Okura Amsterdam / AMS Terminal">
+                        </div>
+                        <div class="form-group">
+                            <label>Rental Duration (Days) *</label>
+                            <input type="number" id="param_duration" min="1" value="1" required>
+                        </div>
+                        <div class="form-group full">
+                            <label>Driver Setup</label>
+                            <select id="param_chauffeur">
+                                <option value="chauffeur">Executive VIP Armed/Unarmed Chauffeur Included</option>
+                                <option value="self_drive">Self-Drive Keyless Mobile Unlock</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            }
         }
 
-        async function processBooking(e) {
+        function closeModal() {
+            document.getElementById('booking-modal').style.display = 'none';
+        }
+
+        async function submitBooking(e) {
             e.preventDefault();
-            const btn = document.getElementById('btnSubmit');
-            btn.disabled = true; btn.innerText = "Reserving Asset...";
+            
+            const bookingDetails = {
+                asset_title: selectedAsset.title,
+                category: selectedAsset.category,
+                client_name: document.getElementById('client_name').value,
+                client_email: document.getElementById('client_email').value,
+                client_company: document.getElementById('client_company').value,
+                client_phone: document.getElementById('client_phone').value,
+                origin: document.getElementById('param_origin') ? document.getElementById('param_origin').value : 'N/A',
+                destination: document.getElementById('param_dest') ? document.getElementById('param_dest').value : 'N/A',
+                service_type: document.getElementById('param_service') ? document.getElementById('param_service').value : 'Standard Operational Setup'
+            };
 
-            const name = document.getElementById('cName').value;
-            const email = document.getElementById('cEmail').value;
-            const phone = document.getElementById('cPhone').value;
-            const title = document.getElementById('aTitle').value;
-            const cat = document.getElementById('aCat').value;
-            const fulfillment = document.getElementById('fulfillmentType').value;
-            const location = document.getElementById('pickupLocation').value;
-            const startDate = document.getElementById('startDate').value;
-            const duration = document.getElementById('duration').value;
-            const total = document.getElementById('cTotal').innerText;
+            if (typeof HABACHA_ENGINE !== 'undefined') {
+                await HABACHA_ENGINE.processBookingSubmission(bookingDetails);
+            }
 
-            const manifestHtml = `<p><strong>Asset:</strong> ${title} (${cat})</p>
-                <p><strong>Fulfillment Mode:</strong> ${fulfillment}</p>
-                <p><strong>Pickup / Delivery Location:</strong> ${location}</p>
-                <p><strong>Start Date & Time:</strong> ${startDate}</p>
-                <p><strong>Duration:</strong> ${duration} day(s)/hour(s)</p>
-                <p><strong>Total Estimate:</strong> ${total}</p>`;
-
-            try {
-                await fetch(SUPABASE_URL + '/rest/v1/inquiries', {
-                    method: 'POST',
-                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ full_name: name, email: email, phone: phone, asset_category: cat, logistics_data: manifestHtml })
-                });
-            } catch(e) { console.log('Local log'); }
-
-            const adminEmail = localStorage.getItem('admin_email_address') || email;
-            await Promise.all([
-                dispatchResendEmail(email, "Reservation Confirmation: " + title, generateClientEmail(name, cat, manifestHtml)),
-                dispatchResendEmail(adminEmail, "🚨 New Local Reservation: " + title + " (" + name + ")", generateAdminEmail(name, email, phone, cat, title, manifestHtml))
-            ]);
-
-            window.location.href = "success.html";
+            window.location.href = 'success.html';
         }
 
-        document.addEventListener('DOMContentLoaded', init);
+        // Initialize Inventory
+        renderInventory(inventoryData);
     </script>
 </body>
 </html>
