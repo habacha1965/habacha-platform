@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Marketplace | HABACHA Platform</title>
+    <title>Marketplace | HABACHA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --bg-dark: #0b132b; --bg-card: #1c2541; --gold: #c5a059; }
-        body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', sans-serif; }
         .text-gold { color: var(--gold) !important; }
         .bg-gold { background-color: var(--gold) !important; color: #000 !important; }
         .nav-link { color: #fff; font-weight: 500; }
-        .nav-link:hover { color: var(--gold); }
-        .asset-card { background-color: var(--bg-card); border: 1px solid rgba(197, 160, 89, 0.2); border-radius: 12px; overflow: hidden; transition: transform 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
+        .asset-card { background: var(--bg-card); border: 1px solid rgba(197,160,89,0.2); border-radius: 12px; overflow: hidden; transition: 0.3s; }
         .asset-card:hover { transform: translateY(-5px); border-color: var(--gold); }
         .asset-img { height: 220px; object-fit: cover; width: 100%; }
-        .filter-btn { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
-        .filter-btn.active, .filter-btn:hover { background-color: var(--gold); color: #000; }
-        .modal-content { background-color: var(--bg-card); border: 1px solid var(--gold); color: white; }
+        .btn-filter { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
+        .btn-filter.active, .btn-filter:hover { background: var(--gold); color: #000; }
     </style>
 </head>
 <body>
@@ -27,77 +26,55 @@
             <a class="navbar-brand text-gold fw-bold fs-3" href="index.html">HABACHA</a>
             <div class="navbar-nav ms-auto gap-3">
                 <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link active text-gold" href="inventory.html">Marketplace</a>
-                <a class="nav-link" href="suppliers.html">List Your Asset</a>
-                <a class="nav-link" href="admin.html">Admin Console</a>
+                <a class="nav-link active" href="inventory.html">Marketplace</a>
+                <a class="nav-link" href="admin.html">Admin</a>
             </div>
         </div>
     </nav>
 
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h1 class="display-5 text-gold fw-bold mb-3">Executive Asset Exchange</h1>
-            <p class="text-secondary lead">Browse and charter verified private jets, luxury fleets, motor yachts, and real estate assets.</p>
-            <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap" id="category-filters">
-                <button class="btn filter-btn active" onclick="filterAssets('All')">All Assets</button>
-                <button class="btn filter-btn" onclick="filterAssets('Road Transport')">Road Transport</button>
-                <button class="btn filter-btn" onclick="filterAssets('Aviation')">Aviation</button>
-                <button class="btn filter-btn" onclick="filterAssets('Maritime')">Maritime</button>
-                <button class="btn filter-btn" onclick="filterAssets('Real Estate')">Real Estate</button>
+            <h1 class="display-5 text-gold fw-bold">Executive Asset Exchange</h1>
+            <p class="text-secondary lead">Select an asset to begin your charter request.</p>
+            <div class="d-flex justify-content-center gap-2 mt-4" id="filters">
+                <button class="btn btn-filter active" onclick="filter('All')">All</button>
+                <button class="btn btn-filter" onclick="filter('Aviation')">Aviation</button>
+                <button class="btn btn-filter" onclick="filter('Road Transport')">Road</button>
+                <button class="btn btn-filter" onclick="filter('Maritime')">Maritime</button>
+                <button class="btn btn-filter" onclick="filter('Real Estate')">Real Estate</button>
             </div>
         </div>
-
-        <div class="row g-4" id="inventory-grid">
-            <div class="col-12 text-center py-5">
-                <div class="spinner-border text-gold" role="status"></div>
-                <p class="mt-3 text-secondary">Loading live fleet inventory...</p>
-            </div>
-        </div>
+        <div class="row g-4" id="grid"></div>
     </div>
 
-    <!-- Booking Modal -->
-    <div class="modal fade" id="bookingModal" tabindex="-1">
+    <!-- Modal -->
+    <div class="modal fade" id="bookModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content" style="background:var(--bg-card); border:1px solid var(--gold);">
                 <div class="modal-header border-secondary">
-                    <h5 class="modal-title text-gold" id="modalAssetTitle">Asset Booking Manifest</h5>
+                    <h5 class="modal-title text-gold" id="modalTitle">Charter Request</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
-                        <input type="hidden" id="assetId">
-                        <input type="hidden" id="assetCategory">
-                        <input type="hidden" id="assetTitle">
-                        <input type="hidden" id="assetRate">
-                        <input type="hidden" id="assetRateType">
-
-                        <div class="mb-3">
-                            <label class="form-label small text-secondary">Full Name</label>
-                            <input type="text" id="clientName" class="form-control bg-dark text-white border-secondary" required placeholder="John Doe">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small text-secondary">Email Address</label>
-                            <input type="email" id="clientEmail" class="form-control bg-dark text-white border-secondary" required placeholder="name@company.com">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small text-secondary">Phone / WhatsApp</label>
-                            <input type="tel" id="clientPhone" class="form-control bg-dark text-white border-secondary" required placeholder="+31 6 12345678">
-                        </div>
+                    <form id="bookForm" onsubmit="processBooking(event)">
+                        <input type="hidden" id="aTitle">
+                        <input type="hidden" id="aCat">
+                        <input type="hidden" id="aRate">
+                        
+                        <input type="text" id="cName" class="form-control bg-dark text-white border-secondary mb-3" required placeholder="Full Name">
+                        <input type="email" id="cEmail" class="form-control bg-dark text-white border-secondary mb-3" required placeholder="Email Address">
+                        <input type="tel" id="cPhone" class="form-control bg-dark text-white border-secondary mb-3" required placeholder="Phone Number">
+                        
                         <div class="row g-2 mb-3">
-                            <div class="col-6">
-                                <label class="form-label small text-secondary">Start Date / Departure</label>
-                                <input type="date" id="startDate" class="form-control bg-dark text-white border-secondary" required onchange="calcTotal()">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label small text-secondary">Duration (Days / Hours)</label>
-                                <input type="number" id="durationUnits" class="form-control bg-dark text-white border-secondary" min="1" value="1" required onchange="calcTotal()">
-                            </div>
+                            <div class="col-6"><input type="date" id="cDate" class="form-control bg-dark text-white border-secondary" required></div>
+                            <div class="col-6"><input type="number" id="cUnits" class="form-control bg-dark text-white border-secondary" min="1" value="1" oninput="calc()" required placeholder="Duration"></div>
                         </div>
-                        <div class="mb-3 p-3 bg-dark rounded border border-warning d-flex justify-content-between align-items-center">
-                            <span>Estimated Total:</span>
-                            <span class="fs-4 fw-bold text-gold" id="calculatedTotal">€0</span>
+                        
+                        <div class="d-flex justify-content-between p-3 bg-dark rounded border-warning mb-3">
+                            <span>Total Estimate:</span>
+                            <span class="fs-4 fw-bold text-gold" id="cTotal">€0</span>
                         </div>
-                        <button type="submit" id="submitBtn" class="btn bg-gold w-100 fw-bold py-2">Confirm Charter Request</button>
+                        <button type="submit" id="btnSubmit" class="btn bg-gold w-100 fw-bold py-2">Confirm Request</button>
                     </form>
                 </div>
             </div>
@@ -107,161 +84,105 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/supabase-client.js"></script>
     <script>
-        let allAssets = [];
-        const fallbackImages = {
-            "Road Transport": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
-            "Aviation": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-            "Maritime": "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80",
-            "Real Estate": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
-        };
-
-        const defaultFleet = [
-            { id: "jet-1", title: "Gulfstream G650ER", category: "Aviation", daily_rate: 14500, rate_type: "hour", location: "Amsterdam Schiphol (EHAM)", capacity: "16 Passengers", image_url: fallbackImages["Aviation"] },
-            { id: "car-1", title: "Rolls-Royce Cullinan Black Badge", category: "Road Transport", daily_rate: 2200, rate_type: "day", location: "Monaco / Paris / Amsterdam", capacity: "Chauffeur Driven", image_url: fallbackImages["Road Transport"] },
-            { id: "yacht-1", title: "Sunseeker 131 Yacht", category: "Maritime", daily_rate: 18500, rate_type: "day", location: "Cannes / Mediterranean", capacity: "12 Guests / 5 Cabins", image_url: fallbackImages["Maritime"] },
-            { id: "re-1", title: "Villa Superieure Cote dAzur", category: "Real Estate", daily_rate: 8500, rate_type: "day", location: "Saint-Tropez, France", capacity: "7 Bedrooms / Private Helipad", image_url: fallbackImages["Real Estate"] }
+        const fallbackFleet = [
+            { title: "Gulfstream G650ER", cat: "Aviation", rate: 14500, type: "hour", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
+            { title: "Rolls-Royce Cullinan", cat: "Road Transport", rate: 2200, type: "day", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" },
+            { title: "Sunseeker 131 Yacht", cat: "Maritime", rate: 18500, type: "day", img: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&w=800&q=80" },
+            { title: "Villa Superieure", cat: "Real Estate", rate: 8500, type: "day", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" }
         ];
 
-        async function fetchAssets() {
+        let assets = fallbackFleet;
+
+        async function init() {
             try {
-                const resp = await fetch(SUPABASE_URL + "/rest/v1/assets?select=*", {
-                    headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY }
+                const res = await fetch(SUPABASE_URL + '/rest/v1/assets?select=*', {
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
                 });
-                if (resp.ok) {
-                    const data = await resp.json();
-                    if (data && data.length > 0) {
-                        allAssets = data.map(item => ({
-                            ...item,
-                            image_url: item.image_url || fallbackImages[item.category] || fallbackImages["Road Transport"]
-                        }));
-                    } else {
-                        allAssets = defaultFleet;
-                    }
-                } else {
-                    allAssets = defaultFleet;
+                if(res.ok) {
+                    const data = await res.json();
+                    if(data.length > 0) assets = data;
                 }
-            } catch (err) {
-                console.warn("Using default fleet fallback:", err);
-                allAssets = defaultFleet;
-            }
-            renderAssets(allAssets);
+            } catch(e) { console.warn("DB offline, using failsafe assets."); }
+            render(assets);
         }
 
-        function renderAssets(assets) {
-            const grid = document.getElementById("inventory-grid");
-            if (!assets || assets.length === 0) {
-                grid.innerHTML = '<div class="col-12 text-center text-secondary py-5">No assets available in this category.</div>';
-                return;
-            }
-            grid.innerHTML = assets.map(a => `
+        function render(data) {
+            document.getElementById('grid').innerHTML = data.map(a => `
                 <div class="col-md-6 col-lg-3">
                     <div class="asset-card h-100 d-flex flex-column">
-                        <img src="${a.image_url}" class="asset-img" alt="${a.title}" onerror="this.src='${fallbackImages[a.category] || fallbackImages["Road Transport"]}'">
-                        <div class="p-4 d-flex flex-column flex-grow-1">
-                            <span class="badge bg-gold align-self-start mb-2">${a.category}</span>
-                            <h5 class="fw-bold mb-1">${a.title}</h5>
-                            <p class="text-secondary small mb-3"><i class="fas fa-location-dot me-1 text-gold"></i>${a.location || "Global Ops"}</p>
-                            <div class="mt-auto">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-secondary small">${a.capacity || ""}</span>
-                                    <span class="fs-5 fw-bold text-gold">€${Number(a.daily_rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || "day"}</small></span>
-                                </div>
-                                <button onclick="openBookingModal('${a.id}', '${a.title}', '${a.category}', ${a.daily_rate}, '${a.rate_type || "day"}')" class="btn bg-gold w-100 fw-bold">Book Asset</button>
+                        <img src="${a.image_url || a.img}" class="asset-img" alt="${a.title}">
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <span class="badge bg-gold align-self-start mb-2">${a.category || a.cat}</span>
+                            <h5 class="fw-bold">${a.title}</h5>
+                            <div class="mt-auto pt-3">
+                                <h4 class="text-gold mb-3">€${(a.daily_rate || a.rate).toLocaleString()}<small class="fs-6 text-secondary">/${a.rate_type || a.type}</small></h4>
+                                <button onclick="openModal('${a.title}', '${a.category || a.cat}', ${a.daily_rate || a.rate})" class="btn bg-gold w-100 fw-bold">Select</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            `).join("");
+            `).join('');
         }
 
-        function filterAssets(cat) {
-            document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
-            if (event && event.target) event.target.classList.add("active");
-            if (cat === "All") {
-                renderAssets(allAssets);
-            } else {
-                renderAssets(allAssets.filter(a => a.category === cat));
-            }
+        function filter(c) {
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            render(c === 'All' ? assets : assets.filter(a => (a.category || a.cat) === c));
         }
 
-        function openBookingModal(id, title, category, rate, rateType) {
-            document.getElementById("assetId").value = id;
-            document.getElementById("assetTitle").value = title;
-            document.getElementById("assetCategory").value = category;
-            document.getElementById("assetRate").value = rate;
-            document.getElementById("assetRateType").value = rateType;
-            document.getElementById("modalAssetTitle").innerText = "Charter " + title;
-            calcTotal();
-            new bootstrap.Modal(document.getElementById("bookingModal")).show();
+        function openModal(title, cat, rate) {
+            document.getElementById('aTitle').value = title;
+            document.getElementById('aCat').value = cat;
+            document.getElementById('aRate').value = rate;
+            document.getElementById('modalTitle').innerText = 'Request: ' + title;
+            calc();
+            new bootstrap.Modal(document.getElementById('bookModal')).show();
         }
 
-        function calcTotal() {
-            const rate = parseFloat(document.getElementById("assetRate").value || 0);
-            const units = parseInt(document.getElementById("durationUnits").value || 1);
-            const total = rate * units;
-            document.getElementById("calculatedTotal").innerText = "€" + total.toLocaleString();
+        function calc() {
+            const r = parseFloat(document.getElementById('aRate').value);
+            const u = parseFloat(document.getElementById('cUnits').value || 1);
+            document.getElementById('cTotal').innerText = '€' + (r * u).toLocaleString();
         }
 
-        async function handleBookingSubmit(e) {
+        async function processBooking(e) {
             e.preventDefault();
-            const submitBtn = document.getElementById("submitBtn");
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Dispatching Requests...';
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true; btn.innerText = "Processing...";
 
-            const name = document.getElementById("clientName").value;
-            const email = document.getElementById("clientEmail").value;
-            const phone = document.getElementById("clientPhone").value;
-            const title = document.getElementById("assetTitle").value;
-            const category = document.getElementById("assetCategory").value;
-            const startDate = document.getElementById("startDate").value;
-            const units = document.getElementById("durationUnits").value;
-            const rateType = document.getElementById("assetRateType").value;
-            const total = document.getElementById("calculatedTotal").innerText;
+            const data = {
+                name: document.getElementById('cName').value,
+                email: document.getElementById('cEmail').value,
+                phone: document.getElementById('cPhone').value,
+                title: document.getElementById('aTitle').value,
+                cat: document.getElementById('aCat').value,
+                date: document.getElementById('cDate').value,
+                units: document.getElementById('cUnits').value,
+                total: document.getElementById('cTotal').innerText
+            };
 
-            const manifestDetails = `Asset: ${title}\nStart Date: ${startDate}\nDuration: ${units} ${rateType}(s)\nTotal Estimated Rate: ${total}\nClient Contact: ${phone}`;
+            const manifest = `Asset: ${data.title}\nDate: ${data.date}\nDuration: ${data.units}\nTotal: ${data.total}\nPhone: ${data.phone}`;
 
-            // Save to DB
             try {
-                await fetch(SUPABASE_URL + "/rest/v1/inquiries", {
-                    method: "POST",
-                    headers: {
-                        "apikey": SUPABASE_ANON_KEY,
-                        "Authorization": "Bearer " + SUPABASE_ANON_KEY,
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal"
-                    },
-                    body: JSON.stringify({
-                        full_name: name,
-                        email: email,
-                        phone: phone,
-                        asset_category: category,
-                        logistics_data: { asset: title, start_date: startDate, duration: units, total: total }
-                    })
+                await fetch(SUPABASE_URL + '/rest/v1/inquiries', {
+                    method: 'POST',
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ full_name: data.name, email: data.email, phone: data.phone, asset_category: data.cat, logistics_data: manifest })
                 });
-            } catch (err) {
-                console.warn("DB notice:", err);
-            }
+            } catch(e) { console.log('DB log skipped'); }
 
-            // Dispatch Emails via Resend Serverless Function
-            const clientHTML = getClientEmailHTML(name, category, manifestDetails);
-            const adminHTML = getAdminEmailHTML(name, email, category, manifestDetails);
-            const adminEmail = localStorage.getItem("admin_email_address") || email;
-
-            console.log("Sending email to client:", email);
-            console.log("Sending email to admin:", adminEmail);
-
-            const [clientRes, adminRes] = await Promise.all([
-                dispatchResendEmail(email, "Booking Confirmation: " + title, clientHTML),
-                dispatchResendEmail(adminEmail, "🚨 New Booking Inquiry: " + title, adminHTML)
+            const adminEmail = localStorage.getItem('admin_email_address') || data.email;
+            
+            console.log("Dispatching secure emails...");
+            await Promise.all([
+                dispatchResendEmail(data.email, "Booking Confirmation", generateClientEmail(data.name, data.cat, manifest)),
+                dispatchResendEmail(adminEmail, "🚨 New Booking Alert", generateAdminEmail(data.name, data.email, data.cat, manifest))
             ]);
-
-            console.log("Client Dispatch Result:", clientRes);
-            console.log("Admin Dispatch Result:", adminRes);
 
             window.location.href = "success.html";
         }
 
-        document.addEventListener("DOMContentLoaded", fetchAssets);
+        init();
     </script>
 </body>
 </html>

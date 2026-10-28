@@ -5,64 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal | HABACHA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --bg-dark: #0b132b; --bg-card: #1c2541; --gold: #c5a059; }
-        body { background-color: var(--bg-dark); color: #fff; }
-        .text-gold { color: var(--gold) !important; }
-        .bg-gold { background-color: var(--gold) !important; color: #000 !important; }
-        .border-gold { border-color: var(--gold) !important; }
+        body { background-color: #0b132b; color: #fff; font-family: sans-serif; }
+        .text-gold { color: #c5a059; }
+        .bg-gold { background-color: #c5a059; color: #000; }
     </style>
 </head>
 <body class="py-5">
-    <div class="container">
-        <h1 class="text-gold mb-4 fw-bold"><i class="fas fa-shield-halved me-2"></i>Admin Console</h1>
-        
-        <section class="p-4 bg-dark rounded border border-gold mb-5">
-            <h2 class="h5 text-gold mb-3">1. Live Email Dispatch Settings (Resend.com)</h2>
-            <div class="row g-3">
-                <div class="col-md-7">
-                    <label class="small text-secondary">Resend API Key (`re_...`)</label>
-                    <input type="password" id="resend-api-key" class="form-control bg-black text-white border-secondary" placeholder="Paste your re_... key here">
-                </div>
-                <div class="col-md-5">
-                    <label class="small text-secondary">Admin Receiver Email</label>
-                    <input type="email" id="admin-email-address" class="form-control bg-black text-white border-secondary" placeholder="service4companys@gmail.com">
-                </div>
-                <div class="col-12">
-                    <button onclick="saveAdminSettings()" class="btn bg-gold fw-bold px-4">Save Email Dispatcher Settings</button>
-                    <span id="save-status" class="ms-3 small text-success d-none">✅ Settings Saved Locally!</span>
-                </div>
+    <div class="container max-w-md">
+        <h1 class="text-gold mb-4 fw-bold">System Admin Console</h1>
+        <div class="bg-dark p-4 rounded border border-secondary">
+            <h2 class="h5 text-gold mb-3">Email Dispatcher Configuration</h2>
+            <div class="mb-3">
+                <label>Resend API Key</label>
+                <input type="password" id="key" class="form-control bg-black text-white" placeholder="re_...">
             </div>
-        </section>
-        
-        <div class="text-center mt-5">
-            <a href="inventory.html" class="btn btn-outline-secondary">Back to Marketplace</a>
+            <div class="mb-4">
+                <label>Admin Notification Email</label>
+                <input type="email" id="email" class="form-control bg-black text-white" placeholder="you@gmail.com">
+            </div>
+            <button onclick="save()" class="btn bg-gold w-100 fw-bold">Save System State</button>
+            <p id="msg" class="text-success mt-3 d-none text-center">Settings Locked Successfully!</p>
         </div>
+        <div class="mt-4 text-center"><a href="inventory.html" class="text-secondary">Return to Marketplace</a></div>
     </div>
-
     <script>
-        // Load existing settings on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('resend-api-key').value = localStorage.getItem('resend_api_key') || '';
-            document.getElementById('admin-email-address').value = localStorage.getItem('admin_email_address') || '';
-        });
-
-        function saveAdminSettings() {
-            const key = document.getElementById('resend-api-key').value.trim();
-            const email = document.getElementById('admin-email-address').value.trim();
-            
-            if(!key || !email) {
-                alert('Please fill in both fields.');
-                return;
-            }
-
-            localStorage.setItem('resend_api_key', key);
-            localStorage.setItem('admin_email_address', email);
-            
-            const status = document.getElementById('save-status');
-            status.classList.remove('d-none');
-            setTimeout(() => status.classList.add('d-none'), 3000);
+        document.getElementById('key').value = localStorage.getItem('resend_api_key') || '';
+        document.getElementById('email').value = localStorage.getItem('admin_email_address') || '';
+        function save() {
+            localStorage.setItem('resend_api_key', document.getElementById('key').value.trim());
+            localStorage.setItem('admin_email_address', document.getElementById('email').value.trim());
+            document.getElementById('msg').classList.remove('d-none');
+            setTimeout(()=> document.getElementById('msg').classList.add('d-none'), 3000);
         }
     </script>
 </body>
