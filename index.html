@@ -54,10 +54,10 @@
 
         <!-- Mobile Dropdown -->
         <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 absolute w-full left-0 top-full flex flex-col p-4 shadow-lg z-50">
-            <a href="inventory.html?category=all" class="block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">Browse Assets</a>
-            <a href="supplier-register.html" class="block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">For Suppliers</a>
-            <a href="login.html" class="block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">Sign In</a>
-            <a href="register.html" class="block py-3 mt-2 text-base font-semibold bg-blue-600 text-white text-center rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Get Started</a>
+            <a href="inventory.html?category=all" class="block min-h-[48px] py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">Browse Assets</a>
+            <a href="supplier-register.html" class="block min-h-[48px] py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">For Suppliers</a>
+            <a href="login.html" class="block min-h-[48px] py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">Sign In</a>
+            <a href="register.html" class="block min-h-[48px] py-3 mt-2 text-base font-semibold bg-blue-600 text-white text-center rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Get Started</a>
         </nav>
     </header>
 
@@ -74,14 +74,14 @@
                     <label for="category" class="block text-sm font-medium text-slate-700 mb-1 px-1">Category</label>
                     <select id="category" name="category" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="all">All categories</option>
-                        <option value="cars">Cars & Passenger Vans</option>
-                        <option value="commercial">Commercial Vans & Freight Trucks</option>
-                        <option value="maritime">Boats, Yachts & Cargo Ships</option>
+                        <option value="cars">Cars & Vans</option>
+                        <option value="commercial">Commercial Freight</option>
+                        <option value="maritime">Boats & Yachts</option>
                         <option value="aviation">Helicopters & Aircraft</option>
-                        <option value="stays">Stays, Accommodations & Real Estate</option>
-                        <option value="industrial">Construction Machinery & Industrial Equipment</option>
-                        <option value="leisure">Campers, RVs & Leisure Mobility</option>
-                        <option value="event">Event & Audio/Visual Equipment</option>
+                        <option value="stays">Stays & Real Estate</option>
+                        <option value="industrial">Construction Machinery</option>
+                        <option value="leisure">Campers & RVs</option>
+                        <option value="event">Event & AV Equipment</option>
                     </select>
                 </div>
                 <div class="md:col-span-4 text-left">
@@ -99,7 +99,7 @@
                             <option value="short">Short-term rental (daily)</option>
                             <option value="long">Long-term lease</option>
                         </select>
-                        <button type="submit" class="h-12 px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-500">Find my asset</button>
+                        <button type="submit" class="min-h-[48px] px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-500">Find my asset</button>
                     </div>
                 </div>
             </form>
@@ -216,19 +216,19 @@
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
                 <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">1</div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Tell us what you need</h3>
-                <p class="text-sm text-slate-600">Choose the category, the dates and whether you want a short rental or a long lease.</p>
+                <p class="text-base text-slate-600">Choose the category, the dates and whether you want a short rental or a long lease.</p>
             </div>
             
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
                 <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">2</div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Get your reference</h3>
-                <p class="text-sm text-slate-600">Your request receives a personal code (HB-xxxx), so nothing gets lost between you and the supplier.</p>
+                <p class="text-base text-slate-600">Your request receives a personal code (HB-xxxx), so nothing gets lost between you and the supplier.</p>
             </div>
             
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
                 <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">3</div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Go straight to the supplier</h3>
-                <p class="text-sm text-slate-600">You continue directly with them to confirm the details and arrange delivery.</p>
+                <p class="text-base text-slate-600">You continue directly with them to confirm the details and arrange delivery.</p>
             </div>
         </div>
     </section>
@@ -299,4 +299,3 @@
     </script>
 </body>
 </html>
-EOF
