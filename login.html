@@ -3,124 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | HABACHA Platform Access</title>
+    <title>Portal Login | HABACHA Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
-        .bg-navy-dark { background-color: #0b1329; }
         .bg-navy-light { background-color: #0f172a; }
         .border-navy { border-color: #1e293b; }
         .text-cyan { color: #0ea5e9; }
-        .bg-cyan { background-color: #0ea5e9; }
-        .bg-blue-600 { background-color: #2563eb; }
+        .bg-cyan-soft { background-color: rgba(14, 165, 233, 0.15); }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <div class="w-full max-w-md">
-        <!-- Logo Home Link -->
-        <div class="flex items-center justify-center space-x-2 mb-10 cursor-pointer" onclick="window.location.href='index.html'">
-            <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
-                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
-            </div>
-            <span class="text-3xl font-bold tracking-tight text-white uppercase">HABACHA</span>
-        </div>
-
-        <div class="bg-navy-light border border-navy rounded-xl p-8 shadow-2xl">
-            <h1 class="text-2xl font-bold text-center mb-2">Platform Access</h1>
-            <p class="text-center text-gray-400 text-sm mb-8">Select your portal to continue</p>
-
-            <!-- Role Selector Tabs -->
-            <div class="flex border-b border-navy mb-8">
-                <button id="tab-client" onclick="switchRole('client')" class="flex-1 py-3 text-sm font-bold border-b-2 border-cyan text-cyan uppercase tracking-widest transition">
-                    Client Portal
-                </button>
-                <button id="tab-supplier" onclick="switchRole('supplier')" class="flex-1 py-3 text-sm font-bold border-b-2 border-transparent text-gray-500 uppercase tracking-widest hover:text-white transition">
-                    Supplier Hub
-                </button>
-            </div>
-
-            <form id="login-form" class="space-y-6">
-                <div>
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Work Email / User ID</label>
-                    <input type="email" required placeholder="name@company.com" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+    <div>
+        <!-- Navigation -->
+        <nav class="border-b border-navy bg-navy-light px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-cyan-soft rounded flex items-center justify-center">
+                    <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
-
-                <div id="supplier-id-field" class="hidden">
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Supplier Partner ID</label>
-                    <input type="text" placeholder="HB-SUP-XXXX" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                </div>
-
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <label class="text-xs font-bold text-gray-400 uppercase">Secure Password</label>
-                        <a href="#" class="text-xs text-cyan hover:underline">Forgot?</a>
-                    </div>
-                    <input type="password" required placeholder="••••••••" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                </div>
-
-                <button type="submit" class="w-full bg-cyan hover:bg-opacity-90 text-navy-dark font-bold py-4 rounded-md transition uppercase tracking-widest text-sm">
-                    Enter Exchange
-                </button>
-            </form>
-
-            <div class="mt-8 pt-8 border-t border-navy text-center">
-                <p id="register-text" class="text-sm text-gray-400">
-                    New to the exchange? <a href="register.html" class="text-cyan font-bold hover:underline">Create Client Account</a>
-                </p>
-                <p id="supplier-register-text" class="hidden text-sm text-gray-400">
-                    Want to list your fleet? <a href="supplier-register.html" class="text-cyan font-bold hover:underline">Supplier Onboarding</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="text-center mt-8">
-            <a href="index.html" class="text-gray-500 text-xs hover:text-white transition">
-                <i class="fas fa-arrow-left mr-2"></i> Return to Global Exchange
+                <span class="text-xl font-bold tracking-tighter">HABACHA</span>
             </a>
-        </div>
+            <a href="register.html" class="text-sm text-cyan hover:underline">Create Account</a>
+        </nav>
+
+        <main class="max-w-4xl mx-auto mt-12 px-6">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-bold">Select Your Portal Access</h1>
+                <p class="text-gray-400 text-sm mt-2">Choose your registered role to enter your dedicated portal interface.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 1. Client Portal -->
+                <div class="bg-navy-light p-6 rounded-xl border border-navy flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-cyan-soft text-cyan rounded-lg flex items-center justify-center mb-4 font-bold">C</div>
+                        <h2 class="font-bold text-lg mb-2">Renter & Enterprise</h2>
+                        <p class="text-xs text-gray-400 mb-6">Manage your referral inquiries, tracking codes (HB-xxxx), and direct supplier links.</p>
+                    </div>
+                    <a href="client-dashboard.html" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg text-center text-sm transition-all block">
+                        Enter Client Portal
+                    </a>
+                </div>
+
+                <!-- 2. Fleet Supplier Portal -->
+                <div class="bg-navy-light p-6 rounded-xl border border-navy flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-cyan-soft text-cyan rounded-lg flex items-center justify-center mb-4 font-bold">S</div>
+                        <h2 class="font-bold text-lg mb-2">Fleet Operator</h2>
+                        <p class="text-xs text-gray-400 mb-6">Manage your fleet listings, submit new assets, and analyze client lead conversions.</p>
+                    </div>
+                    <a href="supplier-dashboard.html" class="w-full bg-cyan-soft text-cyan hover:bg-cyan hover:text-white border border-cyan/30 font-semibold py-2.5 rounded-lg text-center text-sm transition-all block">
+                        Enter Supplier Portal
+                    </a>
+                </div>
+
+                <!-- 3. Admin Moderation Portal -->
+                <div class="bg-navy-light p-6 rounded-xl border border-navy flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-cyan-soft text-cyan rounded-lg flex items-center justify-center mb-4 font-bold">A</div>
+                        <h2 class="font-bold text-lg mb-2">HABACHA Admin</h2>
+                        <p class="text-xs text-gray-400 mb-6">Moderation queue center to review, approve, or reject proposed fleet asset submissions.</p>
+                    </div>
+                    <a href="admin-dashboard.html" class="w-full bg-[#1e293b] hover:bg-[#334155] text-white border border-navy font-semibold py-2.5 rounded-lg text-center text-sm transition-all block">
+                        Enter Admin Hub
+                    </a>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <script>
-        let currentRole = 'client';
-
-        function switchRole(role) {
-            currentRole = role;
-            const tabClient = document.getElementById('tab-client');
-            const tabSupplier = document.getElementById('tab-supplier');
-            const supplierField = document.getElementById('supplier-id-field');
-            const regText = document.getElementById('register-text');
-            const supRegText = document.getElementById('supplier-register-text');
-
-            if (role === 'supplier') {
-                tabSupplier.classList.add('border-cyan', 'text-cyan');
-                tabSupplier.classList.remove('border-transparent', 'text-gray-500');
-                tabClient.classList.add('border-transparent', 'text-gray-500');
-                tabClient.classList.remove('border-cyan', 'text-cyan');
-                supplierField.classList.remove('hidden');
-                regText.classList.add('hidden');
-                supRegText.classList.remove('hidden');
-            } else {
-                tabClient.classList.add('border-cyan', 'text-cyan');
-                tabClient.classList.remove('border-transparent', 'text-gray-500');
-                tabSupplier.classList.add('border-transparent', 'text-gray-500');
-                tabSupplier.classList.remove('border-cyan', 'text-cyan');
-                supplierField.classList.add('hidden');
-                regText.classList.remove('hidden');
-                supRegText.classList.add('hidden');
-            }
-        }
-
-        // Simulate Redirection based on Role
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (currentRole === 'supplier') {
-                window.location.href = 'supplier-dashboard.html';
-            } else {
-                window.location.href = 'client-dashboard.html';
-            }
-        });
-    </script>
+    <!-- Corporate Footer -->
+    <footer class="border-t border-navy bg-navy-light py-8 px-6 text-center text-xs text-gray-500 mt-20">
+        <p>© 2025 HABACHA Platform. Global Intermediary Mobility Exchange.</p>
+    </footer>
 </body>
 </html>
