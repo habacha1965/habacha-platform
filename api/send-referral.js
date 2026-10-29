@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   try {
     // Stuur naar de klant
     await resend.emails.send({
-      from: 'HABACHA <noreply@seedkincapital.com>',
+      from: 'HABACHA <onboarding@resend.dev>',
       to: clientEmail,
       subject: `Your HABACHA Tracking Code: ${refCode}`,
       html: `<h2>Thank you, ${clientName}!</h2>
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
     // Stuur naar jou (Admin)
     await resend.emails.send({
-      from: 'HABACHA System <noreply@seedkincapital.com>',
+      from: 'HABACHA System <onboarding@resend.dev>',
       to: adminEmail,
       subject: `New Lead: ${refCode}`,
       html: `<p>New request from <strong>${clientName}</strong> (${clientEmail}). Code: ${refCode}</p>`
