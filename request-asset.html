@@ -63,8 +63,9 @@
 
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            const refCode = `HB-${randomNum}`;
+            // Genereer een 10-teken alfanumerieke code (maximale veiligheid)
+            const randomStr = Math.random().toString(36).substring(2, 12).toUpperCase();
+            const refCode = `HB-${randomStr}`;
 
             const { error } = await supabase
                 .from('referrals')
