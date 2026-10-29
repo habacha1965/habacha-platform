@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supplier Onboarding | HABACHA Fleet Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
         .bg-navy-dark { background-color: #0b1329; }
@@ -13,7 +13,8 @@
         .border-navy { border-color: #1e293b; }
         .text-cyan { color: #0ea5e9; }
         .bg-cyan { background-color: #0ea5e9; }
-        
+        .bg-blue-600 { background-color: #2563eb; }
+
         select {
             background-color: #0f172a !important;
             color: white !important;
@@ -30,7 +31,7 @@
     <nav class="p-6 border-b border-navy flex justify-between items-center bg-navy-light">
         <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
             <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
-                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
+                <i class="fa-solid fa-right-left text-navy-dark text-lg"></i>
             </div>
             <span class="text-2xl font-bold tracking-tight text-white uppercase">HABACHA</span>
         </div>
@@ -42,7 +43,7 @@
             <div class="bg-navy-light border border-navy rounded-xl p-8 shadow-2xl">
                 <div class="flex items-center space-x-4 mb-6">
                     <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-truck-moving text-blue-600 text-2xl"></i>
+                        <i class="fa-solid fa-truck-moving text-blue-600 text-xl"></i>
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold">Fleet Onboarding</h1>
@@ -55,11 +56,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Company Registered Name</label></div>
-                            <input type="text" required placeholder="Global Fleet Solutions" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <input type="text" required placeholder="Global Fleet Solutions" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                         </div>
                         <div>
                             <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Primary Asset Division</label></div>
-                            <select required class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <select required class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                                 <option value="1">Cars & Passenger Vans</option>
                                 <option value="2">Commercial & Freight</option>
                                 <option value="3">Marine & Shipping</option>
@@ -72,11 +73,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Headquarters / Main Region</label></div>
-                            <input type="text" required placeholder="e.g. Amsterdam, NL" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <input type="text" required placeholder="e.g. Amsterdam, NL" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                         </div>
                         <div>
                             <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Direct Booking Portal URL</label></div>
-                            <input type="url" required placeholder="https://your-website.com/book" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <input type="url" required placeholder="https://your-website.com/book" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                         </div>
                     </div>
 
@@ -94,7 +95,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-md transition uppercase tracking-widest text-sm">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-md transition uppercase tracking-widest text-xs">
                         Submit Onboarding Application
                     </button>
                     

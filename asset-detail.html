@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Details | HABACHA - International Asset Exchange</title>
+    <title>Asset Details | HABACHA Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
         .bg-navy-dark { background-color: #0b1329; }
@@ -14,8 +14,7 @@
         .text-cyan { color: #0ea5e9; }
         .bg-cyan { background-color: #0ea5e9; }
         .bg-blue-600 { background-color: #2563eb; }
-        
-        /* Custom Select Styling to prevent OS default light theme */
+
         select {
             background-color: #0f172a !important;
             color: #ffffff !important;
@@ -34,11 +33,11 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Navigation Header (Clean logo home link, zero redundant text links) -->
+    <!-- Navigation Header -->
     <nav class="bg-navy-light border-b border-navy px-6 py-4 flex justify-between items-center sticky top-0 z-50">
         <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
             <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
-                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
+                <i class="fa-solid fa-right-left text-navy-dark text-lg"></i>
             </div>
             <span class="text-2xl font-bold tracking-tight text-white uppercase">HABACHA</span>
         </div>
@@ -52,11 +51,11 @@
         </div>
     </nav>
 
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <main class="flex-grow container mx-auto px-6 py-8">
         
-        <!-- Dynamic Breadcrumbs & Return Navigation -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <!-- Restored Breadcrumbs & Return Navigation -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b border-navy pb-6">
             <nav class="flex text-sm text-gray-400 space-x-2">
                 <a href="index.html" class="hover:text-cyan">Home</a>
                 <span>/</span>
@@ -65,7 +64,7 @@
                 <span class="text-white font-semibold" id="breadcrumb-asset-name">Asset Details</span>
             </nav>
             <a id="return-directory-btn" href="inventory.html" class="text-cyan text-sm font-semibold flex items-center hover:underline">
-                <i class="fas fa-arrow-left mr-2"></i> Return to Category Directory
+                <i class="fa-solid fa-arrow-left mr-2"></i> Return to Category Directory
             </a>
         </div>
 
@@ -73,14 +72,14 @@
             
             <!-- Left Column: Asset Media & Technical Specifications -->
             <div class="lg:col-span-2 space-y-6">
-                <div class="bg-navy-light border border-navy rounded-xl overflow-hidden">
-                    <img id="asset-image" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1200" alt="Asset Image" class="w-full h-[420px] object-cover">
+                <div class="bg-navy-light border border-navy rounded-xl overflow-hidden shadow-2xl">
+                    <img id="asset-image" src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1200" alt="Asset Image" class="w-full h-[420px] object-cover">
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-6">
                             <div>
-                                <h1 id="asset-title" class="text-3xl font-bold mb-2 text-white">High-Performance Enterprise Asset</h1>
-                                <p id="asset-supplier" class="text-cyan font-medium flex items-center">
-                                    <i class="fas fa-shield-check mr-2"></i> Verified Fleet Partner ID: HB-SUP-8821
+                                <h1 id="asset-title" class="text-3xl font-bold mb-2 text-white">Mercedes-Benz S-Class Long</h1>
+                                <p id="asset-supplier" class="text-cyan font-medium flex items-center text-sm">
+                                    <i class="fa-solid fa-shield-halved mr-2"></i> Verified Fleet Partner ID: HB-SUP-8821
                                 </p>
                             </div>
                             <div class="text-right">
@@ -89,31 +88,29 @@
                             </div>
                         </div>
 
-                        <!-- Technical Specification Highlights -->
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-y border-navy mb-6">
                             <div>
                                 <div class="text-xs text-gray-500 uppercase font-bold mb-1">Availability</div>
-                                <div class="text-white font-medium" id="spec-availability">Immediate</div>
+                                <div class="text-white font-medium">Immediate</div>
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 uppercase font-bold mb-1">Agreement Type</div>
-                                <div class="text-white font-medium" id="spec-agreement">Short-Term / Lease</div>
+                                <div class="text-white font-medium">Short-Term / Lease</div>
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 uppercase font-bold mb-1">Fulfillment</div>
-                                <div class="text-white font-medium" id="spec-location">Hub Pickup / Delivery</div>
+                                <div class="text-white font-medium">Hub Pickup / Delivery</div>
                             </div>
                             <div>
                                 <div class="text-xs text-gray-500 uppercase font-bold mb-1">Tracking Code</div>
-                                <div class="text-cyan font-bold" id="spec-hb-code">HB-8821-X</div>
+                                <div class="text-cyan font-bold" id="spec-hb-code">HB-9549-X</div>
                             </div>
                         </div>
 
-                        <!-- Asset Overview Text -->
                         <div class="prose prose-invert max-w-none">
                             <h3 class="text-xl font-bold mb-4">Description & Operational Specifications</h3>
-                            <p class="text-gray-400 leading-relaxed mb-4" id="asset-description">
-                                This asset is listed by an accredited international fleet operator within the HABACHA Intermediary Network. All machinery, vehicles, vessels, and equipment are maintained under certified inspection standards.
+                            <p class="text-gray-400 leading-relaxed mb-4">
+                                This luxury executive asset is listed by an accredited international fleet operator within the HABACHA Intermediary Network. All machinery, vehicles, vessels, and equipment are maintained under certified inspection standards.
                             </p>
                             <p class="text-gray-400 leading-relaxed text-sm">
                                 As an intermediary exchange platform, HABACHA routes your request directly to the supplier's booking management system, generating a unique referral tracking code for guaranteed priority rates and verified compliance.
@@ -125,47 +122,44 @@
 
             <!-- Right Column: Division-Aware Lead Capture Form -->
             <div class="space-y-6">
-                <div class="bg-navy-light border border-navy rounded-xl p-8 sticky top-24">
+                <div class="bg-navy-light border border-navy rounded-xl p-8 sticky top-24 shadow-2xl">
                     <h2 class="text-xl font-bold mb-2">Request Referral Link</h2>
                     <p class="text-sm text-gray-400 mb-6">Submit your inquiry to receive the direct supplier booking link with your HABACHA tracking code.</p>
                     
                     <form id="referral-form" action="success.html" method="GET" class="space-y-4">
-                        <!-- Division Tracking Input -->
                         <input type="hidden" name="category" id="form-division-id" value="1">
-                        <input type="hidden" name="asset" id="form-asset-name" value="Asset Request">
+                        <input type="hidden" name="asset" id="form-asset-name" value="Mercedes-Benz S-Class Long">
                         
                         <div>
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Full Name / Representative</label>
                             </div>
-                            <input type="text" name="name" required placeholder="Enter your full name" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <input type="text" name="name" required placeholder="Enter your full name" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                         </div>
 
                         <div>
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Corporate or Contact Email</label>
                             </div>
-                            <input type="email" name="email" required placeholder="name@company.com" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <input type="email" name="email" required placeholder="name@company.com" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                         </div>
 
-                        <!-- Dynamic Division-Specific Input Fields Injection Container -->
+                        <!-- Dynamic Division Inputs with Overflow & Padding Protection -->
                         <div id="dynamic-fields" class="space-y-4 pt-2 border-t border-navy mt-4">
-                            <!-- Dynamic fields inserted by JS below -->
                         </div>
 
-                        <!-- Date & Duration Grid with Horizontal Alignment -->
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <div class="min-h-[30px] flex items-end">
                                     <label class="text-xs font-bold text-gray-400 uppercase mb-1">Start Date</label>
                                 </div>
-                                <input type="date" name="start_date" required class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                                <input type="date" name="start_date" required class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-xs">
                             </div>
                             <div>
                                 <div class="min-h-[30px] flex items-end">
                                     <label class="text-xs font-bold text-gray-400 uppercase mb-1">Duration</label>
                                 </div>
-                                <select name="duration" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                                <select name="duration" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 focus:border-cyan outline-none transition text-white text-xs">
                                     <option value="Daily">Daily Rental</option>
                                     <option value="Weekly">Weekly Rental</option>
                                     <option value="Monthly">Monthly Lease</option>
@@ -174,9 +168,9 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-cyan hover:bg-opacity-90 text-navy-dark font-bold py-4 rounded-md transition mt-4 flex items-center justify-center space-x-2">
+                        <button type="submit" class="w-full bg-cyan hover:bg-opacity-90 text-navy-dark font-bold py-4 rounded-md transition mt-4 flex items-center justify-center space-x-2 text-xs uppercase tracking-widest">
                             <span>GENERATE REFERRAL CODE</span>
-                            <i class="fas fa-chevron-right"></i>
+                            <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     </form>
 
@@ -190,14 +184,14 @@
         </div>
     </main>
 
-    <!-- Corporate B2B Footer -->
+    <!-- Footer -->
     <footer class="bg-navy-light border-t border-navy py-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-1">
+                <div>
                     <div class="flex items-center space-x-2 mb-6">
                         <div class="w-6 h-6 bg-cyan rounded flex items-center justify-center">
-                            <i class="fas fa-exchange-alt text-navy-dark text-xs"></i>
+                            <i class="fa-solid fa-right-left text-navy-dark text-xs"></i>
                         </div>
                         <span class="text-xl font-bold tracking-tight text-white uppercase">HABACHA</span>
                     </div>
@@ -207,7 +201,7 @@
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Exchange Divisions</h4>
-                    <ul class="text-gray-400 text-sm space-y-4">
+                    <ul class="text-gray-400 text-sm space-y-3">
                         <li><a href="inventory.html?category=1" class="hover:text-cyan transition">Cars & Passenger Vans</a></li>
                         <li><a href="inventory.html?category=2" class="hover:text-cyan transition">Commercial & Freight</a></li>
                         <li><a href="inventory.html?category=3" class="hover:text-cyan transition">Boats & Marine Vessels</a></li>
@@ -216,7 +210,7 @@
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Platform</h4>
-                    <ul class="text-gray-400 text-sm space-y-4">
+                    <ul class="text-gray-400 text-sm space-y-3">
                         <li><a href="supplier-register.html" class="hover:text-cyan transition">Fleet Onboarding</a></li>
                         <li><a href="register.html" class="hover:text-cyan transition">Client Registration</a></li>
                         <li><a href="login.html" class="hover:text-cyan transition">Partner Portal Access</a></li>
@@ -224,7 +218,7 @@
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Legal & Compliance</h4>
-                    <ul class="text-gray-400 text-sm space-y-4">
+                    <ul class="text-gray-400 text-sm space-y-3">
                         <li><a href="#" class="hover:text-cyan transition">Intermediary Governance</a></li>
                         <li><a href="#" class="hover:text-cyan transition">Privacy Policy</a></li>
                         <li><a href="#" class="hover:text-cyan transition">Terms of Exchange</a></li>
@@ -233,23 +227,27 @@
             </div>
             <div class="pt-8 border-t border-navy flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-xs">© 2024 HABACHA Platform. International Intermediary Asset Exchange.</p>
-                <div class="flex space-x-6 text-gray-500">
-                    <i class="fab fa-linkedin hover:text-cyan cursor-pointer transition"></i>
-                    <i class="fab fa-twitter hover:text-cyan cursor-pointer transition"></i>
-                    <i class="fab fa-instagram hover:text-cyan cursor-pointer transition"></i>
+                <div class="flex space-x-6 text-gray-500 text-sm">
+                    <i class="fa-brands fa-linkedin hover:text-cyan cursor-pointer transition"></i>
+                    <i class="fa-brands fa-x-twitter hover:text-cyan cursor-pointer transition"></i>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript logic for dynamic 8-Division Lead Form Generation -->
     <script>
+        const assetImages = {
+            'Mercedes-Benz S-Class Long': 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1200',
+            'DAF XF 530 Super Space Cab': 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200',
+            'Sunseeker 76 Luxury Motor Yacht': 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=1200',
+            'Airbus H145 Executive Helicopter': 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=1200'
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const categoryId = params.get('category') || '1';
-            const assetName = params.get('asset') || 'Executive Platform Asset';
+            const assetName = params.get('asset') || 'Mercedes-Benz S-Class Long';
             
-            // Populate Page Elements
             document.getElementById('breadcrumb-asset-name').textContent = assetName;
             document.getElementById('asset-title').textContent = assetName;
             document.getElementById('breadcrumb-category-link').href = `inventory.html?category=${categoryId}`;
@@ -257,37 +255,35 @@
             document.getElementById('form-division-id').value = categoryId;
             document.getElementById('form-asset-name').value = assetName;
 
-            // Generate Random Supplier Code for aesthetic consistency
-            const randomCode = 'HB-' + Math.floor(1000 + Math.random() * 9000) + '-X';
-            document.getElementById('spec-hb-code').textContent = randomCode;
+            if (assetImages[assetName]) {
+                document.getElementById('asset-image').src = assetImages[assetName];
+            }
 
-            // Target Container for Dynamic Fields
             const dynamicContainer = document.getElementById('dynamic-fields');
             let fieldHTML = '';
 
-            // Switch statement covering ALL 8 Divisions explicitly
             switch(categoryId) {
-                case '1': // Cars & Passenger Vans
+                case '1':
                     fieldHTML = `
                         <div>
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Driver's License & Pickup</label>
                             </div>
-                            <select name="license_type" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                                <option value="Standard B">Standard License (Class B) - Airport/Branch Pickup</option>
+                            <select name="license_type" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium truncate">
+                                <option value="Standard B">Class B - Airport/Branch Pickup</option>
                                 <option value="International">International Driver Permit</option>
                                 <option value="Chauffeur">Chauffeur Service Requested</option>
                             </select>
                         </div>
                     `;
                     break;
-                case '2': // Commercial Vans & Freight Trucks
+                case '2':
                     fieldHTML = `
                         <div>
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Required Cargo Payload Capacity</label>
                             </div>
-                            <select name="cargo_capacity" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <select name="cargo_capacity" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium truncate">
                                 <option value="Under 3.5T">Light Freight (Up to 3,500 kg)</option>
                                 <option value="3.5T - 7.5T">Medium Haul (3.5T to 7.5T)</option>
                                 <option value="Heavy Freight">Heavy Freight Truck (Over 7.5T)</option>
@@ -295,80 +291,16 @@
                         </div>
                     `;
                     break;
-                case '3': // Boats, Yachts & Cargo Ships
+                case '3':
                     fieldHTML = `
                         <div>
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Crew & Skipper Arrangement</label>
                             </div>
-                            <select name="skipper_option" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                                <option value="Bareboat">Bareboat (Self-Navigated / Certified Skipper)</option>
+                            <select name="skipper_option" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium truncate">
+                                <option value="Bareboat">Bareboat (Self-Navigated)</option>
                                 <option value="Captain Included">Professional Captain Included</option>
                                 <option value="Full Maritime Crew">Full Crew & Service Staff Included</option>
-                            </select>
-                        </div>
-                    `;
-                    break;
-                case '4': // Helicopters & Aircraft
-                    fieldHTML = `
-                        <div>
-                            <div class="min-h-[30px] flex items-end">
-                                <label class="text-xs font-bold text-gray-400 uppercase mb-1">Flight Hours & Operational Requirements</label>
-                            </div>
-                            <select name="flight_requirements" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                                <option value="Charter Pilot Included">Charter Service with Certified Crew</option>
-                                <option value="Dry Lease">Dry Lease (Licensed Commercial Pilot)</option>
-                                <option value="VIP Helicopter Transport">VIP Helipad Pickup / Transfer</option>
-                            </select>
-                        </div>
-                    `;
-                    break;
-                case '5': // Stays, Accommodations & Real Estate
-                    fieldHTML = `
-                        <div>
-                            <div class="min-h-[30px] flex items-end">
-                                <label class="text-xs font-bold text-gray-400 uppercase mb-1">Total Occupants / Lease Purpose</label>
-                            </div>
-                            <select name="occupancy_type" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                                <option value="Corporate Executive">Corporate Executive Stay (1-2 Persons)</option>
-                                <option value="Team Housing">Enterprise Team Lodging (3-10 Persons)</option>
-                                <option value="Commercial Space">Commercial / Office Real Estate Lease</option>
-                            </select>
-                        </div>
-                    `;
-                    break;
-                case '6': // Construction Machinery & Industrial Equipment
-                    fieldHTML = `
-                        <div>
-                            <div class="min-h-[30px] flex items-end">
-                                <label class="text-xs font-bold text-gray-400 uppercase mb-1">Site Delivery Postcode & Machinery Operator</label>
-                            </div>
-                            <input type="text" name="delivery_postcode" placeholder="Enter Site Location & Operator Needed (Yes/No)" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                    `;
-                    break;
-                case '7': // Campers, RVs & Leisure Mobility
-                    fieldHTML = `
-                        <div>
-                            <div class="min-h-[30px] flex items-end">
-                                <label class="text-xs font-bold text-gray-400 uppercase mb-1">Mileage Allowance & Travel Radius</label>
-                            </div>
-                            <select name="travel_radius" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                                <option value="Standard Travel">Standard Regional Travel Package</option>
-                                <option value="Unlimited Mileage">Unlimited International Mileage Package</option>
-                            </select>
-                        </div>
-                    `;
-                    break;
-                case '8': // Event & Audio/Visual Equipment
-                    fieldHTML = `
-                        <div>
-                            <div class="min-h-[30px] flex items-end">
-                                <label class="text-xs font-bold text-gray-400 uppercase mb-1">Technical Setup Crew Option</label>
-                            </div>
-                            <select name="technical_crew" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                                <option value="Equipment Only">Equipment Rental Only (Self-Setup)</option>
-                                <option value="On-site Technicians">Full Delivery & On-Site AV Technicians</option>
                             </select>
                         </div>
                     `;
@@ -379,7 +311,7 @@
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Rental / Lease Specification</label>
                             </div>
-                            <input type="text" name="general_spec" placeholder="Specify your requirements" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                            <input type="text" name="general_spec" placeholder="Specify your requirements" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                         </div>
                     `;
             }

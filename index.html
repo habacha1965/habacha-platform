@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HABACHA | International Intermediary Asset Exchange</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
         .bg-navy-dark { background-color: #0b1329; }
@@ -15,7 +15,6 @@
         .bg-cyan { background-color: #0ea5e9; }
         .bg-blue-600 { background-color: #2563eb; }
 
-        /* Custom Select Dropdown Styling for cross-browser consistency */
         select {
             background-color: #0f172a !important;
             color: #ffffff !important;
@@ -34,11 +33,11 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Corporate Navigation Bar (Zero redundant Home text link; logo serves as sole Home link) -->
+    <!-- Navigation Header -->
     <nav class="bg-navy-light border-b border-navy px-6 py-4 flex justify-between items-center sticky top-0 z-50">
         <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
             <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
-                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
+                <i class="fa-solid fa-right-left text-navy-dark text-lg"></i>
             </div>
             <span class="text-2xl font-bold tracking-tight text-white uppercase">HABACHA</span>
         </div>
@@ -53,7 +52,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Integrated Search Bar -->
+    <!-- Hero Section -->
     <section class="relative py-20 px-6 bg-gradient-to-b from-navy-light to-navy-dark border-b border-navy">
         <div class="container mx-auto max-w-6xl text-center">
             <span class="text-xs font-bold text-cyan uppercase tracking-widest bg-navy-dark border border-navy px-4 py-2 rounded-full inline-block mb-6">
@@ -70,7 +69,6 @@
             <div class="bg-navy-light border border-navy p-6 rounded-2xl shadow-2xl text-left max-w-5xl mx-auto">
                 <form action="inventory.html" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
                     
-                    <!-- Location: 3 Cols -->
                     <div class="md:col-span-3">
                         <div class="min-h-[24px] flex items-end">
                             <label class="text-xs font-bold text-gray-400 uppercase mb-1">Pickup or Region</label>
@@ -78,7 +76,6 @@
                         <input type="text" name="location" placeholder="City, Airport or Country" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
                     </div>
 
-                    <!-- Division Category: 4 Cols -->
                     <div class="md:col-span-4">
                         <div class="min-h-[24px] flex items-end">
                             <label class="text-xs font-bold text-gray-400 uppercase mb-1">Exchange Division</label>
@@ -96,7 +93,6 @@
                         </select>
                     </div>
 
-                    <!-- Agreement Term: 3 Cols -->
                     <div class="md:col-span-3">
                         <div class="min-h-[24px] flex items-end">
                             <label class="text-xs font-bold text-gray-400 uppercase mb-1">Agreement Type</label>
@@ -108,11 +104,10 @@
                         </select>
                     </div>
 
-                    <!-- Submit Button: 2 Cols -->
                     <div class="md:col-span-2">
                         <button type="submit" class="w-full bg-cyan hover:bg-opacity-90 text-navy-dark font-bold h-12 rounded-md transition text-xs uppercase tracking-widest flex items-center justify-center space-x-2">
                             <span>Search</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
 
@@ -129,7 +124,7 @@
                 <p class="text-gray-400 text-sm mt-1">Select a division to explore available fleet directory listings.</p>
             </div>
             <a href="inventory.html" class="text-cyan text-sm font-semibold flex items-center hover:underline">
-                View Entire Directory <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                View Entire Directory <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
             </a>
         </div>
 
@@ -139,7 +134,7 @@
             <a href="inventory.html?category=1" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-car"></i>
+                        <i class="fa-solid fa-car"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Cars & Passenger Vans</h3>
@@ -150,7 +145,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -158,7 +153,7 @@
             <a href="inventory.html?category=2" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-truck-moving"></i>
+                        <i class="fa-solid fa-truck-moving"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Commercial & Freight</h3>
@@ -169,7 +164,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -177,7 +172,7 @@
             <a href="inventory.html?category=3" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-ship"></i>
+                        <i class="fa-solid fa-ship"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Boats, Yachts & Ships</h3>
@@ -188,7 +183,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -196,7 +191,7 @@
             <a href="inventory.html?category=4" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-plane"></i>
+                        <i class="fa-solid fa-plane"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Helicopters & Aircraft</h3>
@@ -207,7 +202,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -215,7 +210,7 @@
             <a href="inventory.html?category=5" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-building"></i>
+                        <i class="fa-solid fa-building"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Stays & Real Estate</h3>
@@ -226,7 +221,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -234,7 +229,7 @@
             <a href="inventory.html?category=6" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-hard-hat"></i>
+                        <i class="fa-solid fa-helmet-safety"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Construction & Machinery</h3>
@@ -245,7 +240,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -253,7 +248,7 @@
             <a href="inventory.html?category=7" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-caravan"></i>
+                        <i class="fa-solid fa-caravan"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Campers & Leisure</h3>
@@ -264,7 +259,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -272,7 +267,7 @@
             <a href="inventory.html?category=8" class="bg-navy-light border border-navy rounded-xl p-6 hover:border-cyan transition duration-300 flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-cyan bg-opacity-10 text-cyan rounded-lg flex items-center justify-center text-xl mb-4 group-hover:bg-cyan group-hover:text-navy-dark transition">
-                        <i class="fas fa-photo-video"></i>
+                        <i class="fa-solid fa-sliders"></i>
                     </div>
                     <div class="min-h-[48px]">
                         <h3 class="font-bold text-lg text-white mb-1">Event & Audio/Visual</h3>
@@ -283,7 +278,7 @@
                 </div>
                 <div class="pt-4 border-t border-navy text-xs font-bold text-cyan flex justify-between items-center">
                     <span>Explore Division</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
@@ -320,47 +315,14 @@
         </div>
     </section>
 
-    <!-- Dual Onboarding Call To Action -->
-    <section class="py-16 container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <div class="bg-navy-light border border-navy rounded-2xl p-8 flex flex-col justify-between">
-                <div>
-                    <span class="text-[10px] font-bold text-cyan uppercase tracking-widest">For Renters & Enterprise</span>
-                    <h3 class="text-2xl font-bold text-white mt-2 mb-4">Looking to Lease or Rent?</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Access our international directory to find competitive rates on fleet vehicles, vessels, machinery, and real estate.
-                    </p>
-                </div>
-                <a href="register.html" class="inline-block text-center bg-cyan hover:bg-opacity-90 text-navy-dark font-bold py-3 px-6 rounded-md transition text-xs uppercase tracking-widest">
-                    Create Client Account
-                </a>
-            </div>
-
-            <div class="bg-navy-light border border-navy rounded-2xl p-8 flex flex-col justify-between">
-                <div>
-                    <span class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">For Fleet Operators</span>
-                    <h3 class="text-2xl font-bold text-white mt-2 mb-4">List Your Fleet Assets</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Join the HABACHA intermediary network to receive pre-qualified, high-intent client referral traffic directly to your portal.
-                    </p>
-                </div>
-                <a href="supplier-register.html" class="inline-block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition text-xs uppercase tracking-widest">
-                    Submit Supplier Onboarding
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Corporate Footer (Clean B2B layout with ZERO phone, email or KvK details) -->
+    <!-- Footer -->
     <footer class="bg-navy-light border-t border-navy py-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div>
                     <div class="flex items-center space-x-2 mb-6">
                         <div class="w-6 h-6 bg-cyan rounded flex items-center justify-center">
-                            <i class="fas fa-exchange-alt text-navy-dark text-xs"></i>
+                            <i class="fa-solid fa-right-left text-navy-dark text-xs"></i>
                         </div>
                         <span class="text-xl font-bold tracking-tight text-white uppercase">HABACHA</span>
                     </div>
@@ -397,9 +359,8 @@
             <div class="pt-8 border-t border-navy flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-xs">© 2024 HABACHA Platform. International Intermediary Asset Exchange.</p>
                 <div class="flex space-x-6 text-gray-500 text-sm">
-                    <i class="fab fa-linkedin hover:text-cyan cursor-pointer transition"></i>
-                    <i class="fab fa-twitter hover:text-cyan cursor-pointer transition"></i>
-                    <i class="fab fa-instagram hover:text-cyan cursor-pointer transition"></i>
+                    <i class="fa-brands fa-linkedin hover:text-cyan cursor-pointer transition"></i>
+                    <i class="fa-brands fa-x-twitter hover:text-cyan cursor-pointer transition"></i>
                 </div>
             </div>
         </div>
