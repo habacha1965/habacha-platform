@@ -33,43 +33,69 @@
                     Generate Code & Continue
                 </button>
             </form>
+
             <div id="success-message" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-green-200 text-center">
                 <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Request Logged!</h2>
-                <p class="text-slate-600 mb-6">Your unique tracking code is:</p>
-                <div class="text-3xl font-mono font-bold bg-slate-50 py-3 px-6 rounded-xl inline-block mb-6 border border-slate-200" id="ref-code">HB-0000</div>
-                <p class="text-sm text-slate-500 mb-6">You are now being redirected to the supplier to complete your booking.</p>
-                <a href="#" id="supplier-link" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Go to Supplier Now &rarr;</a>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Request Logged & Email Sent!</h2>
+                <p class="text-slate-600 mb-4">Your tracking code is: <strong id="ref-code" class="text-xl text-blue-600 font-mono"></strong></p>
+                <p class="text-sm text-slate-500 mb-6">We have emailed your code to you. You are now being redirected to the supplier...</p>
+                <div class="w-full bg-slate-100 rounded-full h-2 mb-4">
+                    <div id="progress-bar" class="bg-blue-600 h-2 rounded-full" style="width: 0%; transition: width 3s linear;"></div>
+                </div>
             </div>
         </div>
     </main>
+
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k'; 
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k';
         const supabase = createClient(supabaseUrl, supabaseKey);
+
         document.getElementById('simple-booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.innerText = 'Generating...';
+            btn.innerText = 'Processing...';
             btn.disabled = true;
+
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             const randomNum = Math.floor(1000 + Math.random() * 9000);
             const refCode = `HB-${randomNum}`;
-            const { error } = await supabase.from('referrals').insert([{ reference_code: refCode, client_name: name, client_email: email }]);
+
+            const { error } = await supabase
+                .from('referrals')
+                .insert([{ reference_code: refCode, client_name: name, client_email: email }]);
+
             if (error) {
                 alert('Database Error: ' + error.message);
                 btn.innerText = 'Generate Code & Continue';
                 btn.disabled = false;
                 return;
             }
+
+            try {
+                await fetch('/api/send-referral', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ clientName: name, clientEmail: email, refCode: refCode })
+                });
+            } catch (err) {
+                console.log('Email API error', err);
+            }
+
             document.getElementById('simple-booking-form').classList.add('hidden');
             document.getElementById('success-message').classList.remove('hidden');
             document.getElementById('ref-code').innerText = refCode;
-            document.getElementById('supplier-link').href = 'https://example.com/supplier?ref=' + refCode;
+            
+            setTimeout(() => { document.getElementById('progress-bar').style.width = '100%'; }, 100);
+
+            setTimeout(() => {
+                window.location.href = `https://example.com/supplier?ref=${refCode}`;
+            }, 3000);
         });
     </script>
 </body>
