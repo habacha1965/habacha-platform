@@ -3,86 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fleet Onboarding - HABACHA Platform</title>
+    <title>Supplier Registration | HABACHA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="bg-blue-600 text-white p-1.5 rounded-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                </div>
-                <span class="font-bold text-xl tracking-wider text-slate-900">HABACHA</span>
-            </a>
-            <a href="login.html" class="text-sm font-semibold text-blue-600 hover:text-blue-700">Supplier Login</a>
-        </div>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center">
+        <a href="index.html" class="font-bold text-xl text-slate-900 tracking-wider">HABACHA</a>
+        <a href="index.html" class="text-sm font-semibold text-blue-600 hover:underline">Return to Main Page</a>
     </header>
 
-    <!-- FOUNDING SUPPLIER DISCOUNT BANNER -->
-    <div class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 px-6 text-center shadow-md relative z-40">
-        <p class="text-sm md:text-base font-medium">
-            <strong>Founding Supplier Offer:</strong> Join our exclusive network today and get <strong>50% off</strong> your first year. Limited spots available.
-        </p>
-    </div>
-
-
-    <main class="max-w-3xl mx-auto px-6 py-12 flex-grow flex flex-col justify-center">
-        <div class="bg-white p-8 md:p-10 rounded-2xl border border-slate-200 shadow-sm">
-            <h1 class="text-2xl font-bold text-slate-900">Fleet Onboarding Application</h1>
-            <p class="text-xs text-slate-500 mt-1 mb-8">Apply to list your assets on the international exchange (No Cure, No Pay).</p>
-
-            <form action="supplier-dashboard.html" class="space-y-4 text-sm">
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-1">Company Registered Name</label>
-                        <input type="text" required placeholder="Global Fleet Solutions Ltd" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
-                    </div>
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-1">Primary Asset Division</label>
-                        <select class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
-                            <option>Cars & Passenger Vans</option>
-                            <option>Commercial Vans & Freight Trucks</option>
-                            <option>Boats, Yachts & Cargo Ships</option>
-                            <option>Helicopters & Aircraft</option>
-                            <option>Stays, Accommodations & Real Estate</option>
-                            <option>Construction Machinery & Equipment</option>
-                            <option>Campers, RVs & Leisure Mobility</option>
-                            <option>Event & Audio/Visual Equipment</option>
-                        </select>
-                    </div>
+    <!-- Main Form -->
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div class="max-w-xl w-full">
+            <form id="supplier-form" class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-slate-900 mb-2">Become a HABACHA Supplier</h1>
+                    <p class="text-slate-600">Join our founding network. Get 50% off your first year.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Company Name</label>
+                    <input type="text" id="companyName" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Contact Email</label>
+                    <input type="email" id="contactEmail" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Which Division?</label>
+                    <select id="category" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        <option value="cars">Cars & Vans</option>
+                        <option value="commercial">Commercial Freight</option>
+                        <option value="maritime">Boats & Yachts</option>
+                        <option value="aviation">Helicopters & Aircraft</option>
+                        <option value="stays">Stays & Real Estate</option>
+                        <option value="industrial">Construction Machinery</option>
+                        <option value="leisure">Campers & RVs</option>
+                        <option value="event">Event & AV Equipment</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Website URL</label>
+                    <input type="url" id="websiteUrl" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="https://yourcompany.com">
+                </div>
+                <div class="mb-8">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Unique Contract Link</label>
+                    <input type="url" id="contractLink" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="https://yourcompany.com/book?ref=">
+                    <p class="text-xs text-slate-500 mt-1">This is where we send the customer with their unique HB-code.</p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-1">Headquarters / Main Region</label>
-                        <input type="text" required placeholder="e.g. Amsterdam Airport (AMS)" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
-                    </div>
-                    <div>
-                        <label class="block font-medium text-slate-700 mb-1">Direct Booking Portal URL</label>
-                        <input type="url" required placeholder="https://your-company.com/book" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-slate-200">
-                    <button type="submit" class="w-full py-3.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition">Submit Onboarding Application</button>
-                </div>
+                <button type="submit" id="submitBtn" class="w-full h-12 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">
+                    Register & Claim 50% Discount
+                </button>
             </form>
+            
+            <div id="success-message" class="hidden bg-green-50 text-green-800 p-6 rounded-2xl border border-green-200 text-center mt-4">
+                <h3 class="font-bold text-lg mb-2">Registration Successful!</h3>
+                <p>We will review your application and contact you shortly.</p>
+            </div>
         </div>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-            <p>© 2026 HABACHA Intermediary Exchange. All rights reserved.</p>
-            <div class="flex gap-6">
-                <a href="terms.html" class="hover:text-white">Terms of Service</a>
-                <a href="supplier-agreement.html" class="hover:text-white">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
-                <a href="cookies.html" class="hover:text-white">Cookie Policy</a>
-            </div>
-        </div>
-    </footer>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k'; // Wordt automatisch vervangen
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        document.getElementById('supplier-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = 'Processing...';
+            btn.disabled = true;
+
+            const company = document.getElementById('companyName').value;
+            const email = document.getElementById('contactEmail').value;
+            const category = document.getElementById('category').value;
+            const website = document.getElementById('websiteUrl').value;
+            const contract = document.getElementById('contractLink').value;
+
+            const { error } = await supabase.from('suppliers').insert([{
+                company_name: company,
+                contact_email: email,
+                category: category,
+                website_url: website,
+                contract_link: contract
+            }]);
+
+            if (error) {
+                alert('Database Error: ' + error.message);
+                btn.innerText = 'Register & Claim 50% Discount';
+                btn.disabled = false;
+                return;
+            }
+
+            document.getElementById('supplier-form').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>
