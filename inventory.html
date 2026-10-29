@@ -43,7 +43,7 @@
         </div>
         <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4" id="vip-title">Expanding Our Global Network.</h2>
         <p class="text-lg text-slate-600 mb-8">We are currently onboarding vetted suppliers for this division. Submit your request now to be prioritized for our founding launch.</p>
-        <a href="submit-asset.html" id="vip-cta" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg text-base">Submit Your Request &rarr;</a>
+        <a href="request-asset.html" id="vip-cta" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg text-base">Submit Your Request &rarr;</a>
     </div>
     <!-- EINDE VIP WACHTKAMER -->
 
@@ -184,7 +184,7 @@
                 if (category && category !== 'all') {
                     const formattedCat = category.charAt(0).toUpperCase() + category.slice(1);
                     document.getElementById('vip-title').innerText = `Expanding Our ${formattedCat} Network.`;
-                    document.getElementById('vip-cta').href = `submit-asset.html?category=${category}`;
+                    document.getElementById('vip-cta').href = `request-asset.html?category=${category}`;
                 }
             }
         });

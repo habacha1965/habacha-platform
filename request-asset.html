@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Request | HABACHA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+    <header class="bg-white border-b border-slate-200 w-full py-4 px-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2">
+            <span class="font-bold text-xl text-slate-900 tracking-wider">HABACHA</span>
+        </a>
+    </header>
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div class="max-w-lg w-full">
+            <form id="simple-booking-form" class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-slate-900 mb-2">Secure Your Asset</h1>
+                    <p class="text-slate-600">Enter your details to generate your unique tracking code and proceed to the supplier.</p>
+                </div>
+                <div class="mb-5">
+                    <label for="clientName" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                    <input type="text" id="clientName" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="John Doe">
+                </div>
+                <div class="mb-8">
+                    <label for="clientEmail" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                    <input type="email" id="clientEmail" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="john@example.com">
+                </div>
+                <button type="submit" id="submitBtn" class="w-full h-12 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg flex items-center justify-center">
+                    Generate Code & Continue
+                </button>
+            </form>
+            <div id="success-message" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-green-200 text-center">
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Request Logged!</h2>
+                <p class="text-slate-600 mb-6">Your unique tracking code is:</p>
+                <div class="text-3xl font-mono font-bold bg-slate-50 py-3 px-6 rounded-xl inline-block mb-6 border border-slate-200" id="ref-code">HB-0000</div>
+                <p class="text-sm text-slate-500 mb-6">You are now being redirected to the supplier to complete your booking.</p>
+                <a href="#" id="supplier-link" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Go to Supplier Now &rarr;</a>
+            </div>
+        </div>
+    </main>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk2MjQ2NDAsImV4cCI6MjAyNTIwMDY0MH0.x6v5mN1Q2P8x9Y5z3R4T1W2X3Y4Z5A6B7C8D9E0F1G'; 
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        document.getElementById('simple-booking-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = 'Generating...';
+            btn.disabled = true;
+            const name = document.getElementById('clientName').value;
+            const email = document.getElementById('clientEmail').value;
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const refCode = `HB-${randomNum}`;
+            const { error } = await supabase.from('referrals').insert([{ reference_code: refCode, client_name: name, client_email: email }]);
+            if (error) {
+                alert('Something went wrong. Please try again.');
+                btn.innerText = 'Generate Code & Continue';
+                btn.disabled = false;
+                return;
+            }
+            document.getElementById('simple-booking-form').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
+            document.getElementById('ref-code').innerText = refCode;
+            document.getElementById('supplier-link').href = 'https://example.com/supplier?ref=' + refCode;
+        });
+    </script>
+</body>
+</html>
