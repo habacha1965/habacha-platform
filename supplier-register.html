@@ -3,177 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supplier Fleet Onboarding | HABACHA Platform</title>
+    <title>Supplier Onboarding | HABACHA Fleet Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: { 900: '#0b1329', 800: '#0f172a', 700: '#1e293b' },
-                        steel: '#2563eb',
-                        cyan: '#0ea5e9'
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0b1329; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-align: left; }
+        body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
+        .bg-navy-dark { background-color: #0b1329; }
+        .bg-navy-light { background-color: #0f172a; }
+        .border-navy { border-color: #1e293b; }
+        .text-cyan { color: #0ea5e9; }
+        .bg-cyan { background-color: #0ea5e9; }
+        
         select {
             background-color: #0f172a !important;
-            color: #ffffff !important;
-            border: 1px solid #334155 !important;
+            color: white !important;
             appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230ea5e9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 0.75rem center !important;
-            background-size: 1rem !important;
-            padding-right: 2.25rem !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.25em 1.25em;
         }
-        select option { background-color: #0f172a !important; color: #ffffff !important; padding: 12px; }
     </style>
 </head>
-<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col justify-between items-start">
+<body class="min-h-screen flex flex-col">
 
-    <!-- HEADER -->
-    <header class="bg-navy-900 border-b border-slate-800 py-4 px-6 w-full">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="index.html" class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-steel to-cyan flex items-center justify-center font-black text-white text-lg">H</div>
-                <span class="text-xl font-bold text-white">HABACHA</span>
-            </a>
-            <a href="login.html" class="text-xs text-slate-400 hover:text-white">Partner Portal Sign In &rarr;</a>
-        </div>
-    </header>
-
-    <!-- MAIN ONBOARDING FORM -->
-    <main class="flex-grow max-w-4xl mx-auto px-4 py-12 w-full text-left">
-        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 shadow-2xl flex flex-col items-start w-full">
-            
-            <div class="mb-8 border-b border-slate-700 pb-6 w-full flex flex-col items-start">
-                <span class="px-3 py-1 rounded-full bg-steel/20 text-cyan text-xs font-semibold">Asset Supplier Partner Application</span>
-                <h1 class="text-3xl font-bold text-white mt-2">Register Your Enterprise Fleet</h1>
-                <p class="text-slate-400 text-xs sm:text-sm mt-2">Join HABACHA's global intermediary referral exchange. Receive verified client leads and route them directly to your booking URLs.</p>
+    <nav class="p-6 border-b border-navy flex justify-between items-center bg-navy-light">
+        <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
+            <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
+                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
             </div>
+            <span class="text-2xl font-bold tracking-tight text-white uppercase">HABACHA</span>
+        </div>
+        <a href="login.html" class="text-sm font-semibold text-gray-400 hover:text-cyan transition">Supplier Login</a>
+    </nav>
 
-            <form id="supplierForm" class="space-y-8 w-full">
-                
-                <!-- SECTION 1: COMPANY DETAILS -->
-                <div class="flex flex-col items-start w-full">
-                    <h2 class="text-base font-bold text-cyan mb-4 flex items-center"><span class="w-6 h-6 rounded-full bg-steel text-white text-xs flex items-center justify-center mr-2">1</span> Commercial Entity Details</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                        <div class="flex flex-col items-start">
-                            <label class="block text-xs font-bold text-slate-300 mb-1">Company Legal Name *</label>
-                            <input type="text" required placeholder="e.g. European Logistics & Mobility Group" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
-                        </div>
-                        <div class="flex flex-col items-start">
-                            <label class="block text-xs font-bold text-slate-300 mb-1">Corporate / Operations Email *</label>
-                            <input type="email" required placeholder="partners@company.com" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm focus:outline-none focus:border-cyan">
-                        </div>
+    <main class="flex-grow flex items-center justify-center p-6 py-12">
+        <div class="w-full max-w-3xl">
+            <div class="bg-navy-light border border-navy rounded-xl p-8 shadow-2xl">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-truck-moving text-blue-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">Fleet Onboarding</h1>
+                        <p class="text-gray-400 text-sm">Apply to list your assets on the international exchange.</p>
                     </div>
                 </div>
 
-                <!-- SECTION 2: FIXED EQUAL-HEIGHT LABEL CONTAINERS -->
-                <div class="flex flex-col items-start w-full bg-navy-900/60 p-6 rounded-xl border border-slate-700">
-                    <h2 class="text-base font-bold text-cyan mb-4 flex items-center"><span class="w-6 h-6 rounded-full bg-steel text-white text-xs flex items-center justify-center mr-2">2</span> Enterprise Headquarters & Direct Booking URL</h2>
+                <form id="supplier-form" class="space-y-6" onsubmit="handleSupplierReg(event)">
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full items-start">
-                        
-                        <div class="flex flex-col items-start w-full">
-                            <div class="min-h-[50px] flex flex-col justify-start w-full">
-                                <label class="block text-xs font-bold text-white mb-1">Company Headquarters / Primary Region *</label>
-                                <p class="text-[11px] text-slate-400">Main HQ location (e.g., Global / Europe / London HQ).</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Company Registered Name</label></div>
+                            <input type="text" required placeholder="Global Fleet Solutions" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                        </div>
+                        <div>
+                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Primary Asset Division</label></div>
+                            <select required class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                                <option value="1">Cars & Passenger Vans</option>
+                                <option value="2">Commercial & Freight</option>
+                                <option value="3">Marine & Shipping</option>
+                                <option value="4">Aviation & Aircraft</option>
+                                <option value="6">Industrial & Construction</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Headquarters / Main Region</label></div>
+                            <input type="text" required placeholder="e.g. Amsterdam, NL" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                        </div>
+                        <div>
+                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Direct Booking Portal URL</label></div>
+                            <input type="url" required placeholder="https://your-website.com/book" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-dark p-6 rounded-lg border border-navy space-y-4">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-widest">Compliance Documentation</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[10px] text-gray-500 uppercase mb-2">Commercial Registry (PDF)</label>
+                                <input type="file" required class="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-navy-light file:text-cyan hover:file:bg-opacity-80">
                             </div>
-                            <input type="text" required placeholder="e.g. Global Fleet / Headquarters Amsterdam" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-600 text-sm focus:outline-none focus:border-cyan">
-                        </div>
-
-                        <div class="flex flex-col items-start w-full">
-                            <div class="min-h-[50px] flex flex-col justify-start w-full">
-                                <label class="block text-xs font-bold text-white mb-1">Supplier Direct Booking Website (URL) *</label>
-                                <p class="text-[11px] text-slate-400">URL to redirect clients with lead code (<code class="text-cyan">?ref=HB-xxxx</code>).</p>
+                            <div>
+                                <label class="block text-[10px] text-gray-500 uppercase mb-2">Fleet Insurance Certificate (PDF)</label>
+                                <input type="file" required class="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-navy-light file:text-cyan hover:file:bg-opacity-80">
                             </div>
-                            <input type="url" required placeholder="https://yourcompany.com/booking-engine" class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-600 text-sm focus:outline-none focus:border-cyan">
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- SECTION 3: PRODUCT DIVISIONS OFFERED -->
-                <div class="flex flex-col items-start w-full">
-                    <h2 class="text-base font-bold text-cyan mb-4 flex items-center"><span class="w-6 h-6 rounded-full bg-steel text-white text-xs flex items-center justify-center mr-2">3</span> Primary Asset Division</h2>
-                    <div class="w-full">
-                        <label class="block text-xs font-bold text-slate-300 mb-1">Primary Product Category Offered *</label>
-                        <select required class="w-full h-12 px-4 rounded-lg bg-navy-900 text-white border border-slate-700 text-sm">
-                            <option value="cars">1. Cars & Passenger Vans (Branch & Airport Terminal Pickup)</option>
-                            <option value="freight">2. Commercial Vans & Heavy Freight Trucks</option>
-                            <option value="boats">3. Boats, Yachts & Commercial Cargo Ships</option>
-                            <option value="aircraft">4. Helicopters & Executive Aircraft</option>
-                            <option value="realestate">5. Stays, Apartments & Commercial Real Estate</option>
-                            <option value="equipment">6. Construction Machinery & Industrial Equipment</option>
-                            <option value="campers">7. Campers, RVs & Leisure Mobility</option>
-                            <option value="events">8. Event Equipment & Professional Sound/Lighting</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- SECTION 4: DOCUMENT UPLOADS -->
-                <div class="flex flex-col items-start w-full">
-                    <h2 class="text-base font-bold text-cyan mb-4 flex items-center"><span class="w-6 h-6 rounded-full bg-steel text-white text-xs flex items-center justify-center mr-2">4</span> Verification Documents (PDF / Images)</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                        <div class="border border-dashed border-slate-700 bg-navy-900/40 p-4 rounded-xl text-left">
-                            <label class="block text-xs font-bold text-slate-300 mb-1">Commercial Registry / Extract (PDF) *</label>
-                            <p class="text-[11px] text-slate-400 mb-2">Proof of legal business registration.</p>
-                            <input type="file" required accept=".pdf,.png,.jpg" class="block w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-steel file:text-white hover:file:bg-blue-600">
-                        </div>
-                        <div class="border border-dashed border-slate-700 bg-navy-900/40 p-4 rounded-xl text-left">
-                            <label class="block text-xs font-bold text-slate-300 mb-1">Fleet / Asset Insurance Certificate (PDF) *</label>
-                            <p class="text-[11px] text-slate-400 mb-2">Proof of operational liability insurance.</p>
-                            <input type="file" required accept=".pdf,.png,.jpg" class="block w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-steel file:text-white hover:file:bg-blue-600">
                         </div>
                     </div>
-                </div>
 
-                <div class="pt-4 border-t border-slate-700 w-full">
-                    <label class="flex items-start space-x-3 cursor-pointer text-left">
-                        <input type="checkbox" required class="mt-1 rounded bg-navy-900 border-slate-700 text-steel">
-                        <span class="text-xs text-slate-300">I confirm that my company operates legally as an authorized supplier, agrees to receive tracked referral leads with unique <code class="text-cyan">HB-xxxx</code> codes, and processes client bookings on our own terms.</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="w-full py-3.5 px-4 rounded-lg bg-steel hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-steel/30 transition">
-                    Submit Application & Upload Documents
-                </button>
-
-            </form>
-
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-md transition uppercase tracking-widest text-sm">
+                        Submit Onboarding Application
+                    </button>
+                    
+                    <p class="text-[10px] text-gray-500 text-center uppercase leading-relaxed">
+                        By submitting, you agree to HABACHA's intermediary fees and verified supplier protocols. <br>Applications are reviewed within 48 business hours.
+                    </p>
+                </form>
+            </div>
         </div>
     </main>
 
-    <!-- SUCCESS POPUP MODAL -->
-    <div id="supplierModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-navy-800 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center space-y-4 shadow-2xl">
-            <div class="w-16 h-16 rounded-full bg-cyan/20 text-cyan mx-auto flex items-center justify-center text-3xl font-bold">✓</div>
-            <h3 class="text-xl font-bold text-white">Application Submitted</h3>
-            <p class="text-xs text-slate-300">Your enterprise fleet application and documents have been submitted to HABACHA Compliance Verification.</p>
-            <p class="text-xs text-slate-400">Our onboarding team will review your credentials and send portal activation details within 24 hours.</p>
-            <div class="pt-2">
-                <a href="index.html" class="inline-block w-full py-3 px-4 rounded-lg bg-steel text-white font-bold text-sm">Return to Marketplace Home</a>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-navy-950 border-t border-slate-800 text-slate-500 text-xs py-4 text-center w-full">
-        &copy; HABACHA Platform. All rights reserved.
-    </footer>
-
     <script>
-        document.getElementById('supplierForm').addEventListener('submit', function(e) {
+        function handleSupplierReg(e) {
             e.preventDefault();
-            document.getElementById('supplierModal').classList.remove('hidden');
-            document.getElementById('supplierModal').classList.add('flex');
-        });
+            alert('Application submitted! Our partner team will contact you shortly. Redirecting to portal...');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>
