@@ -97,15 +97,15 @@
                     <label for="start_date" class="block text-sm font-medium text-slate-700 mb-1 px-1">From</label>
                     <input type="date" id="start_date" name="start_date" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <div class="md:col-span-3 text-left flex flex-col justify-end">
+                <div class="md:col-span-3 text-left">
                     <label for="lease" class="block text-sm font-medium text-slate-700 mb-1 px-1">Duration</label>
-                    <div class="flex gap-2">
-                        <select id="lease" name="lease" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="short">Short-term rental (daily)</option>
-                            <option value="long">Long-term lease</option>
-                        </select>
-                        <button type="submit" class="min-h-[48px] px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-500">Find my asset</button>
-                    </div>
+                    <select id="lease" name="lease" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="short">Short-term rental (daily)</option>
+                        <option value="long">Long-term lease</option>
+                    </select>
+                </div>
+                <div class="md:col-span-12 flex justify-stretch md:justify-end">
+                    <button type="submit" class="w-full md:w-auto min-h-[48px] px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Find my asset</button>
                 </div>
             </form>
         </div>
