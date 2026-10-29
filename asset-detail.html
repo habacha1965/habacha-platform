@@ -13,6 +13,7 @@
         .border-navy { border-color: #1e293b; }
         .text-cyan { color: #0ea5e9; }
         .bg-cyan { background-color: #0ea5e9; }
+        .bg-cyan-soft { background-color: rgba(14, 165, 233, 0.15); }
         .bg-blue-600 { background-color: #2563eb; }
 
         select {
@@ -73,7 +74,8 @@
             <!-- Left Column: Asset Media & Technical Specifications -->
             <div class="lg:col-span-2 space-y-6">
                 <div class="bg-navy-light border border-navy rounded-xl overflow-hidden shadow-2xl">
-                    <img id="asset-image" src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1200" alt="Asset Image" class="w-full h-[420px] object-cover">
+                    <!-- Correct Mercedes-Benz S-Class Image -->
+                    <img id="asset-image" src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1200" alt="Asset Image" class="w-full h-[420px] object-cover">
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-6">
                             <div>
@@ -237,7 +239,7 @@
 
     <script>
         const assetImages = {
-            'Mercedes-Benz S-Class Long': 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1200',
+            'Mercedes-Benz S-Class Long': 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1200',
             'DAF XF 530 Super Space Cab': 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200',
             'Sunseeker 76 Luxury Motor Yacht': 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=1200',
             'Airbus H145 Executive Helicopter': 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=1200'
@@ -269,8 +271,8 @@
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Driver's License & Pickup</label>
                             </div>
-                            <select name="license_type" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium truncate">
-                                <option value="Standard B">Class B - Airport/Branch Pickup</option>
+                            <select name="license_type" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium">
+                                <option value="Standard B">Class B License (Standard)</option>
                                 <option value="International">International Driver Permit</option>
                                 <option value="Chauffeur">Chauffeur Service Requested</option>
                             </select>
@@ -283,7 +285,7 @@
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Required Cargo Payload Capacity</label>
                             </div>
-                            <select name="cargo_capacity" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium truncate">
+                            <select name="cargo_capacity" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium">
                                 <option value="Under 3.5T">Light Freight (Up to 3,500 kg)</option>
                                 <option value="3.5T - 7.5T">Medium Haul (3.5T to 7.5T)</option>
                                 <option value="Heavy Freight">Heavy Freight Truck (Over 7.5T)</option>
@@ -297,7 +299,7 @@
                             <div class="min-h-[30px] flex items-end">
                                 <label class="text-xs font-bold text-gray-400 uppercase mb-1">Crew & Skipper Arrangement</label>
                             </div>
-                            <select name="skipper_option" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium truncate">
+                            <select name="skipper_option" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-3 text-xs focus:border-cyan outline-none transition text-white font-medium">
                                 <option value="Bareboat">Bareboat (Self-Navigated)</option>
                                 <option value="Captain Included">Professional Captain Included</option>
                                 <option value="Full Maritime Crew">Full Crew & Service Staff Included</option>
