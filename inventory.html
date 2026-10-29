@@ -3,448 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Inventory Exchange | HABACHA Platform</title>
+    <title>Asset Directory | HABACHA Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
-        .bg-navy-dark { background-color: #0b1329; }
         .bg-navy-light { background-color: #0f172a; }
         .border-navy { border-color: #1e293b; }
         .text-cyan { color: #0ea5e9; }
-        .bg-cyan { background-color: #0ea5e9; }
-        .bg-blue-600 { background-color: #2563eb; }
-
-        /* Prevent OS default light select options */
-        select {
-            background-color: #0f172a !important;
-            color: #ffffff !important;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.75rem center;
-            background-repeat: no-repeat;
-            background-size: 1.25em 1.25em;
-            padding-right: 2.5rem;
-        }
-        select option {
-            background-color: #0f172a !important;
-            color: #ffffff !important;
-        }
+        .bg-cyan-soft { background-color: rgba(14, 165, 233, 0.15); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- Header Navigation -->
-    <nav class="bg-navy-light border-b border-navy px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-        <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
-            <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
-                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
-            </div>
-            <span class="text-2xl font-bold tracking-tight text-white uppercase">HABACHA</span>
-        </div>
-        <div class="hidden md:flex space-x-8 text-sm font-medium">
-            <a href="inventory.html" class="text-cyan font-bold transition">Global Directory</a>
-            <a href="login.html" class="text-gray-400 hover:text-cyan transition">Partner Portal</a>
-        </div>
-        <div class="flex items-center space-x-4">
-            <button onclick="window.location.href='login.html'" class="text-sm font-semibold hover:text-cyan transition">Sign In</button>
-            <button onclick="window.location.href='register.html'" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-md text-sm font-semibold transition">Get Started</button>
-        </div>
-    </nav>
-
-    <!-- Main Directory Layout -->
-    <main class="flex-grow container mx-auto px-6 py-8">
-        
-        <!-- Top Breadcrumb & Return Banner -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-navy gap-4">
-            <div>
-                <a href="index.html" class="text-cyan text-sm font-semibold flex items-center hover:underline mb-2">
-                    <i class="fas fa-arrow-left mr-2"></i> Return to Global Exchange Home
+    <div>
+        <!-- Navigation Header -->
+        <header class="border-b border-navy bg-navy-light sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                <!-- Sole Home Link Logo -->
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-cyan-soft rounded-lg flex items-center justify-center border border-cyan/20">
+                        <svg class="w-6 h-6 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tighter text-white block leading-none">HABACHA</span>
+                        <span class="text-[10px] text-cyan font-semibold tracking-widest uppercase block mt-1">Global Exchange</span>
+                    </div>
                 </a>
-                <h1 id="directory-title" class="text-3xl font-bold text-white tracking-tight">Global Directory Exchange</h1>
-                <p id="directory-subtitle" class="text-gray-400 text-sm mt-1">Browse verified supplier assets for short-term rental and long-term enterprise leasing.</p>
+
+                <!-- Return Button to Main Page (No division dropdowns allowed) -->
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span>Return to Main Page</span>
+                </a>
             </div>
-            <div class="flex items-center space-x-3">
-                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest bg-navy-light border border-navy px-4 py-2 rounded-md">
-                    Intermediary Lead System
-                </span>
-            </div>
-        </div>
+        </header>
 
-        <!-- Directory Search & Filter Bar -->
-        <div class="bg-navy-light border border-navy rounded-xl p-6 mb-10 shadow-xl">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-                
-                <div class="md:col-span-4">
-                    <div class="min-h-[24px] flex items-end">
-                        <label class="text-xs font-bold text-gray-400 uppercase mb-1">Search Keywords</label>
-                    </div>
-                    <div class="relative">
-                        <i class="fas fa-search absolute left-4 top-4 text-gray-400 text-sm"></i>
-                        <input type="text" id="filter-keyword" onkeyup="filterInventory()" placeholder="Asset name, model or spec..." class="w-full bg-navy-dark border border-navy rounded-md h-12 pl-11 pr-4 focus:border-cyan outline-none transition text-white text-sm">
-                    </div>
-                </div>
-
-                <div class="md:col-span-4">
-                    <div class="min-h-[24px] flex items-end">
-                        <label class="text-xs font-bold text-gray-400 uppercase mb-1">Exchange Division</label>
-                    </div>
-                    <select id="filter-category" onchange="filterInventory()" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
-                        <option value="all">All 8 Exchange Divisions</option>
-                        <option value="1">Division 1: Cars & Passenger Vans</option>
-                        <option value="2">Division 2: Commercial Vans & Freight</option>
-                        <option value="3">Division 3: Boats, Yachts & Cargo Ships</option>
-                        <option value="4">Division 4: Helicopters & Aircraft</option>
-                        <option value="5">Division 5: Stays & Real Estate</option>
-                        <option value="6">Division 6: Construction & Machinery</option>
-                        <option value="7">Division 7: Campers, RVs & Leisure</option>
-                        <option value="8">Division 8: Event & Audio/Visual Equipment</option>
-                    </select>
-                </div>
-
-                <div class="md:col-span-4">
-                    <div class="min-h-[24px] flex items-end">
-                        <label class="text-xs font-bold text-gray-400 uppercase mb-1">Agreement Term</label>
-                    </div>
-                    <select id="filter-term" onchange="filterInventory()" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white text-sm">
-                        <option value="all">All Agreement Terms</option>
-                        <option value="short">Short-Term Rental (Daily / Weekly)</option>
-                        <option value="long">Long-Term Lease (Monthly / Yearly)</option>
-                    </select>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Inventory Grid Display -->
-        <div id="inventory-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Dynamic Content Cards Injected by JavaScript -->
-        </div>
-
-        <!-- Empty Results Message -->
-        <div id="no-results" class="hidden text-center py-16 bg-navy-light border border-navy rounded-xl my-8">
-            <i class="fas fa-search text-gray-600 text-4xl mb-4"></i>
-            <h3 class="text-xl font-bold text-white mb-2">No Matching Assets Found</h3>
-            <p class="text-gray-400 text-sm mb-6">Try adjusting your search filters or division category.</p>
-            <button onclick="resetFilters()" class="bg-cyan text-navy-dark font-bold px-6 py-3 rounded-md text-xs uppercase tracking-widest hover:bg-opacity-90 transition">
-                Reset All Filters
-            </button>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-navy-light border-t border-navy py-12 mt-16">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <main class="max-w-7xl mx-auto px-6 py-10">
+            <!-- Breadcrumbs & Return Callout -->
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8 pb-6 border-b border-navy">
                 <div>
-                    <div class="flex items-center space-x-2 mb-6">
-                        <div class="w-6 h-6 bg-cyan rounded flex items-center justify-center">
-                            <i class="fas fa-exchange-alt text-navy-dark text-xs"></i>
-                        </div>
-                        <span class="text-xl font-bold tracking-tight text-white uppercase">HABACHA</span>
+                    <div class="flex items-center space-x-2 text-xs text-gray-400 mb-2">
+                        <a href="index.html" class="hover:text-white transition-colors">Home Exchange</a>
+                        <span>/</span>
+                        <span id="breadcrumbCategory" class="text-cyan font-semibold">Selected Division</span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        International intermediary exchange facilitating short-term rentals and enterprise leasing across 8 specialized divisions.
-                    </p>
+                    <h1 id="divisionTitle" class="text-3xl font-extrabold text-white">Division Fleet Inventory</h1>
+                    <p class="text-xs text-gray-400 mt-1">Showing verified assets exclusively available within this division.</p>
                 </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Divisions</h4>
-                    <ul class="text-gray-400 text-sm space-y-3">
-                        <li><a href="inventory.html?category=1" class="hover:text-cyan transition">Mobility & Passenger</a></li>
-                        <li><a href="inventory.html?category=2" class="hover:text-cyan transition">Freight & Freight</a></li>
-                        <li><a href="inventory.html?category=3" class="hover:text-cyan transition">Marine & Shipping</a></li>
-                        <li><a href="inventory.html?category=4" class="hover:text-cyan transition">Aviation & Aircraft</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Platform Services</h4>
-                    <ul class="text-gray-400 text-sm space-y-3">
-                        <li><a href="supplier-register.html" class="hover:text-cyan transition">Fleet Onboarding</a></li>
-                        <li><a href="register.html" class="hover:text-cyan transition">Client Registration</a></li>
-                        <li><a href="login.html" class="hover:text-cyan transition">Partner Login Portal</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Governance</h4>
-                    <ul class="text-gray-400 text-sm space-y-3">
-                        <li><a href="#" class="hover:text-cyan transition">Intermediary Policy</a></li>
-                        <li><a href="#" class="hover:text-cyan transition">Privacy & Compliance</a></li>
-                        <li><a href="#" class="hover:text-cyan transition">Terms of Service</a></li>
-                    </ul>
-                </div>
+
+                <!-- Explicit Return to Change Product Division Button -->
+                <a href="index.html" class="inline-flex items-center space-x-2 text-xs text-gray-300 hover:text-white bg-navy-light border border-navy px-4 py-3 rounded-lg transition-colors">
+                    <svg class="w-4 h-4 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
+                    <span>Change Division (Return to Main Page)</span>
+                </a>
             </div>
-            <div class="pt-8 border-t border-navy flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-gray-500 text-xs">© 2024 HABACHA Platform. International Intermediary Asset Exchange.</p>
-                <div class="flex space-x-6 text-gray-500 text-sm">
-                    <i class="fab fa-linkedin hover:text-cyan cursor-pointer transition"></i>
-                    <i class="fab fa-twitter hover:text-cyan cursor-pointer transition"></i>
-                </div>
+
+            <!-- Exclusive Division Assets Grid -->
+            <div id="assetsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript dynamic injection for selected category -->
             </div>
-        </div>
+        </main>
+    </div>
+
+    <!-- B2B Footer -->
+    <footer class="border-t border-navy bg-navy-light py-8 px-6 mt-16 text-xs text-gray-500 text-center">
+        <p>© 2025 HABACHA Platform. Global Intermediary Mobility Exchange. All rights reserved.</p>
     </footer>
 
-    <!-- Complete Inventory Dataset & Filter Engine -->
     <script>
-        const inventoryData = [
-            // Division 1: Cars & Passenger Vans
-            {
-                id: 101,
-                category: '1',
-                title: 'Mercedes-Benz S-Class Long',
-                supplier: 'HB-SUP-8821',
-                price: '€220.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Short & Long Term',
-                image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=800',
-                specs: ['Chauffeur Available', 'Automatic', 'Airport Pickup']
-            },
-            {
-                id: 102,
-                category: '1',
-                title: 'V-Class Executive Shuttle (8-Seat)',
-                supplier: 'HB-SUP-4102',
-                price: '€185.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Passenger Fleet',
-                image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800',
-                specs: ['8 Seats', 'Leather Interior', 'Branch Pickup']
-            },
-
-            // Division 2: Commercial Vans & Freight Trucks
-            {
-                id: 201,
-                category: '2',
-                title: 'DAF XF 530 Super Space Cab',
-                supplier: 'HB-SUP-9931',
-                price: '€1,250.00',
-                unit: '/ Month',
-                term: 'long',
-                badge: 'Enterprise Lease',
-                image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800',
-                specs: ['Payload 40T', 'Euro 6 Diesel', 'Long Haul']
-            },
-            {
-                id: 202,
-                category: '2',
-                title: 'Mercedes-Benz Sprinter Cargo Van',
-                supplier: 'HB-SUP-1104',
-                price: '€95.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Logistics Fleet',
-                image: 'https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&q=80&w=800',
-                specs: ['14m³ Volume', 'Hydraulic Lift', 'City Permit']
-            },
-
-            // Division 3: Boats, Yachts & Cargo Ships
-            {
-                id: 301,
-                category: '3',
-                title: 'Sunseeker 76 Luxury Motor Yacht',
-                supplier: 'HB-SUP-5520',
-                price: '€3,400.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Maritime Fleet',
-                image: 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=800',
-                specs: ['Captain Included', '4 Cabins', 'Mediterranean']
-            },
-            {
-                id: 302,
-                category: '3',
-                title: 'Feedership Commercial Cargo Vessel',
-                supplier: 'HB-SUP-7788',
-                price: '€14,500.00',
-                unit: '/ Month',
-                term: 'long',
-                badge: 'Commercial Shipping',
-                image: 'https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&q=80&w=800',
-                specs: ['800 TEU Capacity', 'International Waters', 'Bareboat']
-            },
-
-            // Division 4: Helicopters & Aircraft
-            {
-                id: 401,
-                category: '4',
-                title: 'Airbus H145 Executive Helicopter',
-                supplier: 'HB-SUP-3390',
-                price: '€1,800.00',
-                unit: '/ Hour',
-                term: 'short',
-                badge: 'VIP Aviation',
-                image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800',
-                specs: ['Certified Pilot', '8 Passengers', 'Helipad Access']
-            },
-
-            // Division 5: Stays & Real Estate
-            {
-                id: 501,
-                category: '5',
-                title: 'Waterfront Enterprise HQ & Office Loft',
-                supplier: 'HB-SUP-6001',
-                price: '€4,500.00',
-                unit: '/ Month',
-                term: 'long',
-                badge: 'Real Estate Lease',
-                image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800',
-                specs: ['350 m²', 'Fully Furnished', 'Prime Location']
-            },
-
-            // Division 6: Construction & Machinery
-            {
-                id: 601,
-                category: '6',
-                title: 'Caterpillar 320 Hydraulic Excavator',
-                supplier: 'HB-SUP-2244',
-                price: '€320.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Heavy Industrial',
-                image: 'https://images.unsplash.com/photo-1579412690850-bd41cd0af397?auto=format&fit=crop&q=80&w=800',
-                specs: ['22 Tonnes', 'Site Delivery', 'Operator Optional']
-            },
-
-            // Division 7: Campers, RVs & Leisure
-            {
-                id: 701,
-                category: '7',
-                title: 'Hymer Grand Canyon Overland RV',
-                supplier: 'HB-SUP-9912',
-                price: '€140.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Leisure Mobility',
-                image: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&q=80&w=800',
-                specs: ['4 Berth', 'Unlimited Mileage', 'Solar Powered']
-            },
-
-            // Division 8: Event & Audio/Visual Equipment
-            {
-                id: 801,
-                category: '8',
-                title: 'Full Modular LED Concert Wall & Sound Rig',
-                supplier: 'HB-SUP-4411',
-                price: '€2,100.00',
-                unit: '/ Day',
-                term: 'short',
-                badge: 'Broadcast / Event',
-                image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800',
-                specs: ['4K Video Wall', 'Line Array Audio', 'Tech Team Incl.']
-            }
-        ];
-
-        const divisionTitles = {
-            '1': 'Division 1: Cars & Passenger Vans Directory',
-            '2': 'Division 2: Commercial Vans & Freight Trucks Directory',
-            '3': 'Division 3: Boats, Yachts & Cargo Ships Directory',
-            '4': 'Division 4: Helicopters & Aircraft Directory',
-            '5': 'Division 5: Stays, Accommodations & Real Estate Directory',
-            '6': 'Division 6: Construction Machinery & Industrial Directory',
-            '7': 'Division 7: Campers, RVs & Leisure Mobility Directory',
-            '8': 'Division 8: Event & Audio/Visual Equipment Directory'
+        const mockDatabase = {
+            cars: [
+                { id: "car-1", title: "Mercedes-Benz S-Class Long", rate: "$350/Day", image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600&auto=format&fit=crop", desc: "Executive Line • V8 Twin-Turbo • Airport/Branch Pickup Only" },
+                { id: "car-2", title: "BMW 7 Series Sedan", rate: "$320/Day", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=600&auto=format&fit=crop", desc: "Luxury Comfort • Automatic • Airport/Branch Pickup Only" },
+                { id: "car-3", title: "Mercedes V-Class VIP Van", rate: "$280/Day", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=600&auto=format&fit=crop", desc: "7 Passenger Luxury • Leather Interior • Airport/Branch Pickup" }
+            ],
+            commercial: [
+                { id: "com-1", title: "Scania R-Series Heavy Freight Truck", rate: "$650/Day", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=600&auto=format&fit=crop", desc: "High Cargo Payload • Long Distance Long-Term Lease Available" }
+            ],
+            maritime: [
+                { id: "mar-1", title: "Sunseeker Manhattan 66 Yacht", rate: "$2,400/Day", image: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=600&auto=format&fit=crop", desc: "Luxury Flybridge • Professional Skipper Available" }
+            ],
+            aviation: [
+                { id: "av-1", title: "Airbus H135 Executive Helicopter", rate: "$3,500/Day", image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=600&auto=format&fit=crop", desc: "VIP Charter • Commercial Pilot Required" }
+            ],
+            stays: [
+                { id: "stay-1", title: "Waterfront Executive Villa", rate: "$1,200/Day", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600&auto=format&fit=crop", desc: "Corporate Housing • Luxury Real Estate Stay" }
+            ],
+            industrial: [
+                { id: "ind-1", title: "Caterpillar 320 Hydraulic Excavator", rate: "$850/Day", image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=600&auto=format&fit=crop", desc: "Heavy Construction • Certified Operator Option" }
+            ],
+            leisure: [
+                { id: "rv-1", title: "Hymer B-Class Supreme Motorhome", rate: "$220/Day", image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=600&auto=format&fit=crop", desc: "Luxury RV Mobility • 4 Berth • Fully Equipped" }
+            ],
+            event: [
+                { id: "ev-1", title: "Pioneer Concert Pro Sound System", rate: "$450/Day", image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop", desc: "Stage Audio & Lighting Array • Technical Crew Option" }
+            ]
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const categoryParam = params.get('category');
+        const params = new URLSearchParams(window.location.search);
+        let category = params.get('category') || 'cars';
+        if (!mockDatabase[category]) category = 'cars';
 
-            if (categoryParam && divisionTitles[categoryParam]) {
-                document.getElementById('filter-category').value = categoryParam;
-                document.getElementById('directory-title').textContent = divisionTitles[categoryParam];
-                document.getElementById('directory-subtitle').textContent = `Showing verified partner inventory under Division ${categoryParam}.`;
-            }
+        // Format Title
+        const titleMap = {
+            cars: "Cars & Passenger Vans Division",
+            commercial: "Commercial Freight Trucks Division",
+            maritime: "Boats, Yachts & Maritime Ships Division",
+            aviation: "Helicopters & Aircraft Division",
+            stays: "Stays & Real Estate Division",
+            industrial: "Construction Machinery Division",
+            leisure: "Campers & RV Mobility Division",
+            event: "Event & Audio/Visual Equipment Division"
+        };
 
-            renderGrid(inventoryData);
-        });
+        document.getElementById('breadcrumbCategory').textContent = titleMap[category];
+        document.getElementById('divisionTitle').textContent = titleMap[category];
 
-        function renderGrid(items) {
-            const grid = document.getElementById('inventory-grid');
-            const noResults = document.getElementById('no-results');
+        const grid = document.getElementById('assetsGrid');
+        const assets = mockDatabase[category];
 
-            if (items.length === 0) {
-                grid.innerHTML = '';
-                noResults.classList.remove('hidden');
-                return;
-            }
-
-            noResults.classList.add('hidden');
-            grid.innerHTML = items.map(item => `
-                <div class="bg-navy-light border border-navy rounded-xl overflow-hidden flex flex-col justify-between hover:border-cyan transition duration-300 shadow-lg">
-                    <div>
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
-                            <div class="absolute top-3 left-3 bg-navy-dark bg-opacity-80 px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest text-cyan border border-navy">
-                                ${item.badge}
-                            </div>
-                        </div>
-
-                        <div class="p-6">
-                            <div class="min-h-[50px]">
-                                <h3 class="font-bold text-lg text-white leading-snug">${item.title}</h3>
-                            </div>
-                            
-                            <p class="text-xs text-cyan font-medium mb-4 flex items-center">
-                                <i class="fas fa-shield-check mr-2"></i> ${item.supplier}
-                            </p>
-
-                            <div class="border-t border-navy pt-4 space-y-2 mb-6">
-                                ${item.specs.map(spec => `
-                                    <div class="text-xs text-gray-400 flex items-center">
-                                        <i class="fas fa-check text-cyan text-[10px] mr-2"></i> ${spec}
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
+        grid.innerHTML = assets.map(asset => `
+            <div class="bg-navy-light border border-navy rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-gray-800 overflow-hidden relative">
+                        <img src="${asset.image}" alt="${asset.title}" class="object-cover w-full h-full hover:scale-105 transition-transform duration-300">
+                        <span class="absolute top-3 right-3 bg-navy-light/90 border border-navy text-cyan text-xs font-bold px-3 py-1 rounded-full">${asset.rate}</span>
                     </div>
-
-                    <div class="p-6 pt-0 border-t border-navy mt-auto">
-                        <div class="flex justify-between items-center py-4">
-                            <div>
-                                <div class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Estimated Rate</div>
-                                <div class="text-xl font-bold text-white">${item.price} <span class="text-xs font-normal text-gray-400">${item.unit}</span></div>
-                            </div>
-                        </div>
-                        <a href="asset-detail.html?category=${item.category}&asset=${encodeURIComponent(item.title)}" class="w-full bg-cyan hover:bg-opacity-90 text-navy-dark font-bold py-3 rounded-md transition flex items-center justify-center space-x-2 text-xs uppercase tracking-widest">
-                            <span>Request Referral</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-white mb-2">${asset.title}</h3>
+                        <p class="text-xs text-gray-400 mb-4 leading-relaxed">${asset.desc}</p>
                     </div>
                 </div>
-            `).join('');
-        }
-
-        function filterInventory() {
-            const keyword = document.getElementById('filter-keyword').value.toLowerCase();
-            const category = document.getElementById('filter-category').value;
-            const term = document.getElementById('filter-term').value;
-
-            // Dynamic header title update based on dropdown
-            if (category !== 'all' && divisionTitles[category]) {
-                document.getElementById('directory-title').textContent = divisionTitles[category];
-            } else {
-                document.getElementById('directory-title').textContent = 'Global Directory Exchange';
-            }
-
-            const filtered = inventoryData.filter(item => {
-                const matchesKeyword = item.title.toLowerCase().includes(keyword) || item.specs.some(s => s.toLowerCase().includes(keyword));
-                const matchesCategory = category === 'all' || item.category === category;
-                const matchesTerm = term === 'all' || item.term === term;
-
-                return matchesKeyword && matchesCategory && matchesTerm;
-            });
-
-            renderGrid(filtered);
-        }
-
-        function resetFilters() {
-            document.getElementById('filter-keyword').value = '';
-            document.getElementById('filter-category').value = 'all';
-            document.getElementById('filter-term').value = 'all';
-            document.getElementById('directory-title').textContent = 'Global Directory Exchange';
-            renderGrid(inventoryData);
-        }
+                <div class="p-6 pt-0">
+                    <a href="asset-detail.html?id=${asset.id}&category=${category}" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-lg transition-all">
+                        View Unit Specifications
+                    </a>
+                </div>
+            </div>
+        `).join('');
     </script>
 </body>
 </html>
