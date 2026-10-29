@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Login | HABACHA Platform</title>
+    <title>Portal Access | HABACHA Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -17,59 +17,59 @@
 <body class="min-h-screen flex flex-col justify-between">
 
     <div>
-        <!-- Navigation -->
+        <!-- Navigation Header -->
         <nav class="border-b border-navy bg-navy-light px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-cyan-soft rounded flex items-center justify-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-cyan-soft rounded flex items-center justify-center border border-cyan/20">
                     <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
                 <span class="text-xl font-bold tracking-tighter">HABACHA</span>
             </a>
-            <a href="register.html" class="text-sm text-cyan hover:underline">Create Account</a>
+            <a href="register.html" class="text-sm font-semibold text-cyan hover:underline">Create Account</a>
         </nav>
 
-        <main class="max-w-4xl mx-auto mt-12 px-6">
-            <div class="text-center mb-10">
-                <h1 class="text-3xl font-bold">Select Your Portal Access</h1>
-                <p class="text-gray-400 text-sm mt-2">Choose your registered role to enter your dedicated portal interface.</p>
+        <main class="max-w-4xl mx-auto mt-16 px-6">
+            <div class="text-center mb-12">
+                <span class="text-xs font-semibold text-cyan uppercase tracking-widest block mb-2">Secure Account Gateway</span>
+                <h1 class="text-3xl font-extrabold text-white">Select Your Portal Access</h1>
+                <p class="text-gray-400 text-sm mt-2">Choose your registered role to enter your dedicated management portal interface.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 1. Client Portal -->
-                <div class="bg-navy-light p-6 rounded-xl border border-navy flex flex-col justify-between">
+            <!-- Only 2 Public Portals: Renter Client & Fleet Supplier -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                
+                <!-- 1. Client & Enterprise Portal -->
+                <div class="bg-navy-light p-8 rounded-2xl border border-navy flex flex-col justify-between hover:border-cyan/40 transition-all shadow-xl">
                     <div>
-                        <div class="w-10 h-10 bg-cyan-soft text-cyan rounded-lg flex items-center justify-center mb-4 font-bold">C</div>
-                        <h2 class="font-bold text-lg mb-2">Renter & Enterprise</h2>
-                        <p class="text-xs text-gray-400 mb-6">Manage your referral inquiries, tracking codes (HB-xxxx), and direct supplier links.</p>
+                        <div class="w-12 h-12 bg-cyan-soft text-cyan rounded-xl flex items-center justify-center mb-6 border border-cyan/20 font-bold text-lg">
+                            C
+                        </div>
+                        <h2 class="font-bold text-xl text-white mb-2">Renter & Enterprise</h2>
+                        <p class="text-xs text-gray-400 mb-8 leading-relaxed">
+                            Access your active rental inquiries, unique tracking referral codes (HB-xxxx), and direct supplier gateway links.
+                        </p>
                     </div>
-                    <a href="client-dashboard.html" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg text-center text-sm transition-all block">
+                    <a href="client-dashboard.html" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-center text-xs transition-all block shadow-lg">
                         Enter Client Portal
                     </a>
                 </div>
 
                 <!-- 2. Fleet Supplier Portal -->
-                <div class="bg-navy-light p-6 rounded-xl border border-navy flex flex-col justify-between">
+                <div class="bg-navy-light p-8 rounded-2xl border border-navy flex flex-col justify-between hover:border-cyan/40 transition-all shadow-xl">
                     <div>
-                        <div class="w-10 h-10 bg-cyan-soft text-cyan rounded-lg flex items-center justify-center mb-4 font-bold">S</div>
-                        <h2 class="font-bold text-lg mb-2">Fleet Operator</h2>
-                        <p class="text-xs text-gray-400 mb-6">Manage your fleet listings, submit new assets, and analyze client lead conversions.</p>
+                        <div class="w-12 h-12 bg-cyan-soft text-cyan rounded-xl flex items-center justify-center mb-6 border border-cyan/20 font-bold text-lg">
+                            S
+                        </div>
+                        <h2 class="font-bold text-xl text-white mb-2">Fleet Operator</h2>
+                        <p class="text-xs text-gray-400 mb-8 leading-relaxed">
+                            Manage fleet inventory listings, propose new asset submissions, and review incoming referral lead analytics.
+                        </p>
                     </div>
-                    <a href="supplier-dashboard.html" class="w-full bg-cyan-soft text-cyan hover:bg-cyan hover:text-white border border-cyan/30 font-semibold py-2.5 rounded-lg text-center text-sm transition-all block">
+                    <a href="supplier-dashboard.html" class="w-full bg-cyan-soft text-cyan hover:bg-cyan hover:text-white border border-cyan/30 font-bold py-3.5 rounded-xl text-center text-xs transition-all block shadow-lg">
                         Enter Supplier Portal
                     </a>
                 </div>
 
-                <!-- 3. Admin Moderation Portal -->
-                <div class="bg-navy-light p-6 rounded-xl border border-navy flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-cyan-soft text-cyan rounded-lg flex items-center justify-center mb-4 font-bold">A</div>
-                        <h2 class="font-bold text-lg mb-2">HABACHA Admin</h2>
-                        <p class="text-xs text-gray-400 mb-6">Moderation queue center to review, approve, or reject proposed fleet asset submissions.</p>
-                    </div>
-                    <a href="admin-dashboard.html" class="w-full bg-[#1e293b] hover:bg-[#334155] text-white border border-navy font-semibold py-2.5 rounded-lg text-center text-sm transition-all block">
-                        Enter Admin Hub
-                    </a>
-                </div>
             </div>
         </main>
     </div>
