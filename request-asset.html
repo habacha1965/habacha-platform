@@ -47,8 +47,8 @@
     </main>
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-        const supabaseUrl = '[SENSITIVE]';
-        const supabaseKey = '[SENSITIVE]'; 
+        const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k'; 
         const supabase = createClient(supabaseUrl, supabaseKey);
         document.getElementById('simple-booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
