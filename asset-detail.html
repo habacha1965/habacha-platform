@@ -3,26 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Details | HABACHA Platform</title>
+    <title>Asset Details | HABACHA Global Exchange</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
         .bg-navy-light { background-color: #0f172a; }
         .border-navy { border-color: #1e293b; }
         .text-cyan { color: #0ea5e9; }
         .bg-cyan-soft { background-color: rgba(14, 165, 233, 0.15); }
-        select, input { background-color: #0f172a !important; color: #ffffff !important; }
-        select option { background-color: #0f172a !important; color: #ffffff !important; }
+        
+        /* Force Input and Dropdown Dark Mode Styling */
+        select, input { 
+            background-color: #0f172a !important; 
+            color: #ffffff !important; 
+            color-scheme: dark !important;
+        }
+        select option { 
+            background-color: #0f172a !important; 
+            color: #ffffff !important; 
+        }
+
+        /* Make Date Picker Calendar Icon Bright & Clearly Visible */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) sepia(100%) saturate(5) hue-rotate(170deg);
+            cursor: pointer;
+            opacity: 0.9;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
     <div>
-        <!-- Navigation Header -->
+        <!-- Sticky Header Navigation -->
         <header class="border-b border-navy bg-navy-light sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <!-- Sole Home Link -->
+                <!-- Sole Home Link Logo -->
                 <a href="index.html" class="flex items-center space-x-3 group">
                     <div class="w-10 h-10 bg-cyan-soft rounded-lg flex items-center justify-center border border-cyan/20">
                         <svg class="w-6 h-6 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -33,105 +52,215 @@
                     </div>
                 </a>
 
-                <!-- Return Button to Main Exchange -->
-                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    <span>Return to Main Page</span>
-                </a>
+                <!-- Main Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="inventory.html" class="text-gray-300 hover:text-cyan transition-colors">Global Directory</a>
+                    <a href="supplier-register.html" class="text-gray-300 hover:text-cyan transition-colors">Partner Portal</a>
+                </nav>
+
+                <!-- Auth Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-sm font-semibold text-gray-300 hover:text-white px-4 py-2 rounded-lg hover:bg-[#1e293b] transition-all">Sign In</a>
+                    <a href="register.html" class="text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg transition-all shadow-md">Get Started</a>
+                </div>
             </div>
         </header>
 
+        <!-- Main Content -->
         <main class="max-w-7xl mx-auto px-6 py-10">
-            <!-- Breadcrumbs with Return Link -->
-            <div class="mb-8 flex items-center justify-between border-b border-navy pb-4">
+            
+            <!-- Return Navigation Bar -->
+            <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-navy">
                 <div class="flex items-center space-x-2 text-xs text-gray-400">
-                    <a href="index.html" class="hover:text-white">Home</a>
+                    <a href="index.html" class="hover:text-white transition-colors">Home Exchange</a>
                     <span>/</span>
-                    <a id="returnCategoryLink" href="inventory.html" class="hover:text-white text-cyan font-semibold">Category Inventory</a>
+                    <a id="categoryReturnBreadcrumb" href="inventory.html" class="hover:text-white text-cyan font-semibold">Category Directory</a>
                     <span>/</span>
-                    <span class="text-gray-200">Asset Specifications</span>
+                    <span id="breadcrumbAssetTitle" class="text-gray-300">Asset Specifications</span>
                 </div>
 
-                <!-- Return to Category Button -->
-                <a id="backToCatBtn" href="inventory.html" class="text-xs text-gray-300 hover:text-white bg-navy-light border border-navy px-3.5 py-1.5 rounded transition-all">
-                    ← Back to Category
+                <!-- Prominent Return Button (Strict Division Isolation Rule) -->
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2 shadow-lg">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span>Return to Main Page to Choose Another Division</span>
                 </a>
             </div>
 
-            <!-- Asset Showcase Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                <!-- Left: Asset Image & Specs (Col 7) -->
+            <!-- Asset Showcase & Referral Form Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Details Panel (Col 7) -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="h-96 rounded-2xl bg-gray-800 overflow-hidden border border-navy shadow-2xl">
-                        <img id="assetImg" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover alt="Asset Image">
+                    <!-- Asset Image Banner -->
+                    <div class="h-80 md:h-96 rounded-2xl bg-gray-800 overflow-hidden border border-navy shadow-2xl relative">
+                        <img id="assetHeroImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Mercedes-Benz S-Class Long Sedan">
+                        <div class="absolute bottom-4 left-4 bg-navy-light/90 border border-navy backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-cyan">
+                            Verified Fleet Asset
+                        </div>
                     </div>
-                    <div class="bg-navy-light p-6 rounded-xl border border-navy space-y-4">
-                        <h2 class="font-bold text-xl text-white">Technical Asset Overview</h2>
-                        <div class="grid grid-cols-2 gap-4 text-xs">
-                            <div class="p-3 bg-[#1e293b] rounded-lg"><span class="text-gray-400 block">Dispatch Policy:</span> <span class="font-semibold text-white">Branch / Airport Pickup Only</span></div>
-                            <div class="p-3 bg-[#1e293b] rounded-lg"><span class="text-gray-400 block">Insurance Policy:</span> <span class="font-semibold text-white">Full Commercial Coverage</span></div>
-                            <div class="p-3 bg-[#1e293b] rounded-lg"><span class="text-gray-400 block">Status:</span> <span class="font-semibold text-green-400">Available for Immediate Referral</span></div>
-                            <div class="p-3 bg-[#1e293b] rounded-lg"><span class="text-gray-400 block">Intermediary Code:</span> <span class="font-semibold text-cyan">HABACHA Verified</span></div>
+
+                    <!-- Main Asset Info Card -->
+                    <div class="bg-navy-light p-8 rounded-2xl border border-navy shadow-xl">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-navy">
+                            <div>
+                                <h1 id="assetDisplayTitle" class="text-3xl font-extrabold text-white">Mercedes-Benz S-Class Long</h1>
+                                <p class="text-xs text-cyan font-semibold mt-1 flex items-center space-x-1">
+                                    <svg class="w-4 h-4 text-cyan inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                    <span>Verified Fleet Partner ID: HB-SUP-8821</span>
+                                </p>
+                            </div>
+                            <div class="text-left md:text-right">
+                                <span class="text-[10px] text-gray-400 uppercase tracking-widest font-semibold block">Estimated Base Rate</span>
+                                <span id="assetDisplayRate" class="text-2xl font-extrabold text-white">€145.00 <span class="text-xs text-gray-400 font-normal">/ Day</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Asset Key Specifications Grid -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-6 py-4 border-b border-navy text-xs">
+                            <div>
+                                <span class="text-gray-400 block mb-1">AVAILABILITY</span>
+                                <span class="font-bold text-white">Immediate</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block mb-1">AGREEMENT TYPE</span>
+                                <span class="font-bold text-white">Short-Term / Lease</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block mb-1">FULFILLMENT</span>
+                                <span class="font-bold text-white">Hub Pickup / Delivery</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-400 block mb-1">TRACKING CODE</span>
+                                <span class="font-bold text-cyan">HB-9549-X</span>
+                            </div>
+                        </div>
+
+                        <!-- Description & Compliance Policy -->
+                        <div>
+                            <h3 class="font-bold text-base text-white mb-2">Description & Operational Specifications</h3>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                This luxury executive asset is listed by an accredited international fleet operator within the HABACHA Intermediary Network. All machinery, vehicles, vessels, and equipment are maintained under certified inspection standards.
+                            </p>
+                            <p class="text-xs text-gray-400 leading-relaxed mt-3">
+                                As an intermediary exchange platform, HABACHA routes your request directly to the supplier's booking management system, generating a unique referral tracking code for guaranteed priority rates and verified compliance.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Division Specific Lead Form (Col 5) -->
+                <!-- Right Referral Lead Form Panel (Col 5) -->
                 <div class="lg:col-span-5">
-                    <div class="bg-navy-light p-8 rounded-2xl border border-navy shadow-2xl">
-                        <div class="mb-6">
-                            <span class="text-xs text-cyan font-bold uppercase tracking-wider block">Official Lead Referral Form</span>
-                            <h1 id="assetTitle" class="text-2xl font-bold text-white mt-1">Mercedes-Benz S-Class Long</h1>
-                            <div id="assetRate" class="text-lg font-bold text-cyan mt-1">$350 / Day</div>
-                        </div>
+                    <div class="bg-navy-light p-8 rounded-2xl border border-navy shadow-2xl sticky top-28">
+                        <h2 class="font-bold text-lg text-white mb-6">Generate Supplier Referral</h2>
 
-                        <form action="success.html" method="GET" class="space-y-4 text-xs">
+                        <form action="success.html" method="GET" class="space-y-5 text-xs">
+                            
+                            <!-- Email Input -->
                             <div>
-                                <label class="block font-semibold text-gray-300 mb-1">Full Name / Representative</label>
-                                <input type="text" required placeholder="John Doe" class="w-full h-11 border border-navy rounded-lg px-4 outline-none">
-                            </div>
-                            <div>
-                                <label class="block font-semibold text-gray-300 mb-1">Business / Personal Email</label>
-                                <input type="email" required placeholder="name@company.com" class="w-full h-11 border border-navy rounded-lg px-4 outline-none">
+                                <label class="block font-semibold text-gray-300 mb-1.5 uppercase text-[11px] tracking-wider">Corporate or Contact Email</label>
+                                <input type="email" name="email" required placeholder="name@company.com" class="w-full h-12 bg-[#1e293b] border border-navy rounded-lg px-4 text-white outline-none focus:border-cyan transition-colors">
                             </div>
 
-                            <!-- Dynamic Division Specific Input -->
-                            <div id="divisionField">
-                                <label class="block font-semibold text-gray-300 mb-1">Driver License Class</label>
-                                <select class="w-full h-11 border border-navy rounded-lg px-3 outline-none">
-                                    <option>Standard Class B (Airport/Branch Pickup)</option>
-                                    <option>International Driving Permit</option>
+                            <!-- Driver License Input -->
+                            <div id="divisionSpecificContainer">
+                                <label class="block font-semibold text-gray-300 mb-1.5 uppercase text-[11px] tracking-wider">Driver's License & Pickup</label>
+                                <select name="license" class="w-full h-12 bg-[#1e293b] border border-navy rounded-lg px-3 text-white outline-none focus:border-cyan transition-colors">
+                                    <option value="class_b">Class B License (Standard Pickup)</option>
+                                    <option value="international">International Driving Permit</option>
+                                    <option value="chauffeur">Chauffeur Service Requested</option>
                                 </select>
                             </div>
 
-                            <div>
-                                <label class="block font-semibold text-gray-300 mb-1">Lease Start Date</label>
-                                <input type="date" required class="w-full h-11 border border-navy rounded-lg px-4 outline-none">
+                            <!-- Date and Duration Inputs -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block font-semibold text-gray-300 mb-1.5 uppercase text-[11px] tracking-wider">Start Date</label>
+                                    <!-- High Contrast Bright Cyan Calendar Icon Indicator -->
+                                    <input type="date" name="start_date" required class="w-full h-12 bg-[#1e293b] border border-navy rounded-lg px-3 text-white outline-none focus:border-cyan transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block font-semibold text-gray-300 mb-1.5 uppercase text-[11px] tracking-wider">Duration</label>
+                                    <select name="duration" class="w-full h-12 bg-[#1e293b] border border-navy rounded-lg px-3 text-white outline-none focus:border-cyan transition-colors">
+                                        <option value="daily">Daily Rental</option>
+                                        <option value="weekly">Weekly Rental</option>
+                                        <option value="monthly">Long-Term Lease</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="pt-4 border-t border-navy">
-                                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg text-sm transition-all shadow-lg">
-                                    Generate Referral Code & Redirect
+                            <!-- Submit Button -->
+                            <div class="pt-4">
+                                <button type="submit" class="w-full bg-[#0ea5e9] hover:bg-sky-500 text-white font-bold py-4 rounded-xl text-sm transition-all shadow-lg flex items-center justify-center space-x-2">
+                                    <span>GENERATE REFERRAL CODE</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </button>
-                                <p class="text-[11px] text-gray-500 text-center mt-3">You will be redirected directly to the supplier booking gateway with tracking code HB-xxxx.</p>
                             </div>
+
+                            <!-- Intermediary Policy Note -->
+                            <p class="text-[10px] text-gray-400 text-center leading-relaxed pt-2">
+                                INTERMEDIARY POLICY: HABACHA DOES NOT PROCESS DIRECT PAYMENTS OR HOLD SECURITY DEPOSITS. BOOKINGS ARE COMPLETED ON THE SUPPLIER'S VERIFIED GATEWAY.
+                            </p>
                         </form>
                     </div>
                 </div>
+
             </div>
         </main>
     </div>
 
-    <footer class="border-t border-navy bg-navy-light py-8 px-6 text-xs text-gray-500 text-center mt-16">
-        <p>© 2025 HABACHA Platform. Global Intermediary Exchange.</p>
+    <!-- Corporate Footer -->
+    <footer class="border-t border-navy bg-navy-light py-10 px-6 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-xs text-gray-400">
+            <div>
+                <div class="flex items-center space-x-2 mb-3">
+                    <div class="w-6 h-6 bg-cyan-soft rounded flex items-center justify-center border border-cyan/20">
+                        <svg class="w-4 h-4 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <span class="font-extrabold text-white text-sm">HABACHA</span>
+                </div>
+                <p class="leading-relaxed">International Intermediary Exchange for Short-Term Rentals & Long-Term Leases.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white uppercase text-[11px] mb-3 tracking-wider">Exchange Divisions</h4>
+                <ul class="space-y-2">
+                    <li><a href="inventory.html?category=cars" class="hover:text-cyan">Cars & Vans</a></li>
+                    <li><a href="inventory.html?category=commercial" class="hover:text-cyan">Commercial Freight</a></li>
+                    <li><a href="inventory.html?category=maritime" class="hover:text-cyan">Boats & Yachts</a></li>
+                    <li><a href="inventory.html?category=aviation" class="hover:text-cyan">Helicopters & Aircraft</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white uppercase text-[11px] mb-3 tracking-wider">Platform</h4>
+                <ul class="space-y-2">
+                    <li><a href="inventory.html" class="hover:text-cyan">Global Directory</a></li>
+                    <li><a href="supplier-register.html" class="hover:text-cyan">Fleet Operator Onboarding</a></li>
+                    <li><a href="admin-dashboard.html" class="hover:text-cyan">Admin Moderation Hub</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white uppercase text-[11px] mb-3 tracking-wider">Legal & Compliance</h4>
+                <p class="leading-relaxed">Operating under international B2B & B2C intermediary referral framework.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-navy text-center text-[11px] text-gray-500">
+            <p>© 2025 HABACHA Platform. All rights reserved.</p>
+        </div>
     </footer>
 
+    <!-- JavaScript to Handle Dynamic Parameters -->
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const category = params.get('category') || 'cars';
-        
-        document.getElementById('returnCategoryLink').href = `inventory.html?category=${category}`;
-        document.getElementById('backToCatBtn').href = `inventory.html?category=${category}`;
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category') || 'cars';
+        const assetParam = urlParams.get('asset') || urlParams.get('id');
+
+        const categoryReturnBreadcrumb = document.getElementById('categoryReturnBreadcrumb');
+        categoryReturnBreadcrumb.href = `inventory.html?category=${categoryParam}`;
+
+        if (assetParam) {
+            const decodedTitle = decodeURIComponent(assetParam);
+            document.getElementById('assetDisplayTitle').textContent = decodedTitle;
+            document.getElementById('breadcrumbAssetTitle').textContent = decodedTitle;
+        }
     </script>
 </body>
 </html>
