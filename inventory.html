@@ -7,76 +7,66 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
-        .bg-navy-light { background-color: #0f172a; }
-        .border-navy { border-color: #1e293b; }
-        .text-cyan { color: #0ea5e9; }
-        .bg-cyan-soft { background-color: rgba(14, 165, 233, 0.15); }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .bg-card { background-color: #ffffff; }
+        .border-subtle { border-color: #e2e8f0; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
     <div>
         <!-- Navigation Header -->
-        <header class="border-b border-navy bg-navy-light sticky top-0 z-50">
+        <header class="border-b border-subtle bg-white sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <!-- Sole Home Link Logo -->
-                <a href="index.html" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 bg-cyan-soft rounded-lg flex items-center justify-center border border-cyan/20">
-                        <svg class="w-6 h-6 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-200">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
                     <div>
-                        <span class="text-xl font-extrabold tracking-tighter text-white block leading-none">HABACHA</span>
-                        <span class="text-[10px] text-cyan font-semibold tracking-widest uppercase block mt-1">Global Exchange</span>
+                        <span class="text-xl font-bold tracking-tight text-slate-900 block leading-none">HABACHA</span>
+                        <span class="text-[10px] text-blue-600 font-semibold tracking-wider uppercase block mt-1">Intermediary Exchange</span>
                     </div>
                 </a>
 
-                <!-- Return Button to Main Page (No division dropdowns allowed) -->
-                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2">
+                <!-- Strict Division Exit Button -->
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2 shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    <span>Return to Main Page</span>
+                    <span>Return to Main Page to Choose Another Division</span>
                 </a>
             </div>
         </header>
 
         <main class="max-w-7xl mx-auto px-6 py-10">
-            <!-- Breadcrumbs & Return Callout -->
-            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8 pb-6 border-b border-navy">
+            <!-- Header Title -->
+            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8 pb-6 border-b border-subtle">
                 <div>
-                    <div class="flex items-center space-x-2 text-xs text-gray-400 mb-2">
-                        <a href="index.html" class="hover:text-white transition-colors">Home Exchange</a>
+                    <div class="flex items-center space-x-2 text-xs text-slate-500 mb-2">
+                        <a href="index.html" class="hover:text-blue-600">Home Exchange</a>
                         <span>/</span>
-                        <span id="breadcrumbCategory" class="text-cyan font-semibold">Selected Division</span>
+                        <span id="breadcrumbCategory" class="text-blue-600 font-semibold">Selected Division</span>
                     </div>
-                    <h1 id="divisionTitle" class="text-3xl font-extrabold text-white">Division Fleet Inventory</h1>
-                    <p class="text-xs text-gray-400 mt-1">Showing verified assets exclusively available within this division.</p>
+                    <h1 id="divisionTitle" class="text-3xl font-extrabold text-slate-900">Division Fleet Directory</h1>
+                    <p class="text-xs text-slate-500 mt-1">Showing verified assets strictly available within this division.</p>
                 </div>
-
-                <!-- Explicit Return to Change Product Division Button -->
-                <a href="index.html" class="inline-flex items-center space-x-2 text-xs text-gray-300 hover:text-white bg-navy-light border border-navy px-4 py-3 rounded-lg transition-colors">
-                    <svg class="w-4 h-4 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
-                    <span>Change Division (Return to Main Page)</span>
-                </a>
             </div>
 
-            <!-- Exclusive Division Assets Grid -->
+            <!-- Assets Grid -->
             <div id="assetsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Javascript dynamic injection for selected category -->
+                <!-- Javascript populated -->
             </div>
         </main>
     </div>
 
-    <!-- B2B Footer -->
-    <footer class="border-t border-navy bg-navy-light py-8 px-6 mt-16 text-xs text-gray-500 text-center">
-        <p>© 2025 HABACHA Platform. Global Intermediary Mobility Exchange. All rights reserved.</p>
+    <!-- Corporate Footer -->
+    <footer class="border-t border-subtle bg-white py-8 px-6 text-center text-xs text-slate-500 mt-16">
+        <p>© 2025 HABACHA Platform. All rights reserved. Global Intermediary Exchange.</p>
     </footer>
 
     <script>
         const mockDatabase = {
             cars: [
                 { id: "car-1", title: "Mercedes-Benz S-Class Long", rate: "$350/Day", image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600&auto=format&fit=crop", desc: "Executive Line • V8 Twin-Turbo • Airport/Branch Pickup Only" },
-                { id: "car-2", title: "BMW 7 Series Sedan", rate: "$320/Day", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=600&auto=format&fit=crop", desc: "Luxury Comfort • Automatic • Airport/Branch Pickup Only" },
-                { id: "car-3", title: "Mercedes V-Class VIP Van", rate: "$280/Day", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=600&auto=format&fit=crop", desc: "7 Passenger Luxury • Leather Interior • Airport/Branch Pickup" }
+                { id: "car-2", title: "BMW 7 Series Sedan", rate: "$320/Day", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=600&auto=format&fit=crop", desc: "Luxury Comfort • Automatic • Airport/Branch Pickup Only" }
             ],
             commercial: [
                 { id: "com-1", title: "Scania R-Series Heavy Freight Truck", rate: "$650/Day", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=600&auto=format&fit=crop", desc: "High Cargo Payload • Long Distance Long-Term Lease Available" }
@@ -91,10 +81,10 @@
                 { id: "stay-1", title: "Waterfront Executive Villa", rate: "$1,200/Day", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=600&auto=format&fit=crop", desc: "Corporate Housing • Luxury Real Estate Stay" }
             ],
             industrial: [
-                { id: "ind-1", title: "Caterpillar 320 Hydraulic Excavator", rate: "$850/Day", image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=600&auto=format&fit=crop", desc: "Heavy Construction • Certified Operator Option" }
+                { id: "ind-1", title: "Caterpillar 320 Excavator", rate: "$850/Day", image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=600&auto=format&fit=crop", desc: "Heavy Construction • Certified Operator Option" }
             ],
             leisure: [
-                { id: "rv-1", title: "Hymer B-Class Supreme Motorhome", rate: "$220/Day", image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=600&auto=format&fit=crop", desc: "Luxury RV Mobility • 4 Berth • Fully Equipped" }
+                { id: "rv-1", title: "Hymer B-Class Supreme RV", rate: "$220/Day", image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=600&auto=format&fit=crop", desc: "Luxury RV Mobility • 4 Berth • Fully Equipped" }
             ],
             event: [
                 { id: "ev-1", title: "Pioneer Concert Pro Sound System", rate: "$450/Day", image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop", desc: "Stage Audio & Lighting Array • Technical Crew Option" }
@@ -105,11 +95,10 @@
         let category = params.get('category') || 'cars';
         if (!mockDatabase[category]) category = 'cars';
 
-        // Format Title
         const titleMap = {
             cars: "Cars & Passenger Vans Division",
             commercial: "Commercial Freight Trucks Division",
-            maritime: "Boats, Yachts & Maritime Ships Division",
+            maritime: "Boats & Yachts Division",
             aviation: "Helicopters & Aircraft Division",
             stays: "Stays & Real Estate Division",
             industrial: "Construction Machinery Division",
@@ -124,20 +113,20 @@
         const assets = mockDatabase[category];
 
         grid.innerHTML = assets.map(asset => `
-            <div class="bg-navy-light border border-navy rounded-xl overflow-hidden shadow-xl flex flex-col justify-between">
+            <div class="bg-white border border-subtle rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
                 <div>
-                    <div class="h-48 bg-gray-800 overflow-hidden relative">
+                    <div class="h-48 bg-slate-100 overflow-hidden relative">
                         <img src="${asset.image}" alt="${asset.title}" class="object-cover w-full h-full hover:scale-105 transition-transform duration-300">
-                        <span class="absolute top-3 right-3 bg-navy-light/90 border border-navy text-cyan text-xs font-bold px-3 py-1 rounded-full">${asset.rate}</span>
+                        <span class="absolute top-3 right-3 bg-white/90 border border-subtle text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-sm">${asset.rate}</span>
                     </div>
                     <div class="p-6">
-                        <h3 class="font-bold text-lg text-white mb-2">${asset.title}</h3>
-                        <p class="text-xs text-gray-400 mb-4 leading-relaxed">${asset.desc}</p>
+                        <h3 class="font-bold text-base text-slate-900 mb-2">${asset.title}</h3>
+                        <p class="text-xs text-slate-500 mb-4 leading-relaxed">${asset.desc}</p>
                     </div>
                 </div>
                 <div class="p-6 pt-0">
-                    <a href="asset-detail.html?id=${asset.id}&category=${category}" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-lg transition-all">
-                        View Unit Specifications
+                    <a href="asset-detail.html?id=${asset.id}&category=${category}&asset=${encodeURIComponent(asset.title)}" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-lg transition-all shadow-sm">
+                        View Technical Specifications
                     </a>
                 </div>
             </div>
