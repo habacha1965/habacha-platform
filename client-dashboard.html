@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard | HABACHA - My Referrals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
+        .bg-navy-dark { background-color: #0b1329; }
+        .bg-navy-light { background-color: #0f172a; }
+        .border-navy { border-color: #1e293b; }
+        .text-cyan { color: #0ea5e9; }
+        .bg-cyan { background-color: #0ea5e9; }
+        .sidebar-link:hover { background-color: #1e293b; }
+        .sidebar-link.active { border-left: 4px solid #0ea5e9; background-color: #1e293b; color: #0ea5e9; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-navy-light border-r border-navy flex flex-col">
+        <div class="p-6 border-b border-navy flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
+            <div class="w-7 h-7 bg-cyan rounded flex items-center justify-center">
+                <i class="fas fa-exchange-alt text-navy-dark text-sm"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-white uppercase">HABACHA</span>
+        </div>
+        
+        <nav class="flex-grow py-6">
+            <a href="#" class="sidebar-link active flex items-center px-6 py-3 text-sm font-medium transition">
+                <i class="fas fa-list-ul mr-3 w-5"></i> My Referrals
+            </a>
+            <a href="inventory.html" class="sidebar-link flex items-center px-6 py-3 text-sm font-medium text-gray-400 transition">
+                <i class="fas fa-search mr-3 w-5"></i> Browse Exchange
+            </a>
+            <a href="#" class="sidebar-link flex items-center px-6 py-3 text-sm font-medium text-gray-400 transition">
+                <i class="fas fa-history mr-3 w-5"></i> Lease History
+            </a>
+            <div class="mt-8 px-6 text-[10px] uppercase tracking-widest text-gray-500 font-bold">Account</div>
+            <a href="#" class="sidebar-link flex items-center px-6 py-3 text-sm font-medium text-gray-400 transition">
+                <i class="fas fa-user-tie mr-3 w-5"></i> Profile Settings
+            </a>
+            <a href="login.html" class="sidebar-link flex items-center px-6 py-3 text-sm font-medium text-red-400 transition">
+                <i class="fas fa-sign-out-alt mr-3 w-5"></i> Sign Out
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-navy text-[10px] text-gray-500 uppercase tracking-tighter">
+            HABACHA Intermediary Network v1.0
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-8">
+        
+        <header class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-white">Client Portfolio</h1>
+                <p class="text-gray-400 text-sm">Manage your asset referrals and active leasing inquiries.</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="window.location.href='inventory.html'" class="bg-cyan text-navy-dark px-4 py-2 rounded font-bold text-xs uppercase tracking-widest hover:bg-opacity-90 transition">
+                    New Request
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-navy-light border border-navy p-6 rounded-xl">
+                <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Active Referrals</p>
+                <h3 class="text-3xl font-bold text-white">03</h3>
+            </div>
+            <div class="bg-navy-light border border-navy p-6 rounded-xl">
+                <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Total Savings</p>
+                <h3 class="text-3xl font-bold text-cyan">Enterprise</h3>
+            </div>
+            <div class="bg-navy-light border border-navy p-6 rounded-xl">
+                <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Pending Responses</p>
+                <h3 class="text-3xl font-bold text-white">01</h3>
+            </div>
+        </div>
+
+        <!-- Referral List -->
+        <div class="bg-navy-light border border-navy rounded-xl overflow-hidden">
+            <div class="p-6 border-b border-navy bg-navy-dark bg-opacity-30">
+                <h3 class="font-bold text-white uppercase text-xs tracking-widest">Active Referral Tracking</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-[10px] text-gray-500 uppercase tracking-widest border-b border-navy">
+                            <th class="px-6 py-4">Ref Code</th>
+                            <th class="px-6 py-4">Asset Requested</th>
+                            <th class="px-6 py-4">Supplier Partner</th>
+                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-navy hover:bg-navy-dark transition">
+                            <td class="px-6 py-4 font-mono text-cyan">HB-4492-X</td>
+                            <td class="px-6 py-4 text-white font-medium">DAF XF 530 Freight Truck</td>
+                            <td class="px-6 py-4 text-gray-400">Global Logistics Corp</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 bg-green-900 text-green-300 text-[10px] font-bold rounded uppercase">Active Link</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="text-cyan text-xs font-bold hover:underline">Go to Supplier <i class="fas fa-external-link-alt ml-1"></i></a>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-navy hover:bg-navy-dark transition">
+                            <td class="px-6 py-4 font-mono text-cyan">HB-1029-X</td>
+                            <td class="px-6 py-4 text-white font-medium">Tesla Model S Long Range</td>
+                            <td class="px-6 py-4 text-gray-400">Premium Fleet Services</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 bg-green-900 text-green-300 text-[10px] font-bold rounded uppercase">Active Link</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="text-cyan text-xs font-bold hover:underline">Go to Supplier <i class="fas fa-external-link-alt ml-1"></i></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-navy-dark transition">
+                            <td class="px-6 py-4 font-mono text-cyan">HB-7731-X</td>
+                            <td class="px-6 py-4 text-white font-medium">Excavator CAT 320</td>
+                            <td class="px-6 py-4 text-gray-400">Heavy Build Rental</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 bg-blue-900 text-blue-300 text-[10px] font-bold rounded uppercase">In Review</span>
+                            </td>
+                            <td class="px-6 py-4 text-right text-gray-500 italic text-xs">
+                                Verification Pending
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-8 p-6 border border-dashed border-navy rounded-xl text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-widest leading-relaxed">
+                Intermediary Reminder: All contractual obligations are established between you and the Fleet Supplier. <br>HABACHA provides the referral mechanism and priority tracking.
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>
