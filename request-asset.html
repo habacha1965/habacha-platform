@@ -78,13 +78,19 @@
             }
 
             try {
-                await fetch('/api/send-referral', {
+                const response = await fetch('https://habacha-platform.vercel.app/api/send-referral', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ clientName: name, clientEmail: email, refCode: refCode })
                 });
+                const data = await response.json();
+                if (!response.ok) {
+                    console.error('API Error:', data);
+                    alert('Email could not be sent. Please try again.');
+                }
             } catch (err) {
-                console.log('Email API error', err);
+                console.error('Fetch Error:', err);
+                alert('Network error. Please check your connection.');
             }
 
             document.getElementById('simple-booking-form').classList.add('hidden');
