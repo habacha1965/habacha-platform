@@ -48,12 +48,17 @@
         </div>
     </main>
 
+    
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k';
+        const supabaseKey = 'JOUW_KEY_HIER'; // Wordt automatisch vervangen
         const supabase = createClient(supabaseUrl, supabaseKey);
+
+        // Haal de categorie uit de URL (bijv. ?category=maritime)
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategory = urlParams.get('category') || 'cars'; 
 
         document.getElementById('simple-booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -63,10 +68,11 @@
 
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
-            // Genereer een 10-teken alfanumerieke code (maximale veiligheid)
+            
             const randomStr = Math.random().toString(36).substring(2, 12).toUpperCase();
             const refCode = `HB-${randomStr}`;
 
+            // 1. Opslaan in Supabase
             const { error } = await supabase
                 .from('referrals')
                 .insert([{ reference_code: refCode, client_name: name, client_email: email }]);
@@ -78,32 +84,45 @@
                 return;
             }
 
+            // 2. Zoek de aanbieder voor deze categorie
+            let redirectUrl = `https://example.com/supplier?ref=${refCode}`; // Fallback
+            const { data: supplier } = await supabase
+                .from('suppliers')
+                .select('contract_link')
+                .eq('category', currentCategory)
+                .limit(1)
+                .single();
+
+            if (supplier && supplier.contract_link) {
+                // Plak de HB-code achter de unieke link van de aanbieder
+                redirectUrl = `${supplier.contract_link}${refCode}`;
+            }
+
+            // 3. E-mails sturen via API
             try {
-                const response = await fetch('https://habacha-platform.vercel.app/api/send-referral', {
+                await fetch('https://habacha-platform.vercel.app/api/send-referral', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ clientName: name, clientEmail: email, refCode: refCode })
                 });
-                const data = await response.json();
-                if (!response.ok) {
-                    console.error('API Error:', data);
-                    alert('Email could not be sent. Please try again.');
-                }
             } catch (err) {
-                console.error('Fetch Error:', err);
-                alert('Network error. Please check your connection.');
+                console.log('Email API error', err);
             }
 
+            // 4. Toon succes scherm en start redirect
             document.getElementById('simple-booking-form').classList.add('hidden');
             document.getElementById('success-message').classList.remove('hidden');
             document.getElementById('ref-code').innerText = refCode;
             
-            setTimeout(() => { document.getElementById('progress-bar').style.width = '100%'; }, 100);
+            setTimeout(() => {
+                document.getElementById('progress-bar').style.width = '100%';
+            }, 100);
 
             setTimeout(() => {
-                window.location.href = `https://example.com/supplier?ref=${refCode}`;
+                window.location.href = redirectUrl;
             }, 3000);
         });
     </script>
+
 </body>
 </html>
