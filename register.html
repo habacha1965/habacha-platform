@@ -3,136 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Registration | HABACHA Platform</title>
+    <title>Create Account - HABACHA Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
-        .bg-navy-dark { background-color: #0b1329; }
-        .bg-navy-light { background-color: #0f172a; }
-        .border-navy { border-color: #1e293b; }
-        .text-cyan { color: #0ea5e9; }
-        .bg-cyan { background-color: #0ea5e9; }
-        .bg-blue-600 { background-color: #2563eb; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="min-h-screen flex flex-col">
-
-    <!-- Simple Nav -->
-    <nav class="p-6 border-b border-navy flex justify-between items-center bg-navy-light">
-        <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='index.html'">
-            <div class="w-8 h-8 bg-cyan rounded flex items-center justify-center">
-                <i class="fas fa-exchange-alt text-navy-dark text-xl"></i>
-            </div>
-            <span class="text-2xl font-bold tracking-tight text-white uppercase">HABACHA</span>
-        </div>
-        <a href="login.html" class="text-sm font-semibold text-gray-400 hover:text-cyan transition">Already have an account?</a>
-    </nav>
-
-    <main class="flex-grow flex items-center justify-center p-6 py-12">
-        <div class="w-full max-w-2xl">
-            <div class="bg-navy-light border border-navy rounded-xl p-8 shadow-2xl">
-                <h1 class="text-2xl font-bold mb-2">Create Client Account</h1>
-                <p class="text-gray-400 text-sm mb-8">Access the global exchange for short-term rentals and enterprise leasing.</p>
-
-                <!-- Type Selector -->
-                <div class="flex gap-4 mb-8">
-                    <button id="btn-b2c" onclick="setType('b2c')" class="flex-1 py-3 px-4 rounded-md border border-cyan bg-cyan bg-opacity-10 text-cyan text-xs font-bold uppercase tracking-widest transition">
-                        Private Renter (B2C)
-                    </button>
-                    <button id="btn-b2b" onclick="setType('b2b')" class="flex-1 py-3 px-4 rounded-md border border-navy bg-navy-dark text-gray-500 text-xs font-bold uppercase tracking-widest hover:text-white transition">
-                        Enterprise Client (B2B)
-                    </button>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="bg-blue-600 text-white p-1.5 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
                 </div>
+                <span class="font-bold text-xl tracking-wider text-slate-900">HABACHA</span>
+            </a>
+            <a href="login.html" class="text-sm font-semibold text-blue-600 hover:text-blue-700">Already have an account?</a>
+        </div>
+    </header>
 
-                <form id="registration-form" class="space-y-6" onsubmit="handleRegistration(event)">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Full Legal Name</label></div>
-                            <input type="text" required placeholder="John Doe" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                        <div>
-                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Email Address</label></div>
-                            <input type="email" required placeholder="name@domain.com" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                    </div>
+    <main class="max-w-xl mx-auto px-6 py-12 flex-grow flex flex-col justify-center">
+        <div class="bg-white p-8 md:p-10 rounded-2xl border border-slate-200 shadow-sm">
+            <h1 class="text-2xl font-bold text-slate-900">Create Client Account</h1>
+            <p class="text-xs text-slate-500 mt-1 mb-6">Access short-term rentals and long-term enterprise leasing.</p>
 
-                    <!-- Enterprise Specific Fields -->
-                    <div id="enterprise-fields" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Company Name</label></div>
-                            <input type="text" id="input-company" placeholder="Enterprise Ltd." class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                        <div>
-                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Business Phone</label></div>
-                            <input type="text" id="input-phone" placeholder="+31 6 0000 0000" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Create Password</label></div>
-                            <input type="password" required placeholder="••••••••" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                        <div>
-                            <div class="min-h-[30px] flex items-end"><label class="text-xs font-bold text-gray-400 uppercase mb-1">Confirm Password</label></div>
-                            <input type="password" required placeholder="••••••••" class="w-full bg-navy-dark border border-navy rounded-md h-12 px-4 focus:border-cyan outline-none transition text-white">
-                        </div>
-                    </div>
-
-                    <div class="pt-4">
-                        <label class="flex items-start space-x-3 cursor-pointer">
-                            <input type="checkbox" required class="mt-1 w-4 h-4 rounded border-navy bg-navy-dark text-cyan focus:ring-cyan">
-                            <span class="text-xs text-gray-400 leading-relaxed">
-                                I agree to the HABACHA Intermediary Terms of Service and Privacy Policy. I understand that HABACHA is an exchange platform and is not responsible for the direct rental agreements with suppliers.
-                            </span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="w-full bg-cyan hover:bg-opacity-90 text-navy-dark font-bold py-4 rounded-md transition uppercase tracking-widest text-sm">
-                        Create Account
-                    </button>
-                </form>
-            </div>
+            <form action="client-dashboard.html" class="space-y-4 text-sm">
+                <div>
+                    <label class="block font-medium text-slate-700 mb-1">Full Legal Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+                <div>
+                    <label class="block font-medium text-slate-700 mb-1">Corporate / Personal Email</label>
+                    <input type="email" required placeholder="name@domain.com" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+                <div>
+                    <label class="block font-medium text-slate-700 mb-1">Password</label>
+                    <input type="password" required class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition">Create Account</button>
+            </form>
         </div>
     </main>
 
-    <script>
-        let clientType = 'b2c';
-
-        function setType(type) {
-            clientType = type;
-            const btnB2c = document.getElementById('btn-b2c');
-            const btnB2b = document.getElementById('btn-b2b');
-            const enterpriseFields = document.getElementById('enterprise-fields');
-            const inputCompany = document.getElementById('input-company');
-            const inputPhone = document.getElementById('input-phone');
-
-            if (type === 'b2b') {
-                btnB2b.classList.add('border-cyan', 'bg-cyan', 'bg-opacity-10', 'text-cyan');
-                btnB2b.classList.remove('border-navy', 'bg-navy-dark', 'text-gray-500');
-                btnB2c.classList.remove('border-cyan', 'bg-cyan', 'bg-opacity-10', 'text-cyan');
-                btnB2c.classList.add('border-navy', 'bg-navy-dark', 'text-gray-500');
-                enterpriseFields.classList.remove('hidden');
-                inputCompany.required = true;
-                inputPhone.required = true;
-            } else {
-                btnB2c.classList.add('border-cyan', 'bg-cyan', 'bg-opacity-10', 'text-cyan');
-                btnB2c.classList.remove('border-navy', 'bg-navy-dark', 'text-gray-500');
-                btnB2b.classList.remove('border-cyan', 'bg-cyan', 'bg-opacity-10', 'text-cyan');
-                btnB2b.classList.add('border-navy', 'bg-navy-dark', 'text-gray-500');
-                enterpriseFields.classList.add('hidden');
-                inputCompany.required = false;
-                inputPhone.required = false;
-            }
-        }
-
-        function handleRegistration(e) {
-            e.preventDefault();
-            // In a real scenario, API call would happen here
-            alert('Registration successful! Redirecting to login portal...');
-            window.location.href = 'login.html';
-        }
-    </script>
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+            <p>© 2026 HABACHA Intermediary Exchange. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="terms.html" class="hover:text-white">Terms of Service</a>
+                <a href="supplier-agreement.html" class="hover:text-white">Supplier Agreement</a>
+                <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
+                <a href="cookies.html" class="hover:text-white">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
