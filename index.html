@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HABACHA | Rent or Lease Cars, Yachts, Aircraft, Machinery & More</title>
-    <meta name="description" content="Send one request and be connected directly to the right supplier. Short-term rentals and long-term leases across 8 categories, worldwide.">
-    <meta property="og:title" content="HABACHA | Rent or Lease Cars, Yachts, Aircraft, Machinery & More">
-    <meta property="og:description" content="Send one request and be connected directly to the right supplier. Short-term rentals and long-term leases across 8 categories, worldwide.">
+    <title>HABACHA | Global Rental & Leasing Platform</title>
+    <meta name="description" content="Discover rental and leasing options across eight asset categories. HABACHA connects businesses and individuals with suppliers; confirm availability and terms directly.">
+    <meta property="og:title" content="HABACHA | Global Rental & Leasing Platform">
+    <meta property="og:description" content="Discover rental and leasing options across eight asset categories. HABACHA connects businesses and individuals with suppliers; confirm availability and terms directly.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://habacha-platform.vercel.app/">
     <meta name="theme-color" content="#2563eb">
@@ -63,12 +63,17 @@
 
     <!-- Hero -->
     <section class="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
-        <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-bold tracking-wider uppercase mb-6">Rent & lease worldwide</span>
-        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 tracking-tight max-w-3xl mx-auto mb-6">Rent or lease almost anything. One request.</h1>
-        <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-12">From a van for tomorrow to a yacht for the summer or a crane for the year: tell us what you need and we connect you directly with the right supplier.</p>
+        <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-bold tracking-wider uppercase mb-6">Global rental and leasing platform</span>
+        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 tracking-tight max-w-3xl mx-auto mb-6">Where rental needs meet the right suppliers.</h1>
+        <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-8">Connecting businesses and individuals with rental and leasing suppliers across multiple categories, worldwide.</p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-3 mb-10">
+            <a href="#asset-search" class="inline-flex items-center justify-center min-h-[48px] px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Find what you need</a>
+            <a href="supplier-register.html" class="inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-slate-900 text-base font-semibold rounded-xl border border-slate-300 hover:border-blue-300 transition focus:outline-none focus:ring-2 focus:ring-blue-500">List your assets</a>
+        </div>
 
         <!-- Search Form -->
-        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 max-w-5xl mx-auto">
+        <div id="asset-search" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 max-w-5xl mx-auto scroll-mt-24">
             <form action="inventory.html" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-3">
                 <div class="md:col-span-3 text-left">
                     <label for="category" class="block text-sm font-medium text-slate-700 mb-1 px-1">Category</label>
@@ -104,7 +109,7 @@
                 </div>
             </form>
         </div>
-        <p class="text-sm text-slate-500 mt-4">Free to request. No obligation. You agree terms directly with the supplier.</p>
+        <p class="text-sm text-slate-500 mt-4">Search results do not confirm availability. Confirm pricing, availability and terms directly with the supplier.</p>
     </section>
 
     <!-- Divisions -->
@@ -112,7 +117,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12">
                 <h2 class="text-3xl font-bold text-slate-900">Choose your category</h2>
-                <p class="text-base text-slate-600 mt-2">Pick a category and see what suppliers offer.</p>
+                <p class="text-base text-slate-600 mt-2">Explore the categories supported by HABACHA. Listings and availability may vary.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -211,24 +216,25 @@
     <section class="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
         <span class="inline-block py-1 px-3 rounded bg-slate-200 text-slate-700 text-xs font-bold tracking-wider uppercase mb-4">Simple by design</span>
         <h2 class="text-3xl font-bold text-slate-900 mb-12">How it works</h2>
+        <p class="text-base text-slate-600 max-w-3xl mx-auto -mt-8 mb-12">HABACHA helps you find and connect with rental and leasing suppliers. Final availability, pricing and agreements are confirmed directly with the supplier.</p>
 
         <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
                 <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">1</div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Tell us what you need</h3>
-                <p class="text-base text-slate-600">Choose the category, the dates and whether you want a short rental or a long lease.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Choose a category</h3>
+                <p class="text-base text-slate-600">Explore the asset category that matches your rental or leasing needs.</p>
             </div>
             
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
                 <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">2</div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Get your reference</h3>
-                <p class="text-base text-slate-600">Your request receives a personal code (HB-xxxx), so nothing gets lost between you and the supplier.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Review the listing details</h3>
+                <p class="text-base text-slate-600">Check the information shown and contact the supplier to confirm the details that matter to you.</p>
             </div>
             
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
                 <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">3</div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Go straight to the supplier</h3>
-                <p class="text-base text-slate-600">You continue directly with them to confirm the details and arrange delivery.</p>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Confirm directly with the supplier</h3>
+                <p class="text-base text-slate-600">Discuss availability, pricing, terms and any booking arrangements directly with the supplier.</p>
             </div>
         </div>
     </section>
@@ -239,14 +245,14 @@
             <div class="bg-slate-100 p-8 md:p-12 rounded-2xl border border-slate-200 flex flex-col justify-between items-start">
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 mb-3">For businesses</h3>
-                    <p class="text-base text-slate-600 mb-8">Fleet, equipment and housing for projects, teams and events, with long-term lease options.</p>
+                    <p class="text-base text-slate-600 mb-8">Explore rental and leasing categories for business vehicles, equipment, accommodation and project needs. Confirm suitable options directly with suppliers.</p>
                 </div>
                 <a href="inventory.html?category=all" class="inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-slate-900 font-semibold rounded-xl border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Browse assets</a>
             </div>
             <div class="bg-slate-100 p-8 md:p-12 rounded-2xl border border-slate-200 flex flex-col justify-between items-start">
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 mb-3">For individuals</h3>
-                    <p class="text-base text-slate-600 mb-8">The right vehicle, boat or stay for your trip, your move or your occasion.</p>
+                    <p class="text-base text-slate-600 mb-8">Explore options for travel, moving, leisure and other personal needs. Availability and terms are confirmed directly with each supplier.</p>
                 </div>
                 <a href="inventory.html?category=all" class="inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-slate-900 font-semibold rounded-xl border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Browse assets</a>
             </div>
@@ -256,9 +262,9 @@
     <!-- NEW SECTION 2: Supplier CTA -->
     <section class="max-w-7xl mx-auto px-6 mb-16 md:mb-24">
         <div class="bg-blue-600 text-white rounded-2xl p-8 md:p-12 text-center flex flex-col items-center">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">Put your fleet in front of people who are ready to book.</h2>
-            <p class="text-base text-blue-100 mb-8 max-w-3xl">List your assets on HABACHA and receive requests directly from businesses and individuals worldwide. You stay in control of your prices, your terms and your contracts.</p>
-            <a href="supplier-register.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-white text-blue-600 font-bold rounded-xl hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">Register as supplier</a>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">Are you a rental or leasing supplier?</h2>
+            <p class="text-base text-blue-100 mb-8 max-w-3xl">HABACHA is building a platform where businesses and individuals can discover rental and leasing suppliers. Submit your business and assets for consideration. Registration does not guarantee enquiries, bookings or revenue.</p>
+            <a href="supplier-register.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-white text-blue-600 font-bold rounded-xl hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">Submit supplier details</a>
         </div>
     </section>
 
@@ -279,7 +285,7 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-6 mt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-100 pt-6">
-            <p class="text-xs text-slate-500 max-w-2xl">HABACHA connects people and companies with suppliers of rental and lease assets worldwide. Agreements are made directly between you and the supplier.</p>
+            <p class="text-sm text-slate-500 max-w-2xl">HABACHA is a rental and leasing intermediary platform. Availability, pricing and contractual terms must be confirmed directly with the relevant supplier.</p>
             <p class="text-xs text-slate-400 font-medium">© 2026 HABACHA. All rights reserved.</p>
         </div>
     </footer>
