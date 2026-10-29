@@ -1,6 +1,3 @@
-cd ~/Desktop/habacha-platform
-
-cat << 'EOF' > index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +15,26 @@ cat << 'EOF' > index.html
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        ::-webkit-calendar-picker-indicator {
-            filter: invert(34%) sepia(98%) saturate(3011%) hue-rotate(209deg) brightness(97%) contrast(92%);
-            cursor: pointer;
-        }
+        ::-webkit-calendar-picker-indicator { cursor: pointer; }
+    </style>
+    <style type="text/tailwindcss">
+        .card { @apply bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full; }
+        .ico { @apply w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm; }
+        .field { @apply w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500; }
+        .lbl { @apply block text-sm font-medium text-slate-700 mb-1 px-1; }
+        .step { @apply bg-white p-8 pt-10 rounded-2xl border border-slate-200 shadow-sm relative; }
+        .num { @apply w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg absolute -top-5 left-1/2 -translate-x-1/2 shadow-md; }
+        .audience { @apply bg-slate-100 p-8 md:p-12 rounded-2xl border border-slate-200 flex flex-col justify-between items-start; }
+        .btn-light { @apply inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-slate-900 font-semibold rounded-xl border border-slate-300 hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500; }
+        .navlink { @apply text-sm font-semibold text-slate-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-1; }
+        .mlink { @apply block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500; }
+        .flink { @apply hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 w-full">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
                 <div class="bg-blue-600 text-white p-1.5 rounded-lg flex-shrink-0">
@@ -38,44 +45,40 @@ cat << 'EOF' > index.html
                     <span class="text-xs font-semibold text-slate-500 tracking-wide mt-0.5">Rent & Lease Worldwide</span>
                 </div>
             </a>
-            
-            <!-- Desktop Nav -->
+
             <nav class="hidden md:flex items-center gap-8">
-                <a href="inventory.html?category=all" class="text-sm font-semibold text-slate-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-1">Browse Assets</a>
-                <a href="supplier-register.html" class="text-sm font-semibold text-slate-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-1">For Suppliers</a>
+                <a href="inventory.html?category=all" class="navlink">Browse Assets</a>
+                <a href="supplier-register.html" class="navlink">For Suppliers</a>
                 <div class="flex items-center gap-4 border-l border-slate-200 pl-8">
-                    <a href="login.html" class="text-sm font-semibold text-slate-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-1">Sign In</a>
+                    <a href="login.html" class="navlink">Sign In</a>
                     <a href="register.html" class="text-sm font-semibold bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Get Started</a>
                 </div>
             </nav>
 
-            <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" class="md:hidden p-2 text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
 
-        <!-- Mobile Dropdown -->
         <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 absolute w-full left-0 top-full flex flex-col p-4 shadow-lg z-50">
-            <a href="inventory.html?category=all" class="block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">Browse Assets</a>
-            <a href="supplier-register.html" class="block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">For Suppliers</a>
-            <a href="login.html" class="block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">Sign In</a>
+            <a href="inventory.html?category=all" class="mlink">Browse Assets</a>
+            <a href="supplier-register.html" class="mlink">For Suppliers</a>
+            <a href="login.html" class="mlink">Sign In</a>
             <a href="register.html" class="block py-3 mt-2 text-base font-semibold bg-blue-600 text-white text-center rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Get Started</a>
         </nav>
     </header>
 
     <!-- Hero -->
-    <section class="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
-        <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-bold tracking-wider uppercase mb-6">Rent & lease worldwide</span>
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+        <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-semibold mb-6">Cars, boats, aircraft, machinery &amp; more</span>
         <h1 class="text-4xl md:text-6xl font-bold text-slate-900 tracking-tight max-w-3xl mx-auto mb-6">Rent or lease almost anything. One request.</h1>
         <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-12">From a van for tomorrow to a yacht for the summer or a crane for the year: tell us what you need and we connect you directly with the right supplier.</p>
 
-        <!-- Search Form -->
-        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 max-w-5xl mx-auto">
-            <form action="inventory.html" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 max-w-6xl mx-auto">
+            <form action="inventory.html" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
                 <div class="md:col-span-3 text-left">
-                    <label for="category" class="block text-sm font-medium text-slate-700 mb-1 px-1">Category</label>
-                    <select id="category" name="category" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="category" class="lbl">Category</label>
+                    <select id="category" name="category" class="field">
                         <option value="all">All categories</option>
                         <option value="cars">Cars & Passenger Vans</option>
                         <option value="commercial">Commercial Vans & Freight Trucks</option>
@@ -87,177 +90,126 @@ cat << 'EOF' > index.html
                         <option value="event">Event & Audio/Visual Equipment</option>
                     </select>
                 </div>
-                <div class="md:col-span-4 text-left">
-                    <label for="query" class="block text-sm font-medium text-slate-700 mb-1 px-1">What are you looking for?</label>
-                    <input type="text" id="query" name="query" placeholder="e.g. SUV, yacht, excavator, villa" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="md:col-span-3 text-left">
+                    <label for="query" class="lbl">What are you looking for?</label>
+                    <input type="text" id="query" name="query" placeholder="e.g. SUV, yacht, excavator, villa" class="field">
                 </div>
                 <div class="md:col-span-2 text-left">
-                    <label for="start_date" class="block text-sm font-medium text-slate-700 mb-1 px-1">From</label>
-                    <input type="date" id="start_date" name="start_date" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="start_date" class="lbl">From</label>
+                    <input type="date" id="start_date" name="start_date" class="field">
                 </div>
-                <div class="md:col-span-3 text-left flex flex-col justify-end">
-                    <label for="lease" class="block text-sm font-medium text-slate-700 mb-1 px-1">Duration</label>
-                    <div class="flex gap-2">
-                        <select id="lease" name="lease" class="w-full h-12 px-3 text-base bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="short">Short-term rental (daily)</option>
-                            <option value="long">Long-term lease</option>
-                        </select>
-                        <button type="submit" class="h-12 px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-blue-500">Find my asset</button>
-                    </div>
+                <div class="md:col-span-2 text-left">
+                    <label for="lease" class="lbl">Duration</label>
+                    <select id="lease" name="lease" class="field">
+                        <option value="short">Short-term</option>
+                        <option value="long">Long-term lease</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full h-12 px-6 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Find my asset</button>
                 </div>
             </form>
         </div>
         <p class="text-sm text-slate-500 mt-4">Free to request. No obligation. You agree terms directly with the supplier.</p>
     </section>
 
-    <!-- Divisions -->
-    <section class="bg-white border-y border-slate-200 py-16 md:py-24">
+    <!-- Categories -->
+    <section class="w-full bg-white border-y border-slate-200 py-16 md:py-24">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-12">
+            <div class="mb-12 text-center">
                 <h2 class="text-3xl font-bold text-slate-900">Choose your category</h2>
                 <p class="text-base text-slate-600 mt-2">Pick a category and see what suppliers offer.</p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card 1 -->
-                <a href="inventory.html?category=cars" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Cars & Passenger Vans</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Sedans, SUVs, passenger vans and electric options.</p>
+                <a href="inventory.html?category=cars" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Cars &amp; Vans</h3>
+                    <p class="text-sm text-slate-600 mt-2">Sedans, SUVs, passenger vans and electric options.</p>
                 </a>
-
-                <!-- Card 2 -->
-                <a href="inventory.html?category=commercial" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Commercial Vans & Freight Trucks</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Cargo vans, heavy trucks and trailers.</p>
+                <a href="inventory.html?category=commercial" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Commercial Freight</h3>
+                    <p class="text-sm text-slate-600 mt-2">Cargo vans, heavy trucks and trailers.</p>
                 </a>
-
-                <!-- Card 3 -->
-                <a href="inventory.html?category=maritime" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Boats, Yachts & Cargo Ships</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Yachts, speedboats, catamarans and cargo vessels.</p>
+                <a href="inventory.html?category=maritime" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Boats &amp; Yachts</h3>
+                    <p class="text-sm text-slate-600 mt-2">Yachts, speedboats, catamarans and cargo vessels.</p>
                 </a>
-
-                <!-- Card 4 -->
-                <a href="inventory.html?category=aviation" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Helicopters & Aircraft</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Helicopters, private jets and cargo charters.</p>
+                <a href="inventory.html?category=aviation" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Helicopters &amp; Aircraft</h3>
+                    <p class="text-sm text-slate-600 mt-2">Helicopters, private jets and cargo charters.</p>
                 </a>
-
-                <!-- Card 5 -->
-                <a href="inventory.html?category=stays" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Stays, Accommodations & Real Estate</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Corporate apartments, villas and commercial space.</p>
+                <a href="inventory.html?category=stays" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Stays &amp; Real Estate</h3>
+                    <p class="text-sm text-slate-600 mt-2">Corporate apartments, villas and commercial space.</p>
                 </a>
-
-                <!-- Card 6 -->
-                <a href="inventory.html?category=industrial" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Construction Machinery & Industrial Equipment</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Excavators, cranes, loaders and power equipment.</p>
+                <a href="inventory.html?category=industrial" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Construction Machinery</h3>
+                    <p class="text-sm text-slate-600 mt-2">Excavators, cranes, loaders and power equipment.</p>
                 </a>
-
-                <!-- Card 7 -->
-                <a href="inventory.html?category=leisure" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Campers, RVs & Leisure Mobility</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Motorhomes and campervans for the road ahead.</p>
+                <a href="inventory.html?category=leisure" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 19V9a4 4 0 0 0-4-4H8a6 6 0 0 0-6 6v6a2 2 0 0 0 2 2h2"/><path d="M2 19h3"/><path d="M9 19h9"/><path d="M22 19h-1"/><circle cx="7" cy="19" r="2"/><path d="M13 9h4"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Campers &amp; RVs</h3>
+                    <p class="text-sm text-slate-600 mt-2">Motorhomes and campervans for the road ahead.</p>
                 </a>
-
-                <!-- Card 8 -->
-                <a href="inventory.html?category=event" class="group bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 flex flex-col h-full">
-                    <div class="w-12 h-12 bg-white text-blue-600 rounded-xl flex items-center justify-center border border-slate-200 mb-4 shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
-                    </div>
-                    <div class="min-h-[48px] flex items-center">
-                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition leading-tight">Event & Audio/Visual Equipment</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 flex-grow">Sound, lighting and production gear for any stage.</p>
+                <a href="inventory.html?category=event" class="group card">
+                    <div class="ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M12 6h.01"/><circle cx="12" cy="14" r="4"/><path d="M12 14h.01"/></svg></div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">Event &amp; AV Equipment</h3>
+                    <p class="text-sm text-slate-600 mt-2">Sound, lighting and production gear for any stage.</p>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Process -->
-    <section class="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
-        <span class="inline-block py-1 px-3 rounded bg-slate-200 text-slate-700 text-xs font-bold tracking-wider uppercase mb-4">Simple by design</span>
-        <h2 class="text-3xl font-bold text-slate-900 mb-12">How it works</h2>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
-                <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">1</div>
+    <!-- How it works -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 mb-14">How it works</h2>
+        <div class="grid md:grid-cols-3 gap-10 md:gap-8">
+            <div class="step">
+                <div class="num">1</div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Tell us what you need</h3>
-                <p class="text-sm text-slate-600">Choose the category, the dates and whether you want a short rental or a long lease.</p>
+                <p class="text-base text-slate-600">Choose the category, the dates and whether you want a short rental or a long lease.</p>
             </div>
-            
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
-                <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">2</div>
+            <div class="step">
+                <div class="num">2</div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Get your reference</h3>
-                <p class="text-sm text-slate-600">Your request receives a personal code (HB-xxxx), so nothing gets lost between you and the supplier.</p>
+                <p class="text-base text-slate-600">Your request receives a personal code (<span class="whitespace-nowrap">HB&#8209;xxxx</span>), so nothing gets lost between you and the supplier.</p>
             </div>
-            
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
-                <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-6 absolute -top-5 left-1/2 -translate-x-1/2 shadow-md">3</div>
+            <div class="step">
+                <div class="num">3</div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Go straight to the supplier</h3>
-                <p class="text-sm text-slate-600">You continue directly with them to confirm the details and arrange delivery.</p>
+                <p class="text-base text-slate-600">You continue directly with them to confirm the details and arrange delivery.</p>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION 1: For Businesses / For Individuals -->
-    <section class="max-w-7xl mx-auto px-6 pb-16 md:pb-24">
+    <!-- Audiences -->
+    <section class="w-full max-w-7xl mx-auto px-6 pb-16 md:pb-24">
         <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-slate-100 p-8 md:p-12 rounded-2xl border border-slate-200 flex flex-col justify-between items-start">
+            <div class="audience">
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 mb-3">For businesses</h3>
                     <p class="text-base text-slate-600 mb-8">Fleet, equipment and housing for projects, teams and events, with long-term lease options.</p>
                 </div>
-                <a href="inventory.html?category=all" class="inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-slate-900 font-semibold rounded-xl border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Browse assets</a>
+                <a href="inventory.html?category=all" class="btn-light">Browse assets</a>
             </div>
-            <div class="bg-slate-100 p-8 md:p-12 rounded-2xl border border-slate-200 flex flex-col justify-between items-start">
+            <div class="audience">
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 mb-3">For individuals</h3>
                     <p class="text-base text-slate-600 mb-8">The right vehicle, boat or stay for your trip, your move or your occasion.</p>
                 </div>
-                <a href="inventory.html?category=all" class="inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-slate-900 font-semibold rounded-xl border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition focus:outline-none focus:ring-2 focus:ring-blue-500">Browse assets</a>
+                <a href="inventory.html?category=all" class="btn-light">Browse assets</a>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION 2: Supplier CTA -->
-    <section class="max-w-7xl mx-auto px-6 mb-16 md:mb-24">
+    <!-- Supplier band -->
+    <section class="w-full max-w-7xl mx-auto px-6 mb-16 md:mb-24">
         <div class="bg-blue-600 text-white rounded-2xl p-8 md:p-12 text-center flex flex-col items-center">
             <h2 class="text-2xl md:text-3xl font-bold mb-4 max-w-2xl">Put your fleet in front of people who are ready to book.</h2>
             <p class="text-base text-blue-100 mb-8 max-w-3xl">List your assets on HABACHA and receive requests directly from businesses and individuals worldwide. You stay in control of your prices, your terms and your contracts.</p>
@@ -266,7 +218,7 @@ cat << 'EOF' > index.html
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 pt-12 pb-8 mt-auto">
+    <footer class="w-full bg-white border-t border-slate-200 pt-12 pb-8 mt-auto">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-2">
                 <div class="bg-slate-200 text-slate-600 p-1 rounded">
@@ -275,31 +227,28 @@ cat << 'EOF' > index.html
                 <span class="font-bold text-lg tracking-wider text-slate-900">HABACHA</span>
             </div>
             <div class="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600">
-                <a href="terms.html" class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm">Terms of Service</a>
-                <a href="supplier-agreement.html" class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm">Privacy Policy</a>
-                <a href="cookies.html" class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm">Cookie Policy</a>
+                <a href="terms.html" class="flink">Terms of Service</a>
+                <a href="supplier-agreement.html" class="flink">Supplier Agreement</a>
+                <a href="privacy.html" class="flink">Privacy Policy</a>
+                <a href="cookies.html" class="flink">Cookie Policy</a>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-6 mt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-100 pt-6">
-            <p class="text-xs text-slate-500 max-w-2xl">HABACHA connects people and companies with suppliers of rental and lease assets worldwide. Agreements are made directly between you and the supplier.</p>
-            <p class="text-xs text-slate-400 font-medium">© 2026 HABACHA. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-6 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-100 pt-6 text-center md:text-left">
+            <p class="text-sm text-slate-500 max-w-2xl">HABACHA connects people and companies with suppliers of rental and lease assets worldwide. Agreements are made directly between you and the supplier.</p>
+            <p class="text-sm text-slate-500 font-medium">© 2026 HABACHA. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
-            
             btn.addEventListener('click', () => {
-                const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', !isExpanded);
+                const open = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!open));
                 menu.classList.toggle('hidden');
             });
         });
     </script>
 </body>
 </html>
-EOF
