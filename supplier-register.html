@@ -59,18 +59,15 @@
                     Register & Claim 50% Discount
                 </button>
             </form>
-            
-            <div id="success-message" class="hidden bg-green-50 text-green-800 p-6 rounded-2xl border border-green-200 text-center mt-4">
-                <h3 class="font-bold text-lg mb-2">Registration Successful!</h3>
-                <p>We will review your application and contact you shortly.</p>
-            </div>
         </div>
     </main>
 
+    <!-- JavaScript -->
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k'; // Wordt automatisch vervangen
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwNjgwMDAsImV4cCI6MjA1NTY0NDAwMH0.79V4d8rG1g'; // Wordt hieronder automatisch vervangen
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         document.getElementById('supplier-form').addEventListener('submit', async (e) => {
@@ -85,6 +82,7 @@
             const website = document.getElementById('websiteUrl').value;
             const contract = document.getElementById('contractLink').value;
 
+            // 1. Opslaan in Supabase
             const { error } = await supabase.from('suppliers').insert([{
                 company_name: company,
                 contact_email: email,
@@ -100,8 +98,19 @@
                 return;
             }
 
-            document.getElementById('supplier-form').classList.add('hidden');
-            document.getElementById('success-message').classList.remove('hidden');
+            // 2. E-mail sturen via API
+            try {
+                await fetch('https://habacha-platform.vercel.app/api/send-supplier-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companyName: company, contactEmail: email })
+                });
+            } catch (err) {
+                console.log('Email API error', err);
+            }
+
+            // 3. Direct doorsturen naar de professionele bedankpagina
+            window.location.href = 'supplier-success.html';
         });
     </script>
 </body>
