@@ -2,5 +2,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
     "resend": "^6.34.1"
-  }
+  },
+  "type": "module"
 }
