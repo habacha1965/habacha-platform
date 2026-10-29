@@ -36,6 +36,18 @@
             </div>
         </header>
 
+    <!-- START VIP WACHTKAMER -->
+    <div id="vip-waiting-room" class="hidden max-w-3xl mx-auto text-center py-24 px-6">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-50 text-blue-600 mb-6 border border-blue-100">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4" id="vip-title">Expanding Our Global Network.</h2>
+        <p class="text-lg text-slate-600 mb-8">We are currently onboarding vetted suppliers for this division. Submit your request now to be prioritized for our founding launch.</p>
+        <a href="submit-asset.html" id="vip-cta" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg text-base">Submit Your Request &rarr;</a>
+    </div>
+    <!-- EINDE VIP WACHTKAMER -->
+
+
         <main class="max-w-7xl mx-auto px-6 py-10">
             <!-- Header Title -->
             <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8 pb-6 border-b border-subtle">
@@ -132,5 +144,26 @@
             </div>
         `).join('');
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const waitingRoom = document.getElementById('vip-waiting-room');
+            
+            // Toon de wachtkamer (in een later stadium verberg je deze als er echte data is)
+            if (waitingRoom) {
+                waitingRoom.classList.remove('hidden');
+                
+                // Als er een specifieke categorie is gekozen, pas de titel aan
+                if (category && category !== 'all') {
+                    const formattedCat = category.charAt(0).toUpperCase() + category.slice(1);
+                    document.getElementById('vip-title').innerText = `Expanding Our ${formattedCat} Network.`;
+                    document.getElementById('vip-cta').href = `submit-asset.html?category=${category}`;
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
