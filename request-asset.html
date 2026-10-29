@@ -61,7 +61,7 @@
             const refCode = `HB-${randomNum}`;
             const { error } = await supabase.from('referrals').insert([{ reference_code: refCode, client_name: name, client_email: email }]);
             if (error) {
-                alert('Something went wrong. Please try again.');
+                alert('Database Error: ' + error.message);
                 btn.innerText = 'Generate Code & Continue';
                 btn.disabled = false;
                 return;
