@@ -10,17 +10,33 @@
 </head>
 <body class="bg-slate-100 text-slate-900 min-h-screen">
 
-    <!-- LOGIN SCHERM -->
-    <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
-        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
-            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+
+    <!-- PREMIUM LOGIN SCHERM -->
+    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900">
+        <!-- Achtergrond gradient en raster -->
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 opacity-95"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        
+        <div class="relative z-10 w-full max-w-md">
+            <div class="bg-white/95 backdrop-blur-sm p-10 rounded-3xl shadow-2xl border border-white/20 text-center">
+                <!-- HABACHA Logo -->
+                <div class="bg-blue-600 text-white p-3 rounded-2xl inline-flex items-center justify-center mb-6 shadow-lg">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                
+                <h1 class="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Admin Access</h1>
+                <p class="text-slate-500 text-sm mb-8">Enter your secure PIN to access the command center.</p>
+                
+                <div class="relative mb-6">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </div>
+                    <input type="password" id="pin-input" class="w-full h-14 pl-12 pr-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition outline-none tracking-widest text-lg" placeholder="••••••••">
+                </div>
+                
+                <button id="login-btn" class="w-full h-14 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg text-lg">Enter Dashboard</button>
+                <p id="login-error" class="text-red-500 text-sm mt-4 hidden font-medium">Incorrect PIN. Try again.</p>
             </div>
-            <h1 class="text-2xl font-bold mb-2">Admin Access</h1>
-            <p class="text-slate-500 text-sm mb-6">Enter your secure PIN to access the command center.</p>
-            <input type="password" id="pin-input" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center tracking-widest text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="••••••••">
-            <button id="login-btn" class="w-full h-12 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Enter Dashboard</button>
-            <p id="login-error" class="text-red-500 text-sm mt-3 hidden">Incorrect PIN. Try again.</p>
         </div>
     </div>
 
