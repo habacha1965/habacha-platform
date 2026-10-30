@@ -8,17 +8,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
-    <header class="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center">
-        <a href="index.html" class="font-bold text-xl text-slate-900 tracking-wider">HABACHA</a>
-        <a href="index.html" class="text-sm font-semibold text-blue-600 hover:underline">Return to Main Page</a>
+<body class="bg-slate-900 text-slate-900 min-h-screen flex flex-col relative overflow-x-hidden">
+    <!-- Premium Achtergrond -->
+    <div class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 opacity-95 -z-10"></div>
+    <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
+    <header class="relative z-10 py-4 px-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2">
+            <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
+        </a>
+        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
-    <main class="flex-grow flex items-center justify-center p-6">
+    <main class="relative z-10 flex-grow flex items-center justify-center p-6">
         <div class="max-w-xl w-full">
-            <form id="supplier-form" class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+            <form id="supplier-form" class="bg-white/95 backdrop-blur-sm p-8 md:p-10 rounded-3xl shadow-2xl border border-white/20">
                 <div class="text-center mb-8">
-                    <h1 class="text-3xl font-bold text-slate-900 mb-2">Become a HABACHA Supplier</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-2 tracking-tight">Become a HABACHA Supplier</h1>
                     <p class="text-slate-600">Join our founding network. Get 50% off your first year.</p>
                 </div>
                 
@@ -116,5 +124,11 @@
             window.location.href = 'supplier-success.html';
         });
     </script>
+    <!-- Footer -->
+    <footer class="relative z-10 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-slate-400">
+            <p>&copy; 2026 HABACHA. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
