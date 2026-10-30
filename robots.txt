@@ -1,6 +1,20 @@
 User-agent: *
 Allow: /
-Disallow: /admin.html
-Disallow: /dashboard.html
 
+# Belangrijke pagina's om te indexeren
+Allow: /index.html
+Allow: /about.html
+Allow: /inventory.html
+Allow: /request-asset.html
+Allow: /supplier-register.html
+Allow: /contact.html
+Allow: /faq.html
+
+# Privé-pagina's: niet indexeren
+Disallow: /admin-dashboard.html
+Disallow: /supplier-dashboard.html
+Disallow: /api/
+Disallow: /success.html
+
+# Sitemap locatie
 Sitemap: https://habacha-platform.vercel.app/sitemap.xml
