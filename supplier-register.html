@@ -7,29 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
-
-    <!-- Google Translate Automatische Vertaling -->
-    <style>
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-    </style>
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element');
-    }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
-    <!-- Header -->
     <header class="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center">
         <a href="index.html" class="font-bold text-xl text-slate-900 tracking-wider">HABACHA</a>
         <a href="index.html" class="text-sm font-semibold text-blue-600 hover:underline">Return to Main Page</a>
     </header>
 
-    <!-- Main Form -->
     <main class="flex-grow flex items-center justify-center p-6">
         <div class="max-w-xl w-full">
             <form id="supplier-form" class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
@@ -80,12 +64,10 @@
         </div>
     </main>
 
-    <!-- JavaScript -->
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-        
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k'; // Wordt hieronder automatisch vervangen
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         document.getElementById('supplier-form').addEventListener('submit', async (e) => {
@@ -101,13 +83,12 @@
             const website = document.getElementById('websiteUrl').value;
             const contract = document.getElementById('contractLink').value;
 
-            // Hash het wachtwoord (SHA-256) voor veiligheid
+            // Hash het wachtwoord
             const msgBuffer = new TextEncoder().encode(password);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-            // 1. Opslaan in Supabase
             const { error } = await supabase.from('suppliers').insert([{
                 company_name: company,
                 contact_email: email,
@@ -124,18 +105,14 @@
                 return;
             }
 
-            // 2. E-mail sturen via API
             try {
                 await fetch('https://habacha-platform.vercel.app/api/send-supplier-email', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ companyName: company, contactEmail: email })
                 });
-            } catch (err) {
-                console.log('Email API error', err);
-            }
+            } catch (err) { console.log('Email API error', err); }
 
-            // 3. Direct doorsturen naar de professionele bedankpagina
             window.location.href = 'supplier-success.html';
         });
     </script>

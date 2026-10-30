@@ -10,7 +10,6 @@
 </head>
 <body class="bg-slate-100 text-slate-900 min-h-screen">
 
-    <!-- LOGIN SCHERM -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
         <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -27,7 +26,6 @@
         </div>
     </div>
 
-    <!-- DASHBOARD SCHERM -->
     <div id="dashboard-screen" class="hidden">
         <header class="bg-slate-900 text-white py-4 px-8 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
@@ -90,13 +88,11 @@
 
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-        
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         let currentSupplier = null;
-
         const loginScreen = document.getElementById('login-screen');
         const dashboardScreen = document.getElementById('dashboard-screen');
         const loginBtn = document.getElementById('login-btn');
@@ -104,9 +100,8 @@
         const loginPassword = document.getElementById('login-password');
         const loginError = document.getElementById('login-error');
 
-        const savedSupplier = sessionStorage.getItem('supplierData');
-        if (savedSupplier) {
-            currentSupplier = JSON.parse(savedSupplier);
+        if (sessionStorage.getItem('supplierData')) {
+            currentSupplier = JSON.parse(sessionStorage.getItem('supplierData'));
             loginScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
             loadDashboard();
@@ -125,7 +120,6 @@
             loginBtn.innerText = 'Verifying...';
             loginBtn.disabled = true;
 
-            // Hash het ingevoerde wachtwoord (SHA-256)
             const msgBuffer = new TextEncoder().encode(password);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -142,7 +136,6 @@
                 return;
             }
 
-            // Zoek de supplier op basis van e-mail
             const foundSupplier = data.find(sup => sup.contact_email.trim().toLowerCase() === email.toLowerCase());
 
             if (!foundSupplier) {
@@ -151,7 +144,6 @@
                 return;
             }
 
-            // Controleer het wachtwoord
             if (foundSupplier.password_hash !== passwordHash) {
                 loginError.innerText = "Incorrect password. Please try again.";
                 loginError.classList.remove('hidden');
@@ -166,7 +158,6 @@
 
             currentSupplier = foundSupplier;
             sessionStorage.setItem('supplierData', JSON.stringify(currentSupplier));
-            
             loginScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
             loadDashboard();
@@ -183,15 +174,8 @@
             document.getElementById('contract-link').innerText = currentSupplier.contract_link;
             document.getElementById('contract-link').href = currentSupplier.contract_link;
 
-            const { data: allLeads, error } = await supabase
-                .from('referrals')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                console.error(error);
-                return;
-            }
+            const { data: allLeads, error } = await supabase.from('referrals').select('*').order('created_at', { ascending: false });
+            if (error) { console.error(error); return; }
 
             const leads = allLeads.filter(lead => {
                 if (!lead.details || !lead.details.category) return false;
@@ -211,7 +195,6 @@
 
             leads.forEach(lead => {
                 const date = new Date(lead.created_at).toLocaleDateString('en-GB');
-                
                 let detailsHTML = '<span class="text-xs text-slate-400">-</span>';
                 if (lead.details && Object.keys(lead.details).length > 0) {
                     detailsHTML = Object.entries(lead.details)
@@ -219,7 +202,6 @@
                         .map(([k, v]) => '<span class="block text-xs text-slate-600 capitalize"><strong>' + k + ':</strong> ' + v + '</span>')
                         .join('');
                 }
-
                 const isBooked = lead.status === 'Booked';
                 const statusBadge = isBooked 
                     ? '<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded uppercase">Booked</span>' 
@@ -239,17 +221,8 @@
 
         window.markAsBooked = async (id) => {
             if (!confirm('Are you sure you want to mark this lead as Booked? This will notify HABACHA that a commission is due.')) return;
-
-            const { error } = await supabase
-                .from('referrals')
-                .update({ status: 'Booked' })
-                .eq('id', id);
-
-            if (error) {
-                alert('Database Error: ' + error.message);
-            } else {
-                loadDashboard();
-            }
+            const { error } = await supabase.from('referrals').update({ status: 'Booked' }).eq('id', id);
+            if (error) { alert('Database Error: ' + error.message); } else { loadDashboard(); }
         };
     </script>
 </body>
