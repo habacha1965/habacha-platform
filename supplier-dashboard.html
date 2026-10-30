@@ -3,110 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supplier Command Center | HABACHA Fleet Portal</title>
+    <title>Supplier Portal | HABACHA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0b1329; color: #ffffff; }
-        .bg-navy-light { background-color: #0f172a; }
-        .border-navy { border-color: #1e293b; }
-        .text-cyan { color: #0ea5e9; }
-        .bg-cyan-soft { background-color: rgba(14, 165, 233, 0.15); }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="flex min-h-screen">
+<body class="bg-slate-100 text-slate-900 min-h-screen">
 
-    <!-- Supplier Sidebar -->
-    <aside class="w-64 bg-navy-light border-r border-navy p-6 hidden md:block flex-shrink-0">
-        <a href="index.html" class="flex items-center space-x-2 mb-10">
-            <div class="w-8 h-8 bg-cyan-soft rounded flex items-center justify-center">
-                <svg class="w-5 h-5 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    <!-- LOGIN SCHERM -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
             </div>
-            <span class="text-xl font-bold tracking-tighter">HABACHA</span>
-        </a>
+            <h1 class="text-2xl font-bold mb-2">Supplier Portal</h1>
+            <p class="text-slate-500 text-sm mb-6">Enter your registered email address to access your leads.</p>
+            <input type="email" id="login-email" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="your@company.com">
+            <button id="login-btn" class="w-full h-12 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Access Dashboard</button>
+            <p id="login-error" class="text-red-500 text-sm mt-3 hidden">Email not found or not approved yet.</p>
+        </div>
+    </div>
 
-        <nav class="space-y-2">
-            <a href="#" class="flex items-center space-x-3 bg-cyan-soft text-cyan px-4 py-3 rounded-lg font-semibold text-sm">
-                <span>Fleet Dashboard</span>
-            </a>
-            <a href="submit-asset.html" class="flex items-center space-x-3 text-gray-400 hover:text-white px-4 py-3 rounded-lg text-sm transition-colors">
-                <span>+ Submit New Asset</span>
-            </a>
-            <a href="admin-dashboard.html" class="flex items-center space-x-3 text-gray-400 hover:text-white px-4 py-3 rounded-lg text-sm transition-colors">
-                <span>Admin Moderation</span>
-            </a>
-        </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-8 overflow-y-auto">
-        <header class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8">
-            <div>
-                <h1 class="text-3xl font-bold">Supplier Fleet Command</h1>
-                <p class="text-gray-400 text-sm mt-1">Manage your active listings, submit new assets, and track client inquiries.</p>
+    <!-- DASHBOARD SCHERM -->
+    <div id="dashboard-screen" class="hidden">
+        <header class="bg-slate-900 text-white py-4 px-8 flex justify-between items-center shadow-md">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-xl tracking-wider text-white">HABACHA</span>
+                <span class="px-2 py-1 bg-green-600 text-xs font-bold rounded uppercase tracking-wide">Supplier Portal</span>
             </div>
-            <div class="flex items-center space-x-4">
-                <!-- PROMINENT BUTTON TO SUBMIT-ASSET.HTML -->
-                <a href="submit-asset.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-5 py-3 rounded-lg shadow-lg transition-all flex items-center space-x-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    <span>Propose New Asset</span>
-                </a>
-                <a href="index.html" class="text-xs text-gray-400 hover:text-white border border-navy px-3 py-2 rounded">Sign Out</a>
+            <div class="flex items-center gap-4">
+                <span class="text-sm text-slate-300">Welcome, <strong id="company-name-header" class="text-white"></strong></span>
+                <button id="logout-btn" class="text-sm font-semibold text-slate-300 hover:text-white transition">Log Out</button>
             </div>
         </header>
 
-        <!-- Fleet Overview Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-navy-light p-6 rounded-xl border border-navy">
-                <span class="text-gray-400 text-xs font-medium uppercase tracking-wider">Active Marketplace Assets</span>
-                <div class="text-3xl font-bold text-white mt-2">14 Units</div>
+        <main class="max-w-7xl mx-auto px-6 py-10">
+            <!-- Profile Info -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 flex justify-between items-center">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Company Profile</h2>
+                    <p class="text-sm text-slate-500" id="company-details">Loading...</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Your Contract Link</p>
+                    <a href="#" id="contract-link" target="_blank" class="text-sm font-medium text-blue-600 hover:underline">Loading...</a>
+                </div>
             </div>
-            <div class="bg-navy-light p-6 rounded-xl border border-navy">
-                <span class="text-gray-400 text-xs font-medium uppercase tracking-wider">Pending Admin Moderation</span>
-                <div class="text-3xl font-bold text-cyan mt-2">2 Units</div>
-            </div>
-            <div class="bg-navy-light p-6 rounded-xl border border-navy">
-                <span class="text-gray-400 text-xs font-medium uppercase tracking-wider">Total Client Lead Inquiries</span>
-                <div class="text-3xl font-bold text-green-400 mt-2">89 Leads</div>
-            </div>
-        </div>
 
-        <!-- Fleet Management Table -->
-        <div class="bg-navy-light border border-navy rounded-xl overflow-hidden shadow-xl">
-            <div class="p-6 border-b border-navy flex justify-between items-center">
-                <h2 class="font-bold text-lg">Your Listed Fleet Items</h2>
-                <a href="submit-asset.html" class="text-xs text-cyan hover:underline font-semibold">+ Add Another Asset</a>
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Leads Received</p>
+                    <p id="total-leads" class="text-4xl font-bold text-slate-900">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Pending Action</p>
+                    <p id="pending-leads" class="text-4xl font-bold text-yellow-600">0</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Confirmed Bookings</p>
+                    <p id="booked-leads" class="text-4xl font-bold text-green-600">0</p>
+                </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-[#1e293b] text-gray-400 text-xs uppercase tracking-wider">
-                        <tr>
-                            <th class="px-6 py-4 font-semibold">Asset Title</th>
-                            <th class="px-6 py-4 font-semibold">Division</th>
-                            <th class="px-6 py-4 font-semibold">Status</th>
-                            <th class="px-6 py-4 font-semibold">Daily Rate</th>
-                            <th class="px-6 py-4 font-semibold text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-navy">
-                        <tr>
-                            <td class="px-6 py-4 font-bold text-white">Mercedes-Benz S-Class Long</td>
-                            <td class="px-6 py-4 text-gray-400">Cars & Vans</td>
-                            <td class="px-6 py-4"><span class="text-xs bg-green-900/40 text-green-400 border border-green-800/40 px-2.5 py-1 rounded-full font-medium">Live Market</span></td>
-                            <td class="px-6 py-4 font-semibold">$350/Day</td>
-                            <td class="px-6 py-4 text-right"><a href="asset-detail.html" class="text-xs text-cyan hover:underline">View Live</a></td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 font-bold text-white">Sunseeker Manhattan 66 Yacht</td>
-                            <td class="px-6 py-4 text-gray-400">Boats & Yachts</td>
-                            <td class="px-6 py-4"><span class="text-xs bg-amber-900/40 text-amber-400 border border-amber-800/40 px-2.5 py-1 rounded-full font-medium">Pending Review</span></td>
-                            <td class="px-6 py-4 font-semibold">$2,400/Day</td>
-                            <td class="px-6 py-4 text-right"><a href="admin-dashboard.html" class="text-xs text-gray-400 hover:text-white">Review Status</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <!-- Leads Table -->
+            <h2 class="text-lg font-bold text-slate-900 mb-4">Your Client Leads</h2>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Date</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Tracking Code</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Client Name</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600">Request Details</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Status</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 text-right whitespace-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-body" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        
+        const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aXlydGNoZmJqcHdyYnZ6eW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NTkyODYsImV4cCI6MjEwODUzNTI4Nn0.yGU478L57XpJRq3qsk48KV4xem0BwipRIwqilTAPI4k'; 
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        let currentSupplier = null;
+
+        // --- LOGIN ---
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
+        const loginBtn = document.getElementById('login-btn');
+        const loginEmail = document.getElementById('login-email');
+        const loginError = document.getElementById('login-error');
+
+        // Check of al ingelogd
+        const savedSupplier = sessionStorage.getItem('supplierData');
+        if (savedSupplier) {
+            currentSupplier = JSON.parse(savedSupplier);
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+            loadDashboard();
+        }
+
+        loginBtn.addEventListener('click', async () => {
+            const email = loginEmail.value.trim();
+            if (!email) return;
+
+            // Zoek de aanbieder op basis van e-mailadres
+            const { data, error } = await supabase
+                .from('suppliers')
+                .select('*')
+                .eq('contact_email', email)
+                .single();
+
+            if (error || !data) {
+                loginError.classList.remove('hidden');
+                return;
+            }
+
+            // Optioneel: check of status 'Approved' is. Voor nu laten we iedereen met een e-mail in.
+            currentSupplier = data;
+            sessionStorage.setItem('supplierData', JSON.stringify(currentSupplier));
+            
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+            loadDashboard();
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            sessionStorage.removeItem('supplierData');
+            window.location.reload();
+        });
+
+        // --- DASHBOARD LADEN ---
+        async function loadDashboard() {
+            // Toon bedrijfsgegevens
+            document.getElementById('company-name-header').innerText = currentSupplier.company_name;
+            document.getElementById('company-details').innerText = `${currentSupplier.company_name} • ${currentSupplier.category.toUpperCase()} Division`;
+            document.getElementById('contract-link').innerText = currentSupplier.contract_link;
+            document.getElementById('contract-link').href = currentSupplier.contract_link;
+
+            // Laad leads voor DEZE categorie
+            const { data: leads, error } = await supabase
+                .from('referrals')
+                .select('*')
+                .eq('details->>category', currentSupplier.category)
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            // Statistieken
+            document.getElementById('total-leads').innerText = leads.length;
+            document.getElementById('pending-leads').innerText = leads.filter(l => l.status !== 'Booked').length;
+            document.getElementById('booked-leads').innerText = leads.filter(l => l.status === 'Booked').length;
+
+            // Tabel vullen
+            const tbody = document.getElementById('leads-body');
+            tbody.innerHTML = '';
+            if (leads.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-500">No leads received yet for your division.</td></tr>`;
+                return;
+            }
+
+            leads.forEach(lead => {
+                const date = new Date(lead.created_at).toLocaleDateString('en-GB');
+                
+                let detailsHTML = '<span class="text-xs text-slate-400">-</span>';
+                if (lead.details && Object.keys(lead.details).length > 0) {
+                    detailsHTML = Object.entries(lead.details)
+                        .filter(([key]) => key !== 'category') 
+                        .map(([key, value]) => `<span class="block text-xs text-slate-600 capitalize"><strong>${key}:</strong> ${value}</span>`)
+                        .join('');
+                }
+
+                const isBooked = lead.status === 'Booked';
+                const statusBadge = isBooked 
+                    ? `<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded uppercase">Booked</span>` 
+                    : `<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded uppercase">${lead.status || 'Pending'}</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-4 px-6 text-sm text-slate-500 whitespace-nowrap">${date}</td>
+                        <td class="py-4 px-6"><span class="px-2 py-1 bg-blue-100 text-blue-700 font-mono font-bold text-sm rounded">${lead.reference_code}</span></td>
+                        <td class="py-4 px-6 text-sm font-medium text-slate-900 whitespace-nowrap">${lead.client_name}</td>
+                        <td class="py-4 px-6 min-w-[150px]">${detailsHTML}</td>
+                        <td class="py-4 px-6 whitespace-nowrap">${statusBadge}</td>
+                        <td class="py-4 px-6 text-right">
+                            ${!isBooked ? `<button onclick="markAsBooked('${lead.id}')" class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded hover:bg-green-700">Mark as Booked</button>` : ''}
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // --- ACTIE: MARK AS BOOKED ---
+        window.markAsBooked = async (id) => {
+            if (!confirm('Are you sure you want to mark this lead as Booked? This will notify HABACHA that a commission is due.')) return;
+
+            const { error } = await supabase
+                .from('referrals')
+                .update({ status: 'Booked' })
+                .eq('id', id);
+
+            if (error) {
+                alert('Database Error: ' + error.message);
+            } else {
+                loadDashboard();
+            }
+        };
+    </script>
 </body>
 </html>
