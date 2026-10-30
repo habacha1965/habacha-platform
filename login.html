@@ -3,62 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Access - HABACHA Platform</title>
+    <title>Portal Access | HABACHA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="bg-blue-600 text-white p-1.5 rounded-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+<body class="bg-slate-900 text-slate-900 min-h-screen flex items-center justify-center relative overflow-hidden">
+
+    <!-- PREMIUM ACHTERGROND -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 opacity-95"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+
+    <div class="relative z-10 w-full max-w-5xl px-6">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <a href="index.html" class="inline-flex items-center gap-2 mb-6">
+                <div class="bg-blue-600 text-white p-2 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
-                <span class="font-bold text-xl tracking-wider text-slate-900">HABACHA</span>
+                <span class="font-bold text-2xl tracking-wider text-white">HABACHA</span>
             </a>
-            <a href="register.html" class="text-sm font-semibold text-blue-600 hover:text-blue-700">Create Account</a>
-        </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-6 py-16 flex-grow flex flex-col justify-center">
-        <div class="text-center max-w-xl mx-auto mb-12">
-            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Secure Access Gateway</span>
-            <h1 class="text-3xl font-bold text-slate-900 mt-1">Select Your Portal</h1>
-            <p class="text-slate-600 text-sm mt-2">Choose your registered role to access your management dashboard.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Select Your Portal</h1>
+            <p class="text-lg text-slate-300">Choose your role to access your management dashboard.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:border-blue-400 transition">
+        <!-- 3 Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Card 1: Renters -->
+            <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-white/20 flex flex-col justify-between text-center">
                 <div>
-                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-bold text-xl mb-4">C</div>
-                    <h2 class="text-xl font-bold text-slate-900">Renter & Enterprise</h2>
-                    <p class="text-slate-600 text-sm mt-2">Access active rental inquiries, referral tracking codes (HB-xxxx), and direct supplier gateway links.</p>
+                    <div class="w-16 h-16 bg-slate-100 text-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900 mb-2">Renter & Enterprise</h2>
+                    <p class="text-sm text-slate-500 mb-8">No account required. Submit a request to get matched with a supplier instantly.</p>
                 </div>
-                
+                <a href="request-asset.html" class="w-full py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Submit a Request</a>
             </div>
 
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:border-blue-400 transition">
+            <!-- Card 2: Suppliers -->
+            <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-white/20 flex flex-col justify-between text-center ring-4 ring-blue-600">
                 <div>
-                    <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-xl flex items-center justify-center font-bold text-xl mb-4">S</div>
-                    <h2 class="text-xl font-bold text-slate-900">Fleet Operator</h2>
-                    <p class="text-slate-600 text-sm mt-2">Manage fleet listings, propose new asset submissions, and review incoming referral lead analytics.</p>
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900 mb-2">Fleet Operator</h2>
+                    <p class="text-sm text-slate-500 mb-8">Manage fleet listings, propose new assets, and review incoming referral leads.</p>
                 </div>
-                <a href="supplier-dashboard.html" class="mt-8 w-full py-3 bg-slate-900 text-white text-center font-semibold rounded-xl hover:bg-slate-800 transition">Enter Supplier Portal</a>
+                <a href="supplier-dashboard.html" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg">Enter Supplier Portal</a>
             </div>
-        </div>
-    </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-            <p>© 2026 HABACHA Intermediary Exchange. All rights reserved.</p>
-            <div class="flex gap-6">
-                <a href="terms.html" class="hover:text-white">Terms of Service</a>
-                <a href="supplier-agreement.html" class="hover:text-white">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
-                <a href="cookies.html" class="hover:text-white">Cookie Policy</a>
+            <!-- Card 3: Admin -->
+            <div class="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-white/20 flex flex-col justify-between text-center">
+                <div>
+                    <div class="w-16 h-16 bg-slate-100 text-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900 mb-2">Administrator</h2>
+                    <p class="text-sm text-slate-500 mb-8">Access the command center to manage leads, suppliers, and platform revenue.</p>
+                </div>
+                <a href="admin-dashboard.html" class="w-full py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Admin Access</a>
             </div>
+
         </div>
-    </footer>
+
+        <!-- Footer link -->
+        <div class="text-center mt-12">
+            <a href="index.html" class="text-slate-400 hover:text-white transition text-sm">&larr; Return to Homepage</a>
+        </div>
+    </div>
 </body>
 </html>
