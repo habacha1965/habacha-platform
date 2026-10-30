@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supplier Agreement | HABACHA</title>
-    <meta name="description" content="HABACHA Supplier Agreement. Onboarding, commission structure, payment terms, and legal obligations for fleet operators on the HABACHA network.">
+    <meta name="description" content="HABACHA Supplier Agreement: mandatory disclosure, anti-scam provisions, prohibition on bypassing HABACHA, commission structure, and Dutch jurisdiction.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -24,13 +24,17 @@
         .legal th { background: #f1f5f9; padding: 0.75rem; text-align: left; font-weight: 600; color: #0f172a; border-bottom: 2px solid #cbd5e1; }
         .legal td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
         .legal .updated { color: #64748b; font-size: 0.875rem; margin-bottom: 2rem; }
-        .legal .callout { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
-        .legal .callout p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .callout { background: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .callout p { margin-bottom: 0.5rem; color: #991b1b; }
         .legal .callout p:last-child { margin-bottom: 0; }
+        .legal .info { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .info p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .info p:last-child { margin-bottom: 0; }
+        .legal .cta-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; text-align: center; }
     </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha-platform.vercel.app/"}
+    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha.com/"}
     </script>
     <script type="text/javascript">
     function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element'); }
@@ -42,40 +46,78 @@
     <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
 
     <header class="relative z-10 py-4 px-6 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
+        <a href="/" class="flex items-center gap-2">
             <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
         </a>
-        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
+        <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
     <main class="relative z-10 flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
         <div class="bg-white/95 backdrop-blur-sm p-10 md:p-14 rounded-3xl shadow-2xl border border-white/20">
             <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Supplier Agreement</h1>
-            <p class="updated">Last updated: 30 October 2026</p>
+            <p class="legal updated">Last updated: 30 October 2026</p>
             <div class="legal">
 
-<p>This Supplier Agreement is between HABACHA and any person or entity that registers as a Supplier on the HABACHA platform. It supplements the general <a href="terms.html">Terms of Service</a>. In case of conflict, this agreement prevails for Supplier-specific matters.</p>
+<p>This Supplier Agreement is between HABACHA and any person or entity registering as a Supplier on the HABACHA platform. It supplements the general <a href="/terms.html">Terms of Service</a>. In case of conflict, this agreement prevails for Supplier-specific matters.</p>
+
+<div class="callout">
+    <p><strong>This agreement is strict.</strong> Suppliers are the operational backbone of HABACHA. Any supplier who misrepresents information, refuses to honour the referral, attempts to bypass HABACHA, or defrauds a client will be removed and pursued legally. HABACHA's reputation depends on the quality of its suppliers — we protect that with all available means.</p>
+</div>
 
 <h2>1. Definitions</h2>
 <ul>
-    <li><strong>"Supplier"</strong> refers to the registered company operating a fleet or asset inventory on HABACHA.</li>
-    <li><strong>"Lead"</strong> refers to a Client request that HABACHA routes to the Supplier using the Supplier's contract link.</li>
-    <li><strong>"HB-Code"</strong> refers to the unique tracking code attached to each Lead.</li>
-    <li><strong>"Commission"</strong> refers to the fee owed by the Supplier to HABACHA for each confirmed Lead.</li>
-    <li><strong>"Confirmed Lead"</strong> refers to a Lead that the Supplier has marked as Booked in the HABACHA Supplier portal, or that HABACHA has otherwise verified as concluded.</li>
+    <li><strong>"Supplier"</strong> — the registered company operating a fleet or asset inventory on HABACHA.</li>
+    <li><strong>"Lead"</strong> — a client request that HABACHA routes to the Supplier via the Supplier's contract link.</li>
+    <li><strong>"HB-Code"</strong> — the unique tracking code attached to each Lead.</li>
+    <li><strong>"Confirmed Lead"</strong> — a Lead the Supplier has marked as Booked in the HABACHA Supplier portal, or that HABACHA has otherwise verified as concluded.</li>
+    <li><strong>"Commission"</strong> — the fee owed by the Supplier to HABACHA for each Confirmed Lead.</li>
 </ul>
 
-<h2>2. Onboarding and Approval</h2>
-<p>Suppliers register through the <a href="supplier-register.html">supplier registration page</a>. Registration requires a company name, contact email, password, division, website URL, and a unique contract link. HABACHA reviews each application manually before approval. HABACHA may reject any application at its sole discretion.</p>
+<h2>2. Onboarding and approval</h2>
+<p>Suppliers register through the <a href="/supplier-register.html">supplier registration page</a>. Registration requires: company name, contact email, password, division, website URL, and a unique contract link. HABACHA reviews each application manually. HABACHA reserves the right to reject any application without stating a reason. Approval does not guarantee any volume of Leads.</p>
 
-<h2>3. The Contract Link</h2>
-<p>The contract link is the URL on the Supplier's website where a Client can complete a booking. When HABACHA routes a Lead to the Supplier, the HB-Code is appended to this URL. For example: <code>https://supplier.com/book?ref=HB-8F3K9A2B7X</code>. The Supplier is responsible for ensuring that the contract link is valid, secure, and functional.</p>
+<h2>3. The contract link</h2>
+<p>The contract link is the URL on the Supplier's website where a Client can complete a booking. When HABACHA routes a Lead, the HB-Code is appended to this URL. Example: <code>https://supplier.com/book?ref=HB-8F3K9A2B7X</code>. The Supplier must ensure the link is valid, secure, and functional at all times. HABACHA is not responsible for broken links or technical errors on the Supplier's website.</p>
 
-<h2>4. Commission Structure</h2>
-<p>Commission rates vary by division:</p>
+<h2>4. Eerlijkheidsplicht — volledige en juiste informatie</h2>
+<div class="info">
+    <p><strong>Mandatory disclosure.</strong> The Supplier must provide HABACHA with complete, accurate, and current information regarding its company, its fleet, its licenses, its insurance, and its pricing structure. Any material change to that information must be reported to HABACHA in writing within 5 business days.</p>
+</div>
+<p>Specifically, the Supplier must disclose:</p>
+<ul>
+    <li>Its full legal entity name and Chamber of Commerce (KvK) registration number.</li>
+    <li>Its VAT number, if applicable.</li>
+    <li>All licenses and permits required to operate the assets it offers.</li>
+    <li>The existence and scope of its insurance coverage.</li>
+    <li>Any suspension, revocation, or restriction on its operations.</li>
+    <li>Any claim, lawsuit, or regulatory action that could affect the assets offered through HABACHA.</li>
+</ul>
+
+<h2>5. Verbod op scam en misleiding van huurders</h2>
+<div class="callout">
+    <p><strong>The Supplier shall not scam, mislead, or defraud any client referred by HABACHA.</strong></p>
+    <p>Prohibited conduct includes, without limitation: offering assets that do not exist; inflating prices after a booking is confirmed; charging undisclosed fees; delivering an asset materially different from what was advertised; misrepresenting licenses, insurance, or the condition of the asset; refusing to honour a confirmed booking; or any other act that harms a client financially or reputationally.</p>
+</div>
+<p>If HABACHA receives credible evidence of such conduct, HABACHA may, at its sole discretion:</p>
+<ul>
+    <li>Suspend the Supplier's portal access immediately and without notice.</li>
+    <li>Terminate this agreement.</li>
+    <li>Report the Supplier to the competent authorities.</li>
+    <li>Disclose the Supplier's identity to affected clients.</li>
+    <li>Pursue recovery of any damages HABACHA incurs as a result.</li>
+</ul>
+
+<h2>6. Verbod op bypass — klanten niet buiten HABACHA om leiden</h2>
+<div class="callout">
+    <p><strong>The Supplier shall not attempt to bypass HABACHA.</strong> Any attempt to contact a client referred by HABACHA outside the platform, or to persuade the client to complete the transaction directly without paying the commission, is a fundamental breach of this agreement.</p>
+</div>
+<p>This prohibition applies during the referral and for a period of 24 months after the referral. If the Supplier completes, negotiates, or facilitates a transaction with a HABACHA-referred client outside the platform, the Commission remains fully payable as if the transaction had been booked through HABACHA, plus an administrative penalty of €1,000 per incident.</p>
+<p>HABACHA monitors compliance through the HB-Code, through client follow-ups, and through any other lawful means necessary to protect its rights.</p>
+
+<h2>7. Commission structure</h2>
 <table>
     <thead>
         <tr><th>Division</th><th>Commission</th><th>Founding Discount (first 12 months)</th></tr>
@@ -92,52 +134,66 @@
     </tbody>
 </table>
 
-<h2>5. Founding Supplier Discount</h2>
-<p>Suppliers who are approved during HABACHA's founding phase receive a 50% discount on the applicable Commission for the first 12 months from the date of approval. After 12 months, the standard rate applies. The discount is personal to the Supplier, cannot be transferred, and cannot be combined with any other promotional offer.</p>
+<h2>8. Founding Supplier discount</h2>
+<p>Suppliers approved during HABACHA's founding phase pay 50% of the applicable Commission for the first 12 months from the date of approval. After 12 months, the standard rate applies. The discount is personal to the Supplier, cannot be transferred, and cannot be combined with any other promotional offer. If the Supplier breaches this agreement, the discount is immediately revoked and HABACHA may invoice the difference retroactively.</p>
 
-<h2>6. Reporting and Invoicing</h2>
-<p>The Supplier reports each Confirmed Lead through the Supplier portal by clicking "Mark as Booked" and entering the final transaction value. HABACHA issues a consolidated invoice at the end of each calendar month based on the Confirmed Leads reported during that month.</p>
-<p>The invoice specifies the HB-Codes, the reported transaction values, and the applicable Commission. Payment is due within 14 days of the invoice date, unless otherwise agreed in writing.</p>
+<h2>9. Reporting and invoicing</h2>
+<p>The Supplier reports each Confirmed Lead in the supplier portal by clicking "Mark as Booked" and entering the final transaction value. HABACHA issues a consolidated invoice at the end of each calendar month based on the Confirmed Leads reported during that month. Payment is due within 14 days of the invoice date.</p>
+<p>If the Supplier fails to report a Confirmed Lead, or reports an inaccurate transaction value, HABACHA may invoice the Commission based on its own records (including the average value of comparable bookings) plus an administrative penalty of €500 per unreported or inaccurately reported Lead.</p>
 
-<h2>7. Service Level</h2>
-<p>Suppliers are expected to:</p>
+<h2>10. Service level obligations</h2>
 <ul>
-    <li>Acknowledge each Lead within 48 hours (either by contacting the Client or by updating the status in the portal).</li>
+    <li>Acknowledge each Lead within 48 hours, either by contacting the client or by updating the status in the portal.</li>
     <li>Mark Leads as Booked within 7 days of the booking being confirmed.</li>
     <li>Report transaction values accurately.</li>
 </ul>
-<p>Repeated failure to acknowledge Leads or to report bookings may result in suspension or termination.</p>
+<p>Repeated failure to meet these obligations (3 or more violations in a 90-day period) may result in suspension or termination.</p>
 
-<h2>8. Insurance and Compliance</h2>
-<p>The Supplier must maintain all licenses, permits, and insurance required by the laws of the jurisdiction in which it operates. This includes, where applicable, motor insurance, marine insurance, aviation insurance, and public liability insurance. HABACHA does not provide insurance for the Supplier's assets or operations.</p>
+<h2>11. Insurance and compliance</h2>
+<p>The Supplier must maintain all licenses, permits, and insurance required by the laws of its jurisdiction. This includes, where applicable, motor insurance, marine insurance, aviation insurance, and public liability insurance. HABACHA does not provide insurance for the Supplier's assets or operations. The Supplier indemnifies HABACHA against any claim arising from uninsured or underinsured operations.</p>
 
-<h2>9. Independence of the Parties</h2>
+<h2>12. Independence of the parties</h2>
 <p>HABACHA and the Supplier are independent parties. Nothing in this agreement creates an employment relationship, a partnership, a joint venture, or an agency relationship. The Supplier is not authorised to make commitments on behalf of HABACHA.</p>
 
-<h2>10. Confidentiality</h2>
-<p>Both parties agree to keep confidential any non-public information they receive from the other party in connection with this agreement, including HB-Codes, transaction values, and Client contact details. Confidentiality obligations survive termination for a period of 2 years.</p>
+<h2>13. Confidentiality</h2>
+<p>Both parties agree to keep confidential any non-public information they receive from the other, including HB-Codes, transaction values, and Client contact details. Confidentiality obligations survive termination for 2 years.</p>
 
-<h2>11. Indemnification</h2>
+<h2>14. Indemnification</h2>
 <p>The Supplier agrees to indemnify HABACHA against any claim, damage, or cost (including reasonable legal fees) arising from:</p>
 <ul>
     <li>The Supplier's failure to perform a booked rental or lease.</li>
     <li>Any injury, loss, or damage caused by the Supplier's assets or personnel.</li>
-    <li>Any breach by the Supplier of applicable law, licensing requirements, or these terms.</li>
+    <li>Any breach by the Supplier of applicable law, licensing requirements, this agreement, or the Terms of Service.</li>
+    <li>Any misrepresentation made by the Supplier to HABACHA or to a client.</li>
 </ul>
 
-<h2>12. Termination</h2>
-<p>Either party may terminate this agreement at any time by written notice. HABACHA may terminate immediately if the Supplier breaches these terms, fails to pay an invoice, or engages in conduct that harms the platform. On termination:</p>
+<h2>15. Termination</h2>
+<p>Either party may terminate this agreement at any time by written notice. HABACHA may terminate immediately and without notice if the Supplier:</p>
 <ul>
-    <li>The Supplier's portal access is revoked.</li>
-    <li>Any outstanding Commission remains payable.</li>
+    <li>Breaches any provision of this agreement.</li>
+    <li>Fails to pay an invoice.</li>
+    <li>Engages in conduct that harms HABACHA, its clients, or the platform's reputation.</li>
+    <li>Becomes insolvent or is subject to bankruptcy proceedings.</li>
+</ul>
+<p>On termination:</p>
+<ul>
+    <li>The Supplier's portal access is revoked immediately.</li>
+    <li>All outstanding Commission remains payable in full.</li>
+    <li>The bypass prohibition (article 6) continues for the full 24-month period.</li>
     <li>Confidentiality obligations survive.</li>
 </ul>
 
-<h2>13. Governing Law</h2>
-<p>This agreement is governed by the laws of the Netherlands. Disputes will be submitted to the competent court in Amsterdam, the Netherlands, unless mandatory law provides otherwise.</p>
+<h2>16. Governing law and jurisdiction</h2>
+<p>This agreement is governed by the laws of the Netherlands. Disputes will be submitted exclusively to the competent court in Amsterdam, the Netherlands, unless mandatory law provides otherwise.</p>
 
-<h2>14. Contact</h2>
-<p>For questions about this agreement, contact us at service4companys@gmail.com with the subject line "Supplier Agreement".</p>
+<h2>17. Entire agreement</h2>
+<p>This agreement, together with the Terms of Service and the Privacy Policy, constitutes the entire agreement between the parties regarding its subject matter. It supersedes all prior negotiations, representations, and understandings, whether written or oral.</p>
+
+<div class="cta-block">
+    <p class="text-slate-600 mb-4">Ready to apply as a supplier?</p>
+    <a href="/supplier-register.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">Become a Supplier</a>
+    <a href="/contact.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition ml-2">Ask a Question</a>
+</div>
 
             </div>
         </div>
@@ -147,13 +203,13 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
             <p>&copy; 2026 HABACHA. All rights reserved.</p>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="about.html" class="hover:text-white transition">About</a>
-                <a href="faq.html" class="hover:text-white transition">FAQ</a>
-                <a href="contact.html" class="hover:text-white transition">Contact</a>
-                <a href="terms.html" class="hover:text-white transition">Terms</a>
-                <a href="supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
-                <a href="cookies.html" class="hover:text-white transition">Cookies</a>
+                <a href="/about.html" class="hover:text-white transition">About</a>
+                <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+                <a href="/contact.html" class="hover:text-white transition">Contact</a>
+                <a href="/terms.html" class="hover:text-white transition">Terms</a>
+                <a href="/supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
+                <a href="/privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="/cookies.html" class="hover:text-white transition">Cookies</a>
             </div>
         </div>
     </footer>
