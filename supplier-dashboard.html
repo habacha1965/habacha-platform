@@ -10,7 +10,8 @@
 </head>
 <body class="bg-slate-100 text-slate-900 min-h-screen">
 
-    <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
+    <!-- SCHERM 1: LOGIN -->
+    <div id="login-view" class="min-h-screen flex items-center justify-center p-6">
         <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
@@ -19,13 +20,45 @@
             <p class="text-slate-500 text-sm mb-6">Enter your credentials to access your leads.</p>
             
             <input type="email" id="login-email" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-3 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Email Address">
-            <input type="password" id="login-password" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Password">
+            <input type="password" id="login-password" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-2 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Password">
+            
+            <div class="text-right mb-4">
+                <button id="show-forgot-btn" class="text-sm text-blue-600 hover:underline">Forgot password?</button>
+            </div>
             
             <button id="login-btn" class="w-full h-12 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Access Dashboard</button>
             <p id="login-error" class="text-red-500 text-sm mt-3 hidden"></p>
         </div>
     </div>
 
+    <!-- SCHERM 2: FORGOT PASSWORD -->
+    <div id="forgot-view" class="hidden min-h-screen flex items-center justify-center p-6">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
+            <h1 class="text-2xl font-bold mb-2">Reset Password</h1>
+            <p class="text-slate-500 text-sm mb-6">Enter your registered email address. We'll send you a secure link to reset your password.</p>
+            
+            <input type="email" id="forgot-email" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Email Address">
+            
+            <button id="send-reset-btn" class="w-full h-12 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">Send Reset Link</button>
+            <button id="back-to-login-btn" class="w-full h-12 mt-2 text-slate-600 font-bold rounded-xl hover:bg-slate-100 transition">Back to Login</button>
+            <p id="forgot-message" class="text-sm mt-3 hidden"></p>
+        </div>
+    </div>
+
+    <!-- SCHERM 3: NEW PASSWORD -->
+    <div id="new-password-view" class="hidden min-h-screen flex items-center justify-center p-6">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
+            <h1 class="text-2xl font-bold mb-2">Set New Password</h1>
+            <p class="text-slate-500 text-sm mb-6">Choose a strong, new password for your account.</p>
+            
+            <input type="password" id="new-password" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="New Password">
+            
+            <button id="save-password-btn" class="w-full h-12 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition">Save New Password</button>
+            <p id="new-pass-message" class="text-sm mt-3 hidden"></p>
+        </div>
+    </div>
+
+    <!-- DASHBOARD SCHERM -->
     <div id="dashboard-screen" class="hidden">
         <header class="bg-slate-900 text-white py-4 px-8 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
@@ -93,8 +126,58 @@
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         let currentSupplier = null;
-        const loginScreen = document.getElementById('login-screen');
+        let resetEmail = null;
+
+        const loginView = document.getElementById('login-view');
+        const forgotView = document.getElementById('forgot-view');
+        const newPasswordView = document.getElementById('new-password-view');
         const dashboardScreen = document.getElementById('dashboard-screen');
+
+        function showView(view) {
+            [loginView, forgotView, newPasswordView, dashboardScreen].forEach(v => v.classList.add('hidden'));
+            view.classList.remove('hidden');
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const resetToken = urlParams.get('reset_token');
+
+        if (resetToken) {
+            showView(newPasswordView);
+            document.getElementById('save-password-btn').addEventListener('click', async () => {
+                const newPass = document.getElementById('new-password').value;
+                if (newPass.length < 6) {
+                    document.getElementById('new-pass-message').innerText = "Password must be at least 6 characters.";
+                    document.getElementById('new-pass-message').className = "text-red-500 text-sm mt-3";
+                    return;
+                }
+                const msgBuffer = new TextEncoder().encode(newPass);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                const { data, error } = await supabase.from('suppliers').select('*').eq('password_reset_token', resetToken).single();
+                if (error || !data) {
+                    document.getElementById('new-pass-message').innerText = "Invalid or expired reset link.";
+                    document.getElementById('new-pass-message').className = "text-red-500 text-sm mt-3";
+                    return;
+                }
+                if (new Date(data.password_reset_expires) < new Date()) {
+                    document.getElementById('new-pass-message').innerText = "This reset link has expired. Please request a new one.";
+                    document.getElementById('new-pass-message').className = "text-red-500 text-sm mt-3";
+                    return;
+                }
+                await supabase.from('suppliers').update({
+                    password_hash: passwordHash,
+                    password_reset_token: null,
+                    password_reset_expires: null
+                }).eq('id', data.id);
+
+                document.getElementById('new-pass-message').innerText = "Password successfully changed! Redirecting to login...";
+                document.getElementById('new-pass-message').className = "text-green-600 text-sm mt-3";
+                setTimeout(() => { window.location.href = 'supplier-dashboard.html'; }, 2000);
+            });
+        }
+
         const loginBtn = document.getElementById('login-btn');
         const loginEmail = document.getElementById('login-email');
         const loginPassword = document.getElementById('login-password');
@@ -102,8 +185,7 @@
 
         if (sessionStorage.getItem('supplierData')) {
             currentSupplier = JSON.parse(sessionStorage.getItem('supplierData'));
-            loginScreen.classList.add('hidden');
-            dashboardScreen.classList.remove('hidden');
+            showView(dashboardScreen);
             loadDashboard();
         }
 
@@ -115,7 +197,6 @@
                 loginError.classList.remove('hidden');
                 return;
             }
-
             loginError.classList.add('hidden');
             loginBtn.innerText = 'Verifying...';
             loginBtn.disabled = true;
@@ -126,7 +207,6 @@
             const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
             const { data, error } = await supabase.from('suppliers').select('*');
-
             loginBtn.innerText = 'Access Dashboard';
             loginBtn.disabled = false;
 
@@ -135,37 +215,78 @@
                 loginError.classList.remove('hidden');
                 return;
             }
-
             const foundSupplier = data.find(sup => sup.contact_email.trim().toLowerCase() === email.toLowerCase());
-
             if (!foundSupplier) {
                 loginError.innerText = "Email not found. Please check your email or register first.";
                 loginError.classList.remove('hidden');
                 return;
             }
-
             if (foundSupplier.password_hash !== passwordHash) {
                 loginError.innerText = "Incorrect password. Please try again.";
                 loginError.classList.remove('hidden');
                 return;
             }
-
             if (foundSupplier.status !== 'Approved') {
                 loginError.innerText = "Your account is pending approval by HABACHA.";
                 loginError.classList.remove('hidden');
                 return;
             }
-
             currentSupplier = foundSupplier;
             sessionStorage.setItem('supplierData', JSON.stringify(currentSupplier));
-            loginScreen.classList.add('hidden');
-            dashboardScreen.classList.remove('hidden');
+            showView(dashboardScreen);
             loadDashboard();
         });
 
         document.getElementById('logout-btn').addEventListener('click', () => {
             sessionStorage.removeItem('supplierData');
             window.location.reload();
+        });
+
+        document.getElementById('show-forgot-btn').addEventListener('click', () => {
+            showView(forgotView);
+        });
+
+        document.getElementById('back-to-login-btn').addEventListener('click', () => {
+            showView(loginView);
+        });
+
+        document.getElementById('send-reset-btn').addEventListener('click', async () => {
+            const email = document.getElementById('forgot-email').value.trim();
+            if (!email) return;
+            const msgEl = document.getElementById('forgot-message');
+            msgEl.className = "text-blue-600 text-sm mt-3";
+            msgEl.innerText = "Verifying email...";
+            msgEl.classList.remove('hidden');
+
+            const { data, error } = await supabase.from('suppliers').select('*').eq('contact_email', email).limit(1);
+            if (error || !data || data.length === 0) {
+                msgEl.className = "text-red-500 text-sm mt-3";
+                msgEl.innerText = "This email is not registered.";
+                return;
+            }
+            const supplier = data[0];
+            const token = crypto.randomUUID();
+            const expires = new Date(Date.now() + 60 * 60 * 1000).toISOString();
+
+            await supabase.from('suppliers').update({
+                password_reset_token: token,
+                password_reset_expires: expires
+            }).eq('id', supplier.id);
+
+            const resetLink = `https://habacha-platform.vercel.app/supplier-dashboard.html?reset_token=${token}`;
+
+            try {
+                await fetch('https://habacha-platform.vercel.app/api/send-reset-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companyName: supplier.company_name, contactEmail: supplier.contact_email, resetLink: resetLink })
+                });
+                msgEl.className = "text-green-600 text-sm mt-3";
+                msgEl.innerText = "Reset link sent! Check your email inbox.";
+            } catch (err) {
+                msgEl.className = "text-red-500 text-sm mt-3";
+                msgEl.innerText = "Error sending email. Please try again.";
+            }
         });
 
         async function loadDashboard() {
