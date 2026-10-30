@@ -100,12 +100,12 @@
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5'; // Wordt hieronder vervangen
+        const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        const ADMIN_PIN = 'HABACHA2026'; 
+        const ADMIN_PIN = 'HABACHA2026';
 
-        // --- LOGIN LOGICA ---
+        // --- LOGIN ---
         const loginScreen = document.getElementById('login-screen');
         const dashboardScreen = document.getElementById('dashboard-screen');
         const loginBtn = document.getElementById('login-btn');
@@ -134,7 +134,7 @@
             window.location.reload();
         });
 
-        // --- TABS LOGICA ---
+        // --- TABS ---
         const tabLeads = document.getElementById('tab-leads');
         const tabSuppliers = document.getElementById('tab-suppliers');
         const tableLeads = document.getElementById('table-leads');
@@ -158,9 +158,9 @@
             tableLeads.classList.add('hidden');
         });
 
-        // --- DATA LADEN ---
+        // --- LOAD DATA ---
         async function loadData() {
-            // 1. Laad Leads
+            // Leads
             const { data: leads, error: leadsError } = await supabase
                 .from('referrals')
                 .select('*')
@@ -168,7 +168,6 @@
 
             if (!leadsError && leads) {
                 document.getElementById('total-leads').innerText = leads.length;
-                // Geschatte omzet (15% van een fictief gemiddelde van €500 per lead)
                 const estimatedRevenue = leads.length * 500 * 0.15;
                 document.getElementById('total-revenue').innerText = '€' + estimatedRevenue.toLocaleString('nl-NL');
                 
@@ -188,7 +187,7 @@
                 });
             }
 
-            // 2. Laad Aanbieders
+            // Suppliers
             const { data: suppliers, error: supError } = await supabase
                 .from('suppliers')
                 .select('*')
@@ -196,7 +195,6 @@
 
             if (!supError && suppliers) {
                 document.getElementById('total-suppliers').innerText = suppliers.length;
-                
                 const pendingCount = suppliers.filter(s => !s.status || s.status === 'Pending').length;
                 document.getElementById('total-pending').innerText = pendingCount;
 
@@ -205,10 +203,22 @@
                 suppliers.forEach(sup => {
                     const isPending = !sup.status || sup.status === 'Pending';
                     const isApproved = sup.status === 'Approved';
+                    const isRejected = sup.status === 'Rejected';
                     
                     let statusBadge = `<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded uppercase">Pending</span>`;
                     if (isApproved) statusBadge = `<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded uppercase">Approved</span>`;
-                    if (sup.status === 'Rejected') statusBadge = `<span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded uppercase">Rejected</span>`;
+                    if (isRejected) statusBadge = `<span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded uppercase">Rejected</span>`;
+
+                    let actionButtons = '';
+                    if (isPending) {
+                        actionButtons = `
+                            <button onclick="updateSupplier('${sup.id}', 'Approved', '${sup.contact_email}', '${sup.company_name}')" class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded hover:bg-green-700">Approve</button>
+                            <button onclick="updateSupplier('${sup.id}', 'Rejected', '${sup.contact_email}', '${sup.company_name}')" class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded hover:bg-yellow-600">Reject</button>
+                        `;
+                    }
+                    actionButtons += `
+                        <button onclick="deleteSupplier('${sup.id}', '${sup.contact_email}', '${sup.company_name}')" class="px-3 py-1 bg-red-100 text-red-600 text-xs font-bold rounded hover:bg-red-200">Delete</button>
+                    `;
 
                     tbody.innerHTML += `
                         <tr class="hover:bg-slate-50">
@@ -219,32 +229,48 @@
                             <td class="py-4 px-6"><span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded uppercase">${sup.category}</span></td>
                             <td class="py-4 px-6 text-sm text-blue-500 truncate max-w-xs"><a href="${sup.contract_link}" target="_blank">${sup.contract_link}</a></td>
                             <td class="py-4 px-6">${statusBadge}</td>
-                            <td class="py-4 px-6 text-right flex justify-end gap-2">
-                                ${isPending ? `
-                                    <button onclick="updateSupplier('${sup.id}', 'Approved')" class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded hover:bg-green-700">Approve</button>
-                                    <button onclick="updateSupplier('${sup.id}', 'Rejected')" class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded hover:bg-yellow-600">Reject</button>
-                                ` : ''}
-                                <button onclick="deleteSupplier('${sup.id}')" class="px-3 py-1 bg-red-100 text-red-600 text-xs font-bold rounded hover:bg-red-200">Delete</button>
-                            </td>
+                            <td class="py-4 px-6 text-right flex justify-end gap-2">${actionButtons}</td>
                         </tr>
                     `;
                 });
             }
         }
 
-        // --- ACTIES ---
-        window.updateSupplier = async (id, newStatus) => {
-            if (!confirm(`Weet je zeker dat je deze aanbieder wilt markeren als: ${newStatus}?`)) return;
+        // --- ACTIONS ---
+        window.updateSupplier = async (id, newStatus, email, company) => {
+            const reason = prompt(`Wat is de reden voor afwijzing van ${company}? Dit wordt naar de aanbieder gemaild:`);
+            if (reason === null) return;
+            if (reason.trim() === '') { alert('Je moet een reden opgeven.'); return; }
+
+            try {
+                await fetch('https://habacha-platform.vercel.app/api/send-status-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companyName: company, contactEmail: email, status: newStatus, reason: reason })
+                });
+            } catch (err) { console.log('Email API error', err); }
+
             const { error } = await supabase.from('suppliers').update({ status: newStatus }).eq('id', id);
-            if (error) alert('Error: ' + error.message);
-            else loadData();
+            if (error) alert('Database Error: ' + error.message);
+            else { alert('Aanbieder afgewezen en e-mail verzonden.'); loadData(); }
         };
 
-        window.deleteSupplier = async (id) => {
-            if (!confirm('Weet je ZEKER dat je deze aanbieder definitief wilt verwijderen? Dit kan niet ongedaan worden gemaakt.')) return;
+        window.deleteSupplier = async (id, email, company) => {
+            const reason = prompt(`Wat is de reden voor het verwijderen van ${company}? Dit wordt naar de aanbieder gemaild:`);
+            if (reason === null) return;
+            if (reason.trim() === '') { alert('Je moet een reden opgeven.'); return; }
+
+            try {
+                await fetch('https://habacha-platform.vercel.app/api/send-status-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companyName: company, contactEmail: email, status: 'Deleted', reason: reason })
+                });
+            } catch (err) { console.log('Email API error', err); }
+
             const { error } = await supabase.from('suppliers').delete().eq('id', id);
-            if (error) alert('Error: ' + error.message);
-            else loadData();
+            if (error) alert('Database Error: ' + error.message);
+            else { alert('Aanbieder verwijderd en e-mail verzonden.'); loadData(); }
         };
     </script>
 </body>
