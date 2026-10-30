@@ -204,6 +204,12 @@
                             .join('');
                     }
 
+                    // Dynamische status badge (groen voor Booked)
+                    const isBooked = lead.status === 'Booked';
+                    const statusBadge = isBooked 
+                        ? `<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded uppercase">Booked</span>` 
+                        : `<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded uppercase">${lead.status || 'Pending'}</span>`;
+
                     tbody.innerHTML += `
                         <tr class="hover:bg-slate-50">
                             <td class="py-4 px-6 text-sm text-slate-500 whitespace-nowrap">${date}</td>
@@ -211,7 +217,7 @@
                             <td class="py-4 px-6 text-sm font-medium text-slate-900 whitespace-nowrap">${lead.client_name}</td>
                             <td class="py-4 px-6 min-w-[200px]">${detailsHTML}</td>
                             <td class="py-4 px-6 text-sm text-slate-500">${lead.client_email}</td>
-                            <td class="py-4 px-6"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded uppercase">${lead.status || 'Pending'}</span></td>
+                            <td class="py-4 px-6">${statusBadge}</td>
                         </tr>
                     `;
                 });
