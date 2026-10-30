@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About HABACHA | HABACHA</title>
-    <meta name="description" content="HABACHA is a Dutch-operated intermediary platform connecting clients with vetted rental and leasing suppliers across 8 divisions. One request, one HB-Code, one supplier.">
+    <meta name="description" content="HABACHA is a global intermediary platform connecting clients with vetted rental and leasing suppliers across 8 divisions. What we do and do not do.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -12,11 +12,14 @@
         .legal h2 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
         .legal h3 { font-size: 1.125rem; font-weight: 600; color: #0f172a; margin-top: 1.75rem; margin-bottom: 0.75rem; }
         .legal p { color: #475569; line-height: 1.75; margin-bottom: 1rem; }
-        .legal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #475569; line-height: 1.75; }
+        .legal ul, .legal ol { padding-left: 1.5rem; margin-bottom: 1rem; color: #475569; line-height: 1.75; }
+        .legal ul { list-style: disc; }
+        .legal ol { list-style: decimal; }
         .legal li { margin-bottom: 0.5rem; }
         .legal a { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; }
         .legal a:hover { color: #1d4ed8; }
         .legal strong { color: #0f172a; font-weight: 600; }
+        .legal code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875rem; color: #0f172a; }
         .legal table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.875rem; }
         .legal th { background: #f1f5f9; padding: 0.75rem; text-align: left; font-weight: 600; color: #0f172a; border-bottom: 2px solid #cbd5e1; }
         .legal td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
@@ -24,10 +27,14 @@
         .legal .callout { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
         .legal .callout p { margin-bottom: 0.5rem; color: #1e40af; }
         .legal .callout p:last-child { margin-bottom: 0; }
+        .legal .cta-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; text-align: center; }
+        details summary { list-style: none; cursor: pointer; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .faq-icon { transform: rotate(180deg); }
     </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha-platform.vercel.app/"}
+    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha.com/"}
     </script>
     <script type="text/javascript">
     function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element'); }
@@ -39,67 +46,75 @@
     <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
 
     <header class="relative z-10 py-4 px-6 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
+        <a href="/" class="flex items-center gap-2">
             <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
         </a>
-        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
+        <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
     <main class="relative z-10 flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
         <div class="bg-white/95 backdrop-blur-sm p-10 md:p-14 rounded-3xl shadow-2xl border border-white/20">
             <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">About HABACHA</h1>
-            <p class="updated">Last updated: 30 October 2026</p>
+            <p class="legal updated">Last updated: 30 October 2026</p>
             <div class="legal">
 
-<p>HABACHA exists because finding the right rental or leasing partner takes too long. A client who needs a yacht for a week, an excavator for a project, or a corporate van for the summer starts by calling around. Ten calls later, three quotes, no clear comparison. Meanwhile, suppliers spend more time chasing leads than serving customers.</p>
+<p class="text-lg font-medium text-slate-900">HABACHA is a global intermediary platform. We connect clients with vetted rental and leasing suppliers across eight asset divisions. One request. One HB-Code. One supplier.</p>
 
-<p>HABACHA reduces that to a single request. You tell us what you need. We match you with a vetted supplier in one of our eight divisions. You receive a unique tracking code — the HB-Code — and continue directly with that supplier. No account required. No fee for clients.</p>
+<p>We were founded on a simple premise: the rental market is fragmented. A client who needs a yacht for a week, an excavator for a project, or a corporate van for the summer currently calls multiple suppliers, waits for quotes, and compares without a shared standard. Suppliers, in turn, spend more time chasing leads than serving clients. HABACHA reduces this to a single request, routed to the right supplier, with a trackable code.</p>
 
-<h2>What we are, and what we are not</h2>
-<p>We are an intermediary platform. We do not own the cars, boats, aircraft, machinery, or properties listed on this site. We do not set the prices. We do not handle the payments between you and the supplier. What we do is route your request to the right supplier and keep a record of that referral.</p>
-
-<p>This is a deliberate choice. If we owned the assets, we would be a rental company. If we handled payments, we would be a financial service. HABACHA operates as the efficient middle layer between clients and the operators who actually do the work.</p>
-
-<h2>Our eight divisions</h2>
-<p>HABACHA operates across eight asset divisions. Each has its own supplier network, its own compliance requirements, and its own commission structure. A yacht charter is not the same as a van rental, and we do not pretend it is.</p>
+<h2>What HABACHA does</h2>
 <ul>
-    <li><strong>Cars &amp; Vans</strong> — passenger vehicles, SUVs, executive cars, and passenger vans</li>
-    <li><strong>Commercial Freight</strong> — cargo vans, heavy trucks, and trailers</li>
-    <li><strong>Boats &amp; Yachts</strong> — sailing yachts, motor yachts, catamarans, and cargo vessels</li>
-    <li><strong>Helicopters &amp; Aircraft</strong> — private jets, helicopters, and charter aircraft</li>
-    <li><strong>Stays &amp; Real Estate</strong> — corporate apartments, villas, and commercial space</li>
-    <li><strong>Construction Machinery</strong> — excavators, cranes, loaders, and industrial equipment</li>
-    <li><strong>Campers &amp; RVs</strong> — motorhomes and campervans</li>
-    <li><strong>Event &amp; AV Equipment</strong> — sound, lighting, and production gear</li>
+    <li>Receives a client request through a structured form.</li>
+    <li>Generates a unique HB-Code as proof of referral.</li>
+    <li>Matches the request to an approved supplier in the relevant division.</li>
+    <li>Redirects the client to that supplier with the HB-Code attached.</li>
+    <li>Tracks the referral from request to confirmed booking.</li>
+    <li>Invoices the supplier a commission only after the supplier marks the booking as confirmed.</li>
 </ul>
+
+<h2>What HABACHA does not do</h2>
+<ul>
+    <li>We do not own the cars, boats, aircraft, machinery, or properties listed on this site.</li>
+    <li>We do not set or control the prices charged by suppliers.</li>
+    <li>We do not process payments between clients and suppliers.</li>
+    <li>We do not sign rental or lease contracts on behalf of either party.</li>
+    <li>We do not provide insurance for any asset.</li>
+    <li>We do not verify a client's driver's license, boat license, or pilot's license — that is the supplier's responsibility.</li>
+</ul>
+
+<h2>The eight divisions</h2>
+<ul>
+    <li><strong>Cars &amp; Vans</strong> — sedans, SUVs, executive vehicles, passenger vans.</li>
+    <li><strong>Commercial Freight</strong> — cargo vans, heavy trucks, trailers.</li>
+    <li><strong>Boats &amp; Yachts</strong> — sailing yachts, motor yachts, catamarans, cargo vessels.</li>
+    <li><strong>Helicopters &amp; Aircraft</strong> — private jets, helicopters, charter aircraft.</li>
+    <li><strong>Stays &amp; Real Estate</strong> — corporate apartments, villas, commercial space.</li>
+    <li><strong>Construction Machinery</strong> — excavators, cranes, loaders, industrial equipment.</li>
+    <li><strong>Campers &amp; RVs</strong> — motorhomes, campervans.</li>
+    <li><strong>Event &amp; AV Equipment</strong> — sound, lighting, production gear.</li>
+</ul>
+
+<h2>How we earn</h2>
+<p>HABACHA charges a commission to suppliers when a referred deal is confirmed. The commission is set per division (between 8% and 15% of the transaction value) and is fully described in the <a href="/supplier-agreement.html">Supplier Agreement</a>. Clients pay nothing. No account is required to submit a request.</p>
 
 <h2>Where we are now</h2>
-<p>HABACHA is in its founding phase. We are actively onboarding our first cohort of suppliers and are not yet operating at full capacity across every division. We mention this because we prefer to be accurate about where we stand. Founding suppliers receive a 50% commission discount for their first 12 months on the platform.</p>
+<p>HABACHA is in its founding phase. We are actively onboarding our first cohort of suppliers across all eight divisions. Founding suppliers receive a 50% commission discount for their first 12 months on the platform. We are transparent about this stage because we would rather describe where we stand than overstate it.</p>
 
 <div class="callout">
-    <p><strong>Clients pay nothing to use HABACHA.</strong> Submitting a request, receiving an HB-Code, and being redirected to a supplier is completely free.</p>
+    <p><strong>Our three commitments.</strong></p>
+    <p>1. Accuracy over hype. We say what we do, not what we wish we did.</p>
+    <p>2. A fair split. Suppliers do the operational work — our commission reflects the value of the referral, not more.</p>
+    <p>3. Transparency by default. Our terms, commission rates, and privacy practices are public documents.</p>
 </div>
 
-<h2>How we make money</h2>
-<p>HABACHA earns a commission from the supplier when a referred deal closes. Clients do not pay a fee. The commission varies by division, between 8% and 15% of the transaction value, and is fully disclosed in the <a href="supplier-agreement.html">Supplier Agreement</a>. Founding suppliers pay half of the standard rate for their first 12 months.</p>
-
-<h2>What we value</h2>
-<ul>
-    <li><strong>Accuracy over hype.</strong> We describe what we do, not what we wish we did. When something is still being built, we say so.</li>
-    <li><strong>A fair split.</strong> Suppliers do the operational work. We take a commission that reflects the value of the referral, not more.</li>
-    <li><strong>Transparency by default.</strong> Our terms, privacy policy, commission rates, and the limits of our service are all public documents.</li>
-</ul>
-
-<h2>Where we operate</h2>
-<p>HABACHA is operated from the Netherlands. Legal correspondence should be directed to the contact address below. Our Chamber of Commerce (KvK) registration number and VAT number are available on request.</p>
-
-<h2>Contact</h2>
-<p>For general inquiries: <strong>service4companys@gmail.com</strong><br>
-For legal or privacy matters: <strong>service4companys@gmail.com</strong> (subject line: "Legal")<br>
-For supplier onboarding: see the <a href="supplier-register.html">supplier registration page</a>.</p>
+<div class="cta-block">
+    <p class="text-slate-600 mb-4">Ready to see the eight divisions?</p>
+    <a href="/" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">Explore Divisions</a>
+    <a href="/supplier-register.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition ml-2">Become a Supplier</a>
+</div>
 
             </div>
         </div>
@@ -109,13 +124,13 @@ For supplier onboarding: see the <a href="supplier-register.html">supplier regis
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
             <p>&copy; 2026 HABACHA. All rights reserved.</p>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="about.html" class="hover:text-white transition">About</a>
-                <a href="faq.html" class="hover:text-white transition">FAQ</a>
-                <a href="contact.html" class="hover:text-white transition">Contact</a>
-                <a href="terms.html" class="hover:text-white transition">Terms</a>
-                <a href="supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
-                <a href="cookies.html" class="hover:text-white transition">Cookies</a>
+                <a href="/about.html" class="hover:text-white transition">About</a>
+                <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+                <a href="/contact.html" class="hover:text-white transition">Contact</a>
+                <a href="/terms.html" class="hover:text-white transition">Terms</a>
+                <a href="/supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
+                <a href="/privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="/cookies.html" class="hover:text-white transition">Cookies</a>
             </div>
         </div>
     </footer>
