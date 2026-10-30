@@ -47,6 +47,10 @@
                     <input type="email" id="contactEmail" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Create a Password</label>
+                    <input type="password" id="contactPassword" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500" placeholder="Min. 6 characters">
+                </div>
+                <div class="mb-4">
                     <label class="block text-sm font-medium text-slate-700 mb-1">Which Division?</label>
                     <select id="category" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
                         <option value="cars">Cars & Vans</option>
@@ -92,14 +96,22 @@
 
             const company = document.getElementById('companyName').value;
             const email = document.getElementById('contactEmail').value;
+            const password = document.getElementById('contactPassword').value;
             const category = document.getElementById('category').value;
             const website = document.getElementById('websiteUrl').value;
             const contract = document.getElementById('contractLink').value;
+
+            // Hash het wachtwoord (SHA-256) voor veiligheid
+            const msgBuffer = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
             // 1. Opslaan in Supabase
             const { error } = await supabase.from('suppliers').insert([{
                 company_name: company,
                 contact_email: email,
+                password_hash: passwordHash,
                 category: category,
                 website_url: website,
                 contract_link: contract

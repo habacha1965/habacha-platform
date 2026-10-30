@@ -19,6 +19,7 @@
             <h1 class="text-2xl font-bold mb-2">Supplier Portal</h1>
             <p class="text-slate-500 text-sm mb-6">Enter your registered email address to access your leads.</p>
             <input type="email" id="login-email" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="your@company.com">
+            <input type="password" id="login-password" class="w-full h-12 px-4 border border-slate-300 rounded-xl mb-4 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Password">
             <button id="login-btn" class="w-full h-12 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Access Dashboard</button>
             <p id="login-error" class="text-red-500 text-sm mt-3 hidden"></p>
         </div>
@@ -110,11 +111,22 @@
 
         loginBtn.addEventListener('click', async () => {
             const email = loginEmail.value.trim();
-            if (!email) return;
+            const password = document.getElementById('login-password').value;
+            if (!email || !password) {
+                loginError.innerText = "Please enter both email and password.";
+                loginError.classList.remove('hidden');
+                return;
+            }
 
             loginError.classList.add('hidden');
             loginBtn.innerText = 'Verifying...';
             loginBtn.disabled = true;
+
+            // Hash het ingevoerde wachtwoord
+            const msgBuffer = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
             const { data, error } = await supabase.from('suppliers').select('*');
 
@@ -127,20 +139,18 @@
                 return;
             }
 
-            const cleanedInput = email.toLowerCase().replace(/[^a-z0-9]/g, '');
-            let foundSupplier = data.find(sup => sup.contact_email.trim().toLowerCase() === email.toLowerCase());
-
-            if (!foundSupplier) {
-                foundSupplier = data.find(sup => {
-                    const cleanedDb = sup.contact_email.toLowerCase().replace(/[^a-z0-9]/g, '');
-                    if (cleanedDb.length < 20) return cleanedDb === cleanedInput;
-                    return cleanedDb.substring(0, 8) === cleanedInput.substring(0, 8) 
-                        && cleanedDb.substring(cleanedDb.length - 10) === cleanedInput.substring(cleanedInput.length - 10);
-                });
-            }
+            // Zoek de supplier met dit email
+            const foundSupplier = data.find(sup => sup.contact_email.trim().toLowerCase() === email.toLowerCase());
 
             if (!foundSupplier) {
                 loginError.innerText = "Email not found. Please check your email or register first.";
+                loginError.classList.remove('hidden');
+                return;
+            }
+
+            // Controleer het wachtwoord
+            if (foundSupplier.password_hash !== passwordHash) {
+                loginError.innerText = "Incorrect password. Please try again.";
                 loginError.classList.remove('hidden');
                 return;
             }
