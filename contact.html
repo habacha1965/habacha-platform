@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | HABACHA</title>
-    <meta name="description" content="Contact HABACHA. Reach our partnerships and support team for client inquiries, supplier onboarding, or strategic partnerships.">
+    <title>Contact HABACHA | HABACHA</title>
+    <meta name="description" content="Contact HABACHA. Support, supplier onboarding, legal and privacy inquiries. We respond within 24 to 48 hours on business days.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .legal h2 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
+        .legal h3 { font-size: 1.125rem; font-weight: 600; color: #0f172a; margin-top: 1.75rem; margin-bottom: 0.75rem; }
+        .legal p { color: #475569; line-height: 1.75; margin-bottom: 1rem; }
+        .legal ul, .legal ol { padding-left: 1.5rem; margin-bottom: 1rem; color: #475569; line-height: 1.75; }
+        .legal ul { list-style: disc; }
+        .legal ol { list-style: decimal; }
+        .legal li { margin-bottom: 0.5rem; }
+        .legal a { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; }
+        .legal a:hover { color: #1d4ed8; }
+        .legal strong { color: #0f172a; font-weight: 600; }
+        .legal code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875rem; color: #0f172a; }
+        .legal table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.875rem; }
+        .legal th { background: #f1f5f9; padding: 0.75rem; text-align: left; font-weight: 600; color: #0f172a; border-bottom: 2px solid #cbd5e1; }
+        .legal td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
+        .legal .updated { color: #64748b; font-size: 0.875rem; margin-bottom: 2rem; }
+        .legal .callout { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .callout p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .callout p:last-child { margin-bottom: 0; }
+    </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha-platform.vercel.app/"}
@@ -31,101 +51,77 @@
         <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
-    <main class="relative z-10 flex-grow max-w-5xl mx-auto px-6 py-12 w-full">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Get in Touch</h1>
-            <p class="text-lg text-slate-300 max-w-2xl mx-auto">Our partnerships and support team responds within 24-48 hours.</p>
-        </div>
+    <main class="relative z-10 flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
+        <div class="bg-white/95 backdrop-blur-sm p-10 md:p-14 rounded-3xl shadow-2xl border border-white/20">
+            <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Contact HABACHA</h1>
+            <p class="updated">Last updated: 30 October 2026</p>
+            <div class="legal">
 
-        <div class="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl border border-white/20">
-            <form id="contact-form" class="space-y-5">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-                        <input type="text" id="contact-name" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-                        <input type="email" id="contact-email" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">I am a...</label>
-                    <select id="contact-type" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>— Select the type of your question —</option>
-                        <option value="Client">Client (Renter / Lessee)</option>
-                        <option value="Supplier">Supplier (Fleet Operator)</option>
-                        <option value="Partner">Strategic Partner</option>
-                        <option value="Press">Press / Media</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
-                    <input type="text" id="contact-subject" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="How can we help?">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
-                    <textarea id="contact-message" required class="w-full h-40 p-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none resize-none" placeholder="Type your message here..."></textarea>
-                </div>
-                <button type="submit" id="contact-submit" class="w-full h-14 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg text-lg">Send Message</button>
-                <p id="contact-status" class="text-center text-sm hidden"></p>
-            </form>
-        </div>
+<p>HABACHA handles inquiries through email and through the form below. We do not operate a phone line. This is intentional: it keeps response times predictable and gives us a written record of every conversation.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
-                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                <p class="text-white font-semibold mb-1">Email</p>
-                <p class="text-slate-300 text-sm">service4companys@gmail.com</p>
-            </div>
-            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
-                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <p class="text-white font-semibold mb-1">Response Time</p>
-                <p class="text-slate-300 text-sm">Within 24-48 hours</p>
-            </div>
-            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
-                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <p class="text-white font-semibold mb-1">Global Reach</p>
-                <p class="text-slate-300 text-sm">Operating worldwide</p>
+<h2>Who to contact</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>Email</th>
+            <th>For what</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>General Support</strong></td>
+            <td>service4companys@gmail.com</td>
+            <td>Questions about a booking, an HB-Code, or the platform in general.</td>
+        </tr>
+        <tr>
+            <td><strong>Supplier Onboarding</strong></td>
+            <td>service4companys@gmail.com</td>
+            <td>Applications, approval questions, and contract-link issues.</td>
+        </tr>
+        <tr>
+            <td><strong>Legal &amp; Privacy</strong></td>
+            <td>service4companys@gmail.com</td>
+            <td>GDPR requests, data access, data deletion, or legal notices.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Please use the subject line prefix indicated for each department. It helps us route your message to the right team.</p>
+
+<div class="callout">
+    <p><strong>Response time:</strong> we aim to reply within 24 to 48 hours, Monday to Friday. During the founding phase, response times may occasionally be longer.</p>
+</div>
+
+<h2>Use the form below</h2>
+<p>If you prefer, you can use the form below. Choose the category that best describes your message. All fields are required.</p>
+<form class="mt-6 space-y-5" onsubmit="event.preventDefault(); alert('Please use the email addresses above during the founding phase. The automated form will be activated in a future update.');">
+    <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+        <input type="text" class="w-full h-12 px-4 border border-slate-300 rounded-xl" placeholder="John Doe" required>
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+        <input type="email" class="w-full h-12 px-4 border border-slate-300 rounded-xl" placeholder="john@example.com" required>
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+        <textarea class="w-full h-32 p-4 border border-slate-300 rounded-xl" placeholder="How can we help?" required></textarea>
+    </div>
+    <button type="submit" class="w-full h-12 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">Send Message</button>
+</form>
+
+<h2>Business details</h2>
+<p><strong>Legal entity:</strong> HABACHA<br>
+<strong>Operating from:</strong> The Netherlands<br>
+<strong>Chamber of Commerce (KvK) number:</strong> available on request<br>
+<strong>VAT number:</strong> available on request</p>
+
+<p>For formal notices, court documents, or data subject requests that require written confirmation, please email us at the Legal address above. We will respond from the same address to confirm receipt.</p>
+
             </div>
         </div>
-
-        <script type="module">
-            document.getElementById('contact-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('contact-submit');
-                const status = document.getElementById('contact-status');
-                btn.innerText = 'Sending...';
-                btn.disabled = true;
-                
-                const data = {
-                    name: document.getElementById('contact-name').value,
-                    email: document.getElementById('contact-email').value,
-                    type: document.getElementById('contact-type').value,
-                    subject: document.getElementById('contact-subject').value,
-                    message: document.getElementById('contact-message').value
-                };
-                
-                try {
-                    const res = await fetch('/api/send-contact', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(data)
-                    });
-                    status.className = 'text-center text-green-600 text-sm font-medium mt-2';
-                    status.innerText = 'Message sent successfully! We will respond within 24-48 hours.';
-                    status.classList.remove('hidden');
-                    document.getElementById('contact-form').reset();
-                } catch(err) {
-                    status.className = 'text-center text-red-600 text-sm font-medium mt-2';
-                    status.innerText = 'Something went wrong. Please email us directly.';
-                    status.classList.remove('hidden');
-                }
-                btn.innerText = 'Send Message';
-                btn.disabled = false;
-            });
-        </script>
     </main>
 
     <footer class="relative z-10 py-8 mt-auto">
@@ -136,7 +132,9 @@
                 <a href="faq.html" class="hover:text-white transition">FAQ</a>
                 <a href="contact.html" class="hover:text-white transition">Contact</a>
                 <a href="terms.html" class="hover:text-white transition">Terms</a>
+                <a href="supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
                 <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="cookies.html" class="hover:text-white transition">Cookies</a>
             </div>
         </div>
     </footer>
