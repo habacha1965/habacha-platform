@@ -16,7 +16,9 @@
     </header>
     <main class="flex-grow flex items-center justify-center p-6">
         <div class="max-w-lg w-full">
-            <form id="simple-booking-form" class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+            
+            <!-- FORMULIER (Wordt verborgen als er geen categorie is) -->
+            <form id="simple-booking-form" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold text-slate-900 mb-2">Secure Your Asset</h1>
                     <p class="text-slate-600">Enter your details to generate your unique tracking code and proceed to the supplier.</p>
@@ -39,6 +41,18 @@
                     Generate Code & Continue
                 </button>
             </form>
+
+            <!-- FOUTMELDING (Wordt getoond als er geen categorie is) -->
+            <div id="error-message" class="hidden bg-white p-10 rounded-2xl shadow-xl border border-slate-200 text-center">
+                <div class="w-20 h-20 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Category Required</h2>
+                <p class="text-slate-600 mb-8">Please return to the homepage and select one of our 8 global divisions first.</p>
+                <a href="index.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition">
+                    Return to Homepage
+                </a>
+            </div>
 
             <!-- Success Screen -->
             <div id="success-message" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-green-200 text-center">
@@ -64,88 +78,89 @@
 
         // 1. Bepaal de categorie uit de URL
         const urlParams = new URLSearchParams(window.location.search);
-        const currentCategory = urlParams.get('category') || 'all'; 
+        const currentCategory = urlParams.get('category'); 
 
-        // 2. Bouw de dynamische velden op basis van de categorie
+        const formElement = document.getElementById('simple-booking-form');
+        const errorElement = document.getElementById('error-message');
         const dynamicContainer = document.getElementById('dynamic-fields');
-        let dynamicHTML = '';
 
-        if (currentCategory === 'cars' || currentCategory === 'commercial') {
-            dynamicHTML = `
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Driver's License Type</label>
-                    <select id="dyn-license" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
-                        <option value="B">B (Standard Car)</option>
-                        <option value="C">C (Heavy Truck)</option>
-                        <option value="D">D (Bus)</option>
-                        <option value="none">No license yet</option>
-                    </select>
-                </div>
-            `;
-        } else if (currentCategory === 'maritime') {
-            dynamicHTML = `
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Do you need a professional Skipper?</label>
-                    <select id="dyn-skipper" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
-                        <option value="yes">Yes, I need a skipper</option>
-                        <option value="no">No, I have my own license</option>
-                    </select>
-                </div>
-            `;
-        } else if (currentCategory === 'aviation') {
-            dynamicHTML = `
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Pilot / Charter Type</label>
-                    <select id="dyn-pilot" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
-                        <option value="charter">I need a private charter (with pilot)</option>
-                        <option value="dry">Dry lease (I am the pilot)</option>
-                    </select>
-                </div>
-            `;
-        } else if (currentCategory === 'industrial') {
-            dynamicHTML = `
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Do you need an Operator?</label>
-                    <select id="dyn-operator" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
-                        <option value="yes">Yes, include an operator</option>
-                        <option value="no">No, my team will operate it</option>
-                    </select>
-                </div>
-            `;
-        } else if (currentCategory === 'stays') {
-            dynamicHTML = `
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Number of Guests</label>
-                    <input type="number" id="dyn-guests" min="1" value="1" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
-                </div>
-            `;
+        // 2. Controleer of er een categorie is
+        if (!currentCategory || currentCategory === 'all' || currentCategory === '') {
+            errorElement.classList.remove('hidden');
+        } else {
+            // 3. Categorie is geldig, toon formulier en laad dynamische velden
+            formElement.classList.remove('hidden');
+            
+            let dynamicHTML = '';
+            if (currentCategory === 'cars' || currentCategory === 'commercial') {
+                dynamicHTML = `
+                    <div class="mb-5">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Driver's License Type</label>
+                        <select id="dyn-license" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="B">B (Standard Car)</option>
+                            <option value="C">C (Heavy Truck)</option>
+                            <option value="D">D (Bus)</option>
+                            <option value="none">No license yet</option>
+                        </select>
+                    </div>`;
+            } else if (currentCategory === 'maritime') {
+                dynamicHTML = `
+                    <div class="mb-5">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Do you need a professional Skipper?</label>
+                        <select id="dyn-skipper" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="yes">Yes, I need a skipper</option>
+                            <option value="no">No, I have my own license</option>
+                        </select>
+                    </div>`;
+            } else if (currentCategory === 'aviation') {
+                dynamicHTML = `
+                    <div class="mb-5">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Pilot / Charter Type</label>
+                        <select id="dyn-pilot" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="charter">I need a private charter (with pilot)</option>
+                            <option value="dry">Dry lease (I am the pilot)</option>
+                        </select>
+                    </div>`;
+            } else if (currentCategory === 'industrial') {
+                dynamicHTML = `
+                    <div class="mb-5">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Do you need an Operator?</label>
+                        <select id="dyn-operator" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="yes">Yes, include an operator</option>
+                            <option value="no">No, my team will operate it</option>
+                        </select>
+                    </div>`;
+            } else if (currentCategory === 'stays') {
+                dynamicHTML = `
+                    <div class="mb-5">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Number of Guests</label>
+                        <input type="number" id="dyn-guests" min="1" value="1" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>`;
+            }
+            dynamicContainer.innerHTML = dynamicHTML;
         }
 
-        dynamicContainer.innerHTML = dynamicHTML;
-
-        // 3. Formulier verzenden
-        document.getElementById('simple-booking-form').addEventListener('submit', async (e) => {
+        // 4. Formulier verzenden
+        formElement.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
+            
             btn.innerText = 'Processing...';
             btn.disabled = true;
 
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             
-            // Verzamel dynamische data
-            const details = {};
+            const details = { category: currentCategory };
             if (document.getElementById('dyn-license')) details.license = document.getElementById('dyn-license').value;
             if (document.getElementById('dyn-skipper')) details.skipper = document.getElementById('dyn-skipper').value;
             if (document.getElementById('dyn-pilot')) details.pilot = document.getElementById('dyn-pilot').value;
             if (document.getElementById('dyn-operator')) details.operator = document.getElementById('dyn-operator').value;
             if (document.getElementById('dyn-guests')) details.guests = document.getElementById('dyn-guests').value;
-            details.category = currentCategory;
 
             const randomStr = Math.random().toString(36).substring(2, 12).toUpperCase();
             const refCode = `HB-${randomStr}`;
 
-            // Opslaan in Supabase
             const { error } = await supabase
                 .from('referrals')
                 .insert([{ reference_code: refCode, client_name: name, client_email: email, details: details }]);
@@ -157,7 +172,6 @@
                 return;
             }
 
-            // Zoek aanbieder
             let redirectUrl = `https://example.com/supplier?ref=${refCode}`; 
             const { data: supplier } = await supabase
                 .from('suppliers')
@@ -170,7 +184,6 @@
                 redirectUrl = `${supplier.contract_link}${refCode}`;
             }
 
-            // E-mails sturen
             try {
                 await fetch('https://habacha-platform.vercel.app/api/send-referral', {
                     method: 'POST',
@@ -179,8 +192,7 @@
                 });
             } catch (err) { console.log('Email API error', err); }
 
-            // Toon succes
-            document.getElementById('simple-booking-form').classList.add('hidden');
+            formElement.classList.add('hidden');
             document.getElementById('success-message').classList.remove('hidden');
             document.getElementById('ref-code').innerText = refCode;
             setTimeout(() => { document.getElementById('progress-bar').style.width = '100%'; }, 100);
