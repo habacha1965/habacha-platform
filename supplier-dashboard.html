@@ -85,7 +85,7 @@
         </main>
     </div>
 
-    <script type="module">
+        <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
@@ -113,26 +113,45 @@
             if (!email) return;
 
             loginError.classList.add('hidden');
+            loginBtn.innerText = 'Verifying...';
+            loginBtn.disabled = true;
 
-            const { data, error } = await supabase
-                .from('suppliers')
-                .select('*')
-                .eq('contact_email', email)
-                .limit(1);
+            const { data, error } = await supabase.from('suppliers').select('*');
 
-            if (error || !data || data.length === 0) {
-                loginError.innerText = "DEBUG: Email not found. Data: " + JSON.stringify(data) + " | Error: " + JSON.stringify(error);
+            loginBtn.innerText = 'Access Dashboard';
+            loginBtn.disabled = false;
+
+            if (error) {
+                loginError.innerText = "System Error: " + error.message;
                 loginError.classList.remove('hidden');
                 return;
             }
 
-            if (data[0].status !== 'Approved') {
+            const cleanedInput = email.toLowerCase().replace(/[^a-z0-9]/g, '');
+            let foundSupplier = data.find(sup => sup.contact_email.trim().toLowerCase() === email.toLowerCase());
+
+            if (!foundSupplier) {
+                foundSupplier = data.find(sup => {
+                    const cleanedDb = sup.contact_email.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    if (cleanedDb.length < 20) return cleanedDb === cleanedInput;
+                    return cleanedDb.substring(0, 8) === cleanedInput.substring(0, 8) 
+                        && cleanedDb.substring(cleanedDb.length - 10) === cleanedInput.substring(cleanedInput.length - 10);
+                });
+            }
+
+            if (!foundSupplier) {
+                loginError.innerText = "Email not found. Please check your email or register first.";
+                loginError.classList.remove('hidden');
+                return;
+            }
+
+            if (foundSupplier.status !== 'Approved') {
                 loginError.innerText = "Your account is pending approval by HABACHA.";
                 loginError.classList.remove('hidden');
                 return;
             }
 
-            currentSupplier = data[0];
+            currentSupplier = foundSupplier;
             sessionStorage.setItem('supplierData', JSON.stringify(currentSupplier));
             
             loginScreen.classList.add('hidden');
@@ -151,16 +170,22 @@
             document.getElementById('contract-link').innerText = currentSupplier.contract_link;
             document.getElementById('contract-link').href = currentSupplier.contract_link;
 
-            const { data: leads, error } = await supabase
+            // Haal ALLE leads op
+            const { data: allLeads, error } = await supabase
                 .from('referrals')
                 .select('*')
-                .eq('details->>category', currentSupplier.category)
                 .order('created_at', { ascending: false });
 
             if (error) {
                 console.error(error);
                 return;
             }
+
+            // Filter in de browser (case-insensitive)
+            const leads = allLeads.filter(lead => {
+                if (!lead.details || !lead.details.category) return false;
+                return lead.details.category.toLowerCase() === currentSupplier.category.toLowerCase();
+            });
 
             document.getElementById('total-leads').innerText = leads.length;
             document.getElementById('pending-leads').innerText = leads.filter(l => l.status !== 'Booked').length;
