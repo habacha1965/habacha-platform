@@ -7,6 +7,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
+
+    <!-- Google Translate Automatische Vertaling -->
+    <style>
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+    </style>
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </head>
 <body class="bg-slate-100 text-slate-900 min-h-screen">
 
@@ -94,12 +108,12 @@
     <!-- MODAL VOOR REDEN (Voorkomt dat de browser de pop-up blokkeert) -->
     <div id="reason-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl">
-            <h3 class="text-xl font-bold mb-2" id="modal-title">Reden vereist</h3>
-            <p class="text-slate-500 text-sm mb-4" id="modal-desc">Geef een reden op. Deze wordt per e-mail naar de aanbieder verzonden.</p>
-            <textarea id="modal-reason" class="w-full h-24 p-3 border border-slate-300 rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Typ hier de reden..."></textarea>
+            <h3 class="text-xl font-bold mb-2" id="modal-title">Reason Required</h3>
+            <p class="text-slate-500 text-sm mb-4" id="modal-desc">Provide a reason. This will be emailed to the supplier.</p>
+            <textarea id="modal-reason" class="w-full h-24 p-3 border border-slate-300 rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Type the reason here..."></textarea>
             <div class="flex justify-end gap-3">
-                <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200">Annuleren</button>
-                <button id="modal-submit" class="px-4 py-2 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800">Bevestig & Mail</button>
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200">Cancel</button>
+                <button id="modal-submit" class="px-4 py-2 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800">Confirm & Mail</button>
             </div>
         </div>
     </div>
@@ -253,7 +267,7 @@
         document.getElementById('modal-submit').addEventListener('click', async () => {
             if (!pendingAction) return;
             const reason = document.getElementById('modal-reason').value.trim();
-            if (reason === '') { alert('Je moet een reden opgeven.'); return; }
+            if (reason === '') { alert('You must provide a reason.'); return; }
 
             const btn = document.getElementById('modal-submit');
             btn.innerText = 'Processing...';

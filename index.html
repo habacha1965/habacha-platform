@@ -32,6 +32,20 @@
         .mlink { @apply block py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border-b border-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500; }
         .flink { @apply hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm; }
     </style>
+
+    <!-- Google Translate Automatische Vertaling -->
+    <style>
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+    </style>
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
