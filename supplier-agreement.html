@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +8,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+<body class="bg-slate-900 text-slate-900 min-h-screen flex flex-col relative overflow-x-hidden">
+    <!-- Premium Achtergrond -->
+    <div class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 opacity-95 -z-10"></div>
+    <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
+
     <!-- Header -->
-    <header class="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+    <header class="relative z-10 py-4 px-6 flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-2">
-            <div class="bg-blue-600 text-white p-1.5 rounded-lg">
+            <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
-            <span class="font-bold text-xl text-slate-900 tracking-wider">HABACHA</span>
+            <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
         </a>
-        <a href="index.html" class="text-sm font-semibold text-blue-600 hover:underline">&larr; Return to Homepage</a>
+        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-4xl mx-auto px-6 py-16 w-full">
-        <h1 class="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Supplier Agreement</h1>
-        <p class="text-sm text-slate-500 mb-12">Last updated: October 2026</p>
-        
-        <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+    <main class="relative z-10 flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
+        <div class="bg-white/95 backdrop-blur-sm p-10 md:p-14 rounded-3xl shadow-2xl border border-white/20">
+            <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Supplier Agreement</h1>
+            <p class="text-sm text-slate-500 mb-10 pb-6 border-b border-slate-200">Last updated: October 2026</p>
             
+            <div class="text-slate-600 leading-relaxed space-y-6">
+                
 <h3 class="text-xl font-bold text-slate-900 mb-2">1. Onboarding & Approval</h3>
 <p>All suppliers must register with accurate company details and a unique contract link. HABACHA reserves the right to vet and approve all suppliers to maintain platform quality.</p>
 
@@ -39,17 +44,20 @@
 <h3 class="text-xl font-bold text-slate-900 mt-6 mb-2">4. Contract Links</h3>
 <p>Suppliers must provide a valid, secure booking URL. HABACHA is not responsible for broken links or technical errors on the supplier's website.</p>
 
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-8 mt-auto">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+    <footer class="relative z-10 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
             <p>&copy; 2026 HABACHA. All rights reserved.</p>
-            <div class="flex gap-6">
-                <a href="terms.html" class="hover:text-blue-600">Terms of Service</a>
-                <a href="privacy.html" class="hover:text-blue-600">Privacy Policy</a>
-                <a href="cookies.html" class="hover:text-blue-600">Cookie Policy</a>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="about.html" class="hover:text-white transition">About</a>
+                <a href="terms.html" class="hover:text-white transition">Terms of Service</a>
+                <a href="supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
+                <a href="privacy.html" class="hover:text-white transition">Privacy Policy</a>
+                <a href="cookies.html" class="hover:text-white transition">Cookie Policy</a>
             </div>
         </div>
     </footer>
