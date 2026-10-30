@@ -7,20 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
-
-    <!-- Google Translate Automatische Vertaling -->
-    <style>
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-    </style>
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element');
-    }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
     <header class="bg-white border-b border-slate-200 w-full py-4 px-6 flex justify-between items-center">
@@ -35,19 +21,26 @@
                     <h1 class="text-3xl font-bold text-slate-900 mb-2">Secure Your Asset</h1>
                     <p class="text-slate-600">Enter your details to generate your unique tracking code and proceed to the supplier.</p>
                 </div>
+                
                 <div class="mb-5">
                     <label for="clientName" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
                     <input type="text" id="clientName" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="John Doe">
                 </div>
-                <div class="mb-8">
+
+                <div class="mb-5">
                     <label for="clientEmail" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
                     <input type="email" id="clientEmail" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="john@example.com">
                 </div>
+
+                <!-- DYNAMISCHE VELDEN KOMEN HIER -->
+                <div id="dynamic-fields" class="mb-8"></div>
+
                 <button type="submit" id="submitBtn" class="w-full h-12 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg flex items-center justify-center">
                     Generate Code & Continue
                 </button>
             </form>
 
+            <!-- Success Screen -->
             <div id="success-message" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-green-200 text-center">
                 <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
@@ -62,18 +55,75 @@
         </div>
     </main>
 
-    
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5'; // Wordt automatisch vervangen
+        const supabaseKey = 'JOUW_KEY_HIER';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Haal de categorie uit de URL (bijv. ?category=maritime)
+        // 1. Bepaal de categorie uit de URL
         const urlParams = new URLSearchParams(window.location.search);
-        const currentCategory = urlParams.get('category') || 'cars'; 
+        const currentCategory = urlParams.get('category') || 'all'; 
 
+        // 2. Bouw de dynamische velden op basis van de categorie
+        const dynamicContainer = document.getElementById('dynamic-fields');
+        let dynamicHTML = '';
+
+        if (currentCategory === 'cars' || currentCategory === 'commercial') {
+            dynamicHTML = `
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Driver's License Type</label>
+                    <select id="dyn-license" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        <option value="B">B (Standard Car)</option>
+                        <option value="C">C (Heavy Truck)</option>
+                        <option value="D">D (Bus)</option>
+                        <option value="none">No license yet</option>
+                    </select>
+                </div>
+            `;
+        } else if (currentCategory === 'maritime') {
+            dynamicHTML = `
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Do you need a professional Skipper?</label>
+                    <select id="dyn-skipper" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        <option value="yes">Yes, I need a skipper</option>
+                        <option value="no">No, I have my own license</option>
+                    </select>
+                </div>
+            `;
+        } else if (currentCategory === 'aviation') {
+            dynamicHTML = `
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Pilot / Charter Type</label>
+                    <select id="dyn-pilot" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        <option value="charter">I need a private charter (with pilot)</option>
+                        <option value="dry">Dry lease (I am the pilot)</option>
+                    </select>
+                </div>
+            `;
+        } else if (currentCategory === 'industrial') {
+            dynamicHTML = `
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Do you need an Operator?</label>
+                    <select id="dyn-operator" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        <option value="yes">Yes, include an operator</option>
+                        <option value="no">No, my team will operate it</option>
+                    </select>
+                </div>
+            `;
+        } else if (currentCategory === 'stays') {
+            dynamicHTML = `
+                <div class="mb-5">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Number of Guests</label>
+                    <input type="number" id="dyn-guests" min="1" value="1" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                </div>
+            `;
+        }
+
+        dynamicContainer.innerHTML = dynamicHTML;
+
+        // 3. Formulier verzenden
         document.getElementById('simple-booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -83,13 +133,22 @@
             const name = document.getElementById('clientName').value;
             const email = document.getElementById('clientEmail').value;
             
+            // Verzamel dynamische data
+            const details = {};
+            if (document.getElementById('dyn-license')) details.license = document.getElementById('dyn-license').value;
+            if (document.getElementById('dyn-skipper')) details.skipper = document.getElementById('dyn-skipper').value;
+            if (document.getElementById('dyn-pilot')) details.pilot = document.getElementById('dyn-pilot').value;
+            if (document.getElementById('dyn-operator')) details.operator = document.getElementById('dyn-operator').value;
+            if (document.getElementById('dyn-guests')) details.guests = document.getElementById('dyn-guests').value;
+            details.category = currentCategory;
+
             const randomStr = Math.random().toString(36).substring(2, 12).toUpperCase();
             const refCode = `HB-${randomStr}`;
 
-            // 1. Opslaan in Supabase
+            // Opslaan in Supabase
             const { error } = await supabase
                 .from('referrals')
-                .insert([{ reference_code: refCode, client_name: name, client_email: email }]);
+                .insert([{ reference_code: refCode, client_name: name, client_email: email, details: details }]);
 
             if (error) {
                 alert('Database Error: ' + error.message);
@@ -98,8 +157,8 @@
                 return;
             }
 
-            // 2. Zoek de aanbieder voor deze categorie
-            let redirectUrl = `https://example.com/supplier?ref=${refCode}`; // Fallback
+            // Zoek aanbieder
+            let redirectUrl = `https://example.com/supplier?ref=${refCode}`; 
             const { data: supplier } = await supabase
                 .from('suppliers')
                 .select('contract_link')
@@ -108,35 +167,25 @@
                 .single();
 
             if (supplier && supplier.contract_link) {
-                // Plak de HB-code achter de unieke link van de aanbieder
                 redirectUrl = `${supplier.contract_link}${refCode}`;
             }
 
-            // 3. E-mails sturen via API
+            // E-mails sturen
             try {
                 await fetch('https://habacha-platform.vercel.app/api/send-referral', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ clientName: name, clientEmail: email, refCode: refCode })
                 });
-            } catch (err) {
-                console.log('Email API error', err);
-            }
+            } catch (err) { console.log('Email API error', err); }
 
-            // 4. Toon succes scherm en start redirect
+            // Toon succes
             document.getElementById('simple-booking-form').classList.add('hidden');
             document.getElementById('success-message').classList.remove('hidden');
             document.getElementById('ref-code').innerText = refCode;
-            
-            setTimeout(() => {
-                document.getElementById('progress-bar').style.width = '100%';
-            }, 100);
-
-            setTimeout(() => {
-                window.location.href = redirectUrl;
-            }, 3000);
+            setTimeout(() => { document.getElementById('progress-bar').style.width = '100%'; }, 100);
+            setTimeout(() => { window.location.href = redirectUrl; }, 3000);
         });
     </script>
-
 </body>
 </html>
