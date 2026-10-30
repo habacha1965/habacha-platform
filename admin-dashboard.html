@@ -244,16 +244,16 @@
 
         // --- CUSTOM MODAL ACTIES ---
         window.updateSupplier = (id, newStatus, email, company) => {
-            document.getElementById('modal-title').innerText = newStatus === 'Approved' ? 'Aanbieder Goedkeuren' : 'Aanbieder Afwijzen';
-            document.getElementById('modal-desc').innerText = `Geef een reden voor het ${newStatus === 'Approved' ? 'goedkeuren' : 'afwijzen'} van ${company}. Dit wordt gemaild.`;
+            document.getElementById('modal-title').innerText = newStatus === 'Approved' ? 'Approve Supplier' : 'Reject Supplier';
+            document.getElementById('modal-desc').innerText = `Provide a reason for ${newStatus === 'Approved' ? 'approving' : 'rejecting'} ${company}. This will be emailed.`;
             document.getElementById('modal-reason').value = '';
             pendingAction = { type: 'update', id, newStatus, email, company };
             document.getElementById('reason-modal').classList.remove('hidden');
         };
 
         window.deleteSupplier = (id, email, company) => {
-            document.getElementById('modal-title').innerText = 'Samenwerking Beëindigen';
-            document.getElementById('modal-desc').innerText = `Geef een reden voor het verwijderen van ${company}. Dit wordt gemaild.`;
+            document.getElementById('modal-title').innerText = 'Terminate Partnership';
+            document.getElementById('modal-desc').innerText = `Provide a reason for deleting ${company}. This will be emailed.`;
             document.getElementById('modal-reason').value = '';
             pendingAction = { type: 'delete', id, email, company };
             document.getElementById('reason-modal').classList.remove('hidden');
