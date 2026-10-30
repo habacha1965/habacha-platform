@@ -29,32 +29,39 @@
         <header class="bg-slate-900 text-white py-4 px-8 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
                 <span class="font-bold text-xl tracking-wider text-white">HABACHA</span>
-                <span class="px-2 py-1 bg-blue-600 text-xs font-bold rounded uppercase tracking-wide">Admin</span>
+                <span class="px-2 py-1 bg-blue-600 text-xs font-bold rounded uppercase tracking-wide">Admin Command Center</span>
             </div>
             <button id="logout-btn" class="text-sm font-semibold text-slate-300 hover:text-white transition">Log Out</button>
         </header>
 
         <main class="max-w-7xl mx-auto px-6 py-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <!-- STATS -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Client Leads</p>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Client Leads</p>
                     <p id="total-leads" class="text-4xl font-bold text-slate-900">0</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">Registered Suppliers</p>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Registered Suppliers</p>
                     <p id="total-suppliers" class="text-4xl font-bold text-blue-600">0</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">Founding Discounts Used</p>
-                    <p id="total-discounts" class="text-4xl font-bold text-green-600">0</p>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Est. Revenue (15%)</p>
+                    <p id="total-revenue" class="text-4xl font-bold text-green-600">€0</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Pending Approvals</p>
+                    <p id="total-pending" class="text-4xl font-bold text-yellow-600">0</p>
                 </div>
             </div>
 
+            <!-- TABS -->
             <div class="flex gap-4 mb-6 border-b border-slate-200">
                 <button id="tab-leads" class="px-4 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">Client Leads (HB Codes)</button>
-                <button id="tab-suppliers" class="px-4 py-3 font-semibold text-slate-500 hover:text-slate-800">Registered Suppliers</button>
+                <button id="tab-suppliers" class="px-4 py-3 font-semibold text-slate-500 hover:text-slate-800">Manage Suppliers</button>
             </div>
 
+            <!-- LEADS TABLE -->
             <div id="table-leads" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-50 border-b border-slate-200">
@@ -70,15 +77,16 @@
                 </table>
             </div>
 
+            <!-- SUPPLIERS TABLE -->
             <div id="table-suppliers" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hidden">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-50 border-b border-slate-200">
                         <tr>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Date</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Company</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Email</th>
+                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Company & Details</th>
                             <th class="py-4 px-6 text-sm font-semibold text-slate-600">Division</th>
                             <th class="py-4 px-6 text-sm font-semibold text-slate-600">Contract Link</th>
+                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Status</th>
+                            <th class="py-4 px-6 text-sm font-semibold text-slate-600 text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="suppliers-body" class="divide-y divide-slate-100"></tbody>
@@ -87,15 +95,17 @@
         </main>
     </div>
 
+    <!-- SUPABASE LOGICA -->
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
+        const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5'; // Wordt hieronder vervangen
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         const ADMIN_PIN = 'HABACHA2026'; 
 
+        // --- LOGIN LOGICA ---
         const loginScreen = document.getElementById('login-screen');
         const dashboardScreen = document.getElementById('dashboard-screen');
         const loginBtn = document.getElementById('login-btn');
@@ -124,6 +134,7 @@
             window.location.reload();
         });
 
+        // --- TABS LOGICA ---
         const tabLeads = document.getElementById('tab-leads');
         const tabSuppliers = document.getElementById('tab-suppliers');
         const tableLeads = document.getElementById('table-leads');
@@ -147,7 +158,9 @@
             tableLeads.classList.add('hidden');
         });
 
+        // --- DATA LADEN ---
         async function loadData() {
+            // 1. Laad Leads
             const { data: leads, error: leadsError } = await supabase
                 .from('referrals')
                 .select('*')
@@ -155,10 +168,14 @@
 
             if (!leadsError && leads) {
                 document.getElementById('total-leads').innerText = leads.length;
+                // Geschatte omzet (15% van een fictief gemiddelde van €500 per lead)
+                const estimatedRevenue = leads.length * 500 * 0.15;
+                document.getElementById('total-revenue').innerText = '€' + estimatedRevenue.toLocaleString('nl-NL');
+                
                 const tbody = document.getElementById('leads-body');
                 tbody.innerHTML = '';
                 leads.forEach(lead => {
-                    const date = new Date(lead.created_at).toLocaleDateString();
+                    const date = new Date(lead.created_at).toLocaleDateString('nl-NL');
                     tbody.innerHTML += `
                         <tr class="hover:bg-slate-50">
                             <td class="py-4 px-6 text-sm text-slate-500">${date}</td>
@@ -171,6 +188,7 @@
                 });
             }
 
+            // 2. Laad Aanbieders
             const { data: suppliers, error: supError } = await supabase
                 .from('suppliers')
                 .select('*')
@@ -178,22 +196,56 @@
 
             if (!supError && suppliers) {
                 document.getElementById('total-suppliers').innerText = suppliers.length;
+                
+                const pendingCount = suppliers.filter(s => !s.status || s.status === 'Pending').length;
+                document.getElementById('total-pending').innerText = pendingCount;
+
                 const tbody = document.getElementById('suppliers-body');
                 tbody.innerHTML = '';
                 suppliers.forEach(sup => {
-                    const date = new Date(sup.created_at).toLocaleDateString();
+                    const isPending = !sup.status || sup.status === 'Pending';
+                    const isApproved = sup.status === 'Approved';
+                    
+                    let statusBadge = `<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded uppercase">Pending</span>`;
+                    if (isApproved) statusBadge = `<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded uppercase">Approved</span>`;
+                    if (sup.status === 'Rejected') statusBadge = `<span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded uppercase">Rejected</span>`;
+
                     tbody.innerHTML += `
                         <tr class="hover:bg-slate-50">
-                            <td class="py-4 px-6 text-sm text-slate-500">${date}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-slate-900">${sup.company_name}</td>
-                            <td class="py-4 px-6 text-sm text-slate-500">${sup.contact_email}</td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium text-slate-900">${sup.company_name}</div>
+                                <div class="text-sm text-slate-500">${sup.contact_email}</div>
+                            </td>
                             <td class="py-4 px-6"><span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded uppercase">${sup.category}</span></td>
                             <td class="py-4 px-6 text-sm text-blue-500 truncate max-w-xs"><a href="${sup.contract_link}" target="_blank">${sup.contract_link}</a></td>
+                            <td class="py-4 px-6">${statusBadge}</td>
+                            <td class="py-4 px-6 text-right flex justify-end gap-2">
+                                ${isPending ? `
+                                    <button onclick="updateSupplier('${sup.id}', 'Approved')" class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded hover:bg-green-700">Approve</button>
+                                    <button onclick="updateSupplier('${sup.id}', 'Rejected')" class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded hover:bg-yellow-600">Reject</button>
+                                ` : ''}
+                                <button onclick="deleteSupplier('${sup.id}')" class="px-3 py-1 bg-red-100 text-red-600 text-xs font-bold rounded hover:bg-red-200">Delete</button>
+                            </td>
                         </tr>
                     `;
                 });
             }
         }
+
+        // --- ACTIES ---
+        window.updateSupplier = async (id, newStatus) => {
+            if (!confirm(`Weet je zeker dat je deze aanbieder wilt markeren als: ${newStatus}?`)) return;
+            const { error } = await supabase.from('suppliers').update({ status: newStatus }).eq('id', id);
+            if (error) alert('Error: ' + error.message);
+            else loadData();
+        };
+
+        window.deleteSupplier = async (id) => {
+            if (!confirm('Weet je ZEKER dat je deze aanbieder definitief wilt verwijderen? Dit kan niet ongedaan worden gemaakt.')) return;
+            const { error } = await supabase.from('suppliers').delete().eq('id', id);
+            if (error) alert('Error: ' + error.message);
+            else loadData();
+        };
     </script>
 </body>
 </html>
