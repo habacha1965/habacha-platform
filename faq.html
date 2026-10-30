@@ -16,8 +16,9 @@
         .legal ul { list-style: disc; }
         .legal ol { list-style: decimal; }
         .legal li { margin-bottom: 0.5rem; }
-        .legal a { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; }
-        .legal a:hover { color: #1d4ed8; }
+        .legal p a, .legal li a, .legal td a, .legal .info a, .legal .callout a { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+        .legal p a:hover, .legal li a:hover, .legal td a:hover { color: #1d4ed8; }
+        .legal .cta-block a { text-decoration: none !important; }
         .legal strong { color: #0f172a; font-weight: 600; }
         .legal code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875rem; color: #0f172a; }
         .legal table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.875rem; }
@@ -68,120 +69,120 @@
 
 <div class="mt-8 space-y-3">
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What exactly is HABACHA?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">HABACHA is an intermediary platform. We receive a rental or lease request from a client, generate a unique tracking code (HB-Code), and route the request to a vetted supplier in one of our eight divisions. We do not own the assets, set the prices, or handle payments. The contract is between you and the supplier.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>Does it cost anything to submit a request?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">No. Submitting a request and receiving an HB-Code is completely free for clients. HABACHA earns a commission from the supplier when a referred deal is confirmed. You only pay the supplier directly for the asset you rent or lease.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>Do I need an account?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">No. Clients provide a name and email address and receive an HB-Code immediately. There is no password, no profile, and no account to maintain. Only suppliers (fleet operators) and administrators have login credentials.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What is an HB-Code and why does it matter?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">An HB-Code is a unique 10-character tracking code (example: HB-8F3K9A2B7X). It is generated for your specific request and sent to your email address. It is the sole proof that HABACHA referred you to the supplier. Keep it — you will need it if you contact the supplier or HABACHA about the booking.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What happens after I receive my HB-Code?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">You are automatically redirected to the supplier's booking page with your HB-Code attached to the URL. From that point onwards, the rental or lease is governed entirely by the supplier's terms and conditions. You will complete the booking directly with the supplier.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>Who is responsible if something goes wrong with the rental?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">The supplier. HABACHA does not own the asset, does not sign the rental contract, and is not a party to any dispute. Damage, delays, cancellations, insurance claims, and licensing requirements are all handled between you and the supplier. HABACHA's role is to make the initial referral — nothing beyond that.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>How do I become a supplier on HABACHA?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">Register through the supplier registration page. Provide your company name, contact email, a password, your division, your website URL, and a unique contract link. Our team reviews each application manually. Approval usually takes 24 to 48 hours on business days, but may take longer during the founding phase.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What commission does HABACHA charge suppliers?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">Commission is tiered by division: Cars &amp; Vans 8%, Commercial Freight 10%, Boats &amp; Yachts 15%, Helicopters &amp; Aircraft 15%, Stays &amp; Real Estate 12%, Construction Machinery 12%, Campers &amp; RVs 10%, Event &amp; AV Equipment 15%. Founding suppliers pay 50% of these rates for the first 12 months.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>When and how does HABACHA invoice the commission?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">HABACHA issues a consolidated invoice at the end of each calendar month, based on the leads the supplier has marked as "Booked" during that month. The invoice specifies the HB-Codes, the reported transaction values, and the applicable commission. Payment is due within 14 days of the invoice date.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What happens if a supplier refuses to pay the commission?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">HABACHA may suspend the supplier's portal access, terminate the supplier agreement, and pursue the outstanding amount through the Dutch courts under the terms of the Supplier Agreement. The supplier is also liable for reasonable recovery costs.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>Can a supplier ask a client to bypass HABACHA?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">No. Any attempt by a supplier to contact a client outside the platform and to avoid the commission is a breach of the Supplier Agreement. It is treated as fraud. HABACHA may terminate the account immediately, invoice the full commission, and take legal action where necessary.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What data does HABACHA store about me?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">For clients: your name, email address, the request details, and the HB-Code. For suppliers: company name, contact email, a hashed password, division, website URL, and contract link. Full details, retention periods, and your rights are described in the <a href="/privacy.html">Privacy Policy</a>.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What if I forgot my supplier password?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">Use the "Forgot password?" link on the supplier login page. A reset link is sent to your registered email address and is valid for 1 hour. If your email address is no longer accessible, use the <a href="/contact.html">contact form</a>.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>What happens if the supplier's website is down when I am redirected?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-5 pb-5 text-slate-600">Your HB-Code remains valid. Try the supplier's website again later, or contact the supplier directly with your HB-Code. If the supplier cannot be reached for more than 5 business days, use the <a href="/contact.html">contact form</a> and we will follow up on the referral.</div>
 </details>
 
-<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+<details class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
         <span>Which countries does HABACHA operate in?</span>
         <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </summary>
