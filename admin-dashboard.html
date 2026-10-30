@@ -7,24 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
-
-    <!-- Google Translate Automatische Vertaling -->
-    <style>
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-    </style>
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element');
-    }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </head>
 <body class="bg-slate-100 text-slate-900 min-h-screen">
 
-    <!-- LOGIN -->
+    <!-- LOGIN SCHERM -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
         <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -38,7 +24,7 @@
         </div>
     </div>
 
-    <!-- DASHBOARD -->
+    <!-- DASHBOARD SCHERM -->
     <div id="dashboard-screen" class="hidden">
         <header class="bg-slate-900 text-white py-4 px-8 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
@@ -49,6 +35,7 @@
         </header>
 
         <main class="max-w-7xl mx-auto px-6 py-10">
+            <!-- STATS -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Client Leads</p>
@@ -68,44 +55,52 @@
                 </div>
             </div>
 
+            <!-- TABS -->
             <div class="flex gap-4 mb-6 border-b border-slate-200">
                 <button id="tab-leads" class="px-4 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">Client Leads (HB Codes)</button>
                 <button id="tab-suppliers" class="px-4 py-3 font-semibold text-slate-500 hover:text-slate-800">Manage Suppliers</button>
             </div>
 
+            <!-- LEADS TABLE -->
             <div id="table-leads" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-50 border-b border-slate-200">
-                        <tr>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Date</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Tracking Code</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Client Name</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Client Email</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leads-body" class="divide-y divide-slate-100"></tbody>
-                </table>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Date</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Tracking Code</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Client Name</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600">Request Details</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Client Email</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-body" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
             </div>
 
+            <!-- SUPPLIERS TABLE -->
             <div id="table-suppliers" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hidden">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-50 border-b border-slate-200">
-                        <tr>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Company & Details</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Division</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Contract Link</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600">Status</th>
-                            <th class="py-4 px-6 text-sm font-semibold text-slate-600 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="suppliers-body" class="divide-y divide-slate-100"></tbody>
-                </table>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600">Company & Details</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Division</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600">Contract Link</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 whitespace-nowrap">Status</th>
+                                <th class="py-4 px-6 text-sm font-semibold text-slate-600 text-right whitespace-nowrap">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="suppliers-body" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- MODAL VOOR REDEN (Voorkomt dat de browser de pop-up blokkeert) -->
+    <!-- MODAL VOOR REDEN -->
     <div id="reason-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl">
             <h3 class="text-xl font-bold mb-2" id="modal-title">Reason Required</h3>
@@ -118,11 +113,12 @@
         </div>
     </div>
 
+    <!-- SUPABASE LOGICA -->
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
         const supabaseUrl = 'https://fwiyrtchfbjpwrbvzynb.supabase.co';
-        const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
+        const supabaseKey = 'JOUW_KEY_HIER';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
         const ADMIN_PIN = 'HABACHA2026';
@@ -183,30 +179,55 @@
 
         // --- LOAD DATA ---
         async function loadData() {
-            const { data: leads, error: leadsError } = await supabase.from('referrals').select('*').order('created_at', { ascending: false });
+            // 1. Laad Leads
+            const { data: leads, error: leadsError } = await supabase
+                .from('referrals')
+                .select('*')
+                .order('created_at', { ascending: false });
+
             if (!leadsError && leads) {
                 document.getElementById('total-leads').innerText = leads.length;
                 const estimatedRevenue = leads.length * 500 * 0.15;
-                document.getElementById('total-revenue').innerText = '€' + estimatedRevenue.toLocaleString('nl-NL');
+                document.getElementById('total-revenue').innerText = '€' + estimatedRevenue.toLocaleString('en-US');
+                
                 const tbody = document.getElementById('leads-body');
                 tbody.innerHTML = '';
                 leads.forEach(lead => {
-                    const date = new Date(lead.created_at).toLocaleDateString('nl-NL');
+                    const date = new Date(lead.created_at).toLocaleDateString('en-GB');
+                    
+                    // Formatteer dynamische details
+                    let detailsHTML = '<span class="text-xs text-slate-400">-</span>';
+                    if (lead.details && Object.keys(lead.details).length > 0) {
+                        detailsHTML = Object.entries(lead.details)
+                            .filter(([key]) => key !== 'category') 
+                            .map(([key, value]) => `<span class="block text-xs text-slate-600 capitalize"><strong>${key}:</strong> ${value}</span>`)
+                            .join('');
+                    }
+
                     tbody.innerHTML += `
                         <tr class="hover:bg-slate-50">
-                            <td class="py-4 px-6 text-sm text-slate-500">${date}</td>
+                            <td class="py-4 px-6 text-sm text-slate-500 whitespace-nowrap">${date}</td>
                             <td class="py-4 px-6"><span class="px-2 py-1 bg-blue-100 text-blue-700 font-mono font-bold text-sm rounded">${lead.reference_code}</span></td>
-                            <td class="py-4 px-6 text-sm font-medium text-slate-900">${lead.client_name}</td>
+                            <td class="py-4 px-6 text-sm font-medium text-slate-900 whitespace-nowrap">${lead.client_name}</td>
+                            <td class="py-4 px-6 min-w-[200px]">${detailsHTML}</td>
                             <td class="py-4 px-6 text-sm text-slate-500">${lead.client_email}</td>
                             <td class="py-4 px-6"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded uppercase">${lead.status || 'Pending'}</span></td>
-                        </tr>`;
+                        </tr>
+                    `;
                 });
             }
 
-            const { data: suppliers, error: supError } = await supabase.from('suppliers').select('*').order('created_at', { ascending: false });
+            // 2. Laad Suppliers
+            const { data: suppliers, error: supError } = await supabase
+                .from('suppliers')
+                .select('*')
+                .order('created_at', { ascending: false });
+
             if (!supError && suppliers) {
                 document.getElementById('total-suppliers').innerText = suppliers.length;
-                document.getElementById('total-pending').innerText = suppliers.filter(s => !s.status || s.status === 'Pending').length;
+                const pendingCount = suppliers.filter(s => !s.status || s.status === 'Pending').length;
+                document.getElementById('total-pending').innerText = pendingCount;
+
                 const tbody = document.getElementById('suppliers-body');
                 tbody.innerHTML = '';
                 suppliers.forEach(sup => {
@@ -235,14 +256,15 @@
                             </td>
                             <td class="py-4 px-6"><span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded uppercase">${sup.category}</span></td>
                             <td class="py-4 px-6 text-sm text-blue-500 truncate max-w-xs"><a href="${sup.contract_link}" target="_blank">${sup.contract_link}</a></td>
-                            <td class="py-4 px-6">${statusBadge}</td>
-                            <td class="py-4 px-6 text-right flex justify-end gap-2">${actionButtons}</td>
-                        </tr>`;
+                            <td class="py-4 px-6 whitespace-nowrap">${statusBadge}</td>
+                            <td class="py-4 px-6 text-right flex justify-end gap-2 whitespace-nowrap">${actionButtons}</td>
+                        </tr>
+                    `;
                 });
             }
         }
 
-        // --- CUSTOM MODAL ACTIES ---
+        // --- ACTIONS ---
         window.updateSupplier = (id, newStatus, email, company) => {
             document.getElementById('modal-title').innerText = newStatus === 'Approved' ? 'Approve Supplier' : 'Reject Supplier';
             document.getElementById('modal-desc').innerText = `Provide a reason for ${newStatus === 'Approved' ? 'approving' : 'rejecting'} ${company}. This will be emailed.`;
@@ -275,7 +297,7 @@
 
             const { type, id, newStatus, email, company } = pendingAction;
 
-            // 1. Mail sturen
+            // 1. Stuur e-mail via API
             try {
                 await fetch('https://habacha-platform.vercel.app/api/send-status-email', {
                     method: 'POST',
@@ -284,7 +306,7 @@
                 });
             } catch (err) { console.log('Email API error', err); }
 
-            // 2. Database updaten
+            // 2. Update database
             let error;
             if (type === 'update') {
                 const res = await supabase.from('suppliers').update({ status: newStatus }).eq('id', id);
@@ -294,12 +316,12 @@
                 error = res.error;
             }
 
-            btn.innerText = 'Bevestig & Mail';
+            btn.innerText = 'Confirm & Mail';
             btn.disabled = false;
             closeModal();
 
             if (error) alert('Database Error: ' + error.message);
-            else { alert('Actie voltooid en e-mail verzonden.'); loadData(); }
+            else { alert('Action completed and email sent.'); loadData(); }
         });
     </script>
 </body>
