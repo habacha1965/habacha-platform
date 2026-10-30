@@ -10,7 +10,7 @@
 </head>
 <body class="bg-slate-100 text-slate-900 min-h-screen">
 
-    <!-- LOGIN SCHERM (Wordt verborgen na inloggen) -->
+    <!-- LOGIN SCHERM -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-6">
         <div class="bg-white p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-slate-200">
             <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -24,9 +24,8 @@
         </div>
     </div>
 
-    <!-- DASHBOARD SCHERM (Wordt getoond na inloggen) -->
+    <!-- DASHBOARD SCHERM -->
     <div id="dashboard-screen" class="hidden">
-        <!-- Top Bar -->
         <header class="bg-slate-900 text-white py-4 px-8 flex justify-between items-center shadow-md">
             <div class="flex items-center gap-3">
                 <span class="font-bold text-xl tracking-wider text-white">HABACHA</span>
@@ -36,7 +35,6 @@
         </header>
 
         <main class="max-w-7xl mx-auto px-6 py-10">
-            <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Client Leads</p>
@@ -52,13 +50,11 @@
                 </div>
             </div>
 
-            <!-- Tabs -->
             <div class="flex gap-4 mb-6 border-b border-slate-200">
                 <button id="tab-leads" class="px-4 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">Client Leads (HB Codes)</button>
                 <button id="tab-suppliers" class="px-4 py-3 font-semibold text-slate-500 hover:text-slate-800">Registered Suppliers</button>
             </div>
 
-            <!-- Leads Table -->
             <div id="table-leads" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-50 border-b border-slate-200">
@@ -70,13 +66,10 @@
                             <th class="py-4 px-6 text-sm font-semibold text-slate-600">Status</th>
                         </tr>
                     </thead>
-                    <tbody id="leads-body" class="divide-y divide-slate-100">
-                        <!-- Wordt gevuld door JS -->
-                    </tbody>
+                    <tbody id="leads-body" class="divide-y divide-slate-100"></tbody>
                 </table>
             </div>
 
-            <!-- Suppliers Table -->
             <div id="table-suppliers" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hidden">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-50 border-b border-slate-200">
@@ -88,15 +81,12 @@
                             <th class="py-4 px-6 text-sm font-semibold text-slate-600">Contract Link</th>
                         </tr>
                     </thead>
-                    <tbody id="suppliers-body" class="divide-y divide-slate-100">
-                        <!-- Wordt gevuld door JS -->
-                    </tbody>
+                    <tbody id="suppliers-body" class="divide-y divide-slate-100"></tbody>
                 </table>
             </div>
         </main>
     </div>
 
-    <!-- SUPABASE LOGICA -->
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         
@@ -104,8 +94,7 @@
         const supabaseKey = 'sb_publishable_rej1BmE3pLsiHB2fOrrGqA_IkcGBCX5';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // --- LOGIN LOGICA ---
-        const ADMIN_PIN = 'HABACHA2026'; // <-- Verander dit naar jouw eigen veilige code
+        const ADMIN_PIN = 'HABACHA2026'; 
 
         const loginScreen = document.getElementById('login-screen');
         const dashboardScreen = document.getElementById('dashboard-screen');
@@ -113,7 +102,6 @@
         const pinInput = document.getElementById('pin-input');
         const loginError = document.getElementById('login-error');
 
-        // Check of al ingelogd (via sessionStorage)
         if (sessionStorage.getItem('isAdmin') === 'true') {
             loginScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
@@ -136,7 +124,6 @@
             window.location.reload();
         });
 
-        // --- TABS LOGICA ---
         const tabLeads = document.getElementById('tab-leads');
         const tabSuppliers = document.getElementById('tab-suppliers');
         const tableLeads = document.getElementById('table-leads');
@@ -160,9 +147,7 @@
             tableLeads.classList.add('hidden');
         });
 
-        // --- DATA LADEN ---
         async function loadData() {
-            // 1. Laad Leads
             const { data: leads, error: leadsError } = await supabase
                 .from('referrals')
                 .select('*')
@@ -186,7 +171,6 @@
                 });
             }
 
-            // 2. Laad Aanbieders
             const { data: suppliers, error: supError } = await supabase
                 .from('suppliers')
                 .select('*')
