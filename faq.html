@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frequently Asked Questions | HABACHA</title>
-    <meta name="description" content="Answers to the most common questions about HABACHA for clients and suppliers. Commissions, HB-Codes, onboarding, and more.">
+    <title>FAQ | HABACHA</title>
+    <meta name="description" content="Frequently asked questions about HABACHA: HB-Codes, supplier onboarding, commissions, and the limits of our platform role.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -12,22 +12,32 @@
         .legal h2 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
         .legal h3 { font-size: 1.125rem; font-weight: 600; color: #0f172a; margin-top: 1.75rem; margin-bottom: 0.75rem; }
         .legal p { color: #475569; line-height: 1.75; margin-bottom: 1rem; }
-        .legal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #475569; line-height: 1.75; }
+        .legal ul, .legal ol { padding-left: 1.5rem; margin-bottom: 1rem; color: #475569; line-height: 1.75; }
+        .legal ul { list-style: disc; }
+        .legal ol { list-style: decimal; }
         .legal li { margin-bottom: 0.5rem; }
         .legal a { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; }
         .legal a:hover { color: #1d4ed8; }
         .legal strong { color: #0f172a; font-weight: 600; }
+        .legal code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875rem; color: #0f172a; }
         .legal table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.875rem; }
         .legal th { background: #f1f5f9; padding: 0.75rem; text-align: left; font-weight: 600; color: #0f172a; border-bottom: 2px solid #cbd5e1; }
         .legal td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
         .legal .updated { color: #64748b; font-size: 0.875rem; margin-bottom: 2rem; }
-        .legal .callout { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
-        .legal .callout p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .callout { background: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .callout p { margin-bottom: 0.5rem; color: #991b1b; }
         .legal .callout p:last-child { margin-bottom: 0; }
+        .legal .info { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .info p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .info p:last-child { margin-bottom: 0; }
+        .legal .cta-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; text-align: center; }
+        details summary { list-style: none; cursor: pointer; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .faq-icon { transform: rotate(180deg); }
     </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha-platform.vercel.app/"}
+    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha.com/"}
     </script>
     <script type="text/javascript">
     function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element'); }
@@ -39,110 +49,151 @@
     <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
 
     <header class="relative z-10 py-4 px-6 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
+        <a href="/" class="flex items-center gap-2">
             <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
         </a>
-        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
+        <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
     <main class="relative z-10 flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
         <div class="bg-white/95 backdrop-blur-sm p-10 md:p-14 rounded-3xl shadow-2xl border border-white/20">
-            <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Frequently Asked Questions</h1>
-            <p class="updated">Last updated: 30 October 2026</p>
+            <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">FAQ</h1>
+            <p class="legal updated">Last updated: 30 October 2026</p>
             <div class="legal">
 
-<p>Short answers to the questions we are asked most often. If your question is not here, use the <a href="contact.html">contact form</a>.</p>
+<p>Short answers to the questions we receive most often. Click a question to open it. If your question is not listed, use the <a href="/contact.html">contact form</a>.</p>
 
-<h2>General</h2>
+<div class="mt-8 space-y-3">
 
-<h3>What is HABACHA?</h3>
-<p>HABACHA is an intermediary platform. You submit a request for a rental or lease, and we match you with a vetted supplier in one of our eight divisions. You receive a unique tracking code (the HB-Code) and complete the deal directly with that supplier.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What exactly is HABACHA?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">HABACHA is an intermediary platform. We receive a rental or lease request from a client, generate a unique tracking code (HB-Code), and route the request to a vetted supplier in one of our eight divisions. We do not own the assets, set the prices, or handle payments. The contract is between you and the supplier.</div>
+</details>
 
-<h3>Is HABACHA a rental company?</h3>
-<p>No. We do not own or operate any of the assets listed on the platform. Every vehicle, vessel, aircraft, machine, or property is owned by an independent supplier. HABACHA routes your request to them.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>Does it cost anything to submit a request?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">No. Submitting a request and receiving an HB-Code is completely free for clients. HABACHA earns a commission from the supplier when a referred deal is confirmed. You only pay the supplier directly for the asset you rent or lease.</div>
+</details>
 
-<h3>Where is HABACHA based?</h3>
-<p>HABACHA is operated from the Netherlands. Dutch law governs our terms and privacy practices.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>Do I need an account?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">No. Clients provide a name and email address and receive an HB-Code immediately. There is no password, no profile, and no account to maintain. Only suppliers (fleet operators) and administrators have login credentials.</div>
+</details>
 
-<h2>For Clients</h2>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What is an HB-Code and why does it matter?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">An HB-Code is a unique 10-character tracking code (example: HB-8F3K9A2B7X). It is generated for your specific request and sent to your email address. It is the sole proof that HABACHA referred you to the supplier. Keep it — you will need it if you contact the supplier or HABACHA about the booking.</div>
+</details>
 
-<h3>Does it cost anything to submit a request?</h3>
-<p>No. Submitting a request and receiving an HB-Code is free. You only pay the supplier directly for the asset you rent or lease.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What happens after I receive my HB-Code?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">You are automatically redirected to the supplier's booking page with your HB-Code attached to the URL. From that point onwards, the rental or lease is governed entirely by the supplier's terms and conditions. You will complete the booking directly with the supplier.</div>
+</details>
 
-<h3>Do I need an account?</h3>
-<p>No. You provide your name and email address, and we generate your HB-Code. There is no password to remember and no profile to maintain.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>Who is responsible if something goes wrong with the rental?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">The supplier. HABACHA does not own the asset, does not sign the rental contract, and is not a party to any dispute. Damage, delays, cancellations, insurance claims, and licensing requirements are all handled between you and the supplier. HABACHA's role is to make the initial referral — nothing beyond that.</div>
+</details>
 
-<h3>What is an HB-Code?</h3>
-<p>An HB-Code is a unique 10-character code (example: HB-8F3K9A2B7X) attached to your request. It is your proof of referral and is sent to your email address. Keep it — you will need it if you contact the supplier or us about the booking.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>How do I become a supplier on HABACHA?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">Register through the supplier registration page. Provide your company name, contact email, a password, your division, your website URL, and a unique contract link. Our team reviews each application manually. Approval usually takes 24 to 48 hours on business days, but may take longer during the founding phase.</div>
+</details>
 
-<h3>What happens after I receive my HB-Code?</h3>
-<p>You are automatically redirected to the supplier's booking page with your HB-Code attached. The supplier then confirms the deal in their HABACHA portal. You will not hear from HABACHA again unless there is a problem with the referral.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What commission does HABACHA charge suppliers?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">Commission is tiered by division: Cars &amp; Vans 8%, Commercial Freight 10%, Boats &amp; Yachts 15%, Helicopters &amp; Aircraft 15%, Stays &amp; Real Estate 12%, Construction Machinery 12%, Campers &amp; RVs 10%, Event &amp; AV Equipment 15%. Founding suppliers pay 50% of these rates for the first 12 months.</div>
+</details>
 
-<h3>What if the supplier does not respond?</h3>
-<p>Contact the supplier directly using your HB-Code. If the issue is not resolved within 5 business days, email us at service4companys@gmail.com with your HB-Code and we will follow up on the referral.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>When and how does HABACHA invoice the commission?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">HABACHA issues a consolidated invoice at the end of each calendar month, based on the leads the supplier has marked as "Booked" during that month. The invoice specifies the HB-Codes, the reported transaction values, and the applicable commission. Payment is due within 14 days of the invoice date.</div>
+</details>
 
-<h2>For Suppliers</h2>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What happens if a supplier refuses to pay the commission?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">HABACHA may suspend the supplier's portal access, terminate the supplier agreement, and pursue the outstanding amount through the Dutch courts under the terms of the Supplier Agreement. The supplier is also liable for reasonable recovery costs.</div>
+</details>
 
-<h3>How do I become a supplier?</h3>
-<p>Register on the <a href="supplier-register.html">supplier registration page</a>. Provide your company name, contact email, a password, your division, your website URL, and a unique contract link. Our team reviews each application manually before approval.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>Can a supplier ask a client to bypass HABACHA?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">No. Any attempt by a supplier to contact a client outside the platform and to avoid the commission is a breach of the Supplier Agreement. It is treated as fraud. HABACHA may terminate the account immediately, invoice the full commission, and take legal action where necessary.</div>
+</details>
 
-<h3>How long does approval take?</h3>
-<p>We aim to respond within 24 to 48 hours. During the founding phase, review times may be longer.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What data does HABACHA store about me?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">For clients: your name, email address, the request details, and the HB-Code. For suppliers: company name, contact email, a hashed password, division, website URL, and contract link. Full details, retention periods, and your rights are described in the <a href="/privacy.html">Privacy Policy</a>.</div>
+</details>
 
-<h3>What is the contract link?</h3>
-<p>It is the URL on your website where a client can complete a booking. When HABACHA refers a client to you, their HB-Code is appended to this URL. Example: if your contract link is <code>https://yourcompany.com/book?ref=</code>, the client will arrive at <code>https://yourcompany.com/book?ref=HB-8F3K9A2B7X</code>.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What if I forgot my supplier password?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">Use the "Forgot password?" link on the supplier login page. A reset link is sent to your registered email address and is valid for 1 hour. If your email address is no longer accessible, use the <a href="/contact.html">contact form</a>.</div>
+</details>
 
-<h3>How do I receive leads?</h3>
-<p>Once approved, leads for your division appear in your <a href="supplier-dashboard.html">supplier portal</a>. Log in with your registered email and password to view them.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>What happens if the supplier's website is down when I am redirected?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">Your HB-Code remains valid. Try the supplier's website again later, or contact the supplier directly with your HB-Code. If the supplier cannot be reached for more than 5 business days, use the <a href="/contact.html">contact form</a> and we will follow up on the referral.</div>
+</details>
 
-<h3>How do I confirm a booking?</h3>
-<p>In the supplier portal, click <strong>Mark as Booked</strong> on the relevant lead. This records the deal in HABACHA's system and triggers the commission process.</p>
+<details class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    <summary class="p-5 font-semibold text-slate-900 flex justify-between items-center hover:bg-slate-100 transition">
+        <span>Which countries does HABACHA operate in?</span>
+        <svg class="faq-icon w-5 h-5 text-blue-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-5 pb-5 text-slate-600">HABACHA operates worldwide. Suppliers are independent businesses and operate under the laws of their own jurisdiction. Any rental or lease contract is subject to the law specified in the supplier's terms.</div>
+</details>
 
-<h2>Payments &amp; Commissions</h2>
+</div>
 
-<h3>What commission does HABACHA charge?</h3>
-<p>Commission varies by division:</p>
-<ul>
-    <li>Cars &amp; Vans — 8%</li>
-    <li>Commercial Freight — 10%</li>
-    <li>Boats &amp; Yachts — 15%</li>
-    <li>Helicopters &amp; Aircraft — 15%</li>
-    <li>Stays &amp; Real Estate — 12%</li>
-    <li>Construction Machinery — 12%</li>
-    <li>Campers &amp; RVs — 10%</li>
-    <li>Event &amp; AV Equipment — 15%</li>
-</ul>
-
-<h3>What is the Founding Supplier discount?</h3>
-<p>Suppliers who join during HABACHA's founding phase pay 50% of the standard commission for their first 12 months. After that period, the standard rate applies. The discount cannot be extended or transferred.</p>
-
-<h3>How am I invoiced?</h3>
-<p>HABACHA issues an invoice at the end of each calendar month based on the leads you marked as Booked during that month. The invoice specifies the HB-Code, the booking value you reported, and the applicable commission. Payment is due within 14 days of the invoice date.</p>
-
-<h3>How do I report a booking value?</h3>
-<p>When you mark a lead as Booked in the portal, you also enter the final transaction value. HABACHA uses this figure to calculate the commission. If you need to correct a value after the fact, contact us within 7 days.</p>
-
-<h2>Privacy &amp; Security</h2>
-
-<h3>What data does HABACHA store?</h3>
-<p>For clients: your name, email address, and the details of your request (division, HB-Code, optional preferences such as "skipper required"). For suppliers: company name, contact email, hashed password, division, website URL, and contract link. Full details are in our <a href="privacy.html">Privacy Policy</a>.</p>
-
-<h3>Is my password stored securely?</h3>
-<p>Yes. Passwords are hashed using SHA-256 before storage. We never store plain-text passwords and cannot recover them — this is why the password reset flow exists.</p>
-
-<h3>Do you share my data with third parties?</h3>
-<p>Only with the supplier you are matched with (for clients) and with the infrastructure providers listed in our <a href="privacy.html">Privacy Policy</a> (Supabase, Vercel, Resend). We do not sell data.</p>
-
-<h2>Technical</h2>
-
-<h3>What if the redirect to the supplier fails?</h3>
-<p>Your HB-Code is in the URL. Copy the code from your confirmation email and contact the supplier directly, mentioning the code. If the supplier cannot resolve it, email us at service4companys@gmail.com with the code and a description of what happened.</p>
-
-<h3>Which browsers are supported?</h3>
-<p>HABACHA works on any modern browser (Chrome, Safari, Firefox, Edge) and on mobile. It does not support Internet Explorer.</p>
+<div class="cta-block">
+    <p class="text-slate-600 mb-4">Your question is not listed?</p>
+    <a href="/contact.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">Ask a Question</a>
+</div>
 
             </div>
         </div>
@@ -152,13 +203,13 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
             <p>&copy; 2026 HABACHA. All rights reserved.</p>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="about.html" class="hover:text-white transition">About</a>
-                <a href="faq.html" class="hover:text-white transition">FAQ</a>
-                <a href="contact.html" class="hover:text-white transition">Contact</a>
-                <a href="terms.html" class="hover:text-white transition">Terms</a>
-                <a href="supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
-                <a href="cookies.html" class="hover:text-white transition">Cookies</a>
+                <a href="/about.html" class="hover:text-white transition">About</a>
+                <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+                <a href="/contact.html" class="hover:text-white transition">Contact</a>
+                <a href="/terms.html" class="hover:text-white transition">Terms</a>
+                <a href="/supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
+                <a href="/privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="/cookies.html" class="hover:text-white transition">Cookies</a>
             </div>
         </div>
     </footer>

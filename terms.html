@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service | HABACHA</title>
-    <meta name="description" content="HABACHA Terms of Service. The rules, obligations, commission structure, and legal framework governing the use of the HABACHA intermediary platform.">
+    <meta name="description" content="HABACHA Terms of Service: the platform's limited intermediary role, risk allocation, dispute handling between client and supplier, and Dutch jurisdiction.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -24,13 +24,20 @@
         .legal th { background: #f1f5f9; padding: 0.75rem; text-align: left; font-weight: 600; color: #0f172a; border-bottom: 2px solid #cbd5e1; }
         .legal td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
         .legal .updated { color: #64748b; font-size: 0.875rem; margin-bottom: 2rem; }
-        .legal .callout { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
-        .legal .callout p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .callout { background: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .callout p { margin-bottom: 0.5rem; color: #991b1b; }
         .legal .callout p:last-child { margin-bottom: 0; }
+        .legal .info { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0.5rem; }
+        .legal .info p { margin-bottom: 0.5rem; color: #1e40af; }
+        .legal .info p:last-child { margin-bottom: 0; }
+        .legal .cta-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; text-align: center; }
+        details summary { list-style: none; cursor: pointer; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .faq-icon { transform: rotate(180deg); }
     </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha-platform.vercel.app/"}
+    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha.com/"}
     </script>
     <script type="text/javascript">
     function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element'); }
@@ -42,126 +49,129 @@
     <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
 
     <header class="relative z-10 py-4 px-6 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
+        <a href="/" class="flex items-center gap-2">
             <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
         </a>
-        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
+        <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
     </header>
 
     <main class="relative z-10 flex-grow max-w-4xl mx-auto px-6 py-12 w-full">
         <div class="bg-white/95 backdrop-blur-sm p-10 md:p-14 rounded-3xl shadow-2xl border border-white/20">
             <h1 class="text-4xl font-bold text-slate-900 mb-2 tracking-tight">Terms of Service</h1>
-            <p class="updated">Last updated: 30 October 2026</p>
+            <p class="legal updated">Last updated: 30 October 2026</p>
             <div class="legal">
 
-<p>These Terms of Service govern your use of the HABACHA platform at <code>habacha-platform.vercel.app</code> and any related services. By using HABACHA, you agree to these terms. If you do not agree, do not use the platform.</p>
+<p>These Terms of Service govern your use of the HABACHA platform. By using HABACHA, you agree to these terms. If you do not agree, do not use the platform.</p>
+
+<div class="callout">
+    <p><strong>Critical notice.</strong> HABACHA is an intermediary platform only. We are not the supplier, we are not the rental company, and we are not a party to the rental or lease contract. Any damage, loss, injury, delay, cancellation, or dispute arising from a rental or lease is between you and the supplier directly. HABACHA is not liable for any such matter.</p>
+</div>
 
 <h2>1. Definitions</h2>
 <ul>
-    <li><strong>"HABACHA", "we", "us", "our"</strong> refers to the operator of the HABACHA platform, based in the Netherlands.</li>
-    <li><strong>"Platform"</strong> refers to the HABACHA website, portals, APIs, and related services.</li>
-    <li><strong>"Client"</strong> refers to any person or entity submitting a rental or lease request through the platform.</li>
-    <li><strong>"Supplier"</strong> refers to any person or entity offering assets for rent or lease through the platform.</li>
-    <li><strong>"HB-Code"</strong> refers to the unique 10-character tracking code generated for each client request.</li>
-    <li><strong>"Lead"</strong> refers to a client request routed to a specific supplier.</li>
-    <li><strong>"Commission"</strong> refers to the fee HABACHA charges a supplier for a confirmed Lead.</li>
+    <li><strong>"HABACHA", "we", "us"</strong> — the operator of the HABACHA intermediary platform, registered in the Netherlands.</li>
+    <li><strong>"Platform"</strong> — the website, portals, APIs, and related services operated by HABACHA.</li>
+    <li><strong>"Client"</strong> — any person or entity submitting a rental or lease request through the platform.</li>
+    <li><strong>"Supplier"</strong> — any person or entity offering assets for rent or lease through the platform.</li>
+    <li><strong>"HB-Code"</strong> — the unique tracking code generated for each client request.</li>
+    <li><strong>"Rental"</strong> — the agreement between a Client and a Supplier for use of an asset.</li>
 </ul>
 
-<h2>2. Nature of the Service</h2>
-<p>HABACHA is an intermediary. We connect Clients with Suppliers. We do not:</p>
+<h2>2. The nature of HABACHA</h2>
+<p>HABACHA is an intermediary. We introduce Clients to Suppliers. We do not:</p>
 <ul>
-    <li>Own, operate, or manage any of the assets listed by Suppliers.</li>
-    <li>Set or control the prices charged by Suppliers.</li>
+    <li>Own, operate, or manage any asset listed on the platform.</li>
+    <li>Set, control, or influence the price charged by any Supplier.</li>
     <li>Process payments between Clients and Suppliers.</li>
-    <li>Act as an agent of either party.</li>
+    <li>Sign, negotiate, or administer the rental or lease contract.</li>
+    <li>Provide insurance, licensing, or regulatory verification for any asset.</li>
+    <li>Act as an agent of either the Client or the Supplier.</li>
 </ul>
-<p>All final agreements, warranties, insurance, and liabilities relating to the rental or lease of an asset are established directly between the Client and the Supplier.</p>
 
-<h2>3. Eligibility</h2>
-<p>You must be at least 18 years old and legally capable of entering into binding contracts to use HABACHA. By using the platform, you confirm that you meet these requirements. If you use the platform on behalf of a company, you confirm that you have authority to bind that company to these terms.</p>
+<h2>3. Risk and liability for damage</h2>
+<div class="callout">
+    <p><strong>HABACHA is not responsible for any damage, loss, injury, or cost arising from a rental or lease.</strong></p>
+    <p>All risk of damage, theft, loss, injury, delay, cancellation, mechanical failure, accident, or any other incident connected to the rented or leased asset is borne exclusively by the Client and the Supplier as agreed between them. HABACHA does not provide insurance, does not inspect assets, and does not mediate claims.</p>
+</div>
 
-<h2>4. Client Obligations</h2>
-<p>When you submit a request, you agree to:</p>
+<h2>4. Disputes between Client and Supplier</h2>
+<p>Any dispute — including but not limited to damage claims, non-delivery, cancellation, pricing disputes, contractual interpretation, or insurance matters — remains strictly between the Client and the Supplier. HABACHA is not a party to any such dispute, is not a mediator, is not an arbitrator, and is not liable for any outcome.</p>
+<p>HABACHA's records (the HB-Code and the timestamp of referral) may be provided upon written request to assist a Client or Supplier in establishing that a referral occurred. HABACHA will not otherwise participate in the dispute.</p>
+
+<h2>5. Eligibility</h2>
+<p>You must be at least 18 years old and legally capable of entering into binding contracts. If you use the platform on behalf of a company, you confirm that you have the authority to bind that company to these terms.</p>
+
+<h2>6. Client obligations</h2>
 <ul>
     <li>Provide accurate information (name, email address, and request details).</li>
-    <li>Use the HB-Code you receive in any communication with the Supplier.</li>
-    <li>Comply with the Supplier's own terms, eligibility requirements, and licensing conditions (for example, holding the correct driver's license or boat license).</li>
+    <li>Comply with the Supplier's own terms, eligibility requirements, and licensing conditions (such as holding the correct driver's license, boat license, or pilot's license).</li>
     <li>Not submit false, fraudulent, or duplicate requests.</li>
+    <li>Not attempt to circumvent HABACHA by contacting the Supplier directly after an introduction, in order to avoid the commission being paid to HABACHA.</li>
 </ul>
 
-<h2>5. Supplier Obligations</h2>
-<p>When you register as a Supplier, you agree to:</p>
+<h2>7. Supplier obligations</h2>
 <ul>
-    <li>Provide accurate company information, including a valid contact email and a working contract link.</li>
-    <li>Honour every Lead referred by HABACHA using the HB-Code, in good faith.</li>
-    <li>Mark Leads as Booked in the Supplier portal when a deal is confirmed.</li>
-    <li>Pay the applicable Commission in accordance with the <a href="supplier-agreement.html">Supplier Agreement</a>.</li>
-    <li>Maintain all licenses, insurance, and legal authorisations required to offer the assets you list.</li>
+    <li>Provide accurate company information, a valid contact email, and a working contract link.</li>
+    <li>Honour every Lead referred by HABACHA in good faith, under the Supplier's own commercial terms.</li>
+    <li>Mark Leads as Booked in the supplier portal when a deal is confirmed.</li>
+    <li>Report accurate transaction values for commission calculation.</li>
+    <li>Maintain all licenses, permits, and insurance required by the laws of the jurisdiction in which the Supplier operates.</li>
+    <li>Not solicit a Client to bypass HABACHA or to avoid the commission, as further described in the <a href="/supplier-agreement.html">Supplier Agreement</a>.</li>
 </ul>
 
-<h2>6. The HB-Code</h2>
-<p>The HB-Code is the sole proof of referral. Once a Client receives an HB-Code and is redirected to a Supplier, the Supplier is obliged to recognise that HB-Code as a HABACHA referral. If a Supplier fails to honour a valid HB-Code, HABACHA reserves the right to invoice the Commission based on its internal records and to suspend or terminate the Supplier's account.</p>
+<h2>8. The HB-Code</h2>
+<p>The HB-Code is the sole proof of referral. Once a Client receives an HB-Code and is redirected to a Supplier, the Supplier is obliged to recognise that HB-Code as a HABACHA referral. Failure to honour a valid HB-Code may result in suspension, termination, and invoicing of the commission based on HABACHA's internal records.</p>
 
-<h2>7. Commission and Fees</h2>
-<p>HABACHA charges a Commission to Suppliers for each confirmed Lead. The Commission varies by division:</p>
+<h2>9. Commission and fees</h2>
+<p>HABACHA charges a commission to Suppliers only. Clients pay nothing. Commission rates are tiered by division (8% / 10% / 12% / 15%) and are described in full in the <a href="/supplier-agreement.html">Supplier Agreement</a>. Founding suppliers pay 50% of the standard commission for their first 12 months.</p>
+
+<h2>10. Prohibited uses</h2>
 <ul>
-    <li>Cars &amp; Vans — 8% of the transaction value</li>
-    <li>Commercial Freight — 10% of the transaction value</li>
-    <li>Boats &amp; Yachts — 15% of the transaction value</li>
-    <li>Helicopters &amp; Aircraft — 15% of the transaction value</li>
-    <li>Stays &amp; Real Estate — 12% of the transaction value</li>
-    <li>Construction Machinery — 12% of the transaction value</li>
-    <li>Campers &amp; RVs — 10% of the transaction value</li>
-    <li>Event &amp; AV Equipment — 15% of the transaction value</li>
-</ul>
-<p>Suppliers who joined during HABACHA's founding phase pay 50% of the applicable Commission for the first 12 months, after which the standard rate applies.</p>
-<p>Clients are not charged any fee for using the platform.</p>
-
-<h2>8. Prohibited Uses</h2>
-<p>You agree not to:</p>
-<ul>
-    <li>Submit false, misleading, or fraudulent information.</li>
-    <li>Use the platform to harass, threaten, or defraud any person or entity.</li>
-    <li>Attempt to reverse-engineer, scrape, or copy the platform's code or data.</li>
-    <li>Interfere with the security or availability of the platform.</li>
-    <li>Use the platform for unlawful purposes.</li>
+    <li>Submitting false, misleading, or fraudulent information.</li>
+    <li>Using the platform for harassment, threats, or fraud.</li>
+    <li>Attempting to reverse-engineer, scrape, or copy the platform's code or data.</li>
+    <li>Interfering with the security or availability of the platform.</li>
+    <li>Using the platform for any unlawful purpose.</li>
 </ul>
 
-<h2>9. Intellectual Property</h2>
-<p>All content on the platform (design, text, logos, code, and structure) is the property of HABACHA or its licensors. You may not reproduce, distribute, or create derivative works without our written permission. The HABACHA name and logo are trademarks of HABACHA.</p>
+<h2>11. Intellectual property</h2>
+<p>All content on the platform (design, text, logos, code, and structure) is the property of HABACHA or its licensors. You may not reproduce, distribute, or create derivative works without written permission. The HABACHA name and logo are trademarks of HABACHA.</p>
 
-<h2>10. Third-Party Services</h2>
-<p>The platform uses third-party services for infrastructure and email delivery, including Supabase, Vercel, and Resend. We are not responsible for the independent acts or omissions of these providers, although we select them with care.</p>
+<h2>12. Third-party services</h2>
+<p>The platform uses third-party infrastructure providers (Supabase, Vercel, Resend) for database, hosting, and email delivery. HABACHA is not responsible for the independent acts or omissions of these providers, although we select them with care.</p>
 
-<h2>11. Disclaimers</h2>
-<p>HABACHA provides the platform "as is" and "as available". We do not guarantee that the platform will be uninterrupted, error-free, or free of viruses. We do not verify every Supplier's operational capacity at every moment, although we review Suppliers before approval. Any rental or lease agreement is entered into at your own risk, with the Supplier directly.</p>
+<h2>13. Disclaimers</h2>
+<p>HABACHA provides the platform "as is" and "as available". We do not guarantee that the platform will be uninterrupted, error-free, or free of viruses. We do not verify every Supplier's operational capacity at every moment, although we review Suppliers before approval. Any rental or lease is entered into at your own risk, directly with the Supplier.</p>
 
-<h2>12. Limitation of Liability</h2>
+<h2>14. Limitation of liability</h2>
 <p>To the maximum extent permitted by Dutch law, HABACHA is not liable for:</p>
 <ul>
+    <li>Any damage, loss, injury, or cost arising from the rental or lease of an asset.</li>
     <li>Any indirect, incidental, special, or consequential damages.</li>
     <li>Any loss of profits, revenue, data, or goodwill.</li>
     <li>Any damages arising from the acts or omissions of a Supplier or a Client.</li>
 </ul>
-<p>Where liability cannot be excluded, HABACHA's total liability for any claim is limited to the total Commission paid to HABACHA by the Supplier during the 12 months preceding the claim.</p>
+<p>Where liability cannot be excluded, HABACHA's total liability for any claim is limited to the total commission paid to HABACHA by the relevant Supplier during the 12 months preceding the claim.</p>
 
-<h2>13. Indemnification</h2>
+<h2>15. Indemnification</h2>
 <p>You agree to indemnify and hold harmless HABACHA, its directors, employees, and agents from any claim, damage, or cost (including reasonable legal fees) arising from your use of the platform, your breach of these terms, or your breach of any third-party rights.</p>
 
-<h2>14. Termination</h2>
-<p>HABACHA may suspend or terminate your access to the platform at any time, with or without notice, if you breach these terms or if we determine that your continued access would harm the platform or other users. Clients and Suppliers may stop using the platform at any time. Suppliers remain liable for any Commission accrued before termination.</p>
+<h2>16. Termination</h2>
+<p>HABACHA may suspend or terminate access to the platform at any time, with or without notice, if you breach these terms or if continued access would harm the platform or other users. Clients and Suppliers may stop using the platform at any time. Suppliers remain liable for any commission accrued before termination.</p>
 
-<h2>15. Governing Law and Disputes</h2>
-<p>These terms are governed by the laws of the Netherlands. Any dispute arising from these terms or the use of the platform will be submitted to the competent court in Amsterdam, the Netherlands, unless mandatory consumer law provides otherwise.</p>
+<h2>17. Governing law and jurisdiction</h2>
+<p>These terms are governed by the laws of the Netherlands. Any dispute arising from these terms or the use of the platform will be submitted exclusively to the competent court in Amsterdam, the Netherlands, unless mandatory consumer law provides otherwise.</p>
 
-<h2>16. Changes to These Terms</h2>
-<p>We may update these terms from time to time. When we do, we will change the "Last updated" date at the top of this page. If a change is material, we will notify active Suppliers by email. Continued use of the platform after a change constitutes acceptance of the new terms.</p>
+<h2>18. Changes to these terms</h2>
+<p>We may update these terms from time to time. The "Last updated" date at the top of this page reflects the most recent change. If a change is material, we will notify active Suppliers by email. Continued use of the platform after a change constitutes acceptance of the new terms.</p>
 
-<h2>17. Contact</h2>
-<p>For questions about these terms, contact us at service4companys@gmail.com with the subject line "Legal".</p>
+<div class="cta-block">
+    <p class="text-slate-600 mb-4">Questions about these terms?</p>
+    <a href="/contact.html" class="inline-flex items-center justify-center min-h-[48px] px-8 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">Contact Us</a>
+</div>
 
             </div>
         </div>
@@ -171,13 +181,13 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
             <p>&copy; 2026 HABACHA. All rights reserved.</p>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="about.html" class="hover:text-white transition">About</a>
-                <a href="faq.html" class="hover:text-white transition">FAQ</a>
-                <a href="contact.html" class="hover:text-white transition">Contact</a>
-                <a href="terms.html" class="hover:text-white transition">Terms</a>
-                <a href="supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
-                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
-                <a href="cookies.html" class="hover:text-white transition">Cookies</a>
+                <a href="/about.html" class="hover:text-white transition">About</a>
+                <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+                <a href="/contact.html" class="hover:text-white transition">Contact</a>
+                <a href="/terms.html" class="hover:text-white transition">Terms</a>
+                <a href="/supplier-agreement.html" class="hover:text-white transition">Supplier Agreement</a>
+                <a href="/privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="/cookies.html" class="hover:text-white transition">Cookies</a>
             </div>
         </div>
     </footer>
