@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | HABACHA</title>
+    <meta name="description" content="Contact HABACHA. Reach our partnerships and support team for client inquiries, supplier onboarding, or strategic partnerships.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"HABACHA","url":"https://habacha-platform.vercel.app/"}
+    </script>
+    <script type="text/javascript">
+    function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: true}, 'google_translate_element'); }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body class="bg-slate-900 text-slate-900 min-h-screen flex flex-col relative overflow-x-hidden">
+    <div class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 opacity-95 -z-10"></div>
+    <div class="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] -z-10"></div>
+
+    <header class="relative z-10 py-4 px-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2">
+            <div class="bg-blue-600 text-white p-1.5 rounded-lg shadow-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <span class="font-bold text-xl text-white tracking-wider">HABACHA</span>
+        </a>
+        <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">&larr; Return to Homepage</a>
+    </header>
+
+    <main class="relative z-10 flex-grow max-w-5xl mx-auto px-6 py-12 w-full">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Get in Touch</h1>
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto">Our partnerships and support team responds within 24-48 hours.</p>
+        </div>
+
+        <div class="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl border border-white/20">
+            <form id="contact-form" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                        <input type="text" id="contact-name" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                        <input type="email" id="contact-email" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">I am a...</label>
+                    <select id="contact-type" class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                        <option value="Client">Client (Renter / Lessee)</option>
+                        <option value="Supplier">Supplier (Fleet Operator)</option>
+                        <option value="Partner">Strategic Partner</option>
+                        <option value="Press">Press / Media</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
+                    <input type="text" id="contact-subject" required class="w-full h-12 px-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="How can we help?">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+                    <textarea id="contact-message" required class="w-full h-40 p-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none resize-none" placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" id="contact-submit" class="w-full h-14 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg text-lg">Send Message</button>
+                <p id="contact-status" class="text-center text-sm hidden"></p>
+            </form>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
+                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <p class="text-white font-semibold mb-1">Email</p>
+                <p class="text-slate-300 text-sm">service4companys@gmail.com</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
+                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <p class="text-white font-semibold mb-1">Response Time</p>
+                <p class="text-slate-300 text-sm">Within 24-48 hours</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 text-center">
+                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <p class="text-white font-semibold mb-1">Global Reach</p>
+                <p class="text-slate-300 text-sm">Operating worldwide</p>
+            </div>
+        </div>
+
+        <script type="module">
+            document.getElementById('contact-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('contact-submit');
+                const status = document.getElementById('contact-status');
+                btn.innerText = 'Sending...';
+                btn.disabled = true;
+                
+                const data = {
+                    name: document.getElementById('contact-name').value,
+                    email: document.getElementById('contact-email').value,
+                    type: document.getElementById('contact-type').value,
+                    subject: document.getElementById('contact-subject').value,
+                    message: document.getElementById('contact-message').value
+                };
+                
+                try {
+                    const res = await fetch('/api/send-contact', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(data)
+                    });
+                    status.className = 'text-center text-green-600 text-sm font-medium mt-2';
+                    status.innerText = 'Message sent successfully! We will respond within 24-48 hours.';
+                    status.classList.remove('hidden');
+                    document.getElementById('contact-form').reset();
+                } catch(err) {
+                    status.className = 'text-center text-red-600 text-sm font-medium mt-2';
+                    status.innerText = 'Something went wrong. Please email us directly.';
+                    status.classList.remove('hidden');
+                }
+                btn.innerText = 'Send Message';
+                btn.disabled = false;
+            });
+        </script>
+    </main>
+
+    <footer class="relative z-10 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+            <p>&copy; 2026 HABACHA. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="about.html" class="hover:text-white transition">About</a>
+                <a href="faq.html" class="hover:text-white transition">FAQ</a>
+                <a href="contact.html" class="hover:text-white transition">Contact</a>
+                <a href="terms.html" class="hover:text-white transition">Terms</a>
+                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
